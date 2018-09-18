@@ -6,7 +6,7 @@ CobaIA
 
 DESCRIPCION DEL JUEGO:
 Los personajes principales son cobayas sometidas a un experimento, con el fin de comprobar cómo actúan al 
-introducir una IA en un cuerpo orgánico.
+introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para ello contarán con distintas habilidades con las que podrán ayudarse entre ellas y poder escapar de la zona de pruebas. 
 
 Juego cooperativo de 3 personas. Cuenta con una vista scroll-lateral donde los personajes deberán sortear 
 plataformas y encajar las pruebas para poder avanzar en la trama.
