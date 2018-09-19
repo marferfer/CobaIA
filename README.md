@@ -53,4 +53,5 @@ Dirección de Trello:
 https://trello.com/b/ONtmcols/juegosenred
 
 <h3>Todos los derechos reservados</h3>
+
 ![storm](H-MEN_logo.png)
