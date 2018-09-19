@@ -45,11 +45,8 @@ Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños
 <h2> GAME OVER: </h2>
 <p>Si un jugador muere, los demás jugadores podrán recuperar el chip de su IA. Una vez lo tengan, deberán buscar un cadáver de cobaya para su implante. De esta forma, la muerte de una de los jugadores puede provocar la del equipo entero si no se subsana. En caso de muerte de todo el equipo, se reiniciará el nivel.</p>
 
-
-
-
 <h2> TUTORIAL: </h2>
-<p>El tutorial se hará mediante archivos con estética <b>terminal</b>, a los que se podrá acceder desde el menú de pausa. También podrás encontrar archivos con información sobre la trama.</p>
+<p>El tutorial se hará mediante archivos con estética <b>terminal</b>, a los que se podrá acceder desde el menú de pausa. También se incluirán a nivel visual en el primer nivel, mostrando al jugador como usar las distintas mecánicas a través de imágenes de las teclas que debería usar en cada lugar específico.</p>
 
 <img src="chip.jpg" align="center">
 
