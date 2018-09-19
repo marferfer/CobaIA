@@ -7,11 +7,13 @@ NOMBRE DEL JUEGO:
 <img src="Cobaya2.png" align="right">
 
 <h2>DESCRIPCIÓN DEL JUEGO:</h2>
-<p>Los personajes principales son cobayas sometidas a un experimento, con el fin de comprobar cómo actúan al 
-introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para ello contarán con distintas habilidades con las que podrán ayudarse entre ellas y poder escapar de la zona de pruebas.</p>
+<p>El juego se plantea como una aventura de puzzles y plataformas cooperativa. Los personajes principales son tres cobayas sometidas a un experimento en el que tres IA han tomado control de sus cerebros.
+Estas deben luchar por escapar del lugar donde son retenidas y para ello deberán unir fuerzas aprovechando las habilidades únicas que posee cada una.
+Cada nivel se plantea como un puzzle en sí mismo y la única forma de seguir avanzando hacia la libertad es funcionar como un equipo.
+Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños fragmentos de quiénes son y dónde están realmente, lo que les hará dudar de hasta qué punto conocerse a sí mismo puede resultar peligroso. </p>
 
 <h2> INTERACCIÓN CON USUARIOS Y PERSPECTIVA: </h2>
-<p>Juego cooperativo de 3 personas. Cuenta con una vista scroll-lateral con un sistema de capas, lo que permite que exista una "profundidad" en la escena, donde los personajes deberán sortear plataformas y encajar las pruebas para poder avanzar en la trama.</p>
+<p>Cada usuario controlará a una cobaya. Estará en cada nivel junto a sus compañeras para colaborar en el avance de los puzzles. La cámara se plantea con una vista de scroll-lateral que seguirá al jugador y le permitirá observar su entorno en un pequeño radio. Los jugadores pueden interactuar directamente entre ellos a través de un chat de texto para buscar una coordinación a la hora de actuar.</p>
 
 <h2> ESTRUCTURA NARRATIVA: </h2>
 <p>Va a constar de 4 niveles en los que la trama irá avanzando:</p>
