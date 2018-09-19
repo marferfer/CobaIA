@@ -3,6 +3,7 @@
 NOMBRE DEL JUEGO:
 CobaIA
 
+<center>![storm](Cobaya.jpg)</center>
 <h2>DESCRIPCION DEL JUEGO:</h2>
 <p>Los personajes principales son cobayas sometidas a un experimento, con el fin de comprobar cómo actúan al 
 introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para ello contarán con distintas habilidades con las que podrán ayudarse entre ellas y poder escapar de la zona de pruebas.</p>
@@ -25,6 +26,7 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 
 <h2> TUTORIAL: </h2>
 <p>El tutorial se hará mediante archivos (por ejemplo: "ReadMe.txt") a los que se podrá acceder desde el menú de pausa. También podrás encontrar archivos con información sobre la trama.</p>
+![storm](chip.jpg)
 
 <h2>REFERENCIAS:</h2>
 <p>Hollow Knight, Inside, Ori Blind Forest.</p>
@@ -50,4 +52,4 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 Dirección de Trello:
 https://trello.com/b/ONtmcols/juegosenred
 
-![storm](Cobaya.jpg)
+
