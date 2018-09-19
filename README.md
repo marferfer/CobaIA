@@ -26,8 +26,19 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 <p><b>2. CobaIA ágil: Puede nadar y trepar</b></p>
 <p><b>3. CobaIA exploradora: Puede engancharse a las demás, planear y morder cables</b></p>
 
+<h2> OBJETOS INTERACTUABLES: </h2>
+<p>Son los elementos con los que construiremos los niveles:</p>
+<p><b>1. Cajas</b></p>
+<p><b>2. Bobinas</b></p>
+<p><b>3. Ventiladores</b></p>
+<p><b>4. Plataformas con cuerdas sobre el agua</b></p>
+<p><b>5. Cadávers de cobayas</b></p>
+<p><b>6. Cajas de cableado</b></p>
+<p><b>7. Compuertas</b></p>
+<p><b>8. Botones</b></p>
+
 <h2> TUTORIAL: </h2>
-<p>El tutorial se hará mediante archivos (por ejemplo: "ReadMe.txt") a los que se podrá acceder desde el menú de pausa. También podrás encontrar archivos con información sobre la trama.</p>
+<p>El tutorial se hará mediante archivos con estética <b>terminal</b>, a los que se podrá acceder desde el menú de pausa. También podrás encontrar archivos con información sobre la trama.</p>
 
 <img src="chip.jpg" align="center">
 
