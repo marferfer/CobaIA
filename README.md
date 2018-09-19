@@ -18,6 +18,12 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 <p><b>3. Conductos</b></p>
 <p><b>4. Naturaleza</b></p>
 
+<h2> ELECCIÓN DE CLASE: </h2>
+<p>Cada cobaIA tendrá sus propias características y habilidades:</p>
+<p><b>1. CobaIA gorda: Resistente a ráfagas de aire y con la fuerza suficiente para mover objetos</b></p>
+<p><b>2. CobaIA ágil: Puede nadar y trepar</b></p>
+<p><b>3. CobaIA exploradora: Puede engancharse a las demás, planear y morder cables</b></p>
+
 <h2>REFERENCIAS:</h2>
 <p>Hollow Knight, Inside, Ori Blind Forest.</p>
 
