@@ -26,6 +26,7 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 
 <h2> TUTORIAL: </h2>
 <p>El tutorial se hará mediante archivos (por ejemplo: "ReadMe.txt") a los que se podrá acceder desde el menú de pausa. También podrás encontrar archivos con información sobre la trama.</p>
+
 ![storm](chip.jpg)
 
 <h2>REFERENCIAS:</h2>
