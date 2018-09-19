@@ -25,7 +25,7 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 
 <h2> TUTORIAL: </h2>
 <p>El tutorial se hará mediante archivos (por ejemplo: "ReadMe.txt") a los que se podrá acceder desde el menú de pausa.</p>
-<p>También podrás </p>
+<p>También podrás encontrar archivos con información sobre la trama.</p>
 
 <h2>REFERENCIAS:</h2>
 <p>Hollow Knight, Inside, Ori Blind Forest.</p>
