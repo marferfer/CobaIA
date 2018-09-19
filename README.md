@@ -1,5 +1,4 @@
 # CobaIA
-Proyecto de Videojuego para la Asignatura de Juegos en Red
 
 NOMBRE DEL JUEGO:
 CobaIA
@@ -23,6 +22,10 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 <p><b>1. CobaIA gorda: Resistente a ráfagas de aire y con la fuerza suficiente para mover objetos</b></p>
 <p><b>2. CobaIA ágil: Puede nadar y trepar</b></p>
 <p><b>3. CobaIA exploradora: Puede engancharse a las demás, planear y morder cables</b></p>
+
+<h2> TUTORIAL: </h2>
+<p>El tutorial se hará mediante archivos (por ejemplo: "ReadMe.txt") a los que se podrá acceder desde el menú de pausa.</p>
+<p>También podrás </p>
 
 <h2>REFERENCIAS:</h2>
 <p>Hollow Knight, Inside, Ori Blind Forest.</p>
@@ -48,3 +51,4 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 Dirección de Trello:
 https://trello.com/b/ONtmcols/juegosenred
 
+![storm](Cobaya.jpg)
