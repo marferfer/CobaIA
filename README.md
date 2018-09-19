@@ -19,7 +19,7 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 <p><b>4. Naturaleza</b></p>
 
 <h2>Referencias</h2>
-Inside, Ori Blind Forest.
+<p>Inside, Ori Blind Forest.</p>
 
 <b>INTEGRANTES DEL EQUIPO</b>
 - Nombre: Mario Fernández Fernández	
