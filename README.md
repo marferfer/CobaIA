@@ -54,3 +54,5 @@ Dirección de Trello:
 https://trello.com/b/ONtmcols/juegosenred
 
 
+Todos los derechos reservados
+H-MEN
