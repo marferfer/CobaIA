@@ -13,10 +13,10 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 
 <b> ESTRUCTURA NARRATIVA: </b>
 <p>Va a constar de 4 niveles en los que la trama irá avanzando:</p>
-  1 - Zona de máquinas
-  2 - Laboratorio
-  3 - Conductos
-  4 - Naturaleza
+- Zona de máquinas
+- Laboratorio
+- Conductos
+- Naturaleza
 
 <b>INTEGRANTES DEL EQUIPO</b>
 - Nombre: Mario Fernández Fernández	
