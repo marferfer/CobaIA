@@ -1,7 +1,7 @@
 # CobaIA
 
 NOMBRE DEL JUEGO:
-CobaIA
+<b>CobaIA</b>
 
 
 <img src="Cobaya.jpg" align="right">
