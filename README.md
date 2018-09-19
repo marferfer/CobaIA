@@ -18,6 +18,9 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 <p><b>3. Conductos</b></p>
 <p><b>4. Naturaleza</b></p>
 
+<h2>Referencias</h2>
+Inside, Ori Blind Forest.
+
 <b>INTEGRANTES DEL EQUIPO</b>
 - Nombre: Mario Fernández Fernández	
 - E-mail: m.fernandezfer.2016@alumnos.urjc.es
