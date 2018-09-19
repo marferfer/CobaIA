@@ -9,13 +9,12 @@ CobaIA
 introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para ello contarán con distintas habilidades con las que podrán ayudarse entre ellas y poder escapar de la zona de pruebas.</p>
 
 <b> INTERACCION CON USUARIOS Y PERSPECTIVA: </b>
-<p>Juego cooperativo de 3 personas. Cuenta con una vista scroll-lateral donde los personajes deberán sortear 
-plataformas y encajar las pruebas para poder avanzar en la trama.</p>
+<p>Juego cooperativo de 3 personas. Cuenta con una vista scroll-lateral con un sistema de capas, lo que permite que exista una "profundidad" en la escena, donde los personajes deberán sortear plataformas y encajar las pruebas para poder avanzar en la trama.</p>
 
 <b> ESTRUCTURA NARRATIVA </b>
 
 
-INTEGRANTES DEL EQUIPO:
+<b>INTEGRANTES DEL EQUIPO</b>
 - Nombre: Mario Fernández Fernández	
 - E-mail: m.fernandezfer.2016@alumnos.urjc.es
 - Enlace GitHub: https://github.com/marferfer 
