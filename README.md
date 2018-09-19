@@ -20,6 +20,9 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 <p><b>3. Conductos</b></p>
 <p><b>4. Naturaleza</b></p>
 
+<h2> GAME OVER: </h2>
+<p>Si un jugador muere, los demás pueden recuperar su chip de IA. Una vez lo tengan, deberán implantarle el chip a un cadáver de cobaya. De esta forma, la muerte de una de los jugadores puede provocar la del equipo entero. En caso de todos mueran se reinicia el nivel</p>
+
 <h2> ELECCIÓN DE CLASE: </h2>
 <p>Cada cobaIA tendrá sus propias características y habilidades:</p>
 <p><b>1. CobaIA gorda: Resistente a ráfagas de aire y con la fuerza suficiente para mover objetos</b></p>
