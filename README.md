@@ -3,7 +3,7 @@
 NOMBRE DEL JUEGO:
 CobaIA
 
-![storm](Cobaya.jpg)
+<img src="Cobaya.jpg" align="right">
 <h2>DESCRIPCION DEL JUEGO:</h2>
 <p>Los personajes principales son cobayas sometidas a un experimento, con el fin de comprobar cómo actúan al 
 introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para ello contarán con distintas habilidades con las que podrán ayudarse entre ellas y poder escapar de la zona de pruebas.</p>
