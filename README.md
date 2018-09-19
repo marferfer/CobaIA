@@ -24,8 +24,7 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 <p><b>3. CobaIA exploradora: Puede engancharse a las demás, planear y morder cables</b></p>
 
 <h2> TUTORIAL: </h2>
-<p>El tutorial se hará mediante archivos (por ejemplo: "ReadMe.txt") a los que se podrá acceder desde el menú de pausa.</p>
-<p>También podrás encontrar archivos con información sobre la trama.</p>
+<p>El tutorial se hará mediante archivos (por ejemplo: "ReadMe.txt") a los que se podrá acceder desde el menú de pausa. También podrás encontrar archivos con información sobre la trama.</p>
 
 <h2>REFERENCIAS:</h2>
 <p>Hollow Knight, Inside, Ori Blind Forest.</p>
