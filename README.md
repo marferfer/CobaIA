@@ -1,14 +1,14 @@
 # CobaIA
 
 NOMBRE DEL JUEGO:
-<b>CobaIA</b>
+CobaIA
 
-<img src="Cobaya.jpg" align="right">
-<h2>DESCRIPCIÓN DEL JUEGO:</h2>
+![storm](Cobaya.jpg)
+<h2>DESCRIPCION DEL JUEGO:</h2>
 <p>Los personajes principales son cobayas sometidas a un experimento, con el fin de comprobar cómo actúan al 
 introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para ello contarán con distintas habilidades con las que podrán ayudarse entre ellas y poder escapar de la zona de pruebas.</p>
 
-<h2> INTERACCIÓN CON USUARIOS Y PERSPECTIVA: </h2>
+<h2> INTERACCION CON USUARIOS Y PERSPECTIVA: </h2>
 <p>Juego cooperativo de 3 personas. Cuenta con una vista scroll-lateral con un sistema de capas, lo que permite que exista una "profundidad" en la escena, donde los personajes deberán sortear plataformas y encajar las pruebas para poder avanzar en la trama.</p>
 
 <h2> ESTRUCTURA NARRATIVA: </h2>
@@ -18,7 +18,7 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 <p><b>3. Conductos</b></p>
 <p><b>4. Naturaleza</b></p>
 
-<h2> ELECCIÓN DE CLASE Y MECANICAS GENERALES: </h2>
+<h2> ELECCIÓN DE CLASE: </h2>
 <p>Cada cobaIA tendrá sus propias características y habilidades:</p>
 <p><b>1. CobaIA gorda: Resistente a ráfagas de aire y con la fuerza suficiente para mover objetos</b></p>
 <p><b>2. CobaIA ágil: Puede nadar y trepar</b></p>
@@ -26,7 +26,6 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 
 <h2> TUTORIAL: </h2>
 <p>El tutorial se hará mediante archivos (por ejemplo: "ReadMe.txt") a los que se podrá acceder desde el menú de pausa. También podrás encontrar archivos con información sobre la trama.</p>
-
 ![storm](chip.jpg)
 
 <h2>REFERENCIAS:</h2>
@@ -53,7 +52,4 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 Dirección de Trello:
 https://trello.com/b/ONtmcols/juegosenred
 
-
-Todos los derechos reservados
-H-MEN
-[![Analytics](https://ga-beacon.appspot.com/UA-44006568-2/phaser/index)](https://github.com/igrigorik/ga-beacon)
+![storm](H-MEN_logo.png)
