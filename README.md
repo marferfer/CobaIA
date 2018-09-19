@@ -4,21 +4,21 @@ Proyecto de Videojuego para la Asignatura de Juegos en Red
 NOMBRE DEL JUEGO:
 CobaIA
 
-<b>DESCRIPCION DEL JUEGO:</b>
+<h2>DESCRIPCION DEL JUEGO:</h2>
 <p>Los personajes principales son cobayas sometidas a un experimento, con el fin de comprobar cómo actúan al 
 introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para ello contarán con distintas habilidades con las que podrán ayudarse entre ellas y poder escapar de la zona de pruebas.</p>
 
-<b> INTERACCION CON USUARIOS Y PERSPECTIVA: </b>
+<h2> INTERACCION CON USUARIOS Y PERSPECTIVA: </h2>
 <p>Juego cooperativo de 3 personas. Cuenta con una vista scroll-lateral con un sistema de capas, lo que permite que exista una "profundidad" en la escena, donde los personajes deberán sortear plataformas y encajar las pruebas para poder avanzar en la trama.</p>
 
-<b> ESTRUCTURA NARRATIVA: </b>
+<h2> ESTRUCTURA NARRATIVA: </h2>
 <p>Va a constar de 4 niveles en los que la trama irá avanzando:</p>
 <p><b>1. Zona de máquinas</b></p>
 <p><b>2. Laboratorio</b></p>
 <p><b>3. Conductos</b></p>
 <p><b>4. Naturaleza</b></p>
 
-<h2>Referencias</h2>
+<h2>REFERENCIAS</h2>
 <p>Inside, Ori Blind Forest.</p>
 
 <b>INTEGRANTES DEL EQUIPO</b>
