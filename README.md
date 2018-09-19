@@ -1,7 +1,7 @@
 # CobaIA
 
 NOMBRE DEL JUEGO:
-CobaIA
+<b>CobaIA</b>
 
 <img src="Cobaya.jpg" align="right">
 <h2>DESCRIPCIÓN DEL JUEGO:</h2>
@@ -18,7 +18,7 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 <p><b>3. Conductos</b></p>
 <p><b>4. Naturaleza</b></p>
 
-<h2> ELECCIÓN DE CLASE: </h2>
+<h2> ELECCIÓN DE CLASE Y MECANICAS GENERALES: </h2>
 <p>Cada cobaIA tendrá sus propias características y habilidades:</p>
 <p><b>1. CobaIA gorda: Resistente a ráfagas de aire y con la fuerza suficiente para mover objetos</b></p>
 <p><b>2. CobaIA ágil: Puede nadar y trepar</b></p>
