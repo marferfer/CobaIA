@@ -12,12 +12,11 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 <p>Juego cooperativo de 3 personas. Cuenta con una vista scroll-lateral con un sistema de capas, lo que permite que exista una "profundidad" en la escena, donde los personajes deberán sortear plataformas y encajar las pruebas para poder avanzar en la trama.</p>
 
 <b> ESTRUCTURA NARRATIVA: </b>
-<p>Va a constar de 4 niveles en los que la trama irá avanzando:
-  1- Zona de máquinas
-  2- Laboratorio
-  3- Conductos
-  4- Naturaleza
-</p>
+<p>Va a constar de 4 niveles en los que la trama irá avanzando:</p>
+  1 - Zona de máquinas
+  2 - Laboratorio
+  3 - Conductos
+  4 - Naturaleza
 
 <b>INTEGRANTES DEL EQUIPO</b>
 - Nombre: Mario Fernández Fernández	
