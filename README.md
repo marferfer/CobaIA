@@ -56,3 +56,4 @@ https://trello.com/b/ONtmcols/juegosenred
 
 Todos los derechos reservados
 H-MEN
+[![Analytics](https://ga-beacon.appspot.com/UA-44006568-2/phaser/index)](https://github.com/igrigorik/ga-beacon)
