@@ -12,6 +12,8 @@ introducir una IA en un cuerpo orgánico. Éstas deben luchar por salir y para e
 <p>Juego cooperativo de 3 personas. Cuenta con una vista scroll-lateral donde los personajes deberán sortear 
 plataformas y encajar las pruebas para poder avanzar en la trama.</p>
 
+<b> ESTRUCTURA NARRATIVA </b>
+
 
 INTEGRANTES DEL EQUIPO:
 - Nombre: Mario Fernández Fernández	
