@@ -4,7 +4,7 @@ NOMBRE DEL JUEGO:
 <b>CobaIA</b>
 
 
-<img src="Cobaya.png" align="right">
+<img src="Cobaya2.png" align="right">
 
 <h2>DESCRIPCIÓN DEL JUEGO:</h2>
 <p>Los personajes principales son cobayas sometidas a un experimento, con el fin de comprobar cómo actúan al 
