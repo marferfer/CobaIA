@@ -43,7 +43,10 @@ Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños
 <p><b>8. Botones:</b>..son solo botones.</p>
 
 <h2> GAME OVER: </h2>
-<p>Si un jugador muere, los demás jugadores podrán recuperar el chip de su IA. Una vez lo tengan, deberán buscar un cadáver de cobaya para su implante. De esta forma, la muerte de una de los jugadores puede provocar la del equipo entero si no se subsana. En caso de muerte de todo el equipo, se reiniciará el nivel.</p>
+<p>Si un jugador muere, los demás jugadores podrán recuperar el chip de su IA. Una vez lo tengan, deberán buscar un cadáver de cobaya para su implante. De esta forma, la muerte de una de los jugadores puede provocar la del equipo entero si no se subsana. En caso de muerte de todo el equipo, se reiniciará el nivel. Además de todo esto, se incluirá un botón de reset paara poder reiniciar el nivel cuando quieras.</p>
+
+<h2> RECOMPENSAS Y MOTIVACIONES: </h2>
+<p>Dependiendo de el tiempo en el que logres terminar el nivel se otorgarán recompensas como mejoras del casco que sirvan de vidas extra (en caso de sufrir un golpe mortal, el jugador no morirá pero perderá dicha mejora). Esto cumple la función de motivar a los jugadores a encontrar antes las soluciones a los puzles.</p>
 
 <h2> TUTORIAL: </h2>
 <p>El tutorial se hará mediante archivos con estética <b>terminal</b>, a los que se podrá acceder desde el menú de pausa. También se incluirán a nivel visual en el primer nivel, mostrando al jugador como usar las distintas mecánicas a través de imágenes de las teclas que debería usar en cada lugar específico.</p>
