@@ -4,7 +4,7 @@ NOMBRE DEL JUEGO:
 <b>CobaIA</b>
 
 
-<img src="Cobaya2.png" align="right">
+<img src="../imgs/Cobaya2.png" align="right">
 
 <h2>DESCRIPCIÓN DEL JUEGO:</h2>
 <p>El juego se plantea como una aventura de puzzles y plataformas cooperativa. Los personajes principales son tres cobayas sometidas a un experimento en el que tres IA han tomado control de sus cerebros.
@@ -48,7 +48,7 @@ Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños
 <h2> TUTORIAL: </h2>
 <p>El tutorial se hará mediante archivos con estética <b>terminal</b>, a los que se podrá acceder desde el menú de pausa. También se incluirán a nivel visual en el primer nivel, mostrando al jugador como usar las distintas mecánicas a través de imágenes de las teclas que debería usar en cada lugar específico.</p>
 
-<img src="chip.jpg" align="center">
+<img src="../imgs/chip.jpg" align="center">
 
 <h2>REFERENCIAS:</h2>
 <p>Hollow Knight, Inside, Ori Blind Forest.</p>
@@ -76,4 +76,4 @@ https://trello.com/b/ONtmcols/juegosenred
 
 <h3>Todos los derechos reservados</h3>
 
-<img src="H-MEN_logo.png">
+<img src="../imgs/H-MEN_logo.png">
