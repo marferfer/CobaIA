@@ -56,7 +56,13 @@
             var lista_cajas = [];
 
             var tecla_laser;
-            var lasers;
+            
+            var ctrlW;
+            var ctrlA;
+            var ctrlS;
+            var ctrlD;
+            var lasers
+            ;
 
             var mensajes;
             var lista_mensajes = [];
@@ -100,6 +106,30 @@
                     "contadorEscaleras": 0,
                     "ultimo_sentido": 'derecha'
                 };
+
+                obj_jugador2 = {
+                    "muriendo": false,
+                    "musica_diabolica": false,
+                    "jugador": null,
+                    "vidas": 3,
+                    "retrasa_paso": 0,
+                    "corazones": [],
+                    "inmortal": false,
+                    "tiempo_inmortalidad": 0,
+                    "tolerancia_vida": 100,
+                    "tiempo_disparo": 0,
+                    "tolerancia_disparo": 10,
+                    "cantidad_disparos": 5,
+                    "lasers_der": [],
+                    "lasers_izq": [],
+                    "puntaje": 0,
+                    "contadorSaltos": 0,
+                    "colisionEscalera": false,
+                    "contadorEscaleras": 0,
+                    "ultimo_sentido": 'derecha'
+                };
+
+                //obj_jugador2 = obj_jugador;
 
                 obj_plataforma = {
                     plataforma_grupo: null,
@@ -146,6 +176,10 @@
                 lista_circulos = []; // Arreglo de lista_circulos
 
                 tecla_laser = null;
+                ctrlW = null;
+                ctrlA = null;
+                ctrlS = null;
+                ctrlD = null;
                 lasers = null;
 
                 function preload() {
@@ -197,9 +231,15 @@
                     juego.add.sprite(0, 0, 'ladrillos');
                     juego.world.setBounds(0, 0, 21000, 1384); // Establecemos los límites del juego completo
 
-                    tecla_laser = juego.input.keyboard.addKey(Phaser.Keyboard.A);
+                    tecla_laser = juego.input.keyboard.addKey(Phaser.Keyboard.E);
 
-                    obj_arbol.arbol_grupo = juego.add.group(); //  Grupo de obj_arbol.arbol
+                    //mov jugador dos, teclas
+                    ctrlW = juego.input.keyboard.addKey(Phaser.Keyboard.W);
+                    ctrlA = juego.input.keyboard.addKey(Phaser.Keyboard.A);
+                    ctrlS = juego.input.keyboard.addKey(Phaser.Keyboard.S);
+                    ctrlD = juego.input.keyboard.addKey(Phaser.Keyboard.D);
+
+                    /*obj_arbol.arbol_grupo = juego.add.group(); //  Grupo de obj_arbol.arbol
                     obj_arbol.arbol_grupo.enableBody = true; // Física disponible para objetos que colisionen con ellas
                     obj_arbol.arboles.push(obj_arbol.arbol_grupo.create(150, juego.world.height - 230, 'arbol')); // Arboles
                     obj_arbol.arboles[(obj_arbol.arboles.length - 1)].scale.setTo(1, 1);
@@ -212,7 +252,7 @@
                     obj_arbol.arboles[(obj_arbol.arboles.length - 1)].body.immovable = true;
                     obj_arbol.arboles.push(obj_arbol.arbol_grupo.create(1200, juego.world.height - 230, 'arbol'));
                     obj_arbol.arboles[(obj_arbol.arboles.length - 1)].scale.setTo(1, 1);
-                    obj_arbol.arboles[(obj_arbol.arboles.length - 1)].body.immovable = true;
+                    obj_arbol.arboles[(obj_arbol.arboles.length - 1)].body.immovable = true;*/
 
                     obj_plataforma.plataforma_grupo = juego.add.group(); // Grupo de obj_plataforma.plataformas
                     obj_plataforma.plataforma_grupo.enableBody = true; // Física disponible para objetos que colisionen con ellas
@@ -240,7 +280,7 @@
 
 
 
-                    obj_caja.caja_grupo = juego.add.group();//  Grupo de obj_caja.cajas
+                    /*obj_caja.caja_grupo = juego.add.group();//  Grupo de obj_caja.cajas
                     obj_caja.caja_grupo.enableBody = true;//  Física disponible para objetos que colisionen con ellas
                     obj_caja.cajas.push(obj_caja.caja_grupo.create(50, juego.world.height - 500, 'caja')); // Cajas
                     obj_caja.cajas[(obj_caja.caja_grupo.length - 1)].scale.setTo(1, 1);
@@ -250,13 +290,13 @@
                     obj_caja.cajas[(obj_caja.caja_grupo.length - 1)].body.immovable = true;
                     obj_caja.cajas.push(obj_caja.caja_grupo.create(200, 210, 'caja'));
                     obj_caja.cajas[(obj_caja.caja_grupo.length - 1)].scale.setTo(1, 1);
-                    obj_caja.cajas[(obj_caja.caja_grupo.length - 1)].body.immovable = true;
+                    obj_caja.cajas[(obj_caja.caja_grupo.length - 1)].body.immovable = true;*/
 
 
                     lasers = juego.add.group(); // Lasers
                     lasers.enableBody = true;
 
-                    escaleras = juego.add.group(); // Escaleras
+                    /*escaleras = juego.add.group(); // Escaleras
                     escaleras.enableBody = true;
                     //  Creamos tantas escaleras como sea necesario
                     for (var i = 0; i < 30; i++) {
@@ -269,23 +309,42 @@
                     for (var i = 0; i < 30; i++) {
                         //  Create a maescalera inside of the 'escaleras' group
                         var escalera = escaleras.create(4300, (juego.world.height - 150 - 48 * i), 'escalera');
-                    }
+                    }*/
 
-                    for (var i = 0; i < obj_jugador.vidas; i++) {
+                    /*for (var i = 0; i < obj_jugador.vidas; i++) {
                         obj_jugador.corazones.push(juego.add.sprite(400 + (i * 50), 0, 'corazon')); // Corazones de vidas
                         obj_jugador.corazones[obj_jugador.corazones.length - 1].fixedToCamera = true;
-                    }
-                    obj_jugador.jugador = juego.add.sprite(50, juego.world.height - 200, 'personaje'); // Seteamos los parámetros del obj_jugador.jugador, como su posición inicial
+                    }*/
+
+                    obj_jugador.jugador = juego.add.sprite(50, juego.world.height - 200, 'personaje');
+                    //Creacion jugador 2
+                    obj_jugador2.jugador = juego.add.sprite(300, juego.world.height - 200, 'personaje');
+
+                     // Seteamos los parámetros del obj_jugador.jugador, como su posición inicial
                     juego.physics.arcade.enable(obj_jugador.jugador); //  Debemos permitirle física al obj_jugador.jugador
                     obj_jugador.jugador.body.bounce.y = 0; //  Rebote del obj_jugador.jugador
                     obj_jugador.jugador.body.gravity.y = 500; // Su aceleración de gravedad
-                    obj_jugador.jugador.body.collideWorldBounds = false; // Le permitimos colisionar con los límites del juego
+                    obj_jugador.jugador.body.collideWorldBounds = false; 
+                    // Le permitimos colisionar con los límites del juego
                     obj_jugador.jugador.animations.add('left', [0, 1], 10, true); // Creamos la película de animaciones para el personaje
                     obj_jugador.jugador.animations.add('right', [0, 1], 10, true);
                     obj_jugador.jugador.animations.add('jump', [7], 10, true);
                     obj_jugador.jugador.animations.add('climb', [4, 5, 6], 10, true);
                     obj_jugador.jugador.animations.add('disparo_derecha', [2], 10, true);
                     obj_jugador.jugador.animations.add('disparo_izquierda', [3], 10, true);
+
+                    // Movimiento Jugador 2
+
+                    juego.physics.arcade.enable(obj_jugador2.jugador); //  Debemos permitirle física al obj_jugador.jugador
+                    obj_jugador2.jugador.body.bounce.y = 0; //  Rebote del obj_jugador.jugador
+                    obj_jugador2.jugador.body.gravity.y = 500; // Su aceleración de gravedad
+                    obj_jugador2.jugador.body.collideWorldBounds = false; // Le permitimos colisionar con los límites del juego
+                    obj_jugador2.jugador.animations.add('left', [0, 1], 10, true); // Creamos la película de animaciones para el personaje
+                    obj_jugador2.jugador.animations.add('right', [0, 1], 10, true);
+                    obj_jugador2.jugador.animations.add('jump', [7], 10, true);
+                    obj_jugador2.jugador.animations.add('climb', [4, 5, 6], 10, true);
+                    obj_jugador2.jugador.animations.add('disparo_derecha', [2], 10, true);
+                    obj_jugador2.jugador.animations.add('disparo_izquierda', [3], 10, true);
 
                     platillos = juego.add.group(); // Platillo
                     platillos.enableBody = true;
@@ -295,7 +354,7 @@
                         estado: false
                     };
 
-                    circulos = juego.add.group(); // Circulos
+                    /*circulos = juego.add.group(); // Circulos
                     circulos.enableBody = true;
                     for (var i = 0; i < 1; i++) {
                         var circulo = circulos.create(((i * 70) - 70), juego.world.height - 600, 'circulo');
@@ -324,9 +383,9 @@
                             "gravity_y": 300
                         };
                         lista_circulos.push(entidad);
-                    }
+                    }*/
 
-                    manos = juego.add.group(); // Manos
+                    /*manos = juego.add.group(); // Manos
                     manos.enableBody = true;
                     for (var j = 0; j < 3; j++) {
                         for (var i = 0; i < 4; i++) {
@@ -375,7 +434,7 @@
                             };
                             lista_manos.push(entidad);
                         }
-                    }
+                    }*/
 
                     imagenes = juego.add.group(); // Imagenes
                     imagenes.enableBody = true;
@@ -413,7 +472,7 @@
                         lista_rocas.push(entidad);
                     }
 
-                    posimas = juego.add.group(); // Posimas
+                    /*posimas = juego.add.group(); // Posimas
                     posimas.enableBody = true;
                     for (var i = 0; i < 5; i++) {
                         var posima = posimas.create(300 + i * 70, juego.world.height - 300, 'posima');
@@ -435,9 +494,9 @@
                             "posima": posima
                         };
                         lista_posimas.push(entidad);
-                    }
+                    }*/
 
-                    vidas = juego.add.group(); // Vidas
+                    /*vidas = juego.add.group(); // Vidas
                     vidas.enableBody = true;
                     for (var i = 0; i < 1; i++) {
                         var vida = vidas.create(250, juego.world.height - 1220, 'corazon');
@@ -452,7 +511,7 @@
                             "vida": vida
                         };
                         lista_vidas.push(entidad);
-                    }
+                    }*/
 
 
                     puas = juego.add.group(); // Puas
@@ -506,7 +565,7 @@
                     sprite.addChild(puntajeTexto);
                     sprite.cameraOffset.x = 10; // Ubicamos el sprite contenedor de la cámara en las coordenadas 10, 10
                     sprite.cameraOffset.y = 10;
-                    juego.camera.follow(obj_jugador.jugador); // Le permitimos a la cámara del juego, seguir en todo momento al obj_jugador.jugador				
+                    juego.camera.follow(obj_jugador2.jugador); // Le permitimos a la cámara del juego, seguir en todo momento al obj_jugador.jugador				
                 }
 
                 // Update
@@ -538,8 +597,20 @@
                     juego.physics.arcade.collide(posimas, obj_plataforma.plataformas);// Lo mismo hacemos con las posimas                    
                     juego.physics.arcade.collide(rocas, obj_plataforma.plataformas);// Lo mismo hacemos con las rocas
                     juego.physics.arcade.collide(rocas, obj_jugador.jugador);
-                    juego.physics.arcade.overlap(obj_jugador.jugador, escaleras, collectEscaleras, null, this);// Evaluamos la colisión con las escaleras
-                    juego.physics.arcade.overlap(obj_jugador.jugador, imagenes, collectIluminati_escaleras, null, this);// Evaluamos la colisión con las escaleras
+
+                    //Juggador 2 colisiones
+                    obj_jugador2.colisionEscalera = false; // Reiniciamos variables
+                    obj_jugador2.contadorEscaleras = 0;
+                    obj_jugador2.jugador.body.velocity.x = 0; //  Reseteamos la velocidad del obj_jugador.jugador en x, esto nos permitirá evitar que se acelere
+                    juego.physics.arcade.collide(obj_jugador2.jugador, obj_plataforma.plataformas);// Hacemos colisionar al obj_jugador.jugador con las obj_plataforma.plataformas
+                    juego.physics.arcade.collide(obj_jugador2.jugador, obj_caja.cajas);// Hacemos colisionar al obj_jugador.jugador con las obj_caja.cajas                    
+                    juego.physics.arcade.collide(manos, obj_plataforma.plataformas);// Lo mismo hacemos con las manos
+                    juego.physics.arcade.collide(manos, rocas);
+                    juego.physics.arcade.collide(posimas, obj_plataforma.plataformas);// Lo mismo hacemos con las posimas                    
+                    juego.physics.arcade.collide(rocas, obj_plataforma.plataformas);// Lo mismo hacemos con las rocas
+                    juego.physics.arcade.collide(rocas, obj_jugador2.jugador);
+                    //juego.physics.arcade.overlap(obj_jugador.jugador, escaleras, collectEscaleras, null, this);// Evaluamos la colisión con las escaleras
+                    //juego.physics.arcade.overlap(obj_jugador.jugador, imagenes, collectIluminati_escaleras, null, this);// Evaluamos la colisión con las escaleras
                     if (!obj_jugador.colisionEscalera) { // Si no hay colisión con las escaleras, entonces reestablecemos la gravedad
                         obj_jugador.jugador.body.gravity.y = 500;
                     } else {// Si hay colisión con las escaleras, entonces la gravedad la llevamos a cero, por lo tanto, el obj_jugador.jugador no caerá, dando la sensación de estar suspendido en uno de sus escalones
@@ -591,7 +662,8 @@
 
                         obj_jugador.jugador.animations.play('left');
                         obj_jugador.ultimo_sentido = 'izquierda';
-                    } else if (cursores.right.isDown)// Si presionamos RIGHT
+                    }
+                     else if (cursores.right.isDown)// Si presionamos RIGHT
                     {
                         /*obj_jugador.retrasa_paso++;
                          if (obj_jugador.retrasa_paso % 10 == 0) {
@@ -647,6 +719,117 @@
                         }
                     }
 
+                    //////////////////////////////////////////////////////////////////
+                    //////////////////// JUGADOR 2 CONDICIONES ///////////////////////
+                    //////////////////////////////////////////////////////////////////
+
+                    if (!obj_jugador2.colisionEscalera) { // Si no hay colisión con las escaleras, entonces reestablecemos la gravedad
+                        obj_jugador2.jugador.body.gravity.y = 500;
+                    } else {// Si hay colisión con las escaleras, entonces la gravedad la llevamos a cero, por lo tanto, el obj_jugador.jugador no caerá, dando la sensación de estar suspendido en uno de sus escalones
+                        obj_jugador2.jugador.body.velocity.y = 0;
+                    }
+                    if (tecla_laser.isUp) {
+                        obj_jugador2.tiempo_disparo = 0;
+                    }
+                    if (tecla_laser.isDown && obj_jugador2.tiempo_disparo < obj_jugador2.tolerancia_disparo && obj_jugador2.cantidad_disparos > 0) {
+                        obj_jugador2.tiempo_disparo++;
+                        var ajuste = 25;
+                        if (obj_jugador2.ultimo_sentido == 'derecha') {
+                            obj_jugador2.jugador.animations.play('disparo_derecha');
+                            if (obj_jugador2.tiempo_disparo == 1) {
+                                obj_jugador2.cantidad_disparos--;
+                                var jnLaser = {
+                                    distancia: 0,
+                                    distancia_max: 20,
+                                    laser: lasers.create(obj_jugador2.jugador.position.x + 2 * ajuste, obj_jugador2.jugador.position.y + ajuste, 'laser_der')
+                                };
+                                obj_jugador2.lasers_der.push(jnLaser);
+                                var instance = createjs.Sound.play(disparo);
+                                instance.volume = 0.15;
+                            }
+                        } else {
+                            obj_jugador2.jugador.animations.play('disparo_izquierda');
+                            if (obj_jugador2.tiempo_disparo == 1) {
+                                obj_jugador2.cantidad_disparos--;
+                                var jnLaser = {
+                                    distancia: 0,
+                                    distancia_max: 20,
+                                    laser: lasers.create(obj_jugador2.jugador.position.x - ajuste, obj_jugador2.jugador.position.y + ajuste, 'laser_izq')
+                                };
+                                obj_jugador2.lasers_izq.push(jnLaser);
+                                var instance = createjs.Sound.play(disparo);
+                                instance.volume = 0.15;
+                            }
+                        }
+                        actualiza_informacion();
+                    } else if (ctrlA.isDown)// Si presionamos LEFT
+                    {
+                        /*obj_jugador.retrasa_paso++;
+                         if (obj_jugador.retrasa_paso % 10 == 0) {
+                         paso.volume = 0.0
+                         createjs.Sound.play(paso);
+                         }*/
+                        //  Lo movemos a la izquierda
+                        obj_jugador2.jugador.body.velocity.x = -150;
+
+                        obj_jugador2.jugador.animations.play('left');
+                        obj_jugador2.ultimo_sentido = 'izquierda';
+                    } else if (ctrlD.isDown)// Si presionamos RIGHT
+                    {
+                        /*obj_jugador.retrasa_paso++;
+                         if (obj_jugador.retrasa_paso % 10 == 0) {
+                         paso.volume = 0.0;
+                         createjs.Sound.play(paso);
+                         }*/
+                        //  Move to the right
+                        obj_jugador2.jugador.body.velocity.x = 150;
+
+                        obj_jugador2.jugador.animations.play('right');
+                        obj_jugador2.ultimo_sentido = 'derecha';
+                    } else if (obj_jugador2.contadorEscaleras != 0) {// Si el contador de escaleras es <> de cero, quiere decir que estamos escalando
+                        obj_jugador2.jugador.animations.play('climb');// Animamos la escalada
+                    } else {
+                        //  No estamos precionando ninguna tecla
+                        obj_jugador2.jugador.animations.stop();
+                        obj_jugador2.jugador.frame = 1;
+                    }
+                    if (ctrlW.isDown && (obj_jugador2.jugador.body.touching.down || obj_jugador2.contadorSaltos == 1) && !obj_jugador2.colisionEscalera) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
+                        obj_jugador2.jugador.body.velocity.y = -250;
+                        obj_jugador2.jugador.animations.play('jump');
+                        createjs.Sound.play(salto);
+                        if (obj_jugador2.contadorSaltos == 1) {
+                            obj_jugador2.contadorSaltos = 2;
+                        }
+                    }
+
+                    if (obj_jugador2.jugador.body.touching.down) { // Si el obj_jugador.jugador toca una plataforma el contador de saltos se setea en cero otra vez
+                        obj_jugador2.contadorSaltos = 0;
+                    }
+
+                    if (obj_jugador2.contadorEscaleras < -1) {
+                        obj_jugador2.contadorEscaleras = -1;
+                    }
+                    obj_jugador2.jugador.position.y += (obj_jugador2.contadorEscaleras * 2);
+                    if (obj_jugador2.contadorEscaleras != 0) {
+                        obj_jugador2.jugador.animations.play('climb');
+                    }
+                    for (var i = 0; i < obj_jugador2.lasers_der.length; i++) {
+                        var laserAux = obj_jugador2.lasers_der[i].laser;
+                        obj_jugador2.lasers_der[i].distancia++;
+                        laserAux.position.x += 5;
+                        if (obj_jugador2.lasers_der[i].distancia == obj_jugador2.lasers_der[i].distancia_max) {
+                            obj_jugador2.lasers_der[i].laser.kill();
+                        }
+                    }
+                    for (var i = 0; i < obj_jugador2.lasers_izq.length; i++) {
+                        var laserAux = obj_jugador2.lasers_izq[i].laser;
+                        obj_jugador2.lasers_izq[i].distancia++;
+                        laserAux.position.x -= 5;
+                        if (obj_jugador2.lasers_izq[i].distancia == obj_jugador2.lasers_izq[i].distancia_max) {
+                            obj_jugador2.lasers_izq[i].laser.kill();
+                        }
+                    }
+
                     cont_desp_circulo += 0.025; // Mover circulos
                     for (var i = 0; i < lista_circulos.length; i++) {
                         lista_circulos[i].circulo.body.position.x += 5 * Math.sin(cont_desp_circulo);
@@ -673,13 +856,13 @@
                     }
 
                     // Funsiones al colisionar 
-                    juego.physics.arcade.overlap(lasers, manos, collectlasermano, null, this);
+                    /*juego.physics.arcade.overlap(lasers, manos, collectlasermano, null, this);
                     juego.physics.arcade.overlap(obj_jugador.jugador, manos, collectmano, null, this);
                     juego.physics.arcade.overlap(obj_jugador.jugador, posimas, collectposima, null, this);
                     juego.physics.arcade.overlap(obj_jugador.jugador, puas, collectpuas, null, this);
                     juego.physics.arcade.overlap(obj_jugador.jugador, platillos, collectplatillo, null, this);
                     juego.physics.arcade.overlap(obj_jugador.jugador, circulos, collectcirculos, null, this);
-                    juego.physics.arcade.overlap(obj_jugador.jugador, vidas, collectvidas, null, this);
+                    juego.physics.arcade.overlap(obj_jugador.jugador, vidas, collectvidas, null, this);*/
                 }
 
                 function render() { // Render
@@ -687,7 +870,7 @@
                     //juego.debug.spriteCoords(obj_jugador.jugador, 32, 500);
                 }
 
-                function collectvidas(jugador, vida) {
+                /*function collectvidas(jugador, vida) {
                     createjs.Sound.play(risa);
                     vida.kill();
                     obj_jugador.vidas++;
@@ -769,7 +952,7 @@
                         }
                         obj_jugador.inmortal = true;
                         obj_jugador.tiempo_inmortalidad = 0;
-                        console.log(obj_jugador.vidas);
+                        //console.log(obj_jugador.vidas);
                         createjs.Sound.play(pierde_vida);
                     }
                 }
@@ -825,7 +1008,7 @@
                             obj_jugador.contadorEscaleras++;
                         }
                     }
-                }
+                }*/
 
                 function actualiza_informacion() {
                     puntajeTexto.text = 'puntaje: ' + obj_jugador.puntaje + ' disparos: ' + obj_jugador.cantidad_disparos;
