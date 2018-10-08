@@ -33,6 +33,10 @@
             var obj_arbol;
             var obj_caja;
 
+
+            var pad1;
+            var indicator;
+
             var cursores;
             var escaleras;
             var puntajeTexto;
@@ -80,10 +84,10 @@
             var maldad_2 = 'maldad_2';
             var maldad_3 = 'maldad_3';
             var maldad_4 = 'maldad_4';
-            var fondo = 'fondo';
+            //var fondo = 'fondo';
 
             function inicio() {
-                juego = new Phaser.Game(768, 384, Phaser.AUTO, '', {preload: preload, create: create, update: update, render: render});
+                juego = new Phaser.Game(1920, 800, Phaser.AUTO, '', {preload: preload, create: create, update: update, render: render});
 
                 obj_jugador = {
                     "muriendo": false,
@@ -136,6 +140,8 @@
                     plataformas: []
                 };
 
+                
+                //indicator = null;
                 cursores = null; // Eventos de teclado
 
                 escaleras = null; // Imagenes que pueden permitirnos subir
@@ -183,7 +189,7 @@
                 lasers = null;
 
                 function preload() {
-                    createjs.Sound.registerSound("assets/salto.mp3", salto);
+                    /*createjs.Sound.registerSound("assets/salto.mp3", salto);
                     createjs.Sound.registerSound("assets/risa.mp3", risa);
                     createjs.Sound.registerSound("assets/posion.mp3", posion);
                     createjs.Sound.registerSound("assets/disparo.mp3", disparo);
@@ -196,15 +202,17 @@
                     createjs.Sound.registerSound("assets/maldad_2.mp3", maldad_2);
                     createjs.Sound.registerSound("assets/maldad_3.mp3", maldad_3);
                     createjs.Sound.registerSound("assets/maldad_4.mp3", maldad_4);
-                    createjs.Sound.registerSound("assets/fondo.mp3", fondo);
-                    setTimeout(function () {
+                    createjs.Sound.registerSound("assets/fondo.mp3", fondo);*/
+                   /* setTimeout(function () {
                         instance = createjs.Sound.play(fondo, {interrupt: createjs.Sound.INTERRUPT_ANY, loop: -1});
                         instance.volume = 0.15;
-                    }, 3000);
+                    }, 3000);*/
 
+                    juego.stage.backgroundColor = '#736357';
+                    //juego.load.spritesheet('controller-indicator', 'assets/controller-indicator.png');
 
                     juego.state.add("recarga", Phaser.Preload);
-                    juego.load.image('ladrillos', 'assets/ladrillos.png');
+                    //juego.load.image('ladrillos', 'assets/ladrillos.png');
                     juego.load.image('mano', 'assets/mano.png');
                     juego.load.image('tierra', 'assets/tierra.png');
                     juego.load.image('escalera', 'assets/escalera.png');
@@ -219,15 +227,17 @@
                     juego.load.image('laser_izq', 'assets/laser_izq.png');
                     juego.load.image('circulo', 'assets/circulo.png');
                     juego.load.image('mensaje', 'assets/mensaje.png');
-                    juego.load.image('fondo', 'assets/fondo.png');
+                    //juego.load.image('fondo', 'assets/fondo.png');
                     juego.load.image('dkmnet', 'assets/dkmnet.png');
                     juego.load.spritesheet('personaje', 'assets/personaje.png', 47, 73);
+                    juego.load.spritesheet('controller-indicator', 'assets/controller-indicator.png',16, 16);
+                    
                 }
 
                 function create() {
                     juego.physics.startSystem(Phaser.Physics.ARCADE);
-                    var fondo = juego.add.sprite(0, 0, 'fondo'); //Imagen de fondo
-                    fondo.fixedToCamera = true; // Lo dejará fijo ante la cámara
+                    //var fondo = juego.add.sprite(0, 0, 'fondo'); //Imagen de fondo
+                    //fondo.fixedToCamera = true; // Lo dejará fijo ante la cámara
                     juego.add.sprite(0, 0, 'ladrillos');
                     juego.world.setBounds(0, 0, 21000, 1384); // Establecemos los límites del juego completo
 
@@ -319,6 +329,18 @@
                     obj_jugador.jugador = juego.add.sprite(50, juego.world.height - 200, 'personaje');
                     //Creacion jugador 2
                     obj_jugador2.jugador = juego.add.sprite(300, juego.world.height - 200, 'personaje');
+
+                    indicator = juego.add.sprite(20, juego.world.height - 780, 'controller-indicator');
+                    indicator.scale.x = indicator.scale.y = 2;
+                    indicator.animations.frame = 1;
+
+
+                    juego.input.gamepad.start();
+
+                    // To listen to buttons from a specific pad listen directly on that pad game.input.gamepad.padX, where X = pad 1-4
+                    pad1 = juego.input.gamepad.pad1;
+
+                    //juego.input.onDown.add(dump, this);
 
                      // Seteamos los parámetros del obj_jugador.jugador, como su posición inicial
                     juego.physics.arcade.enable(obj_jugador.jugador); //  Debemos permitirle física al obj_jugador.jugador
@@ -568,8 +590,29 @@
                     juego.camera.follow(obj_jugador2.jugador); // Le permitimos a la cámara del juego, seguir en todo momento al obj_jugador.jugador				
                 }
 
+                /*function dump() {
+
+                    console.log(pad1._axes[0]);
+                    console.log(pad1._rawPad.axes[0]);
+
+                }*/
+
                 // Update
                 function update() {
+
+                    //Indicador
+
+                    // Pad "connected or not" indicator
+                    if (juego.input.gamepad.supported && juego.input.gamepad.active && pad1.connected)
+                    {
+                        indicator.animations.frame = 0;
+                    }
+                    else
+                    {
+                        indicator.animations.frame = 1;
+                    }
+
+
                     if (obj_jugador.jugador.position.y > 1500) { // Muerte al caer
                         reinicia();
                     }
@@ -587,6 +630,55 @@
                             obj_jugador.jugador.alpha = 1;
                         }
                     }
+
+                    // Controls
+                    if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1)
+                    {
+                        obj_jugador.jugador.x--;
+                    }
+                    else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1)
+                    {
+                        obj_jugador.jugador.x++;
+                    }
+
+                    if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_UP) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -0.1)
+                    {
+                        obj_jugador.jugador.y--;
+                    }
+                    else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_DOWN) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.1)
+                    {
+                        obj_jugador.jugador.y++;
+                    }
+
+                    if (pad1.justPressed(Phaser.Gamepad.XBOX360_A))
+                    {
+                        obj_jugador.jugador.angle += 5;
+                    }
+
+                    if (pad1.justReleased(Phaser.Gamepad.XBOX360_B))
+                    {
+                        obj_jugador.jugador.scale.x += 0.01;
+                        obj_jugador.jugador.scale.y = obj_jugador.jugador.scale.x;
+                    }
+
+
+                    if (pad1.connected)
+                    {
+                        var rightStickX = pad1.axis(Phaser.Gamepad.XBOX360_STICK_RIGHT_X);
+                        var rightStickY = pad1.axis(Phaser.Gamepad.XBOX360_STICK_RIGHT_Y);
+
+                        if (rightStickX)
+                        {
+                            sprite.x += rightStickX * 10;
+                        }
+
+                        if (rightStickY)
+                        {
+                            sprite.y += rightStickY * 10;
+                        }
+                    }
+
+
                     obj_jugador.colisionEscalera = false; // Reiniciamos variables
                     obj_jugador.contadorEscaleras = 0;
                     obj_jugador.jugador.body.velocity.x = 0; //  Reseteamos la velocidad del obj_jugador.jugador en x, esto nos permitirá evitar que se acelere
@@ -1034,7 +1126,7 @@
         </script>
     </head>
     <body onload="inicio()">
-        <ul class="list-group">
+        <!--<ul class="list-group">
             <li class="list-group-item">
                 <b>UFIN</b>, el extraterrestre perdido.
             </li>
@@ -1047,8 +1139,8 @@
             <li class="list-group-item">
                 Si ves una roca, <b>empújala</b> para cruzar grandes abismos.
             </li>
-        </ul>
-        <img id="payaso" style="display: none" src="assets/payaso_2.jpg">
+        </ul>-->
+        <!--<img id="payaso" style="display: none" src="assets/payaso_2.jpg">-->
 
     </body>
 </html>
