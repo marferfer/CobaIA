@@ -634,21 +634,21 @@
                     // Controls
                     if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1)
                     {
-                        obj_jugador.jugador.x--;
+                        obj_jugador.jugador.x-=5;
                     }
                     else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1)
                     {
-                        obj_jugador.jugador.x++;
+                        obj_jugador.jugador.x+=5;
                     }
 
                     if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_UP) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -0.1)
                     {
-                        obj_jugador.jugador.y--;
+                        obj_jugador.jugador.y-=5;
                     }
-                    else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_DOWN) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.1)
+                    /*else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_DOWN) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.1)
                     {
-                        obj_jugador.jugador.y++;
-                    }
+                        obj_jugador.jugador.y+=5;
+                    }*/
 
                     if (pad1.justPressed(Phaser.Gamepad.XBOX360_A))
                     {
@@ -669,12 +669,12 @@
 
                         if (rightStickX)
                         {
-                            sprite.x += rightStickX * 10;
+                            obj_jugador.jugador.x += rightStickX * 10;
                         }
 
                         if (rightStickY)
                         {
-                            sprite.y += rightStickY * 10;
+                            obj_jugador.jugador.y += rightStickY * 10;
                         }
                     }
 
