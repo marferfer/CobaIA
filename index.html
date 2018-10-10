@@ -4,90 +4,20 @@
         <title>El extraterrestre perdido</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="js/phaser.min.js"></script>
-        <script src="js/juego.js"></script>
+
+        <!-----------------------LIBRERIAS---------------------------->
+
+        <script src="librerias/phaser.min.js"></script>
         <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script>
-            if (localStorage.getItem('clave') == 'ufo' || localStorage.getItem('clave') == 'segunda' || localStorage.getItem('clave') == 'tercera') {
-                if (localStorage.getItem('clave') == 'tercera') {
-                    localStorage.setItem('clave', null);
-                }
-                if (localStorage.getItem('clave') == 'segunda') {
-                    localStorage.setItem('clave', 'tercera');
-                }
-                if (localStorage.getItem('clave') == 'ufo') {
-                    localStorage.setItem('clave', 'segunda');
-                }
-            }
-            var juego;
-
-            var obj_jugador;
-            var obj_plataforma;
-            var obj_arbol;
-            var obj_caja;
 
 
-            var pad1;
-            var indicator;
+        <!-----------------------ARCHIVOS JUEGO---------------------------->
 
-            var cursores;
-            var escaleras;
-            var puntajeTexto;
-
-            var manos;
-            var lista_manos = [];
-
-            var posimas;
-            var lista_posimas = [];
-
-            var puas;
-            var lista_puas = [];
-
-            var vidas;
-            var lista_vidas = [];
-
-            var rocas;
-            var lista_rocas = [];
-
-            var cajas;
-            var lista_cajas = [];
-
-            var tecla_laser;
-            
-            var ctrlW;
-            var ctrlA;
-            var ctrlS;
-            var ctrlD;
-            var lasers
-            ;
-
-            var mensajes;
-            var lista_mensajes = [];
-
-            var salto = 'salto';
-            var risa = 'risa';
-            var posion = 'posion';
-            var disparo = 'disparo';
-            var pierde_vida = 'pierde_vida';
-            var muerte_malo = 'muerte_malo';
-            var dolor = 'dolor';
-            var paso = 'paso';
-            var perder = 'perder';
-            var maldad = 'maldad';
-            var maldad_2 = 'maldad_2';
-            var maldad_3 = 'maldad_3';
-            var maldad_4 = 'maldad_4';
-            //var fondo = 'fondo';
-
-        </script>
+        <script src="js/variables.js"></script>
+        <script src="js/entidades.js"></script>
+        <script src="js/entorno.js"></script>
+        <script src="js/juego.js"></script>
+        
     </head>
     <body onload="inicio()">
         
