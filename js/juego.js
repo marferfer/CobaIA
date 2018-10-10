@@ -605,16 +605,21 @@ function inicio() {
                     // Controls
                     if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1)
                     {
-                        obj_jugador.jugador.x-=5;
+                        obj_jugador3.jugador.x-=5;
+                        obj_jugador3.jugador.animations.play('left');
+                        obj_jugador3.ultimo_sentido = 'izquierda';
                     }
                     else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1)
                     {
-                        obj_jugador.jugador.x+=5;
+                        obj_jugador3.jugador.x+=5;
+                        obj_jugador3.jugador.animations.play('right');
+                        obj_jugador3.ultimo_sentido = 'derecha';
                     }
 
                     if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_UP) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -0.1)
                     {
-                        obj_jugador.jugador.y-=5;
+                        obj_jugador3.jugador.y-=5;
+                        obj_jugador3.jugador.animations.play('jump');
                     }
                     /*else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_DOWN) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.1)
                     {
@@ -950,44 +955,6 @@ function inicio() {
                             }
                         }
                         actualiza_informacion();
-                    } else if (ctrlA.isDown)// Si presionamos LEFT
-                    {
-                        /*obj_jugador.retrasa_paso++;
-                         if (obj_jugador.retrasa_paso % 10 == 0) {
-                         paso.volume = 0.0
-                         createjs.Sound.play(paso);
-                         }*/
-                        //  Lo movemos a la izquierda
-                        obj_jugador3.jugador.body.velocity.x = -150;
-
-                        obj_jugador3.jugador.animations.play('left');
-                        obj_jugador3.ultimo_sentido = 'izquierda';
-                    } else if (ctrlD.isDown)// Si presionamos RIGHT
-                    {
-                        /*obj_jugador.retrasa_paso++;
-                         if (obj_jugador.retrasa_paso % 10 == 0) {
-                         paso.volume = 0.0;
-                         createjs.Sound.play(paso);
-                         }*/
-                        //  Move to the right
-                        obj_jugador3.jugador.body.velocity.x = 150;
-
-                        obj_jugador3.jugador.animations.play('right');
-                        obj_jugador3.ultimo_sentido = 'derecha';
-                    } else if (obj_jugador3.contadorEscaleras != 0) {// Si el contador de escaleras es <> de cero, quiere decir que estamos escalando
-                        obj_jugador3.jugador.animations.play('climb');// Animamos la escalada
-                    } else {
-                        //  No estamos precionando ninguna tecla
-                        obj_jugador3.jugador.animations.stop();
-                        obj_jugador3.jugador.frame = 1;
-                    }
-                    if (ctrlW.isDown && (obj_jugador3.jugador.body.touching.down || obj_jugador3.contadorSaltos == 1) && !obj_jugador3.colisionEscalera) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
-                        obj_jugador3.jugador.body.velocity.y = -250;
-                        obj_jugador3.jugador.animations.play('jump');
-                        createjs.Sound.play(salto);
-                        if (obj_jugador3.contadorSaltos == 1) {
-                            obj_jugador3.contadorSaltos = 2;
-                        }
                     }
 
                     if (obj_jugador3.jugador.body.touching.down) { // Si el obj_jugador.jugador toca una plataforma el contador de saltos se setea en cero otra vez
