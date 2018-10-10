@@ -1,5 +1,5 @@
 function inicio() {
-    juego = new Phaser.Game(1920, 800, Phaser.AUTO, '', {preload: preload, create: create, update: update, render: render});                
+     juego = new Phaser.Game(1920, 800, Phaser.AUTO, '', {preload: preload, create: create, update: update, render: render});                
     
     
 
