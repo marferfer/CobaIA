@@ -18,7 +18,7 @@ Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños
 
 <p>La pantalla del jugador se verá enmarcada en un terminal, dando la perspectiva de que estamos viéndo el juego a través de los ojos de una máquina. Además este terminal nos servirá como interfaz para consultar los menús del juego y revisar los pequeños coleccionable de información que se verán en los niveles.</p>
 
-<h2> COBAYAS: </h2>
+<h2> COBAIAS: </h2>
 <p>Cada cobaIA tendrá sus propias características físicas y habilidades:</p>
 <p><b>1. CobaIA tanque (TANKABAIA)</b>: Gracias a su complexión fuerte y su peso, esta robusta criatura puede soportar los flujos de aire de los ventiladores que harían volar a las demás. Sumado a esto, posee una fuerza natural que le permite mover objetos pesados como pequeñas cajas o tornillos. Por ello la <b>TANKABAIA</b> es el escudo y el músculo del equipo.</p>
 <p><b>2. CobaIA ágil (AGILBAIA)</b>: Gracias a su flexibilidad y cuerpo alargado esta cobaya posee un don natural para trepar por paredes y nadar a través de pequeñas masas de agua. La <b>AGILBAIA</b> es la que se encarga de llegar a los lugares difíciles para facilitar el acceso a sus compañeras.</p>
