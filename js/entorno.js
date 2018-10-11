@@ -28,6 +28,7 @@ function preload() {
     //juego.load.image('ladrillos', 'assets/ladrillos.png');
     juego.load.image('mano', 'assets/mano.png');
     juego.load.image('tierra', 'assets/tierra.png');
+    juego.load.image('tuboMid', 'assets/tuboMid.png');
     juego.load.image('escalera', 'assets/escalera.png');
     juego.load.image('corazon', 'assets/corazon.png');
     juego.load.image('posima', 'assets/posima.png');
@@ -79,8 +80,8 @@ function create() {
 
     obj_plataforma.plataforma_grupo = juego.add.group(); // Grupo de obj_plataforma.plataformas
     obj_plataforma.plataforma_grupo.enableBody = true; // Física disponible para objetos que colisionen con ellas
-    obj_plataforma.plataformas.push(obj_plataforma.plataforma_grupo.create(50, juego.world.height - 100, 'tierra')); // Plataformas
-    obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].scale.setTo(1, 1);
+    obj_plataforma.plataformas.push(obj_plataforma.plataforma_grupo.create(50, juego.world.height - 100, 'tuboMid')); // Plataformas
+    obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].scale.setTo(2, 1);
     obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].body.immovable = true;
     obj_plataforma.plataformas.push(obj_plataforma.plataforma_grupo.create(800, juego.world.height - 100, 'tierra'));
     obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].scale.setTo(1, 1);
@@ -319,6 +320,20 @@ function create() {
         };
         lista_rocas.push(entidad);
     }
+
+    cajas = juego.add.group();
+    cajas.enableBody = true;
+    for (var i = 0; i < 1; i++) {
+        var caja = cajas.create(950 + i * 70, juego.world.height - 300, 'caja');
+        caja.body.gravity.y = 300;
+        caja.body.bounce.y = 0;
+        var entidad = {
+            "caja": caja,
+            "gravity_y": 300
+        };
+        lista_cajas.push(entidad);
+    }
+
 
     /*posimas = juego.add.group(); // Posimas
     posimas.enableBody = true;

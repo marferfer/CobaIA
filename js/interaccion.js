@@ -91,36 +91,42 @@ function update() {
     obj_jugador.contadorEscaleras = 0;
     obj_jugador.jugador.body.velocity.x = 0; //  Reseteamos la velocidad del obj_jugador.jugador en x, esto nos permitirá evitar que se acelere
     juego.physics.arcade.collide(obj_jugador.jugador, obj_plataforma.plataformas);// Hacemos colisionar al obj_jugador.jugador con las obj_plataforma.plataformas
-    juego.physics.arcade.collide(obj_jugador.jugador, obj_caja.cajas);// Hacemos colisionar al obj_jugador.jugador con las obj_caja.cajas                    
+    //juego.physics.arcade.collide(obj_jugador.jugador, obj_caja.cajas);// Hacemos colisionar al obj_jugador.jugador con las obj_caja.cajas                    
     juego.physics.arcade.collide(manos, obj_plataforma.plataformas);// Lo mismo hacemos con las manos
     juego.physics.arcade.collide(manos, rocas);
     juego.physics.arcade.collide(posimas, obj_plataforma.plataformas);// Lo mismo hacemos con las posimas                    
     juego.physics.arcade.collide(rocas, obj_plataforma.plataformas);// Lo mismo hacemos con las rocas
     juego.physics.arcade.collide(rocas, obj_jugador.jugador);
+    juego.physics.arcade.collide(cajas, obj_plataforma.plataformas);
+    juego.physics.arcade.collide(cajas, obj_jugador.jugador);
 
     //Juggador 2 colisiones
     obj_jugador2.colisionEscalera = false; // Reiniciamos variables
     obj_jugador2.contadorEscaleras = 0;
     obj_jugador2.jugador.body.velocity.x = 0; //  Reseteamos la velocidad del obj_jugador.jugador en x, esto nos permitirá evitar que se acelere
     juego.physics.arcade.collide(obj_jugador2.jugador, obj_plataforma.plataformas);// Hacemos colisionar al obj_jugador.jugador con las obj_plataforma.plataformas
-    juego.physics.arcade.collide(obj_jugador2.jugador, obj_caja.cajas);// Hacemos colisionar al obj_jugador.jugador con las obj_caja.cajas                    
+    //juego.physics.arcade.collide(obj_jugador2.jugador, obj_caja.cajas);// Hacemos colisionar al obj_jugador.jugador con las obj_caja.cajas                    
     juego.physics.arcade.collide(manos, obj_plataforma.plataformas);// Lo mismo hacemos con las manos
     juego.physics.arcade.collide(manos, rocas);
     juego.physics.arcade.collide(posimas, obj_plataforma.plataformas);// Lo mismo hacemos con las posimas                    
     juego.physics.arcade.collide(rocas, obj_plataforma.plataformas);// Lo mismo hacemos con las rocas
     juego.physics.arcade.collide(rocas, obj_jugador2.jugador);
+    juego.physics.arcade.collide(cajas, obj_plataforma.plataformas);
+    juego.physics.arcade.collide(cajas, obj_jugador2.jugador);
 
     //Juggador 3 colisiones
     obj_jugador3.colisionEscalera = false; // Reiniciamos variables
     obj_jugador3.contadorEscaleras = 0;
     obj_jugador3.jugador.body.velocity.x = 0; //  Reseteamos la velocidad del obj_jugador.jugador en x, esto nos permitirá evitar que se acelere
     juego.physics.arcade.collide(obj_jugador3.jugador, obj_plataforma.plataformas);// Hacemos colisionar al obj_jugador.jugador con las obj_plataforma.plataformas
-    juego.physics.arcade.collide(obj_jugador3.jugador, obj_caja.cajas);// Hacemos colisionar al obj_jugador.jugador con las obj_caja.cajas                    
+    //juego.physics.arcade.collide(obj_jugador3.jugador, obj_caja.cajas);// Hacemos colisionar al obj_jugador.jugador con las obj_caja.cajas                    
     juego.physics.arcade.collide(manos, obj_plataforma.plataformas);// Lo mismo hacemos con las manos
     juego.physics.arcade.collide(manos, rocas);
     juego.physics.arcade.collide(posimas, obj_plataforma.plataformas);// Lo mismo hacemos con las posimas                    
     juego.physics.arcade.collide(rocas, obj_plataforma.plataformas);// Lo mismo hacemos con las rocas
     juego.physics.arcade.collide(rocas, obj_jugador3.jugador);
+    juego.physics.arcade.collide(cajas, obj_plataforma.plataformas);
+    juego.physics.arcade.collide(cajas, obj_jugador3.jugador);
     //juego.physics.arcade.overlap(obj_jugador.jugador, escaleras, collectEscaleras, null, this);// Evaluamos la colisión con las escaleras
     //juego.physics.arcade.overlap(obj_jugador.jugador, imagenes, collectIluminati_escaleras, null, this);// Evaluamos la colisión con las escaleras
     if (!obj_jugador.colisionEscalera) { // Si no hay colisión con las escaleras, entonces reestablecemos la gravedad

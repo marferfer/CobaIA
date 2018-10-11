@@ -123,10 +123,8 @@ lista_rocas = []; // Arreglo de rocas
 imagenes = null; // Rocas
 lista_imagenes = []; // Arreglo de rocas
 
-obj_caja = {
-    caja_grupo: null,
-    cajas: []
-};
+cajas = null;
+lista_cajas = [];
 
 obj_arbol = {
     arbol_grupo: null,

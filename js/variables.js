@@ -3,7 +3,7 @@ var juego;
 var obj_jugador;
 var obj_plataforma;
 var obj_arbol;
-var obj_caja;
+
 
 
 var pad1;
