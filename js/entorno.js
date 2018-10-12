@@ -78,29 +78,29 @@ function create() {
     obj_arbol.arboles[(obj_arbol.arboles.length - 1)].scale.setTo(1, 1);
     obj_arbol.arboles[(obj_arbol.arboles.length - 1)].body.immovable = true;*/
 
-    obj_plataforma.plataforma_grupo = juego.add.group(); // Grupo de obj_plataforma.plataformas
-    obj_plataforma.plataforma_grupo.enableBody = true; // Física disponible para objetos que colisionen con ellas
-    obj_plataforma.plataformas.push(obj_plataforma.plataforma_grupo.create(50, juego.world.height - 100, 'tuboMid')); // Plataformas
-    obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].scale.setTo(2, 1);
-    obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].body.immovable = true;
-    obj_plataforma.plataformas.push(obj_plataforma.plataforma_grupo.create(800, juego.world.height - 100, 'tierra'));
-    obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].scale.setTo(1, 1);
-    obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].body.immovable = true;
-    obj_plataforma.plataformas.push(obj_plataforma.plataforma_grupo.create(1500, juego.world.height, 'tierra'));
-    obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].scale.setTo(1, 1);
-    obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].body.immovable = true;
-    obj_plataforma.plataformas.push(obj_plataforma.plataforma_grupo.create(1800, juego.world.height - 100, 'tierra'));
-    obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].scale.setTo(1, 1);
-    obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].body.immovable = true;
-    obj_plataforma.plataformas.push(obj_plataforma.plataforma_grupo.create(2700, juego.world.height - 100, 'tierra'));
-    obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].scale.setTo(1, 1);
-    obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].body.immovable = true;
-    obj_plataforma.plataformas.push(obj_plataforma.plataforma_grupo.create(4200, juego.world.height - 100, 'tierra'));
-    obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].scale.setTo(1, 1);
-    obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].body.immovable = true;
-    obj_plataforma.plataformas.push(obj_plataforma.plataforma_grupo.create(3260, juego.world.height, 'tierra'));
-    obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].scale.setTo(1, 1);
-    obj_plataforma.plataformas[(obj_plataforma.plataformas.length - 1)].body.immovable = true;
+    plataformas.grupo = juego.add.group(); // Grupo de obj_plataforma.plataformas
+    plataformas.grupo.enableBody = true; // Física disponible para objetos que colisionen con ellas
+    plataformas.lista.push(plataformas.grupo.create(50, juego.world.height - 100, 'tierra')); // Plataformas
+    plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(2, 1);
+    plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;
+    plataformas.lista.push(plataformas.grupo.create(800, juego.world.height - 100, 'tierra'));
+    plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(1, 1);
+    plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;
+    plataformas.lista.push(plataformas.grupo.create(1500, juego.world.height, 'tierra'));
+    plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(1, 1);
+    plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;
+    plataformas.lista.push(plataformas.grupo.create(1800, juego.world.height - 100, 'tierra'));
+    plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(1, 1);
+    plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;
+    plataformas.lista.push(plataformas.grupo.create(2700, juego.world.height - 100, 'tierra'));
+    plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(1, 1);
+    plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;
+    plataformas.lista.push(plataformas.grupo.create(4200, juego.world.height - 100, 'tierra'));
+    plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(1, 1);
+    plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;
+    plataformas.lista.push(plataformas.grupo.create(3260, juego.world.height, 'tierra'));
+    plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(1, 1);
+    plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;
 
 
 
@@ -140,12 +140,9 @@ function create() {
         obj_jugador.corazones[obj_jugador.corazones.length - 1].fixedToCamera = true;
     }*/
 
-    obj_jugador.jugador = juego.add.sprite(50, juego.world.height - 200, 'personaje');
+    tankabaIA.jugador = juego.add.sprite(50, juego.world.height - 200, 'personaje');
     //Creacion jugador 2
-    obj_jugador2.jugador = juego.add.sprite(300, juego.world.height - 200, 'personaje');
-
-    obj_jugador3.jugador = juego.add.sprite(400, juego.world.height - 200, 'personaje');
-
+    
     indicator = juego.add.sprite(20, juego.world.height - 780, 'controller-indicator');
     indicator.scale.x = indicator.scale.y = 2;
     indicator.animations.frame = 1;
@@ -159,21 +156,21 @@ function create() {
     //juego.input.onDown.add(dump, this);
 
      // Seteamos los parámetros del obj_jugador.jugador, como su posición inicial
-    juego.physics.arcade.enable(obj_jugador.jugador); //  Debemos permitirle física al obj_jugador.jugador
-    obj_jugador.jugador.body.bounce.y = 0; //  Rebote del obj_jugador.jugador
-    obj_jugador.jugador.body.gravity.y = 500; // Su aceleración de gravedad
-    obj_jugador.jugador.body.collideWorldBounds = false; 
+    juego.physics.arcade.enable(tankabaIA.jugador); //  Debemos permitirle física al obj_jugador.jugador
+    tankabaIA.jugador.body.bounce.y = 0; //  Rebote del obj_jugador.jugador
+    tankabaIA.jugador.body.gravity.y = 500; // Su aceleración de gravedad
+    tankabaIA.jugador.body.collideWorldBounds = false; 
     // Le permitimos colisionar con los límites del juego
-    obj_jugador.jugador.animations.add('left', [0, 1], 10, true); // Creamos la película de animaciones para el personaje
-    obj_jugador.jugador.animations.add('right', [0, 1], 10, true);
-    obj_jugador.jugador.animations.add('jump', [7], 10, true);
-    obj_jugador.jugador.animations.add('climb', [4, 5, 6], 10, true);
-    obj_jugador.jugador.animations.add('disparo_derecha', [2], 10, true);
-    obj_jugador.jugador.animations.add('disparo_izquierda', [3], 10, true);
+    tankabaIA.jugador.animations.add('left', [0, 1], 10, true); // Creamos la película de animaciones para el personaje
+    tankabaIA.jugador.animations.add('right', [0, 1], 10, true);
+    tankabaIA.jugador.animations.add('jump', [7], 10, true);
+    tankabaIA.jugador.animations.add('climb', [4, 5, 6], 10, true);
+    tankabaIA.jugador.animations.add('disparo_derecha', [2], 10, true);
+    tankabaIA.jugador.animations.add('disparo_izquierda', [3], 10, true);
 
     // Movimiento Jugador 2
 
-    juego.physics.arcade.enable(obj_jugador2.jugador); //  Debemos permitirle física al obj_jugador.jugador
+    /*juego.physics.arcade.enable(obj_jugador2.jugador); //  Debemos permitirle física al obj_jugador.jugador
     obj_jugador2.jugador.body.bounce.y = 0; //  Rebote del obj_jugador.jugador
     obj_jugador2.jugador.body.gravity.y = 500; // Su aceleración de gravedad
     obj_jugador2.jugador.body.collideWorldBounds = false; // Le permitimos colisionar con los límites del juego
@@ -193,7 +190,7 @@ function create() {
     obj_jugador3.jugador.animations.add('jump', [7], 10, true);
     obj_jugador3.jugador.animations.add('climb', [4, 5, 6], 10, true);
     obj_jugador3.jugador.animations.add('disparo_derecha', [2], 10, true);
-    obj_jugador3.jugador.animations.add('disparo_izquierda', [3], 10, true);
+    obj_jugador3.jugador.animations.add('disparo_izquierda', [3], 10, true);*/
 
     platillos = juego.add.group(); // Platillo
     platillos.enableBody = true;
@@ -321,18 +318,14 @@ function create() {
         lista_rocas.push(entidad);
     }
 
-    cajas = juego.add.group();
-    cajas.enableBody = true;
-    for (var i = 0; i < 1; i++) {
-        var caja = cajas.create(950 + i * 70, juego.world.height - 300, 'caja');
-        caja.body.gravity.y = 300;
-        caja.body.bounce.y = 0;
-        var entidad = {
-            "caja": caja,
-            "gravity_y": 300
-        };
-        lista_cajas.push(entidad);
-    }
+    cajas.grupo = juego.add.group();
+    cajas.grupo.enableBody = true;
+    let caja = cajas.grupo.create(950, juego.world.height - 300, 'caja');
+    caja.body.gravity.y = 300;
+    caja.body.bounce.y = 0;
+    cajas.lista.push(caja);
+    cajas.lista[(cajas.lista.length - 1)].scale.setTo(1, 1);
+   
 
 
     /*posimas = juego.add.group(); // Posimas
@@ -405,7 +398,7 @@ function create() {
     cursores = juego.input.keyboard.createCursorKeys(); // Creamos un teclado  
     juego.input.keyboard.onUpCallback = function (e) {
         if (e.keyCode == Phaser.Keyboard.UP) {
-            obj_jugador.contadorSaltos++;
+            tankabaIA.contadorSaltos++;
         }
     };
 
@@ -428,5 +421,5 @@ function create() {
     sprite.addChild(puntajeTexto);*/
     sprite.cameraOffset.x = 10; // Ubicamos el sprite contenedor de la cámara en las coordenadas 10, 10
     sprite.cameraOffset.y = 10;
-    juego.camera.follow(obj_jugador2.jugador); // Le permitimos a la cámara del juego, seguir en todo momento al obj_jugador.jugador                
+    juego.camera.follow(tankabaIA.jugador); // Le permitimos a la cámara del juego, seguir en todo momento al obj_jugador.jugador                
 }

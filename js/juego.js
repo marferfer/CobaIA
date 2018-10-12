@@ -14,8 +14,8 @@ function inicio() {
 
     function reinicia() {
         //juego.autoStart();
-        if (obj_jugador.muriendo == false) {
-            obj_jugador.muriendo = true;
+        if (tankabaIA.muriendo == false) {
+            tankabaIA.muriendo = true;
             createjs.Sound.play(perder);
         }
         setTimeout(function () {

@@ -1,11 +1,5 @@
 var juego;
 
-var obj_jugador;
-var obj_plataforma;
-var obj_arbol;
-
-
-
 var pad1;
 var indicator;
 
@@ -28,8 +22,6 @@ var lista_vidas = [];
 var rocas;
 var lista_rocas = [];
 
-var cajas;
-var lista_cajas = [];
 
 var tecla_laser;
 

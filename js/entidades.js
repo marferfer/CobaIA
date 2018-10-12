@@ -1,102 +1,73 @@
-obj_jugador = {
-    "muriendo": false,
-    "musica_diabolica": false,
-    "jugador": null,
-    "vidas": 3,
-    "retrasa_paso": 0,
-    "corazones": [],
-    "inmortal": false,
-    "tiempo_inmortalidad": 0,
-    "tolerancia_vida": 100,
-    "tiempo_disparo": 0,
-    "tolerancia_disparo": 10,
-    "cantidad_disparos": 5,
-    "lasers_der": [],
-    "lasers_izq": [],
-    "puntaje": 0,
-    "contadorSaltos": 0,
-    "colisionEscalera": false,
-    "contadorEscaleras": 0,
-    "ultimo_sentido": 'derecha'
+class CobaIA {
+
+    constructor(){
+        this.muriendo = false;
+        this.musica_diabolica = false;
+        this.jugador = null;
+        this.vidas = 3;
+        this.retrasa_paso = 0;
+        this.corazones = [];
+        this.inmortal = false;
+        this.tiempo_inmortalidad = 0;
+        this.tolerancia_vida = 100;
+        this.tiempo_disparo = 0;
+        this.tolerancia_disparo = 10;
+        this.cantidad_disparos = 5;
+        this.lasers_der = [];
+        this.lasers_izq = [];
+        this.puntaje = 0;
+        this.contadorSaltos = 0;
+        this.colisionEscalera = false;
+        this.contadorEscaleras = 0;
+        this.ultimo_sentido = 'derecha';
+    }
 };
 
-obj_jugador2 = {
-    "muriendo": false,
-    "musica_diabolica": false,
-    "jugador": null,
-    "vidas": 3,
-    "retrasa_paso": 0,
-    "corazones": [],
-    "inmortal": false,
-    "tiempo_inmortalidad": 0,
-    "tolerancia_vida": 100,
-    "tiempo_disparo": 0,
-    "tolerancia_disparo": 10,
-    "cantidad_disparos": 5,
-    "lasers_der": [],
-    "lasers_izq": [],
-    "puntaje": 0,
-    "contadorSaltos": 0,
-    "colisionEscalera": false,
-    "contadorEscaleras": 0,
-    "ultimo_sentido": 'derecha'
-};
+class TankabaIA extends CobaIA{
 
-obj_jugador3 = {
-    "muriendo": false,
-    "musica_diabolica": false,
-    "jugador": null,
-    "vidas": 3,
-    "retrasa_paso": 0,
-    "corazones": [],
-    "inmortal": false,
-    "tiempo_inmortalidad": 0,
-    "tolerancia_vida": 100,
-    "tiempo_disparo": 0,
-    "tolerancia_disparo": 10,
-    "cantidad_disparos": 5,
-    "lasers_der": [],
-    "lasers_izq": [],
-    "puntaje": 0,
-    "contadorSaltos": 0,
-    "colisionEscalera": false,
-    "contadorEscaleras": 0,
-    "ultimo_sentido": 'derecha'
-};
+    constructor(){
+        super();
+    }
 
-//obj_jugador2 = obj_jugador;
+}
 
-/*function Obj_Jugar {
+class TalibaIA extends CobaIA{
+
+    constructor(){
+        super();
+    }
+}
+
+class AcrobaIA extends CobaIA{
+
+    constructor(){
+        super();
+    }
+}
+
+class Objetos {
+
     constructor(){
 
+        this.grupo = null;
+        this.lista = [];
     }
-    let muriendo: false;
-    let jugador: null;
-    let vidas: 1;
-    "retrasa_paso": 0,
-    "corazones": [],
-    "inmortal": false,
-    "tiempo_inmortalidad": 0,
-    "tolerancia_vida": 100,
-    "tiempo_disparo": 0,
-    "tolerancia_disparo": 10,
-    "cantidad_disparos": 5,
-    "lasers_der": [],
-    "lasers_izq": [],
-    "puntaje": 0,
-    "contadorSaltos": 0,
-    "colisionEscalera": false,
-    "contadorEscaleras": 0,
-    "ultimo_sentido": 'derecha'
-}*/
+}
 
-obj_plataforma = {
-    plataforma_grupo: null,
-    plataformas: []
-};
+class Plataformas extends Objetos {
 
+    constructor(){
+        super();
+    }
+}
 
-//indicator = null;
+class Cajas extends Objetos{
+
+    constructor(){
+        super();
+    }
+}
+
 cursores = null; // Eventos de teclado
 
 escaleras = null; // Imagenes que pueden permitirnos subir
@@ -123,14 +94,6 @@ lista_rocas = []; // Arreglo de rocas
 imagenes = null; // Rocas
 lista_imagenes = []; // Arreglo de rocas
 
-cajas = null;
-lista_cajas = [];
-
-obj_arbol = {
-    arbol_grupo: null,
-    arboles: []
-};
-
 circulos = null; // Potenciales enemigos
 lista_circulos = []; // Arreglo de lista_circulos
 
@@ -141,4 +104,6 @@ ctrlS = null;
 ctrlD = null;
 lasers = null;
 
- 
+ let tankabaIA = new TankabaIA();
+ let plataformas = new Plataformas();
+ let cajas = new Cajas();
