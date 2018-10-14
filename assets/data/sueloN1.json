@@ -1,0 +1,31 @@
+{ 
+    
+    "sueloN1": [
+        
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   2184, 90  ,  3117, 212  ,  2007, 224  ,  2010, 88  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   4495, 582  ,  1, 584  ,  2007, 224  ,  4499, 207  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   1874, 90  ,  1873, 225  ,  1, 584  ,  -1, 91  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   3117, 212  ,  2184, 90  ,  2294, 7  ,  2840, 8  ]
+        } ,
+        {
+            "density": 2, "friction": 0, "bounce": 0, 
+            "filter": { "categoryBits": 1, "maskBits": 65535 },
+            "shape": [   1, 584  ,  1873, 225  ,  2007, 224  ]
+        }
+    ]
+}

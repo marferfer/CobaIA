@@ -29,21 +29,21 @@ class TankabaIA extends CobaIA{
         super();
     }
 
-}
+};
 
 class TalibaIA extends CobaIA{
 
     constructor(){
         super();
     }
-}
+};
 
 class AcrobaIA extends CobaIA{
 
     constructor(){
         super();
     }
-}
+};
 
 class Objetos {
 
@@ -52,21 +52,29 @@ class Objetos {
         this.grupo = null;
         this.lista = [];
     }
-}
+};
 
 class Plataformas extends Objetos {
 
     constructor(){
         super();
     }
-}
+};
 
 class Cajas extends Objetos{
 
     constructor(){
         super();
     }
-}
+};
+
+class Suelos extends Objetos{
+
+    constructor(){
+        super();
+    }
+};
+
 
 cursores = null; // Eventos de teclado
 
@@ -107,3 +115,4 @@ lasers = null;
  let tankabaIA = new TankabaIA();
  let plataformas = new Plataformas();
  let cajas = new Cajas();
+ let suelos = new Suelos();

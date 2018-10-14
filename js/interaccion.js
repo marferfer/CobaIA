@@ -178,7 +178,7 @@ function update() {
          createjs.Sound.play(paso);
          }*/
         //  Lo movemos a la izquierda
-        tankabaIA.jugador.body.velocity.x = -150;
+        tankabaIA.jugador.body.velocity.x = -350;
 
         tankabaIA.jugador.animations.play('left');
         tankabaIA.ultimo_sentido = 'izquierda';
@@ -191,7 +191,7 @@ function update() {
          createjs.Sound.play(paso);
          }*/
         //  Move to the right
-        tankabaIA.jugador.body.velocity.x = 150;
+        tankabaIA.jugador.body.velocity.x = 350;
 
         tankabaIA.jugador.animations.play('right');
         tankabaIA.ultimo_sentido = 'derecha';

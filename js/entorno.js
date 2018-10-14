@@ -25,34 +25,42 @@ function preload() {
     //juego.load.spritesheet('controller-indicator', 'assets/controller-indicator.png');
 
     juego.state.add("recarga", Phaser.Preload);
-    //juego.load.image('ladrillos', 'assets/ladrillos.png');
-    juego.load.image('mano', 'assets/mano.png');
-    juego.load.image('tierra', 'assets/tierra.png');
-    juego.load.image('tuboMid', 'assets/tuboMid.png');
-    juego.load.image('escalera', 'assets/escalera.png');
-    juego.load.image('corazon', 'assets/corazon.png');
-    juego.load.image('posima', 'assets/posima.png');
-    juego.load.image('pua', 'assets/puas.png');
-    juego.load.image('roca', 'assets/roca.png');
-    juego.load.image('caja', 'assets/caja.png');
-    juego.load.image('arbol', 'assets/arbol.png');
-    juego.load.image('platillo', 'assets/platillo.png');
-    juego.load.image('laser_der', 'assets/laser_der.png');
-    juego.load.image('laser_izq', 'assets/laser_izq.png');
-    juego.load.image('circulo', 'assets/circulo.png');
-    juego.load.image('mensaje', 'assets/mensaje.png');
+
+    juego.load.image('fondoN1', 'assets/images/fondoN1.png');
+    juego.load.image('sueloN1', 'assets/images/sueloN1.png');
+
+    juego.load.image('mano', 'assets/images/mano.png');
+    juego.load.image('tierra', 'assets/images/tierra.png');
+    juego.load.image('tuboMid', 'assets/images/tuboMid.png');
+    juego.load.image('escalera', 'assets/images/escalera.png');
+    juego.load.image('corazon', 'assets/images/corazon.png');
+    juego.load.image('posima', 'assets/images/posima.png');
+    juego.load.image('pua', 'assets/images/puas.png');
+    juego.load.image('roca', 'assets/images/roca.png');
+    juego.load.image('caja', 'assets/images/caja.png');
+    juego.load.image('arbol', 'assets/images/arbol.png');
+    juego.load.image('platillo', 'assets/images/platillo.png');
+    juego.load.image('laser_der', 'assets/images/laser_der.png');
+    juego.load.image('laser_izq', 'assets/images/laser_izq.png');
+    juego.load.image('circulo', 'assets/images/circulo.png');
+    juego.load.image('mensaje', 'assets/images/mensaje.png');
     //juego.load.image('fondo', 'assets/fondo.png');
-    juego.load.image('dkmnet', 'assets/dkmnet.png');
-    juego.load.spritesheet('personaje', 'assets/personaje.png', 47, 73);
-    juego.load.spritesheet('controller-indicator', 'assets/controller-indicator.png',16, 16);
+    juego.load.image('dkmnet', 'assets/images/dkmnet.png');
+    juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
+    juego.load.spritesheet('controller-indicator', 'assets/images/controller-indicator.png',16, 16);
+
+    juego.load.physics('sueloN1Collisions', 'assets/data/sueloN1.json');
     
 }
 
 function create() {
-    juego.physics.startSystem(Phaser.Physics.ARCADE);
-    //var fondo = juego.add.sprite(0, 0, 'fondo'); //Imagen de fondo
+
+    juego.physics.startSystem(Phaser.Physics.P2JS);
+    juego.physics.p2.setImpactEvents(true);
+
+    var fondoN1 = juego.add.sprite(0, 0, 'fondoN1'); //Imagen de fondo
+    var sueloN1 = juego.add.sprite(0, juego.world.height + 395, 'sueloN1');
     //fondo.fixedToCamera = true; // Lo dejará fijo ante la cámara
-    juego.add.sprite(0, 0, 'ladrillos');
     juego.world.setBounds(0, 0, 21000, 1384); // Establecemos los límites del juego completo
 
     tecla_laser = juego.input.keyboard.addKey(Phaser.Keyboard.E);
@@ -63,20 +71,13 @@ function create() {
     ctrlS = juego.input.keyboard.addKey(Phaser.Keyboard.S);
     ctrlD = juego.input.keyboard.addKey(Phaser.Keyboard.D);
 
-    /*obj_arbol.arbol_grupo = juego.add.group(); //  Grupo de obj_arbol.arbol
-    obj_arbol.arbol_grupo.enableBody = true; // Física disponible para objetos que colisionen con ellas
-    obj_arbol.arboles.push(obj_arbol.arbol_grupo.create(150, juego.world.height - 230, 'arbol')); // Arboles
-    obj_arbol.arboles[(obj_arbol.arboles.length - 1)].scale.setTo(1, 1);
-    obj_arbol.arboles[(obj_arbol.arboles.length - 1)].body.immovable = true;
-    obj_arbol.arboles.push(obj_arbol.arbol_grupo.create(800, juego.world.height - 230, 'arbol'));
-    obj_arbol.arboles[(obj_arbol.arboles.length - 1)].scale.setTo(1, 1);
-    obj_arbol.arboles[(obj_arbol.arboles.length - 1)].body.immovable = true;
-    obj_arbol.arboles.push(obj_arbol.arbol_grupo.create(1000, juego.world.height - 230, 'arbol'));
-    obj_arbol.arboles[(obj_arbol.arboles.length - 1)].scale.setTo(1, 1);
-    obj_arbol.arboles[(obj_arbol.arboles.length - 1)].body.immovable = true;
-    obj_arbol.arboles.push(obj_arbol.arbol_grupo.create(1200, juego.world.height - 230, 'arbol'));
-    obj_arbol.arboles[(obj_arbol.arboles.length - 1)].scale.setTo(1, 1);
-    obj_arbol.arboles[(obj_arbol.arboles.length - 1)].body.immovable = true;*/
+    //juego.physics.p2.enable(sueloN1);
+    juego.physics.p2.enableBody(sueloN1);
+
+    sueloN1.body.clearShapes();
+    sueloN1.body.loadPolygon('sueloN1Collisions', 'sueloN1');
+    sueloN1.body.static = true;
+    //sueloN1.body.collides(plataformas.grupo);
 
     plataformas.grupo = juego.add.group(); // Grupo de obj_plataforma.plataformas
     plataformas.grupo.enableBody = true; // Física disponible para objetos que colisionen con ellas
@@ -101,21 +102,6 @@ function create() {
     plataformas.lista.push(plataformas.grupo.create(3260, juego.world.height, 'tierra'));
     plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(1, 1);
     plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;
-
-
-
-    /*obj_caja.caja_grupo = juego.add.group();//  Grupo de obj_caja.cajas
-    obj_caja.caja_grupo.enableBody = true;//  Física disponible para objetos que colisionen con ellas
-    obj_caja.cajas.push(obj_caja.caja_grupo.create(50, juego.world.height - 500, 'caja')); // Cajas
-    obj_caja.cajas[(obj_caja.caja_grupo.length - 1)].scale.setTo(1, 1);
-    obj_caja.cajas[(obj_caja.caja_grupo.length - 1)].body.immovable = true;
-    obj_caja.cajas.push(obj_caja.caja_grupo.create(500, juego.world.height - 230, 'caja'));
-    obj_caja.cajas[(obj_caja.caja_grupo.length - 1)].scale.setTo(1, 1);
-    obj_caja.cajas[(obj_caja.caja_grupo.length - 1)].body.immovable = true;
-    obj_caja.cajas.push(obj_caja.caja_grupo.create(200, 210, 'caja'));
-    obj_caja.cajas[(obj_caja.caja_grupo.length - 1)].scale.setTo(1, 1);
-    obj_caja.cajas[(obj_caja.caja_grupo.length - 1)].body.immovable = true;*/
-
 
     lasers = juego.add.group(); // Lasers
     lasers.enableBody = true;
