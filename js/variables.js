@@ -1,5 +1,7 @@
 var juego;
 
+
+
 var pad1;
 var indicator;
 
