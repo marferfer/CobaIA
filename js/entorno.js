@@ -77,6 +77,8 @@ function create() {
     sueloN1.body.clearShapes();
     sueloN1.body.loadPolygon('sueloN1Collisions', 'sueloN1');
     sueloN1.body.static = true;
+    sueloN1.body.x = 0;
+    //sueloN1.body.y = juego.world.height + 395;
     //sueloN1.body.collides(plataformas.grupo);
 
     plataformas.grupo = juego.add.group(); // Grupo de obj_plataforma.plataformas
