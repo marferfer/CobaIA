@@ -51,6 +51,7 @@ function preload() {
 
     juego.load.physics('sueloN1Collisions', 'assets/data/sueloN1.json');
     juego.load.physics('cajaCollisions', 'assets/data/caja.json');
+    juego.load.physics('personajeCollisions', 'assets/data/personaje.json');
     
 }
 
@@ -58,10 +59,10 @@ function create() {
 
     juego.physics.startSystem(Phaser.Physics.P2JS); //activamos el motor de fisicas
     juego.physics.p2.setImpactEvents(true); //le decimos que detecte los eventos para las colisiones
-    juego.physics.p2.gravity.y = 250;
+    juego.physics.p2.gravity.y = 300;
+    juego.physics.p2.updateBoundsCollisionGroup();
 
-    var fondoN1 = juego.add.sprite(0, 0, 'fondoN1'); //Imagen de fondo
-    var sueloN1 = juego.add.sprite(0, juego.world.height + 395, 'sueloN1');
+    nivel1.fondo = juego.add.sprite(0, 0, 'fondoN1');
     //fondo.fixedToCamera = true; // Lo dejará fijo ante la cámara
     juego.world.setBounds(0, 0, 21000, 1384); // Establecemos los límites del juego completo
 
@@ -73,16 +74,22 @@ function create() {
     ctrlS = juego.input.keyboard.addKey(Phaser.Keyboard.S);
     ctrlD = juego.input.keyboard.addKey(Phaser.Keyboard.D);
 
-    //juego.physics.p2.enable(sueloN1);
-    juego.physics.p2.enableBody(sueloN1);
+    nivel1.grupo = juego.add.group();
+    nivel1.grupo.enableBody = true;
+    nivel1.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
+    let sueloN1 = nivel1.grupo.create(0, juego.world.height -300, 'sueloN1');
+    juego.physics.p2.enableBody(sueloN1);
+    sueloN1.body.static = true;
+    
+    
     sueloN1.body.clearShapes();
     sueloN1.body.loadPolygon('sueloN1Collisions', 'sueloN1');
     sueloN1.body.static = true;
-    sueloN1.collideWorldBounds = false;
+    sueloN1.collideWorldBounds = true;
     sueloN1.body.x = 2300;
     sueloN1.body.y = juego.world.height + 100;
-    
+    nivel1.suelo = sueloN1;
 
     plataformas.grupo = juego.add.group(); // Grupo de obj_plataforma.plataformas
     plataformas.grupo.enableBody = true; // Física disponible para objetos que colisionen con ellas
@@ -131,27 +138,27 @@ function create() {
         obj_jugador.corazones[obj_jugador.corazones.length - 1].fixedToCamera = true;
     }*/
 
-    tankabaIA.jugador = juego.add.sprite(2000, juego.world.height - 200, 'personaje');
+    
     //Creacion jugador 2
     
     indicator = juego.add.sprite(20, juego.world.height - 780, 'controller-indicator');
     indicator.scale.x = indicator.scale.y = 2;
     indicator.animations.frame = 1;
 
-
     juego.input.gamepad.start();
 
     // To listen to buttons from a specific pad listen directly on that pad game.input.gamepad.padX, where X = pad 1-4
     pad1 = juego.input.gamepad.pad1;
 
-    //juego.input.onDown.add(dump, this);
-
+    tankabaIA.jugador = juego.add.sprite(2000, juego.world.height - 200, 'personaje');
+    juego.physics.p2.enableBody(tankabaIA.jugador);
+    tankabaIA.jugador.body.setRectangle(40, 80);
+    //tankabaIA.jugador.body.clearShapes();
+    //tankabaIA.jugador.body.loadPolygon('cajaCollisions', 'caja');
+    tankabaIA.jugador.dynamic = true;
+    tankabaIA.jugador.body.debug = true;
+    tankabaIA.jugador.body.collideWorldBounds = true;
      // Seteamos los parámetros del obj_jugador.jugador, como su posición inicial
-    juego.physics.arcade.enable(tankabaIA.jugador); //  Debemos permitirle física al obj_jugador.jugador
-    tankabaIA.jugador.body.bounce.y = 0; //  Rebote del obj_jugador.jugador
-    tankabaIA.jugador.body.gravity.y = 500; // Su aceleración de gravedad
-    tankabaIA.jugador.body.collideWorldBounds = false; 
-    // Le permitimos colisionar con los límites del juego
     tankabaIA.jugador.animations.add('left', [0, 1], 10, true); // Creamos la película de animaciones para el personaje
     tankabaIA.jugador.animations.add('right', [0, 1], 10, true);
     tankabaIA.jugador.animations.add('jump', [7], 10, true);
@@ -312,14 +319,42 @@ function create() {
 
     cajas.grupo = juego.add.group();
     cajas.grupo.enableBody = true;
-    let caja = juego.add.sprite(2315, juego.world.height - 300, 'caja');
-    
+    cajas.grupo.physicsBodyType = Phaser.Physics.P2JS;
+    //cajas.collisionGroup = juego.physics.p2.createCollisionGroup();
+
+
+
+    //let caja = juego.add.sprite(2315, juego.world.height - 300, 'caja');
+    let caja = cajas.grupo.create(2315, juego.world.height -300, 'caja');
+    //caja.body.setCollisionGroup(cajas.collisionGroup);
+    //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
+
+
+
     juego.physics.p2.enableBody(caja);
     caja.body.clearShapes();
     caja.body.loadPolygon('cajaCollisions', 'caja');
     caja.scale.setTo(1, 1);
     caja.body.dynamic = true;
-    cajas.grupo.add(caja);
+    caja.body.mass = 50;
+    caja.body.debug = true;
+    caja.body.collideWorldBounds = true;
+    cajas.lista.push(caja);
+
+    caja = cajas.grupo.create(2415, juego.world.height -500, 'caja');
+    //caja.body.setCollisionGroup(cajas.collisionGroup);
+    //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
+
+
+    
+    juego.physics.p2.enableBody(caja);
+    caja.body.clearShapes();
+    caja.body.loadPolygon('cajaCollisions', 'caja');
+    caja.scale.setTo(1, 1);
+    caja.body.static = false;
+    caja.body.mass = 1;
+    caja.body.debug = true;
+    caja.body.collideWorldBounds = true;
     cajas.lista.push(caja);
 
 

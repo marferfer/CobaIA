@@ -1,3 +1,19 @@
+class Nivel{
+
+    constructor(){
+
+        this.fondo = null;
+        this.suelo = null;
+        this.grupo = [];
+        this.collisionGroup = null;
+    }
+
+    getCollisionGroup(){
+
+        return this.collisionGroup;
+    }
+}
+
 class CobaIA {
 
     constructor(){
@@ -50,7 +66,13 @@ class Objetos {
     constructor(){
 
         this.grupo = null;
+        this.collisionGroup = null;
         this.lista = [];
+    }
+
+    getCollisionGroup(){
+
+        return this.collisionGroup;
     }
 };
 
@@ -62,13 +84,6 @@ class Plataformas extends Objetos {
 };
 
 class Cajas extends Objetos{
-
-    constructor(){
-        super();
-    }
-};
-
-class Suelos extends Objetos{
 
     constructor(){
         super();
@@ -115,4 +130,4 @@ lasers = null;
  let tankabaIA = new TankabaIA();
  let plataformas = new Plataformas();
  let cajas = new Cajas();
- let suelos = new Suelos();
+ let nivel1 = new Nivel();
