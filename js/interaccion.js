@@ -191,7 +191,7 @@ function update() {
     if (cursores.up.isDown && checkIfCanJump()) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
         
 
-        tankabaIA.jugador.body.moveUp(300);
+        tankabaIA.jugador.body.moveUp(325);
 
      
         tankabaIA.jugador.animations.play('jump');
@@ -228,29 +228,5 @@ function update() {
             tankabaIA.lasers_izq[i].laser.kill();
         }
     }
-
-    cont_desp_circulo += 0.025; // Mover circulos
-    for (var i = 0; i < lista_circulos.length; i++) {
-        lista_circulos[i].circulo.body.position.x += 5 * Math.sin(cont_desp_circulo);
-        //lista_circulos[i].circulo.angle+=1;
-    }
-
-    cont_desp += (0.0125 + Math.random() * 0.00125); // Mover enemigos
-    for (var i = 0; i < lista_manos.length; i++) {
-        lista_manos[i].mano.body.position.x += Math.sin(cont_desp);
-    }
-
-    cont_desp_plat += 0.0355; // Mover platillo
-    if (!jnPlatillo.estado) {
-        platillo.body.position.y += Math.sin(cont_desp_plat);
-    } else {
-        platillo.body.position.y -= 2;
-        platillo.body.position.x += 50 * Math.cos(cont_desp_plat);
-        if (platillo.body.position.y < 1000) {
-            lista_mensajes[0].mensaje.alpha = 1;
-            setTimeout(function () {
-                reinicia_inmediato();
-            }, 3000);
-        }
-    }
+    
 }

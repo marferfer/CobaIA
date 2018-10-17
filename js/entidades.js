@@ -90,23 +90,17 @@ class Cajas extends Objetos{
     }
 };
 
+class Compuertas extends Objetos{
 
+    constructor(){
+        super();
+    }
+}
 cursores = null; // Eventos de teclado
 
 escaleras = null; // Imagenes que pueden permitirnos subir
 
 puntajeTexto = null; // Texto que muestra el puntaje acumulado
-
-manos = null; // Potenciales enemigos
-lista_manos = []; // Arreglo de lista_manos
-
-cont_desp = 0;
-cont_desp_circulo = 0;
-
-cont_desp_plat = 0;
-
-posimas = null; // Pósimas
-lista_posimas = []; // Arreglo de lista_posimas
 
 puas = null; // Puas
 lista_puas = []; // Arreglo de puas
@@ -131,3 +125,4 @@ lasers = null;
  let plataformas = new Plataformas();
  let cajas = new Cajas();
  let nivel1 = new Nivel();
+ let compuertas = new Compuertas();
