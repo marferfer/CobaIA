@@ -96,6 +96,14 @@ class Compuertas extends Objetos{
         super();
     }
 }
+
+class Tubos extends Objetos{
+
+    constructor(){
+        super();
+    }
+}
+
 cursores = null; // Eventos de teclado
 
 escaleras = null; // Imagenes que pueden permitirnos subir
@@ -126,3 +134,5 @@ lasers = null;
  let cajas = new Cajas();
  let nivel1 = new Nivel();
  let compuertas = new Compuertas();
+ let tubos = new Tubos();
+ let decorados = [];

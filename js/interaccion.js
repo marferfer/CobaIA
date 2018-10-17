@@ -107,7 +107,7 @@ function update() {
         tankabaIA.tiempo_disparo++;
         var ajuste = 25;
         if (tankabaIA.ultimo_sentido == 'derecha') {
-            tankabaIA.jugador.animations.play('disparo_derecha');
+            //tankabaIA.jugador.animations.play('disparo_derecha');
             if (tankabaIA.tiempo_disparo == 1) {
                 tankabaIA.cantidad_disparos--;
                 var jnLaser = {
@@ -120,7 +120,7 @@ function update() {
                 instance.volume = 0.15;
             }
         } else {
-            tankabaIA.jugador.animations.play('disparo_izquierda');
+            //tankabaIA.jugador.animations.play('disparo_izquierda');
             if (tankabaIA.tiempo_disparo == 1) {
                 tankabaIA.cantidad_disparos--;
                 var jnLaser = {
@@ -144,7 +144,7 @@ function update() {
         //  Lo movemos a la izquierda
         tankabaIA.jugador.body.moveLeft(350);
 
-        tankabaIA.jugador.animations.play('left');
+        //tankabaIA.jugador.animations.play('left');
         tankabaIA.ultimo_sentido = 'izquierda';
     }
      else if (cursores.right.isDown)// Si presionamos RIGHT
@@ -157,14 +157,14 @@ function update() {
         //  Move to the right
         tankabaIA.jugador.body.moveRight(350);
 
-        tankabaIA.jugador.animations.play('right');
+        //tankabaIA.jugador.animations.play('right');
         tankabaIA.ultimo_sentido = 'derecha';
     } else if (tankabaIA.contadorEscaleras != 0) {// Si el contador de escaleras es <> de cero, quiere decir que estamos escalando
-        tankabaIA.jugador.animations.play('climb');// Animamos la escalada
+        //tankabaIA.jugador.animations.play('climb');// Animamos la escalada
     } else {
         //  No estamos precionando ninguna tecla
-        tankabaIA.jugador.animations.stop();
-        tankabaIA.jugador.frame = 1;
+        //tankabaIA.jugador.animations.stop();
+       // tankabaIA.jugador.frame = 1;
     }
 
     function checkIfCanJump() {
@@ -191,10 +191,10 @@ function update() {
     if (cursores.up.isDown && checkIfCanJump()) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
         
 
-        tankabaIA.jugador.body.moveUp(325);
+        tankabaIA.jugador.body.moveUp(450);
 
      
-        tankabaIA.jugador.animations.play('jump');
+        //tankabaIA.jugador.animations.play('jump');
         createjs.Sound.play(salto);
         if (tankabaIA.contadorSaltos == 1) {
             tankabaIA.contadorSaltos = 2;
@@ -210,7 +210,7 @@ function update() {
     }
     tankabaIA.jugador.position.y += (tankabaIA.contadorEscaleras * 2);
     if (tankabaIA.contadorEscaleras != 0) {
-        tankabaIA.jugador.animations.play('climb');
+        //tankabaIA.jugador.animations.play('climb');
     }
     for (var i = 0; i < tankabaIA.lasers_der.length; i++) {
         var laserAux = tankabaIA.lasers_der[i].laser;

@@ -44,6 +44,9 @@ function preload() {
     juego.load.image('mensaje', 'assets/images/mensaje.png');
     juego.load.image('compuertaCerrada', 'assets/images/compuertaCerrada.png');
     juego.load.image('tuboN1Completo', 'assets/images/tuboN1Completo.png');
+    juego.load.image('cobaIA', 'assets/images/cobaIA.png');
+    juego.load.image('cable', 'assets/images/cable.png');
+    juego.load.image('frasco', 'assets/images/frasco.png');
     juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
     juego.load.spritesheet('controller-indicator', 'assets/images/controller-indicator.png',16, 16);
 
@@ -56,16 +59,24 @@ function preload() {
 
 function create() {
 
+    
+
+    juego.physics.startSystem(Phaser.Physics.P2JS); //activamos el motor de fisicas
+    juego.physics.p2.setImpactEvents(true); //le decimos que detecte los eventos para las colisiones
+    juego.physics.p2.gravity.y = 600;
+    juego.physics.p2.updateBoundsCollisionGroup();
+
+    nivel1.fondo = juego.add.sprite(0, 0, 'fondoN1');
+
     indicator = juego.add.image(2000, juego.world.height - 200, 'controller-indicator');
     indicator.scale.x = indicator.scale.y = 2;
     indicator.animations.frame = 1;
 
-    juego.physics.startSystem(Phaser.Physics.P2JS); //activamos el motor de fisicas
-    juego.physics.p2.setImpactEvents(true); //le decimos que detecte los eventos para las colisiones
-    juego.physics.p2.gravity.y = 300;
-    juego.physics.p2.updateBoundsCollisionGroup();
+    decorados[0] = juego.add.image(1765, juego.world.height - 70, 'frasco');
+    decorados[1] = juego.add.image(1450, juego.world.height - 75, 'cable');    
 
-    nivel1.fondo = juego.add.sprite(0, 0, 'fondoN1');
+
+
     //fondo.fixedToCamera = true; // Lo dejará fijo ante la cámara
     juego.world.setBounds(0, 0, 21000, 1384); // Establecemos los límites del juego completo
 
@@ -84,7 +95,7 @@ function create() {
     let sueloN1 = nivel1.grupo.create(0, juego.world.height -300, 'sueloN1');
     juego.physics.p2.enableBody(sueloN1);
     sueloN1.body.static = true;
-    sueloN1.body.debug = true;
+    sueloN1.body.debug = false;
     
     
     sueloN1.body.clearShapes();
@@ -106,6 +117,23 @@ function create() {
     compuerta.body.x = 4475;
     compuerta.body.y = juego.world.height - 500;
     compuertas.lista.push(compuerta);
+
+    tubos.grupo = juego.add.group();
+    tubos.grupo.enableBody = true;
+    tubos.grupo.physicsBodyType = Phaser.Physics.P2JS;
+
+    let tubo = tubos.grupo.create(0, 0, 'tuboN1Completo');
+
+    tubo.body.clearShapes();
+    tubo.body.loadPolygon('tuboN1CompletoCollisions', 'tuboN1Completo');
+
+    tubo.body.static = true;
+    tubo.body.debug = false;
+    tubo.body.x = 2150;
+    tubo.body.y = juego.world.height - 800;
+    tubo.body.collideWorldBounds = true;
+    
+    tubos.lista.push(tubo);
 
     /*plataformas.grupo = juego.add.group(); // Grupo de obj_plataforma.plataformas
     plataformas.grupo.enableBody = true; // Física disponible para objetos que colisionen con ellas
@@ -163,7 +191,7 @@ function create() {
     // To listen to buttons from a specific pad listen directly on that pad game.input.gamepad.padX, where X = pad 1-4
     pad1 = juego.input.gamepad.pad1;
 
-    tankabaIA.jugador = juego.add.sprite(2000, juego.world.height - 200, 'personaje');
+    tankabaIA.jugador = juego.add.sprite(2000, juego.world.height - 200, 'cobaIA');
     juego.physics.p2.enableBody(tankabaIA.jugador);
     tankabaIA.jugador.body.setRectangle(80, 40);
     tankabaIA.jugador.body.fixedRotation = true;
@@ -171,15 +199,15 @@ function create() {
     //tankabaIA.jugador.body.clearShapes();
     //tankabaIA.jugador.body.loadPolygon('cajaCollisions', 'caja');
     tankabaIA.jugador.dynamic = true;
-    tankabaIA.jugador.body.debug = true;
+    tankabaIA.jugador.body.debug = false;
     tankabaIA.jugador.body.collideWorldBounds = true;
      // Seteamos los parámetros del obj_jugador.jugador, como su posición inicial
-    tankabaIA.jugador.animations.add('left', [0, 1], 10, true); // Creamos la película de animaciones para el personaje
+   /* tankabaIA.jugador.animations.add('left', [0, 1], 10, true); // Creamos la película de animaciones para el personaje
     tankabaIA.jugador.animations.add('right', [0, 1], 10, true);
     tankabaIA.jugador.animations.add('jump', [7], 10, true);
     tankabaIA.jugador.animations.add('climb', [4, 5, 6], 10, true);
     tankabaIA.jugador.animations.add('disparo_derecha', [2], 10, true);
-    tankabaIA.jugador.animations.add('disparo_izquierda', [3], 10, true);
+    tankabaIA.jugador.animations.add('disparo_izquierda', [3], 10, true);*/
 
     // Movimiento Jugador 2
 
@@ -237,7 +265,7 @@ function create() {
     //cajas.collisionGroup = juego.physics.p2.createCollisionGroup();
 
     //let caja = juego.add.sprite(2315, juego.world.height - 300, 'caja');
-    let caja = cajas.grupo.create(2315, juego.world.height -300, 'caja');
+    /*let caja = cajas.grupo.create(2315, juego.world.height -300, 'caja');
     //caja.body.setCollisionGroup(cajas.collisionGroup);
     //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
 
@@ -260,7 +288,21 @@ function create() {
     caja.body.loadPolygon('cajaCollisions', 'caja');
     caja.scale.setTo(1, 1);
     caja.body.static = false;
-    caja.body.mass = 1;
+    caja.body.mass = 100;
+    caja.body.debug = false;
+    caja.body.collideWorldBounds = true;
+    cajas.lista.push(caja);*/
+
+   let caja = cajas.grupo.create(1000, juego.world.height -240, 'caja');
+    //caja.body.setCollisionGroup(cajas.collisionGroup);
+    //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
+ 
+    juego.physics.p2.enableBody(caja);
+    caja.body.clearShapes();
+    caja.body.loadPolygon('cajaCollisions', 'caja');
+    caja.scale.setTo(1, 1);
+    caja.body.static = false;
+    caja.body.mass = 80;
     caja.body.debug = false;
     caja.body.collideWorldBounds = true;
     cajas.lista.push(caja);
