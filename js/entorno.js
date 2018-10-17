@@ -21,8 +21,7 @@ function preload() {
         instance.volume = 0.15;
     }, 3000);*/
 
-    juego.stage.backgroundColor = '#736357';
-    //juego.load.spritesheet('controller-indicator', 'assets/controller-indicator.png');
+
 
     juego.state.add("recarga", Phaser.Preload);
 
@@ -44,16 +43,22 @@ function preload() {
     juego.load.image('circulo', 'assets/images/circulo.png');
     juego.load.image('mensaje', 'assets/images/mensaje.png');
     juego.load.image('compuertaCerrada', 'assets/images/compuertaCerrada.png');
+    juego.load.image('tuboN1Completo', 'assets/images/tuboN1Completo.png');
     juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
     juego.load.spritesheet('controller-indicator', 'assets/images/controller-indicator.png',16, 16);
 
     juego.load.physics('sueloN1Collisions', 'assets/data/sueloN1.json');
     juego.load.physics('cajaCollisions', 'assets/data/caja.json');
     juego.load.physics('personajeCollisions', 'assets/data/personaje.json');
+    juego.load.physics('tuboN1CompletoCollisions', 'assets/data/tuboN1Completo.json');
     
 }
 
 function create() {
+
+    indicator = juego.add.image(2000, juego.world.height - 200, 'controller-indicator');
+    indicator.scale.x = indicator.scale.y = 2;
+    indicator.animations.frame = 1;
 
     juego.physics.startSystem(Phaser.Physics.P2JS); //activamos el motor de fisicas
     juego.physics.p2.setImpactEvents(true); //le decimos que detecte los eventos para las colisiones
@@ -90,12 +95,16 @@ function create() {
     sueloN1.body.y = juego.world.height + 25;
     nivel1.suelo = sueloN1;
 
+
     compuertas.grupo = juego.add.group();
     compuertas.grupo.enableBody = true;
-    let compuerta = compuertas.grupo.create(2315, juego.world.height -300, 'compuertaCerrada');
-    
-    compuerta.body.x = 2500;
-    compuerta.body.y = juego.world.height + 50;
+    compuertas.grupo.physicsBodyType = Phaser.Physics.P2JS;
+
+    let compuerta = compuertas.grupo.create(0, 0, 'compuertaCerrada');
+
+    compuerta.body.static = true;
+    compuerta.body.x = 4475;
+    compuerta.body.y = juego.world.height - 500;
     compuertas.lista.push(compuerta);
 
     /*plataformas.grupo = juego.add.group(); // Grupo de obj_plataforma.plataformas
@@ -147,9 +156,7 @@ function create() {
     
     //Creacion jugador 2
     
-    indicator = juego.add.sprite(20, juego.world.height - 780, 'controller-indicator');
-    indicator.scale.x = indicator.scale.y = 2;
-    indicator.animations.frame = 1;
+    
 
     juego.input.gamepad.start();
 
