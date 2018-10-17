@@ -88,10 +88,10 @@ function create() {
     sueloN1.body.static = true;
     sueloN1.collideWorldBounds = true;
     sueloN1.body.x = 2300;
-    sueloN1.body.y = juego.world.height + 100;
+    sueloN1.body.y = juego.world.height + 50;
     nivel1.suelo = sueloN1;
 
-    plataformas.grupo = juego.add.group(); // Grupo de obj_plataforma.plataformas
+    /*plataformas.grupo = juego.add.group(); // Grupo de obj_plataforma.plataformas
     plataformas.grupo.enableBody = true; // Física disponible para objetos que colisionen con ellas
     plataformas.lista.push(plataformas.grupo.create(50, juego.world.height - 100, 'tierra')); // Plataformas
     plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(2, 1);
@@ -113,8 +113,7 @@ function create() {
     plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;
     plataformas.lista.push(plataformas.grupo.create(3260, juego.world.height, 'tierra'));
     plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(1, 1);
-    plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;
-
+    plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;*/
     lasers = juego.add.group(); // Lasers
     lasers.enableBody = true;
 
@@ -153,6 +152,7 @@ function create() {
     tankabaIA.jugador = juego.add.sprite(2000, juego.world.height - 200, 'personaje');
     juego.physics.p2.enableBody(tankabaIA.jugador);
     tankabaIA.jugador.body.setRectangle(40, 80);
+    tankabaIA.jugador.body.fixedRotation = true;
     //tankabaIA.jugador.body.clearShapes();
     //tankabaIA.jugador.body.loadPolygon('cajaCollisions', 'caja');
     tankabaIA.jugador.dynamic = true;

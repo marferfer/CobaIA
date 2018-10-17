@@ -166,8 +166,34 @@ function update() {
         tankabaIA.jugador.animations.stop();
         tankabaIA.jugador.frame = 1;
     }
-    if (cursores.up.isDown && (tankabaIA.jugador.body.touching.down || tankabaIA.contadorSaltos == 1) && !tankabaIA.colisionEscalera) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
-        tankabaIA.jugador.body.velocity.y = -250;
+
+    function checkIfCanJump() {
+
+    var yAxis = p2.vec2.fromValues(0, 1);
+    var result = false;
+
+    for (var i = 0; i < juego.physics.p2.world.narrowphase.contactEquations.length; i++)
+    {
+        var c = juego.physics.p2.world.narrowphase.contactEquations[i];
+
+        if (c.bodyA === tankabaIA.jugador.body.data || c.bodyB === tankabaIA.jugador.body.data)
+        {
+            var d = p2.vec2.dot(c.normalA, yAxis); // Normal dot Y-axis
+            if (c.bodyA === tankabaIA.jugador.body.data) d *= -1;
+            if (d > 0.5) result = true;
+        }
+    }
+    
+    return result;
+
+}
+
+    if (cursores.up.isDown && checkIfCanJump()) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
+        
+
+        tankabaIA.jugador.body.moveUp(300);
+
+     
         tankabaIA.jugador.animations.play('jump');
         createjs.Sound.play(salto);
         if (tankabaIA.contadorSaltos == 1) {
