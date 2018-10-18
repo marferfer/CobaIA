@@ -104,6 +104,13 @@ class Tubos extends Objetos{
     }
 }
 
+class CajasCableado extends Objetos{
+
+    constructor(){
+        super();
+    }
+}
+
 cursores = null; // Eventos de teclado
 
 escaleras = null; // Imagenes que pueden permitirnos subir
@@ -136,3 +143,4 @@ lasers = null;
  let compuertas = new Compuertas();
  let tubos = new Tubos();
  let decorados = [];
+ let cajasCableado = new CajasCableado();

@@ -47,8 +47,10 @@ function preload() {
     juego.load.image('cobaIA', 'assets/images/cobaIA.png');
     juego.load.image('cable', 'assets/images/cable.png');
     juego.load.image('frasco', 'assets/images/frasco.png');
+
     juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
     juego.load.spritesheet('controller-indicator', 'assets/images/controller-indicator.png',16, 16);
+    juego.load.spritesheet('cajaCableado', 'assets/images/cajaCableado.png', 54 , 70);
 
     juego.load.physics('sueloN1Collisions', 'assets/data/sueloN1.json');
     juego.load.physics('cajaCollisions', 'assets/data/caja.json');
@@ -68,7 +70,7 @@ function create() {
 
     nivel1.fondo = juego.add.sprite(0, 0, 'fondoN1');
 
-    indicator = juego.add.image(2000, juego.world.height - 200, 'controller-indicator');
+    indicator = juego.add.sprite(1000, juego.world.height - 300, 'controller-indicator');
     indicator.scale.x = indicator.scale.y = 2;
     indicator.animations.frame = 1;
 
@@ -95,7 +97,7 @@ function create() {
     let sueloN1 = nivel1.grupo.create(0, juego.world.height -300, 'sueloN1');
     juego.physics.p2.enableBody(sueloN1);
     sueloN1.body.static = true;
-    sueloN1.body.debug = false;
+    sueloN1.body.debug = true;
     
     
     sueloN1.body.clearShapes();
@@ -106,6 +108,7 @@ function create() {
     sueloN1.body.y = juego.world.height + 25;
     nivel1.suelo = sueloN1;
 
+    ////////////////////////////////////////////////////////////////////////////////////
 
     compuertas.grupo = juego.add.group();
     compuertas.grupo.enableBody = true;
@@ -117,6 +120,24 @@ function create() {
     compuerta.body.x = 4475;
     compuerta.body.y = juego.world.height - 500;
     compuertas.lista.push(compuerta);
+
+    //////////////////////////////////////////////////////////////////////////////////
+
+    cajasCableado.grupo = juego.add.group();
+    cajasCableado.grupo.enableBody = true;
+    cajasCableado.grupo.physicsBodyType = Phaser.Physics.P2JS;
+
+    let cajaCableado = cajasCableado.grupo.create(0, 0, 'cajaCableado');
+
+    cajaCableado.body.debug = true;
+    cajaCableado.animations.frame = 3;
+    cajaCableado.body.static = true;
+    cajaCableado.body.setRectangle(23, 69, 15);
+    cajaCableado.body.x = 2100;
+    cajaCableado.body.y = juego.world.height - 210;
+    //cajaCableado.lista.push(cajaCableado);
+
+    //////////////////////////////////////////////////////////////////////////////////
 
     tubos.grupo = juego.add.group();
     tubos.grupo.enableBody = true;

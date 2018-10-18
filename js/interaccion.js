@@ -95,6 +95,25 @@ function update() {
     juego.physics.arcade.collide(plataformas.grupo, rocas);
 
     
+    function checkIfCanJump() {
+
+        var yAxis = p2.vec2.fromValues(0, 1);
+        var result = false;
+
+        for (var i = 0; i < juego.physics.p2.world.narrowphase.contactEquations.length; i++){
+
+            var c = juego.physics.p2.world.narrowphase.contactEquations[i];
+
+            if (c.bodyA === tankabaIA.jugador.body.data || c.bodyB === tankabaIA.jugador.body.data){
+                var d = p2.vec2.dot(c.normalA, yAxis); // Normal dot Y-axis
+                if (c.bodyA === tankabaIA.jugador.body.data) d *= -1;
+                if (d > 0.5) result = true;
+            }
+        }
+        
+        return result;
+    }
+
     if (!tankabaIA.colisionEscalera) { // Si no hay colisión con las escaleras, entonces reestablecemos la gravedad
         tankabaIA.jugador.body.gravity.y = 500;
     } else {// Si hay colisión con las escaleras, entonces la gravedad la llevamos a cero, por lo tanto, el tankabaIA.jugador no caerá, dando la sensación de estar suspendido en uno de sus escalones
@@ -147,7 +166,7 @@ function update() {
         //tankabaIA.jugador.animations.play('left');
         tankabaIA.ultimo_sentido = 'izquierda';
     }
-     else if (cursores.right.isDown)// Si presionamos RIGHT
+     else if (cursores.right.isDown)
     {
         /*tankabaIA.retrasa_paso++;
          if (tankabaIA.retrasa_paso % 10 == 0) {
@@ -167,26 +186,7 @@ function update() {
        // tankabaIA.jugador.frame = 1;
     }
 
-    function checkIfCanJump() {
-
-    var yAxis = p2.vec2.fromValues(0, 1);
-    var result = false;
-
-    for (var i = 0; i < juego.physics.p2.world.narrowphase.contactEquations.length; i++)
-    {
-        var c = juego.physics.p2.world.narrowphase.contactEquations[i];
-
-        if (c.bodyA === tankabaIA.jugador.body.data || c.bodyB === tankabaIA.jugador.body.data)
-        {
-            var d = p2.vec2.dot(c.normalA, yAxis); // Normal dot Y-axis
-            if (c.bodyA === tankabaIA.jugador.body.data) d *= -1;
-            if (d > 0.5) result = true;
-        }
-    }
     
-    return result;
-
-}
 
     if (cursores.up.isDown && checkIfCanJump()) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
         
