@@ -7,11 +7,6 @@ class Nivel{
         this.grupo = [];
         this.collisionGroup = null;
     }
-
-    getCollisionGroup(){
-
-        return this.collisionGroup;
-    }
 }
 
 class CobaIA {
@@ -36,6 +31,7 @@ class CobaIA {
         this.colisionEscalera = false;
         this.contadorEscaleras = 0;
         this.ultimo_sentido = 'derecha';
+        this.collisionGroup = null;
     }
 };
 
@@ -144,3 +140,4 @@ lasers = null;
  let tubos = new Tubos();
  let decorados = [];
  let cajasCableado = new CajasCableado();
+ let tankabaIA2 = new TankabaIA();

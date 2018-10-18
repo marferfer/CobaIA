@@ -66,7 +66,7 @@ function create() {
     juego.physics.startSystem(Phaser.Physics.P2JS); //activamos el motor de fisicas
     juego.physics.p2.setImpactEvents(true); //le decimos que detecte los eventos para las colisiones
     juego.physics.p2.gravity.y = 600;
-    juego.physics.p2.updateBoundsCollisionGroup();
+ 
 
     nivel1.fondo = juego.add.sprite(0, 0, 'fondoN1');
 
@@ -80,9 +80,11 @@ function create() {
 
 
     //fondo.fixedToCamera = true; // Lo dejará fijo ante la cámara
-    juego.world.setBounds(0, 0, 21000, 1384); // Establecemos los límites del juego completo
+    juego.world.setBounds(0, 0, 5000, 1384); // Establecemos los límites del juego completo
 
     tecla_laser = juego.input.keyboard.addKey(Phaser.Keyboard.E);
+
+    tecla_accion = juego.input.keyboard.addKey(Phaser.Keyboard.X);
 
     //mov jugador dos, teclas
     ctrlW = juego.input.keyboard.addKey(Phaser.Keyboard.W);
@@ -90,9 +92,19 @@ function create() {
     ctrlS = juego.input.keyboard.addKey(Phaser.Keyboard.S);
     ctrlD = juego.input.keyboard.addKey(Phaser.Keyboard.D);
 
+
+    /////////////////////////////////////////////////////////////////////////////////////
+
+    
+
+
+
     nivel1.grupo = juego.add.group();
     nivel1.grupo.enableBody = true;
     nivel1.grupo.physicsBodyType = Phaser.Physics.P2JS;
+
+    
+
 
     let sueloN1 = nivel1.grupo.create(0, juego.world.height -300, 'sueloN1');
     juego.physics.p2.enableBody(sueloN1);
@@ -100,6 +112,7 @@ function create() {
     sueloN1.body.debug = true;
     
     
+
     sueloN1.body.clearShapes();
     sueloN1.body.loadPolygon('sueloN1Collisions', 'sueloN1');
     sueloN1.body.static = true;
@@ -129,13 +142,14 @@ function create() {
 
     let cajaCableado = cajasCableado.grupo.create(0, 0, 'cajaCableado');
 
-    cajaCableado.body.debug = true;
-    cajaCableado.animations.frame = 3;
+    cajaCableado.body.debug = false;
+    cajaCableado.animations.frame = 0;
+    cajaCableado.animations.add('caja_rota', [1, 2, 3], 10, true);
     cajaCableado.body.static = true;
     cajaCableado.body.setRectangle(23, 69, 15);
     cajaCableado.body.x = 2100;
     cajaCableado.body.y = juego.world.height - 210;
-    //cajaCableado.lista.push(cajaCableado);
+    cajasCableado.lista.push(cajaCableado);
 
     //////////////////////////////////////////////////////////////////////////////////
 
@@ -149,7 +163,7 @@ function create() {
     tubo.body.loadPolygon('tuboN1CompletoCollisions', 'tuboN1Completo');
 
     tubo.body.static = true;
-    tubo.body.debug = false;
+    tubo.body.debug = true;
     tubo.body.x = 2150;
     tubo.body.y = juego.world.height - 800;
     tubo.body.collideWorldBounds = true;
@@ -212,16 +226,52 @@ function create() {
     // To listen to buttons from a specific pad listen directly on that pad game.input.gamepad.padX, where X = pad 1-4
     pad1 = juego.input.gamepad.pad1;
 
-    tankabaIA.jugador = juego.add.sprite(2000, juego.world.height - 200, 'cobaIA');
+
+    
+    tankabaIA.jugador = juego.add.sprite(1500, juego.world.height - 225, 'cobaIA');
     juego.physics.p2.enableBody(tankabaIA.jugador);
     tankabaIA.jugador.body.setRectangle(80, 40);
+
+    tankabaIA.jugador.body.collideWorldBounds = true;
+    
     tankabaIA.jugador.body.fixedRotation = true;
     tankabaIA.jugador.body.mass = 1;
     //tankabaIA.jugador.body.clearShapes();
     //tankabaIA.jugador.body.loadPolygon('cajaCollisions', 'caja');
     tankabaIA.jugador.dynamic = true;
     tankabaIA.jugador.body.debug = false;
-    tankabaIA.jugador.body.collideWorldBounds = true;
+    tankabaIA.jugador.body.onBeginContact.add(evento, this);
+
+    function evento(body, bodyB, shapeA, shapeB, equation){
+
+        if (body){
+            console.log(body.sprite.key);
+            console.log(body.id);
+
+        }else{
+        
+        result = 'You last hit: The wall :)';
+        }
+
+        if(body.sprite.key == 'cajaCableado' && tecla_accion.isDown){
+            console.log('La mehor trazha du mundo');
+            console.log(body.id);
+            cajasCableado.lista[0].animations.play('caja_rota');
+
+        }
+    }
+
+    tankabaIA2.jugador = juego.add.sprite(1500, juego.world.height - 300, 'cobaIA');
+    juego.physics.p2.enableBody(tankabaIA2.jugador);
+    tankabaIA2.jugador.body.setRectangle(80, 40);
+
+    
+    tankabaIA2.jugador.body.fixedRotation = true;
+    tankabaIA2.jugador.body.mass = 1;
+    
+    tankabaIA2.jugador.dynamic = true;
+    tankabaIA2.jugador.body.debug = true;
+    
      // Seteamos los parámetros del obj_jugador.jugador, como su posición inicial
    /* tankabaIA.jugador.animations.add('left', [0, 1], 10, true); // Creamos la película de animaciones para el personaje
     tankabaIA.jugador.animations.add('right', [0, 1], 10, true);
@@ -229,6 +279,7 @@ function create() {
     tankabaIA.jugador.animations.add('climb', [4, 5, 6], 10, true);
     tankabaIA.jugador.animations.add('disparo_derecha', [2], 10, true);
     tankabaIA.jugador.animations.add('disparo_izquierda', [3], 10, true);*/
+
 
     // Movimiento Jugador 2
 
@@ -286,7 +337,7 @@ function create() {
     //cajas.collisionGroup = juego.physics.p2.createCollisionGroup();
 
     //let caja = juego.add.sprite(2315, juego.world.height - 300, 'caja');
-    /*let caja = cajas.grupo.create(2315, juego.world.height -300, 'caja');
+    let caja = cajas.grupo.create(2315, juego.world.height -300, 'caja');
     //caja.body.setCollisionGroup(cajas.collisionGroup);
     //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
 
@@ -312,11 +363,9 @@ function create() {
     caja.body.mass = 100;
     caja.body.debug = false;
     caja.body.collideWorldBounds = true;
-    cajas.lista.push(caja);*/
+    cajas.lista.push(caja);
 
-   let caja = cajas.grupo.create(1000, juego.world.height -240, 'caja');
-    //caja.body.setCollisionGroup(cajas.collisionGroup);
-    //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
+    caja = cajas.grupo.create(1000, juego.world.height -240, 'caja');
  
     juego.physics.p2.enableBody(caja);
     caja.body.clearShapes();
@@ -324,7 +373,7 @@ function create() {
     caja.scale.setTo(1, 1);
     caja.body.static = false;
     caja.body.mass = 80;
-    caja.body.debug = false;
+    caja.body.debug = true;
     caja.body.collideWorldBounds = true;
     cajas.lista.push(caja);
 
@@ -380,5 +429,8 @@ function create() {
     sprite.addChild(puntajeTexto);*/
     sprite.cameraOffset.x = 10; // Ubicamos el sprite contenedor de la cámara en las coordenadas 10, 10
     sprite.cameraOffset.y = 10;
-    juego.camera.follow(tankabaIA.jugador); // Le permitimos a la cámara del juego, seguir en todo momento al obj_jugador.jugador                
+    juego.camera.follow(tankabaIA.jugador); // Le permitimos a la cámara del juego, seguir en todo momento al obj_jugador.jugador    
+
+        juego.physics.p2.updateBoundsCollisionGroup();
+           
 }
