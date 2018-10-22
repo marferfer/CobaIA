@@ -429,8 +429,70 @@ function create() {
     sprite.addChild(puntajeTexto);*/
     sprite.cameraOffset.x = 10; // Ubicamos el sprite contenedor de la cámara en las coordenadas 10, 10
     sprite.cameraOffset.y = 10;
+<<<<<<< Updated upstream
     juego.camera.follow(tankabaIA.jugador); // Le permitimos a la cámara del juego, seguir en todo momento al obj_jugador.jugador    
 
         juego.physics.p2.updateBoundsCollisionGroup();
            
+=======
+    juego.camera.follow(tankabaIA.jugador); // Le permitimos a la cámara del juego, seguir en todo momento al obj_jugador.jugador                
+
+
+    /*
+        Code for the pause menu
+    
+
+    // Create a label to use as a button
+    pause_label = juego.add.text(2000, juego.world.height - 200, 'Pause', { font: '24px Arial', fill: '#fff' });
+    pause_label.inputEnabled = true;
+    pause_label.events.onInputUp.add(function () {
+        // When the paus button is pressed, we pause the game
+        juego.paused = true;
+
+        // Then add the menu
+        menu = juego.add.sprite(juego.world.width/2, juego.world.height/2, 'menu');
+        menu.anchor.setTo(0.5, 0.5);
+
+        // And a label to illustrate which menu item was chosen. (This is not necessary)
+        choiseLabel = juego.add.text(juego.world.width/2, juego.world.height-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
+        choiseLabel.anchor.setTo(0.5, 0.5);
+    });
+
+    // Add a input listener that can help us return from being paused
+    juego.input.onDown.add(unpause, self);
+
+    // And finally the method that handels the pause menu
+    function unpause(event){
+        // Only act if paused
+        if(juego.paused){
+            // Calculate the corners of the menu
+            var x1 = juego.world.width/2 - 270/2, x2 = juego.world.width/2 + 270/2,
+                y1 = juego.world.height/2 - 180/2, y2 = juego.world.height/2 + 180/2;
+
+            // Check if the click was inside the menu
+            if(event.x > x1 && event.x < x2 && event.y > y1 && event.y < y2 ){
+                // The choicemap is an array that will help us see which item was clicked
+                var choisemap = ['one', 'two', 'three', 'four', 'five', 'six'];
+
+                // Get menu local coordinates for the click
+                var x = event.x - x1,
+                    y = event.y - y1;
+
+                // Calculate the choice 
+                var choise = Math.floor(x / 90) + 3*Math.floor(y / 90);
+
+                // Display the choice
+                choiseLabel.text = 'You chose menu item: ' + choisemap[choise];
+            }
+            else{
+                // Remove the menu and the label
+                menu.destroy();
+                choiseLabel.destroy();
+
+                // Unpause the game
+                juego.paused = false;
+            }
+        }
+    };*/
+>>>>>>> Stashed changes
 }
