@@ -429,12 +429,10 @@ function create() {
     sprite.addChild(puntajeTexto);*/
     sprite.cameraOffset.x = 10; // Ubicamos el sprite contenedor de la cámara en las coordenadas 10, 10
     sprite.cameraOffset.y = 10;
-<<<<<<< Updated upstream
     juego.camera.follow(tankabaIA.jugador); // Le permitimos a la cámara del juego, seguir en todo momento al obj_jugador.jugador    
 
-        juego.physics.p2.updateBoundsCollisionGroup();
-           
-=======
+    juego.physics.p2.updateBoundsCollisionGroup();
+
     juego.camera.follow(tankabaIA.jugador); // Le permitimos a la cámara del juego, seguir en todo momento al obj_jugador.jugador                
 
 
@@ -494,5 +492,4 @@ function create() {
             }
         }
     };*/
->>>>>>> Stashed changes
 }
