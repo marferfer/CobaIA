@@ -47,6 +47,7 @@ function preload() {
     juego.load.image('cobaIA', 'assets/images/cobaIA.png');
     juego.load.image('cable', 'assets/images/cable.png');
     juego.load.image('frasco', 'assets/images/frasco.png');
+    juego.load.image('plataformaMovil', 'assets/images/plataformaMovil.png');
 
     juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
     juego.load.spritesheet('controller-indicator', 'assets/images/controller-indicator.png',16, 16);
@@ -170,6 +171,21 @@ function create() {
     
     tubos.lista.push(tubo);
 
+    /////////////////////////////////////////////////////////////////////////////////
+    plataformasMoviles.grupo = juego.add.group();
+    plataformasMoviles.grupo.enableBody = true;
+    plataformasMoviles.grupo.physicsBodyType = Phaser.Physics.P2JS;
+
+    let plataformaMovil = plataformasMoviles.grupo.create(0, 0, 'plataformaMovil');
+
+    plataformaMovil.body.debug = true;
+    plataformaMovil.body.static = true;
+    plataformaMovil.body.setRectangle(300, 25, 0);
+    plataformaMovil.body.x = 2150;
+    plataformaMovil.body.y = juego.world.height - 400;
+    plataformaMovil.body.collideWorldBounds = true;
+
+    plataformasMoviles.lista.push(plataformaMovil);
     /*plataformas.grupo = juego.add.group(); // Grupo de obj_plataforma.plataformas
     plataformas.grupo.enableBody = true; // Física disponible para objetos que colisionen con ellas
     plataformas.lista.push(plataformas.grupo.create(50, juego.world.height - 100, 'tierra')); // Plataformas
@@ -257,6 +273,9 @@ function create() {
             console.log('La mehor trazha du mundo');
             console.log(body.id);
             cajasCableado.lista[0].animations.play('caja_rota');
+            //plataformasMoviles.lista[0].body.x += 150;
+            plataformasMoviles.lista[0].body.adjustCenterOfMass(150);
+            plataformasMoviles.lista[0].body.rotateRight(25);
 
         }
     }
@@ -351,7 +370,7 @@ function create() {
     caja.body.collideWorldBounds = true;
     cajas.lista.push(caja);
 
-    caja = cajas.grupo.create(2415, juego.world.height -500, 'caja');
+    /*caja = cajas.grupo.create(2415, juego.world.height -500, 'caja');
     //caja.body.setCollisionGroup(cajas.collisionGroup);
     //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
  
@@ -363,7 +382,7 @@ function create() {
     caja.body.mass = 100;
     caja.body.debug = false;
     caja.body.collideWorldBounds = true;
-    cajas.lista.push(caja);
+    cajas.lista.push(caja);*/
 
     caja = cajas.grupo.create(1000, juego.world.height -240, 'caja');
  
