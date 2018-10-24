@@ -245,7 +245,7 @@ function create() {
 
 
     
-    tankabaIA.jugador = juego.add.sprite(600, juego.world.height - 225, 'cobaIA');
+    tankabaIA.jugador = juego.add.sprite(2100, juego.world.height - 225, 'cobaIA');
     juego.physics.p2.enableBody(tankabaIA.jugador);
     tankabaIA.jugador.body.setRectangle(80, 40);
 
@@ -259,6 +259,11 @@ function create() {
     tankabaIA.jugador.body.debug = false;
     tankabaIA.jugador.body.onBeginContact.add(evento, this);
 
+    
+    function stopPlataforma(i){
+        plataformasMoviles.lista[i].body.rotateRight(0);
+    }
+
     function evento(body, bodyB, shapeA, shapeB, equation){
 
         if (body){
@@ -268,25 +273,16 @@ function create() {
         }else{
         
         result = 'You last hit: The wall :)';
+
         }
 
-        if(body.sprite.key == 'cajaCableado' && tecla_accion.isDown){
 
-            posFinal = plataformaMovil.body.y + 299;
-
-            console.log(posFinal);
+        if(body.sprite.key == 'cajaCableado' && tecla_accion.isDown){  
 
             //console.log(body.id);
             cajasCableado.lista[0].animations.play('caja_rota');
-            //plataformasMoviles.lista[0].body.x += 150;
-            plataformasMoviles.lista[0].body.rotateRight(25);
-            
-            console.log(plataformasMoviles.lista[0].body.y);
-
-            if(plataformasMoviles.lista[0].body.y >= posFinal){
-
-                plataformasMoviles.lista[0].body.rotateRight(0);
-            }
+            let timer =  juego.time.events.add(1250, stopPlataforma, this, 0);
+            plataformasMoviles.lista[0].body.rotateRight(25);      
 
         }
     }
