@@ -191,7 +191,7 @@ function update() {
     if (cursores.up.isDown && checkIfCanJump()) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
         
 
-        tankabaIA.jugador.body.moveUp(450);
+        tankabaIA.jugador.body.moveUp(300);
 
      
         //tankabaIA.jugador.animations.play('jump');

@@ -166,7 +166,7 @@ function create() {
     tubo.body.static = true;
     tubo.body.debug = true;
     tubo.body.x = 2150;
-    tubo.body.y = juego.world.height - 800;
+    tubo.body.y = juego.world.height - 675;
     tubo.body.collideWorldBounds = true;
     
     tubos.lista.push(tubo);
@@ -180,8 +180,9 @@ function create() {
 
     plataformaMovil.body.debug = true;
     plataformaMovil.body.static = true;
-    plataformaMovil.body.setRectangle(300, 25, 0);
-    plataformaMovil.body.x = 2150;
+    plataformaMovil.pivot.x = 150;
+    plataformaMovil.body.setRectangle(300, 25, -150);
+    plataformaMovil.body.x = 2300;
     plataformaMovil.body.y = juego.world.height - 400;
     plataformaMovil.body.collideWorldBounds = true;
 
@@ -244,7 +245,7 @@ function create() {
 
 
     
-    tankabaIA.jugador = juego.add.sprite(1500, juego.world.height - 225, 'cobaIA');
+    tankabaIA.jugador = juego.add.sprite(600, juego.world.height - 225, 'cobaIA');
     juego.physics.p2.enableBody(tankabaIA.jugador);
     tankabaIA.jugador.body.setRectangle(80, 40);
 
@@ -261,8 +262,8 @@ function create() {
     function evento(body, bodyB, shapeA, shapeB, equation){
 
         if (body){
-            console.log(body.sprite.key);
-            console.log(body.id);
+            //console.log(body.sprite.key);
+            //console.log(body.id);
 
         }else{
         
@@ -270,19 +271,29 @@ function create() {
         }
 
         if(body.sprite.key == 'cajaCableado' && tecla_accion.isDown){
-            console.log('La mehor trazha du mundo');
-            console.log(body.id);
+
+            posFinal = plataformaMovil.body.y + 299;
+
+            console.log(posFinal);
+
+            //console.log(body.id);
             cajasCableado.lista[0].animations.play('caja_rota');
             //plataformasMoviles.lista[0].body.x += 150;
-            plataformasMoviles.lista[0].body.adjustCenterOfMass(150);
             plataformasMoviles.lista[0].body.rotateRight(25);
+            
+            console.log(plataformasMoviles.lista[0].body.y);
+
+            if(plataformasMoviles.lista[0].body.y >= posFinal){
+
+                plataformasMoviles.lista[0].body.rotateRight(0);
+            }
 
         }
     }
 
-    tankabaIA2.jugador = juego.add.sprite(1500, juego.world.height - 300, 'cobaIA');
+    tankabaIA2.jugador = juego.add.sprite(700, juego.world.height - 300, 'cobaIA');
     juego.physics.p2.enableBody(tankabaIA2.jugador);
-    tankabaIA2.jugador.body.setRectangle(80, 40);
+    tankabaIA2.jugador.body.setRectangle(90, 70);
 
     
     tankabaIA2.jugador.body.fixedRotation = true;
@@ -324,31 +335,8 @@ function create() {
     obj_jugador3.jugador.animations.add('disparo_derecha', [2], 10, true);
     obj_jugador3.jugador.animations.add('disparo_izquierda', [3], 10, true);*/
 
-    
 
-    rocas = juego.add.group(); // Rocas
-    rocas.enableBody = true;
-    for (var i = 0; i < 1; i++) {
-        var roca = rocas.create(1100 + i * 70, juego.world.height - 300, 'roca');
-        roca.body.gravity.y = 300;
-        roca.body.bounce.y = 0;
-        var entidad = {
-            "roca": roca,
-            "gravity_y": 300
-        };
-        lista_rocas.push(entidad);
-    }
-    for (var i = 0; i < 2; i++) {
-        var roca = rocas.create(3000 + i * 800, juego.world.height - 300, 'roca');
-        roca.body.gravity.y = 300;
-        roca.body.bounce.y = 0;
-        var entidad = {
-            "roca": roca,
-            "gravity_y": 300
-        };
-        lista_rocas.push(entidad);
-    }
-
+    ///////////////////////////////////////////////////////////////////////////////
 
     cajas.grupo = juego.add.group();
     cajas.grupo.enableBody = true;
@@ -356,7 +344,7 @@ function create() {
     //cajas.collisionGroup = juego.physics.p2.createCollisionGroup();
 
     //let caja = juego.add.sprite(2315, juego.world.height - 300, 'caja');
-    let caja = cajas.grupo.create(2315, juego.world.height -300, 'caja');
+    let caja = cajas.grupo.create(900, juego.world.height -300, 'caja');
     //caja.body.setCollisionGroup(cajas.collisionGroup);
     //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
 
@@ -365,7 +353,7 @@ function create() {
     caja.body.loadPolygon('cajaCollisions', 'caja');
     caja.scale.setTo(1, 1);
     caja.body.dynamic = true;
-    caja.body.mass = 50;
+    caja.body.mass = 80;
     caja.body.debug = false;
     caja.body.collideWorldBounds = true;
     cajas.lista.push(caja);
@@ -384,18 +372,18 @@ function create() {
     caja.body.collideWorldBounds = true;
     cajas.lista.push(caja);*/
 
-    caja = cajas.grupo.create(1000, juego.world.height -240, 'caja');
+    /*caja = cajas.grupo.create(1000, juego.world.height -240, 'caja');
  
     juego.physics.p2.enableBody(caja);
-    caja.body.clearShapes();
-    caja.body.loadPolygon('cajaCollisions', 'caja');
-    caja.scale.setTo(1, 1);
+    caja.body.setRectangle(70, 70);
+    caja.scale.setTo(0.5, 0.5);
     caja.body.static = false;
-    caja.body.mass = 80;
+    caja.body.mass = 45;
     caja.body.debug = true;
     caja.body.collideWorldBounds = true;
-    cajas.lista.push(caja);
+    cajas.lista.push(caja);*/
 
+    /////////////////////////////////////////////////////////////////////////////
 
     /*puas = juego.add.group(); // Puas
     puas.enableBody = true;
