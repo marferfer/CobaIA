@@ -1,6 +1,8 @@
 function preload() {
 
-    //Sonido
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// SONIDO   //////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /*createjs.Sound.registerSound("assets/salto.mp3", salto);
     createjs.Sound.registerSound("assets/risa.mp3", risa);
@@ -22,6 +24,9 @@ function preload() {
     }, 3000);*/
 
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// IMAGENES Y FISICAS  ///////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     juego.state.add("recarga", Phaser.Preload);
 
@@ -32,8 +37,6 @@ function preload() {
     juego.load.image('tierra', 'assets/images/tierra.png');
     juego.load.image('tuboMid', 'assets/images/tuboMid.png');
     juego.load.image('escalera', 'assets/images/escalera.png');
-    juego.load.image('corazon', 'assets/images/corazon.png');
-    juego.load.image('posima', 'assets/images/posima.png');
     juego.load.image('pua', 'assets/images/puas.png');
     juego.load.image('roca', 'assets/images/roca.png');
     juego.load.image('caja', 'assets/images/caja.png');
@@ -64,66 +67,77 @@ function preload() {
 function create() {
 
     
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// FISICAS DEL MUNDO   ///////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     juego.physics.startSystem(Phaser.Physics.P2JS); //activamos el motor de fisicas
-    juego.physics.p2.setImpactEvents(true); //le decimos que detecte los eventos para las colisiones
-    juego.physics.p2.gravity.y = 600;
- 
+    juego.physics.p2.setImpactEvents(true);         //le decimos que detecte los eventos para las colisiones
+    juego.physics.p2.gravity.y = 600;               //ajustamos la gravedad
+    juego.world.setBounds(0, 0, 5000, 1384);        // Establecemos los límites del juego completo
 
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// NIVEL 1   /////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     nivel1.fondo = juego.add.sprite(0, 0, 'fondoN1');
 
-    indicator = juego.add.sprite(1000, juego.world.height - 300, 'controller-indicator');
-    indicator.scale.x = indicator.scale.y = 2;
-    indicator.animations.frame = 1;
-
-    decorados[0] = juego.add.image(1765, juego.world.height - 70, 'frasco');
-    decorados[1] = juego.add.image(1450, juego.world.height - 75, 'cable');    
-
-
-
-    //fondo.fixedToCamera = true; // Lo dejará fijo ante la cámara
-    juego.world.setBounds(0, 0, 5000, 1384); // Establecemos los límites del juego completo
-
-    tecla_laser = juego.input.keyboard.addKey(Phaser.Keyboard.E);
-
-    tecla_accion = juego.input.keyboard.addKey(Phaser.Keyboard.X);
-
-    //mov jugador dos, teclas
-    ctrlW = juego.input.keyboard.addKey(Phaser.Keyboard.W);
-    ctrlA = juego.input.keyboard.addKey(Phaser.Keyboard.A);
-    ctrlS = juego.input.keyboard.addKey(Phaser.Keyboard.S);
-    ctrlD = juego.input.keyboard.addKey(Phaser.Keyboard.D);
-
-
-    /////////////////////////////////////////////////////////////////////////////////////
-
-    
-
-
+    nivel1.decorados[0] = juego.add.image(1765, juego.world.height - 650, 'frasco');
+    nivel1.decorados[1] = juego.add.image(1450, juego.world.height - 650, 'cable');    
 
     nivel1.grupo = juego.add.group();
     nivel1.grupo.enableBody = true;
     nivel1.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
-    
-
-
     let sueloN1 = nivel1.grupo.create(0, juego.world.height -300, 'sueloN1');
     juego.physics.p2.enableBody(sueloN1);
-    sueloN1.body.static = true;
-    sueloN1.body.debug = true;
-    
-    
 
     sueloN1.body.clearShapes();
     sueloN1.body.loadPolygon('sueloN1Collisions', 'sueloN1');
     sueloN1.body.static = true;
-    sueloN1.collideWorldBounds = true;
+    sueloN1.body.debug = true;
+    
     sueloN1.body.x = 2250;
     sueloN1.body.y = juego.world.height + 25;
     nivel1.suelo = sueloN1;
 
-    ////////////////////////////////////////////////////////////////////////////////////
+    //fondo.fixedToCamera = true; // Lo dejará fijo ante la cámara
+    
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// TECLAS   //////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    tecla_laser = juego.input.keyboard.addKey(Phaser.Keyboard.E);
+
+    tecla_accion = juego.input.keyboard.addKey(Phaser.Keyboard.X);
+
+    //Movimiento de la TankabaIA
+    cursores = juego.input.keyboard.createCursorKeys();
+
+    //Movimiento de la AcrobaIA
+    ctrlW = juego.input.keyboard.addKey(Phaser.Keyboard.W);
+    ctrlA = juego.input.keyboard.addKey(Phaser.Keyboard.A);
+    ctrlS = juego.input.keyboard.addKey(Phaser.Keyboard.S);
+    ctrlD = juego.input.keyboard.addKey(Phaser.Keyboard.D);
+
+    //movimiento de la TalibaIA
+    ctrlH = juego.input.keyboard.addKey(Phaser.Keyboard.H);
+    ctrlB = juego.input.keyboard.addKey(Phaser.Keyboard.B);
+    ctrlN = juego.input.keyboard.addKey(Phaser.Keyboard.N);
+    ctrlM = juego.input.keyboard.addKey(Phaser.Keyboard.M);
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// INDICADORES   /////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    indicator = juego.add.sprite(1000, juego.world.height - 300, 'controller-indicator');
+    indicator.scale.x = indicator.scale.y = 2;
+    indicator.animations.frame = 1;
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// COMPUERTAS   //////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     compuertas.grupo = juego.add.group();
     compuertas.grupo.enableBody = true;
@@ -136,7 +150,9 @@ function create() {
     compuerta.body.y = juego.world.height - 500;
     compuertas.lista.push(compuerta);
 
-    //////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// CAJAS DE CABLEADO   ///////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     cajasCableado.grupo = juego.add.group();
     cajasCableado.grupo.enableBody = true;
@@ -153,7 +169,9 @@ function create() {
     cajaCableado.body.y = juego.world.height - 210;
     cajasCableado.lista.push(cajaCableado);
 
-    //////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// TUBOS   ///////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     tubos.grupo = juego.add.group();
     tubos.grupo.enableBody = true;
@@ -171,7 +189,10 @@ function create() {
     tubo.body.collideWorldBounds = true;
     
     tubos.lista.push(tubo);
-    /////////////////////////////////////////////////////////////////////////////////
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// BOTONES   /////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     botones.grupo = juego.add.group();
     botones.grupo.enableBody = true;
@@ -187,7 +208,10 @@ function create() {
 
     botones.lista.push(boton);
 
-    /////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// PLATAFORMAS MOVILES   /////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     plataformasMoviles.grupo = juego.add.group();
     plataformasMoviles.grupo.enableBody = true;
     plataformasMoviles.grupo.physicsBodyType = Phaser.Physics.P2JS;
@@ -203,55 +227,13 @@ function create() {
     plataformaMovil.body.collideWorldBounds = true;
 
     plataformasMoviles.lista.push(plataformaMovil);
-    /*plataformas.grupo = juego.add.group(); // Grupo de obj_plataforma.plataformas
-    plataformas.grupo.enableBody = true; // Física disponible para objetos que colisionen con ellas
-    plataformas.lista.push(plataformas.grupo.create(50, juego.world.height - 100, 'tierra')); // Plataformas
-    plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(2, 1);
-    plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;
-    plataformas.lista.push(plataformas.grupo.create(800, juego.world.height - 100, 'tierra'));
-    plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(1, 1);
-    plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;
-    plataformas.lista.push(plataformas.grupo.create(1500, juego.world.height, 'tierra'));
-    plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(1, 1);
-    plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;
-    plataformas.lista.push(plataformas.grupo.create(1800, juego.world.height - 100, 'tierra'));
-    plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(1, 1);
-    plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;
-    plataformas.lista.push(plataformas.grupo.create(2700, juego.world.height - 100, 'tierra'));
-    plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(1, 1);
-    plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;
-    plataformas.lista.push(plataformas.grupo.create(4200, juego.world.height - 100, 'tierra'));
-    plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(1, 1);
-    plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;
-    plataformas.lista.push(plataformas.grupo.create(3260, juego.world.height, 'tierra'));
-    plataformas.lista[(plataformas.lista.length - 1)].scale.setTo(1, 1);
-    plataformas.lista[(plataformas.lista.length - 1)].body.immovable = true;*/
+   
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////    /////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     lasers = juego.add.group(); // Lasers
     lasers.enableBody = true;
 
-    /*escaleras = juego.add.group(); // Escaleras
-    escaleras.enableBody = true;
-    //  Creamos tantas escaleras como sea necesario
-    for (var i = 0; i < 30; i++) {
-        var escalera = escaleras.create(100, (juego.world.height - 150 - 48 * i), 'escalera');
-    }
-    for (var i = 0; i < 2; i++) {
-        //  Create a maescalera inside of the 'escaleras' group
-        var escalera = escaleras.create(650, (juego.world.height - 150 - 48 * i), 'escalera');
-    }
-    for (var i = 0; i < 30; i++) {
-        //  Create a maescalera inside of the 'escaleras' group
-        var escalera = escaleras.create(4300, (juego.world.height - 150 - 48 * i), 'escalera');
-    }*/
-
-    /*for (var i = 0; i < obj_jugador.vidas; i++) {
-        obj_jugador.corazones.push(juego.add.sprite(400 + (i * 50), 0, 'corazon')); // Corazones de vidas
-        obj_jugador.corazones[obj_jugador.corazones.length - 1].fixedToCamera = true;
-    }*/
-
-    
-    //Creacion jugador 2
-    
     
 
     juego.input.gamepad.start();
@@ -259,7 +241,9 @@ function create() {
     // To listen to buttons from a specific pad listen directly on that pad game.input.gamepad.padX, where X = pad 1-4
     pad1 = juego.input.gamepad.pad1;
 
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////// TANKABAIA   ///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     tankabaIA.jugador = juego.add.sprite(2100, juego.world.height - 225, 'cobaIA');
     juego.physics.p2.enableBody(tankabaIA.jugador);
@@ -276,7 +260,43 @@ function create() {
     tankabaIA.jugador.body.onBeginContact.add(colisionInicial, this);
     tankabaIA.jugador.body.onEndContact.add(colisionFinal, this);
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////// ACROBAIA   ////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    acrobaIA.jugador = juego.add.sprite(700, juego.world.height - 300, 'cobaIA');
+    juego.physics.p2.enableBody(acrobaIA.jugador);
+    acrobaIA.jugador.body.setRectangle(80, 40);
     
+    acrobaIA.jugador.body.fixedRotation = true;
+    acrobaIA.jugador.body.mass = 1;
+    //tankabaIA.jugador.body.clearShapes();
+    //tankabaIA.jugador.body.loadPolygon('cajaCollisions', 'caja');
+    acrobaIA.jugador.dynamic = true;
+    acrobaIA.jugador.body.debug = true;
+    acrobaIA.jugador.body.onBeginContact.add(colisionInicial, this);
+    acrobaIA.jugador.body.onEndContact.add(colisionFinal, this);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////// TALIBAIA   ////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    talibaIA.jugador = juego.add.sprite(700, juego.world.height - 300, 'cobaIA');
+    juego.physics.p2.enableBody(talibaIA.jugador);
+    talibaIA.jugador.body.setRectangle(90, 70);
+    
+    talibaIA.jugador.body.fixedRotation = true;
+    talibaIA.jugador.body.mass = 1;
+    
+    talibaIA.jugador.dynamic = true;
+    talibaIA.jugador.body.debug = true;
+    talibaIA.jugador.body.onBeginContact.add(colisionInicial, this);
+    talibaIA.jugador.body.onEndContact.add(colisionFinal, this);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     function stopPlataforma(i){
         plataformasMoviles.lista[i].body.rotateRight(0);
     }
@@ -317,17 +337,6 @@ function create() {
             //stopPlataforma(0);
         }
     }
-
-    tankabaIA2.jugador = juego.add.sprite(700, juego.world.height - 300, 'cobaIA');
-    juego.physics.p2.enableBody(tankabaIA2.jugador);
-    tankabaIA2.jugador.body.setRectangle(90, 70);
-
-    
-    tankabaIA2.jugador.body.fixedRotation = true;
-    tankabaIA2.jugador.body.mass = 1;
-    
-    tankabaIA2.jugador.dynamic = true;
-    tankabaIA2.jugador.body.debug = true;
     
      // Seteamos los parámetros del obj_jugador.jugador, como su posición inicial
    /* tankabaIA.jugador.animations.add('left', [0, 1], 10, true); // Creamos la película de animaciones para el personaje
@@ -412,32 +421,8 @@ function create() {
 
     /////////////////////////////////////////////////////////////////////////////
 
-    /*puas = juego.add.group(); // Puas
-    puas.enableBody = true;
-    for (var i = 0; i < 4; i++) {
-        var pua = puas.create(1470 + i * 70, juego.world.height - 70, 'pua');
-        var entidad = {
-            "pua": pua
-        };
-        lista_puas.push(entidad);
-    }
-    for (var i = 0; i < 6; i++) {
-        var pua = puas.create(3360 + i * 70, juego.world.height - 70, 'pua');
-        var entidad = {
-            "pua": pua
-        };
-        lista_puas.push(entidad);
-    }
-    for (var i = 0; i < 6; i++) {
-        var pua = puas.create(4400 + i * 70, juego.world.height - 170, 'pua');
-        var entidad = {
-            "pua": pua
-        };
-        lista_puas.push(entidad);
-    }*/
 
-
-    cursores = juego.input.keyboard.createCursorKeys(); // Creamos un teclado  
+     // Creamos un teclado  
     juego.input.keyboard.onUpCallback = function (e) {
         if (e.keyCode == Phaser.Keyboard.UP) {
             tankabaIA.contadorSaltos++;

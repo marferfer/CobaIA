@@ -6,6 +6,7 @@ class Nivel{
         this.suelo = null;
         this.grupo = [];
         this.collisionGroup = null;
+        this.decorados = [];
     }
 }
 
@@ -147,12 +148,13 @@ ctrlD = null;
 lasers = null;
 
  let tankabaIA = new TankabaIA();
+ let acrobaIA = new AcrobaIA();
+ let talibaIA = new TalibaIA();
  let plataformas = new Plataformas();
  let cajas = new Cajas();
  let nivel1 = new Nivel();
  let compuertas = new Compuertas();
  let tubos = new Tubos();
- let decorados = [];
  let cajasCableado = new CajasCableado();
  let tankabaIA2 = new TankabaIA();
  let plataformasMoviles = new PlataformasMoviles();

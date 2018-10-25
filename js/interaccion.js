@@ -90,12 +90,8 @@ function update() {
     tankabaIA.colisionEscalera = false; // Reiniciamos variables
     tankabaIA.contadorEscaleras = 0;
     tankabaIA.jugador.body.velocity.x = 0; //  Reseteamos la velocidad del tankabaIA.jugador en x, esto nos permitirá evitar que se acelere
-  
-    juego.physics.arcade.collide(rocas, plataformas.grupo);
-    juego.physics.arcade.collide(plataformas.grupo, rocas);
-
     
-    function checkIfCanJump() {
+    function checkIfCanJump(cobaIA) {
 
         var yAxis = p2.vec2.fromValues(0, 1);
         var result = false;
@@ -104,9 +100,9 @@ function update() {
 
             var c = juego.physics.p2.world.narrowphase.contactEquations[i];
 
-            if (c.bodyA === tankabaIA.jugador.body.data || c.bodyB === tankabaIA.jugador.body.data){
+            if (c.bodyA === cobaIA.jugador.body.data || c.bodyB === cobaIA.jugador.body.data){
                 var d = p2.vec2.dot(c.normalA, yAxis); // Normal dot Y-axis
-                if (c.bodyA === tankabaIA.jugador.body.data) d *= -1;
+                if (c.bodyA === cobaIA.jugador.body.data) d *= -1;
                 if (d > 0.5) result = true;
             }
         }
@@ -188,7 +184,7 @@ function update() {
 
     
 
-    if (cursores.up.isDown && checkIfCanJump()) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
+    if (cursores.up.isDown && checkIfCanJump(tankabaIA)) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
         
 
         tankabaIA.jugador.body.moveUp(300);
@@ -201,9 +197,7 @@ function update() {
         }
     }
 
-    /*if (tankabaIA.jugador.body.touching.down) { // Si el tankabaIA.jugador toca una plataforma el contador de saltos se setea en cero otra vez
-        tankabaIA.contadorSaltos = 0;
-    }*/
+    
 
     if (tankabaIA.contadorEscaleras < -1) {
         tankabaIA.contadorEscaleras = -1;
@@ -228,5 +222,39 @@ function update() {
             tankabaIA.lasers_izq[i].laser.kill();
         }
     }
+
+
+    ///////////////////////////////////////////////////////controles AcrobaIA
+
+    if(ctrlW.isDown && checkIfCanJump(acrobaIA)){
+
+        acrobaIA.jugador.body.moveUp(300);
+    }
     
+    if(ctrlA.isDown){
+
+        acrobaIA.jugador.body.moveLeft(300);
+    }
+
+    if(ctrlD.isDown){
+
+        acrobaIA.jugador.body.moveRight(300);
+    }
+
+    ///////////////////////////////////////////////////////controles talibaIA
+
+    if(ctrlH.isDown && checkIfCanJump(talibaIA)){
+
+        talibaIA.jugador.body.moveUp(300);
+    }
+    
+    if(ctrlB.isDown){
+
+        talibaIA.jugador.body.moveLeft(300);
+    }
+
+    if(ctrlM.isDown){
+
+        talibaIA.jugador.body.moveRight(300);
+    }
 }
