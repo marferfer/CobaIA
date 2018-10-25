@@ -114,6 +114,13 @@ class PlataformasMoviles extends Objetos{
     }
 }
 
+class Botones extends Objetos{
+    
+    constructor(){
+        super();
+    }
+}
+
 cursores = null; // Eventos de teclado
 
 escaleras = null; // Imagenes que pueden permitirnos subir
@@ -149,3 +156,4 @@ lasers = null;
  let cajasCableado = new CajasCableado();
  let tankabaIA2 = new TankabaIA();
  let plataformasMoviles = new PlataformasMoviles();
+ let botones = new Botones();

@@ -48,6 +48,7 @@ function preload() {
     juego.load.image('cable', 'assets/images/cable.png');
     juego.load.image('frasco', 'assets/images/frasco.png');
     juego.load.image('plataformaMovil', 'assets/images/plataformaMovil.png');
+    juego.load.image('boton', 'assets/images/boton.png');
 
     juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
     juego.load.spritesheet('controller-indicator', 'assets/images/controller-indicator.png',16, 16);
@@ -170,6 +171,21 @@ function create() {
     tubo.body.collideWorldBounds = true;
     
     tubos.lista.push(tubo);
+    /////////////////////////////////////////////////////////////////////////////////
+
+    botones.grupo = juego.add.group();
+    botones.grupo.enableBody = true;
+    botones.grupo.physicsBodyType = Phaser.Physics.P2JS;
+
+    let boton = botones.grupo.create(0, 0, 'boton');
+
+    boton.body.setRectangle(61, 15, 0, -5);
+    boton.body.debug = true;
+    boton.body.static = true;
+    boton.body.x = 2600;
+    boton.body.y = juego.world.height - 275;
+
+    botones.lista.push(boton);
 
     /////////////////////////////////////////////////////////////////////////////////
     plataformasMoviles.grupo = juego.add.group();
@@ -257,14 +273,15 @@ function create() {
     //tankabaIA.jugador.body.loadPolygon('cajaCollisions', 'caja');
     tankabaIA.jugador.dynamic = true;
     tankabaIA.jugador.body.debug = false;
-    tankabaIA.jugador.body.onBeginContact.add(evento, this);
+    tankabaIA.jugador.body.onBeginContact.add(colisionInicial, this);
+    tankabaIA.jugador.body.onEndContact.add(colisionFinal, this);
 
     
     function stopPlataforma(i){
         plataformasMoviles.lista[i].body.rotateRight(0);
     }
 
-    function evento(body, bodyB, shapeA, shapeB, equation){
+    function colisionInicial(body, bodyB, shapeA, shapeB, equation){
 
         if (body){
             //console.log(body.sprite.key);
@@ -277,13 +294,27 @@ function create() {
         }
 
 
-        if(body.sprite.key == 'cajaCableado' && tecla_accion.isDown){  
+        if(body.sprite.key === 'cajaCableado' && tecla_accion.isDown){  
 
             //console.log(body.id);
             cajasCableado.lista[0].animations.play('caja_rota');
             let timer =  juego.time.events.add(1250, stopPlataforma, this, 0);
             plataformasMoviles.lista[0].body.rotateRight(25);      
 
+        }
+
+        if(body.sprite.key === 'boton'){
+
+            //animacion de boton presionado
+            plataformasMoviles.lista[0].body.rotateRight(25);
+        }
+    }
+
+    function colisionFinal(body, bodyB, shapeA, shapeB, equation){
+
+        if(body.sprite.key === 'boton'){
+            plataformasMoviles.lista[0].body.rotateRight(0);
+            //stopPlataforma(0);
         }
     }
 
