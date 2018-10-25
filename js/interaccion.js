@@ -1,6 +1,9 @@
 // Update
 function update() {
 
+
+    acrobaIA.jugador.body.velocity.x = 0;
+    talibaIA.jugador.body.velocity.x = 0;
     //Indicador
 
     // Pad "connected or not" indicator
