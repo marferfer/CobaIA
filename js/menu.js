@@ -1,9 +1,9 @@
-var game = new Phaser.Game(1920, 800, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
+                                          var game = new Phaser.Game(1920, 800, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
 
 function preload() {
 
     game.load.spritesheet('button', 'assets/button_sprite_sheet.png', 193, 71);
-    game.load.image('background','assets/starfield.png');
+    game.load.image('background','assets/Portada.png');
 
 }
 
@@ -16,7 +16,9 @@ function create() {
 
     background = game.add.tileSprite(0, 0, 1920, 800, 'background');
 
-    button = game.add.button(game.world.centerX - 95, 400, 'button', actionOnClick, this, 2, 1, 0);
+    button = game.add.button(game.world.centerX - 320, 550, 'button', actionOnClick, this, 2, 1, 0);
+    button = game.add.button(game.world.centerX - 620, 550, 'button', actionOnClick, this, 2, 1, 0);
+    button = game.add.button(game.world.centerX - 920, 550, 'button', actionOnClick, this, 2, 1, 0);
 
     button.onInputOver.add(over, this);
     button.onInputOut.add(out, this);
@@ -25,15 +27,15 @@ function create() {
 }
 
 function up() {
-    console.log('button up', arguments);
+    //console.log('button up', arguments);
 }
 
 function over() {
-    console.log('button over');
+    //console.log('button over');
 }
 
 function out() {
-    console.log('button out');
+    //console.log('button out');
 }
 
 function actionOnClick () {
