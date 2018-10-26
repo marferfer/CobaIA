@@ -3,6 +3,7 @@
 function preload() {
 
     game.load.spritesheet('button', 'assets/button_sprite_sheet.png', 193, 71);
+    game.load.spritesheet('title', 'assets/TituloJuego.png');
     game.load.image('background','assets/Portada.png');
 
 }
@@ -11,12 +12,15 @@ var button;
 var buttonOnline;
 var buttonExit;
 var background;
+var title;
 
 function create() {
 
     game.stage.backgroundColor = '#182d3b';
 
     background = game.add.tileSprite(0, 0, 1920, 800, 'background');
+
+    title = game.add.sprite(game.world.centerX - 769, 50, 'title');
 
     button = game.add.button(game.world.centerX - 920, 550, 'button', actionOnClickGame, this, 2, 1, 0);
     buttonOnline = game.add.button(game.world.centerX - 620, 550, 'button', actionOnClickOnline, this, 2, 1, 0);
