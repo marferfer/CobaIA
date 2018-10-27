@@ -3,6 +3,7 @@
 function preload() {
 
     game.load.spritesheet('button', 'assets/button_sprite_sheet.png', 193, 71);
+    game.load.spritesheet('buttonSalir', 'assets/button_sprite_sheet salir.png', 193, 71);
     game.load.spritesheet('title', 'assets/TituloJuego.png');
     game.load.image('background','assets/Portada.png');
 
@@ -22,9 +23,9 @@ function create() {
 
     title = game.add.sprite(game.world.centerX - 769, 50, 'title');
 
-    button = game.add.button(game.world.centerX - 920, 550, 'button', actionOnClickGame, this, 2, 1, 0);
-    buttonOnline = game.add.button(game.world.centerX - 620, 550, 'button', actionOnClickOnline, this, 2, 1, 0);
-    buttonExit = game.add.button(game.world.centerX - 320, 550, 'button', actionOnClickExit, this, 2, 1, 0);
+    button = game.add.button(game.world.centerX - 720, 550, 'button', actionOnClickGame, this, 2, 1, 0);
+    //buttonOnline = game.add.button(game.world.centerX - 620, 550, 'button', actionOnClickOnline, this, 2, 1, 0);
+    buttonExit = game.add.button(game.world.centerX - 420, 550, 'buttonSalir', actionOnClickExit, this, 2, 1, 0); //game.world.centerX - 320, 550
 
     button.onInputOver.add(over, this);
     button.onInputOut.add(out, this);
