@@ -59,6 +59,7 @@ function preload() {
     juego.load.image('indicadorJ1', 'assets/indicadorJ1.png');
     juego.load.image('indicadorJ2', 'assets/indicadorJ2.png');
     juego.load.image('indicadorJ3', 'assets/indicadorJ3.png');
+    juego.load.image('pilaCadaveres', 'assets/images/pilaCadaveres.png');
 
     juego.load.spritesheet('compuerta', 'assets/images/compuerta.png', 125, 547);
     juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
@@ -267,7 +268,7 @@ function create() {
     //cajas.collisionGroup = juego.physics.p2.createCollisionGroup();
 
     //let caja = juego.add.sprite(2315, juego.world.height - 300, 'caja');
-    let caja = cajas.grupo.create(900, juego.world.height -300, 'caja');
+    let caja = cajas.grupo.create(100, juego.world.height -300, 'caja');
     //caja.body.setCollisionGroup(cajas.collisionGroup);
     //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
 
@@ -314,16 +315,42 @@ function create() {
     chips.grupo.enableBody = true;
     chips.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
-    let chip = chips.grupo.create(0, 0, 'chip');
+    let chip = chips.grupo.create(0, 0, 'chip'); //AcrobaIA
 
+    chip.cobaIA = "acrobaIA";
     chip.body.setRectangle(10, 10);
     chip.body.debug = true;
     chip.body.static = true;        //Se deja static y apartado para que no se vea hasta que sea necesario.
 
-    chip.body.x = -1;
-    chip.body.y = -1;
+    chip.body.x = 0;
+    chip.body.y = -100;
 
-    chips.lista.push(chip);
+    chips.lista[0] = chip;
+
+    chip = chips.grupo.create(0, 0, 'chip'); //TalibaIA
+
+    chip.cobaIA = "talibaIA";
+    chip.body.setRectangle(10, 10);
+    chip.body.debug = true;
+    chip.body.static = true;        //Se deja static y apartado para que no se vea hasta que sea necesario.
+
+    chip.body.x = 0;
+    chip.body.y = -100;
+
+    chips.lista[1] = chip;
+
+    chip = chips.grupo.create(0, 0, 'chip'); //TankabaIA
+
+    chip.cobaIA = "tankabaIA";
+    chip.body.setRectangle(10, 10);
+    chip.body.debug = true;
+    chip.body.static = true;        //Se deja static y apartado para que no se vea hasta que sea necesario.
+
+    chip.body.x = 0;
+    chip.body.y = -100;
+
+    chips.lista[2] = chip;
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////    /////////////////////////////////////////////////////////////////////////////////////////
@@ -371,7 +398,7 @@ function create() {
     acrobaIA.jugador.dynamic = true;
     acrobaIA.jugador.body.debug = false;
     acrobaIA.jugador.body.onBeginContact.add(colisionInicialAcrobaIA, this);
-    //acrobaIA.jugador.body.onEndContact.add(colisionFinal, this);
+    acrobaIA.jugador.body.onEndContact.add(colisionFinalAcrobaIA, this);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// TALIBAIA   ////////////////////////////////////////////////////////////////////////////////////////////
@@ -391,6 +418,9 @@ function create() {
     talibaIA.jugador.animations.add('movimientoDerecha', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
                                                             20, 21, 22, 23, 24, 25, 26, 27, 28], 60, true);
     talibaIA.jugador.animations.add('stop', [0], true);
+
+    talibaIA.jugador.body.onBeginContact.add(colisionInicialTalibaIA, this);
+    talibaIA.jugador.body.onEndContact.add(colisionFinalTalibaIA, this);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////DECORADOS POR DELANTE DEL JUGADOR  ///////////////////////////////////////////////////////////////////////////
@@ -430,11 +460,6 @@ function create() {
         if (body){
             //console.log(body.sprite.key);
             console.log(body.id);
-
-        }else{
-        
-        result = 'You last hit: The wall :)';
-
         }
 
 
@@ -453,55 +478,87 @@ function create() {
             plataformasMoviles.lista[0].body.rotateRight(25);
         }
 
-        if(body.sprite.key === 'chip'){ //deberia ser 'chip'
+        if(body.sprite.key === 'chip'){                 //si choca con un chip
             
-            if(body.id === 18){
-                tankabaIA.chip = "acrobaIA";
-            }
+            if(body.sprite.cobaIA === "acrobaIA" && tankabaIA.chip === null){      //si es de acrobaIA
+                
+                tankabaIA.chip = "acrobaIA";            //lo guardamos
+                body.sprite.visible = false;            //desaparecemos sl sprite del chip
+                body.destroy();                         //destruimos el chip en si mismo
 
-            body.enableBody = true;
-            //body.setRectangle(0.01, 0.01);
-            body.x = -1;
-            body.static = true;
-            
+
+                chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
+                chip.cobaIA = "acrobaIA";
+                chip.body.setRectangle(10, 10);
+                chip.body.debug = true;
+                chip.body.static = true;
+                chip.body.x = 0;
+                chip.body.y = -100;
+                chips.lista[0] = chip;
+
+            }else if(body.sprite.cobaIA === "talibaIA" && tankabaIA.chip === null){
+
+                tankabaIA.chip = "talibaIA";            //lo guardamos
+                body.sprite.visible = false;            //desaparecemos sl sprite del chip
+                body.destroy();                         //destruimos el chip en si mismo
+
+
+                chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
+                chip.cobaIA = "talibaIA";
+                chip.body.setRectangle(10, 10);
+                chip.body.debug = true;
+                chip.body.static = true;
+                chip.body.x = 0;
+                chip.body.y = -100;
+                chips.lista[1] = chip;
+
+            }else{  //si ya tengo un chip de otra cobaIA no hago nada
+                ;
+            }
         }
 
-        if(body.id === 17){
+        if(body.id === 18){ //zona de resurreccion
+
             if(tankabaIA.chip === "acrobaIA"){
 
-                acrobaIA.jugador.body.x = tankabaIA.jugador.body.x + 20;
+                acrobaIA.jugador.body.x = tankabaIA.jugador.body.x + 50;
                 acrobaIA.jugador.body.y = tankabaIA.jugador.body.y;
                 acrobaIA.jugador.body.static = false;
+                acrobaIA.canImove = true;
 
-                tankabaIA.chip = "";
+                tankabaIA.chip = null;
+
+            }else if(tankabaIA.chip === "talibaIA"){
+
+                talibaIA.jugador.body.x = tankabaIA.jugador.body.x + 50;
+                talibaIA.jugador.body.y = tankabaIA.jugador.body.y;
+                talibaIA.jugador.body.static = false;
+                talibaIA.canImove = true;
+
+                tankabaIA.chip = null;
+
+            }else{  //el chip esta vacio
+                ;
             }
         }
     }
 
     function colisionFinalTankabaIA(body, bodyB, shapeA, shapeB, equation){
 
-        if(body.sprite.key === 'boton'){
-            plataformasMoviles.lista[0].body.rotateRight(0);
-            //stopPlataforma(0);
+        if(body.sprite !== null){
+
+            if(body.sprite.key === 'boton'){
+                plataformasMoviles.lista[0].body.rotateRight(0);
+                //stopPlataforma(0);
+            }
         }
     }
 
     function colisionInicialAcrobaIA(body, bodyB, shapeA, shapeB, equation){
 
-        if (body){
-            //console.log(body.sprite.key);
-            //console.log(body.id);
-
-        }else{
-        
-        result = 'You last hit: The wall :)';
-
-        }
-
 
         if(body.sprite.key === 'cajaCableado' && tecla_accion.isDown){  
 
-            //console.log(body.id);
             cajasCableado.lista[0].animations.play('caja_rota');
             let timer =  juego.time.events.add(1250, stopPlataforma, this, 0);
             plataformasMoviles.lista[0].body.rotateRight(25);      
@@ -518,8 +575,181 @@ function create() {
 
             acrobaIA.muerta = true;
         }
+
+
+        if(body.sprite.key === 'chip'){                 //si choca con un chip
+            
+            if(body.sprite.cobaIA === "tankabaIA" && acrobaIA.chip === null){      //si es de acrobaIA
+                
+                acrobaIA.chip = "tankabaIA";            //lo guardamos
+                body.sprite.visible = false;            //desaparecemos sl sprite del chip
+                body.destroy();                         //destruimos el chip en si mismo
+
+
+                chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
+                chip.cobaIA = "tankabaIA";
+                chip.body.setRectangle(10, 10);
+                chip.body.debug = true;
+                chip.body.static = true;
+                chip.body.x = 0;
+                chip.body.y = -100;
+                chips.lista[2] = chip;
+
+            }else if(body.sprite.cobaIA === "talibaIA" && acrobaIA.chip === null){
+
+                acrobaIA.chip = "talibaIA";             //lo guardamos
+                body.sprite.visible = false;            //desaparecemos sl sprite del chip
+                body.destroy();                         //destruimos el chip en si mismo
+
+
+                chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
+                chip.cobaIA = "talibaIA";
+                chip.body.setRectangle(10, 10);
+                chip.body.debug = true;
+                chip.body.static = true;
+                chip.body.x = 0;
+                chip.body.y = -100;
+                chips.lista[1] = chip;
+
+            }else{  //si ya tengo un chip de otra cobaIA no hago nada
+                ;
+            }
+        }
+
+        if(body.id === 18){ //zona de resurreccion
+
+            if(acrobaIA.chip === "tankabaIA"){
+
+                tankabaIA.jugador.body.x = acrobaIA.jugador.body.x + 50;
+                tankabaIA.jugador.body.y = acrobaIA.jugador.body.y;
+                tankabaIA.jugador.body.static = false;
+                tankabaIA.canImove = true;
+
+                acrobaIA.chip = null;
+
+            }else if(acrobaIA.chip === "talibaIA"){
+
+                talibaIA.jugador.body.x = acrobaIA.jugador.body.x + 50;
+                talibaIA.jugador.body.y = acrobaIA.jugador.body.y;
+                talibaIA.jugador.body.static = false;
+                talibaIA.canImove = true;
+
+                acrobaIA.chip = null;
+
+            }else{  //el chip esta vacio
+                ;
+            }
+        }
     }
 
+    function colisionFinalAcrobaIA(body, bodyB, shapeA, shapeB, equation){
+
+        if(body.sprite !== null){
+
+            if(body.sprite.key === 'boton'){
+                plataformasMoviles.lista[0].body.rotateRight(0);
+                //stopPlataforma(0);
+            }
+        }
+    }
+
+    function colisionInicialTalibaIA(body, bodyB, shapeA, shapeB, equation){
+
+
+        if(body.sprite.key === 'cajaCableado' && tecla_accion.isDown){  
+
+            cajasCableado.lista[0].animations.play('caja_rota');
+            let timer =  juego.time.events.add(1250, stopPlataforma, this, 0);
+            plataformasMoviles.lista[0].body.rotateRight(25);      
+
+        }
+
+        if(body.sprite.key === 'boton'){
+
+            //animacion de boton presionado
+            plataformasMoviles.lista[0].body.rotateRight(25);
+        }
+
+        if(body.id === 16){
+
+            talibaIA.muerta = true;
+        }
+
+        if(body.sprite.key === 'chip'){                 //si choca con un chip
+            
+            if(body.sprite.cobaIA === "tankabaIA" && talibaIA.chip === null){ 
+                
+                talibaIA.chip = "tankabaIA";            //lo guardamos
+                body.sprite.visible = false;            //desaparecemos sl sprite del chip
+                body.destroy();                         //destruimos el chip en si mismo
+
+
+                chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
+                chip.cobaIA = "tankabaIA";
+                chip.body.setRectangle(10, 10);
+                chip.body.debug = true;
+                chip.body.static = true;
+                chip.body.x = 0;
+                chip.body.y = -100;
+                chips.lista[2] = chip;
+
+            }else if(body.sprite.cobaIA === "acrobaIA" && talibaIA.chip === null){
+
+                talibaIA.chip = "acrobaIA";            //lo guardamos
+                body.sprite.visible = false;            //desaparecemos sl sprite del chip
+                body.destroy();                         //destruimos el chip en si mismo
+
+
+                chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
+                chip.cobaIA = "acrobaIA";
+                chip.body.setRectangle(10, 10);
+                chip.body.debug = true;
+                chip.body.static = true;
+                chip.body.x = 0;
+                chip.body.y = -100;
+                chips.lista[0] = chip;
+
+            }else{  //si ya tengo un chip de otra cobaIA no hago nada
+                ;
+            }
+        }
+
+        if(body.id === 18){ //zona de resurreccion
+
+            if(talibaIA.chip === "tankabaIA"){
+
+                tankabaIA.jugador.body.x = talibaIA.jugador.body.x + 50;
+                tankabaIA.jugador.body.y = talibaIA.jugador.body.y;
+                tankabaIA.jugador.body.static = false;
+                tankabaIA.canImove = true;
+
+                talibaIA.chip = null;
+
+            }else if(talibaIA.chip === "acrobaIA"){
+
+                acrobaIA.jugador.body.x = talibaIA.jugador.body.x + 50;
+                acrobaIA.jugador.body.y = talibaIA.jugador.body.y;
+                acrobaIA.jugador.body.static = false;
+                acrobaIA.canImove = true;
+
+                talibaIA.chip = null;
+
+            }else{  //el chip esta vacio
+                ;
+            }
+        }
+    }
+
+    function colisionFinalTalibaIA(body, bodyB, shapeA, shapeB, equation){
+
+       if(body.sprite !== null){
+
+            if(body.sprite.key === 'boton'){
+                plataformasMoviles.lista[0].body.rotateRight(0);
+                //stopPlataforma(0);
+            }
+        }
+    }
 
      // Creamos un teclado  
     juego.input.keyboard.onUpCallback = function (e) {

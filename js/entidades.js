@@ -32,7 +32,9 @@ class CobaIA {
         this.colisionEscalera = false;
         this.contadorEscaleras = 0;
         this.ultimo_sentido = 'derecha';
-        this.collisionGroup = null;
+        this.muerta = false;
+        this.canImove = true;
+        this.chip = null;
     }
 };
 
@@ -63,7 +65,6 @@ class Objetos {
     constructor(){
 
         this.grupo = null;
-        this.collisionGroup = null;
         this.lista = [];
     }
 };
@@ -120,6 +121,7 @@ class Botones extends Objetos{
 class Chips extends Objetos{
 
     constructor(){
+
         super();
     }
 }

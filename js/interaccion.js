@@ -6,11 +6,98 @@ function update() {
         chips.lista[0].body.static = false;
         chips.lista[0].body.x = acrobaIA.jugador.body.x - 15;
         chips.lista[0].body.y = acrobaIA.jugador.body.y;
-        acrobaIA.jugador.body.x = -1;
-        acrobaIA.jugador.body.y = -1;
-        acrobaIA.muerta = false;
-        acrobaIA.jugador.body.static = true;
 
+        if(acrobaIA.chip === "tankabaIA"){
+
+            chips.lista[2].body.static = false;
+            chips.lista[2].body.x = acrobaIA.jugador.body.x - 15;
+            chips.lista[2].body.y = acrobaIA.jugador.body.y;
+
+            acrobaIA.chip = null;
+
+        }else if(acrobaIA.chip === "talibaIA"){
+
+            chips.lista[1].body.static = false;
+            chips.lista[1].body.x = acrobaIA.jugador.body.x - 15;
+            chips.lista[1].body.y = acrobaIA.jugador.body.y;
+
+            acrobaIA.chip = null;
+
+        }else{
+            ;
+        }
+
+        acrobaIA.jugador.body.x = -120;
+        acrobaIA.jugador.body.static = true;
+        acrobaIA.muerta = false;
+        acrobaIA.canImove = false;
+        
+    }
+
+    if(talibaIA.muerta){
+
+        chips.lista[1].body.static = false;
+        chips.lista[1].body.x = talibaIA.jugador.body.x - 15;
+        chips.lista[1].body.y = talibaIA.jugador.body.y;
+
+        if(talibaIA.chip === "tankabaIA"){
+
+            chips.lista[2].body.static = false;
+            chips.lista[2].body.x = talibaIA.jugador.body.x - 15;
+            chips.lista[2].body.y = talibaIA.jugador.body.y;
+
+            talibaIA.chip = null;
+
+        }else if(talibaIA.chip === "acrobaIA"){
+
+            chips.lista[0].body.static = false;
+            chips.lista[0].body.x = talibaIA.jugador.body.x - 15;
+            chips.lista[0].body.y = talibaIA.jugador.body.y;
+
+            talibaIA.chip = null;
+            
+        }else{
+            ;
+        }
+
+        talibaIA.jugador.body.x =  -120;
+        talibaIA.jugador.body.static = true;
+        talibaIA.muerta = false;
+        talibaIA.canImove = false;    
+
+    }
+
+    if(tankabaIA.muerta){
+
+        chips.lista[2].body.static = false;
+        chips.lista[2].body.x = tankabaIA.jugador.body.x - 15;
+        chips.lista[2].body.y = tankabaIA.jugador.body.y;
+
+        if(tankabaIA.chip === "acrobaIA"){
+
+            chips.lista[0].body.static = false;
+            chips.lista[0].body.x = acrobaIA.jugador.body.x - 15;
+            chips.lista[0].body.y = acrobaIA.jugador.body.y;
+
+            tankabaIA.chip = null;
+
+        }else if(tankabaIA.chip === "talibaIA"){
+
+            chips.lista[1].body.static = false;
+            chips.lista[1].body.x = acrobaIA.jugador.body.x - 15;
+            chips.lista[1].body.y = acrobaIA.jugador.body.y;
+
+            tankabaIA.chip = null;
+            
+        }else{
+            ;
+        }
+
+        tankabaIA.jugador.body.x = -120;
+        tankabaIA.jugador.body.static = true;
+        tankabaIA.muerta = false;
+        tankabaIA.canImove = false;
+        
     }
 
 
@@ -241,33 +328,33 @@ function update() {
 
     ///////////////////////////////////////////////////////controles AcrobaIA
 
-    if(ctrlW.isDown && checkIfCanJump(acrobaIA)){
+    if(ctrlW.isDown && checkIfCanJump(acrobaIA) && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveUp(300);
     }
     
-    if(ctrlA.isDown){
+    if(ctrlA.isDown && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveLeft(300);
     }
 
-    if(ctrlD.isDown){
+    if(ctrlD.isDown && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveRight(300);
     }
 
     ///////////////////////////////////////////////////////controles talibaIA
 
-    if(ctrlH.isDown && checkIfCanJump(talibaIA)){
+    if(ctrlH.isDown && checkIfCanJump(talibaIA) && talibaIA.canImove){
 
         talibaIA.jugador.body.moveUp(300);
 
-    }else if(ctrlB.isDown){
+    }else if(ctrlB.isDown && talibaIA.canImove){
 
         talibaIA.jugador.body.moveLeft(300);
         //talibaIA.jugador.animations.play('movimientoIzquierda');
 
-    }else if(ctrlM.isDown){
+    }else if(ctrlM.isDown && talibaIA.canImove){
 
         talibaIA.jugador.body.moveRight(300);
         if(checkIfCanJump(talibaIA)){
