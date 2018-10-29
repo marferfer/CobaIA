@@ -66,11 +66,6 @@ class Objetos {
         this.collisionGroup = null;
         this.lista = [];
     }
-
-    getCollisionGroup(){
-
-        return this.collisionGroup;
-    }
 };
 
 class Plataformas extends Objetos {
@@ -122,6 +117,13 @@ class Botones extends Objetos{
     }
 }
 
+class Chips extends Objetos{
+
+    constructor(){
+        super();
+    }
+}
+
 cursores = null; // Eventos de teclado
 
 escaleras = null; // Imagenes que pueden permitirnos subir
@@ -159,3 +161,4 @@ lasers = null;
  let tankabaIA2 = new TankabaIA();
  let plataformasMoviles = new PlataformasMoviles();
  let botones = new Botones();
+ let chips = new Chips();

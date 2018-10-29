@@ -1,6 +1,18 @@
 // Update
 function update() {
 
+    if(acrobaIA.muerta){
+
+        chips.lista[0].body.static = false;
+        chips.lista[0].body.x = acrobaIA.jugador.body.x - 15;
+        chips.lista[0].body.y = acrobaIA.jugador.body.y;
+        acrobaIA.jugador.body.x = -1;
+        acrobaIA.jugador.body.y = -1;
+        acrobaIA.muerta = false;
+        acrobaIA.jugador.body.static = true;
+
+    }
+
 
     acrobaIA.jugador.body.velocity.x = 0;
     talibaIA.jugador.body.velocity.x = 0;
@@ -249,15 +261,22 @@ function update() {
     if(ctrlH.isDown && checkIfCanJump(talibaIA)){
 
         talibaIA.jugador.body.moveUp(300);
-    }
-    
-    if(ctrlB.isDown){
+
+    }else if(ctrlB.isDown){
 
         talibaIA.jugador.body.moveLeft(300);
-    }
+        //talibaIA.jugador.animations.play('movimientoIzquierda');
 
-    if(ctrlM.isDown){
+    }else if(ctrlM.isDown){
 
         talibaIA.jugador.body.moveRight(300);
+        if(checkIfCanJump(talibaIA)){
+            talibaIA.jugador.animations.play('movimientoDerecha');
+        }
+
+    }else{
+
+        talibaIA.jugador.animations.stop();
+        talibaIA.jugador.frame = 0;
     }
 }
