@@ -58,6 +58,9 @@ function preload() {
     juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
     juego.load.spritesheet('controller-indicator', 'assets/images/controller-indicator.png',16, 16);
     juego.load.spritesheet('cajaCableado', 'assets/images/cajaCableado.png', 54 , 70);
+    juego.load.image('indicadorJ1', 'assets/indicadorJ1.png');
+    juego.load.image('indicadorJ2', 'assets/indicadorJ2.png');
+    juego.load.image('indicadorJ3', 'assets/indicadorJ3.png');
 
     juego.load.physics('sueloN1Collisions', 'assets/data/sueloN1.json');
     juego.load.physics('cajaCollisions', 'assets/data/caja.json');
@@ -135,6 +138,8 @@ function create() {
     indicator = juego.add.sprite(1000, juego.world.height - 300, 'controller-indicator');
     indicator.scale.x = indicator.scale.y = 2;
     indicator.animations.frame = 1;
+
+    
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// COMPUERTAS   //////////////////////////////////////////////////////////////////////////////////////////
@@ -245,7 +250,6 @@ function create() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// TANKABAIA   ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
     tankabaIA.jugador = juego.add.sprite(2100, juego.world.height - 225, 'cobaIA');
     juego.physics.p2.enableBody(tankabaIA.jugador);
     tankabaIA.jugador.body.setRectangle(80, 40);
@@ -261,6 +265,7 @@ function create() {
     tankabaIA.jugador.body.onBeginContact.add(colisionInicial, this);
     tankabaIA.jugador.body.onEndContact.add(colisionFinal, this);
 
+    //indicadorJ1 = juego.add.sprite(2100, juego.world.height - 225, 'indicadorJ1');
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// ACROBAIA   ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

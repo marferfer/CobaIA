@@ -5,6 +5,8 @@ var juego;
 var pad1;
 var indicator;
 
+var indicadorJ1;
+
 var cursores;
 var escaleras;
 var puntajeTexto;
