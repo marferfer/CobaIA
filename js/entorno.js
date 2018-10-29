@@ -48,17 +48,19 @@ function preload() {
     juego.load.image('laser_izq', 'assets/images/laser_izq.png');
     juego.load.image('circulo', 'assets/images/circulo.png');
     juego.load.image('mensaje', 'assets/images/mensaje.png');
-    juego.load.image('compuertaCerrada', 'assets/images/compuertaCerrada.png');
     juego.load.image('tuboN1Completo', 'assets/images/tuboN1Completo.png');
     juego.load.image('cobaIA', 'assets/images/cobaIA.png');
     juego.load.image('cable', 'assets/images/cable.png');
     juego.load.image('frasco', 'assets/images/frasco.png');
     juego.load.image('plataformaMovil', 'assets/images/plataformaMovil.png');
     juego.load.image('boton', 'assets/images/boton.png');
+    juego.load.image('conexionTuboArriba', 'assets/images/conexionTuboArriba.png');
+    juego.load.image('conexionTuboDerecha', 'assets/images/conexionTuboDerecha.png');
     juego.load.image('indicadorJ1', 'assets/indicadorJ1.png');
     juego.load.image('indicadorJ2', 'assets/indicadorJ2.png');
     juego.load.image('indicadorJ3', 'assets/indicadorJ3.png');
 
+    juego.load.spritesheet('compuerta', 'assets/images/compuerta.png', 125, 547);
     juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
     juego.load.spritesheet('controller-indicator', 'assets/images/controller-indicator.png',16, 16);
     juego.load.spritesheet('cajaCableado', 'assets/images/cajaCableado.png', 54 , 70);
@@ -89,8 +91,10 @@ function create() {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     nivel1.fondo = juego.add.sprite(0, 0, 'fondoN1');
 
+    //Decorados que se ven detras del jugador
     nivel1.decorados[0] = juego.add.image(1765, juego.world.height - 650, 'frasco');
-    nivel1.decorados[1] = juego.add.image(1450, juego.world.height - 650, 'cable');    
+    nivel1.decorados[1] = juego.add.image(1450, juego.world.height - 650, 'cable');
+
 
     nivel1.grupo = juego.add.group();
     nivel1.grupo.enableBody = true;
@@ -164,9 +168,13 @@ function create() {
     compuertas.grupo.enableBody = true;
     compuertas.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
-    let compuerta = compuertas.grupo.create(0, 0, 'compuertaCerrada');
+    let compuerta = compuertas.grupo.create(0, 0, 'compuerta');
 
+    compuerta.body.debug = true;
     compuerta.body.static = true;
+    compuerta.pivot.y = 250;
+    compuerta.body.setRectangle(75, 25);
+    compuerta.animations.frame = 1;
     compuerta.body.x = 4475;
     compuerta.body.y = juego.world.height - 500;
     compuertas.lista.push(compuerta);
@@ -317,9 +325,9 @@ function create() {
 
     chips.lista.push(chip);
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////    /////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////    /////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     lasers = juego.add.group(); // Lasers
     lasers.enableBody = true;
 
@@ -383,6 +391,13 @@ function create() {
     talibaIA.jugador.animations.add('movimientoDerecha', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
                                                             20, 21, 22, 23, 24, 25, 26, 27, 28], 60, true);
     talibaIA.jugador.animations.add('stop', [0], true);
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////DECORADOS POR DELANTE DEL JUGADOR  ///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    nivel1.decorados[2] = juego.add.image(1610, juego.world.height - 490, 'conexionTuboArriba');
+    nivel1.decorados[3] = juego.add.image(1634, juego.world.height - 1043, 'conexionTuboDerecha');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
