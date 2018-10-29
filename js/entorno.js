@@ -33,7 +33,8 @@ function preload() {
     juego.state.add("recarga", Phaser.Preload);
 
     juego.load.image('fondoN1', 'assets/images/fondoN1.png');
-    juego.load.image('sueloN1', 'assets/images/sueloN1.png');
+    juego.load.image('sueloN1Parte1', 'assets/images/sueloN1Parte1.png');
+    juego.load.image('sueloN1Parte2', 'assets/images/sueloN1Parte2.png');
 
     juego.load.image('chip', 'assets/images/chip.png');
     juego.load.image('tierra', 'assets/images/tierra.png');
@@ -63,7 +64,8 @@ function preload() {
     juego.load.spritesheet('cajaCableado', 'assets/images/cajaCableado.png', 54 , 70);
     juego.load.spritesheet('talibaIAmovimiento', 'assets/images/talibaIAmovimiento.png', 93, 51, 29, 6, 7);
 
-    juego.load.physics('sueloN1Collisions', 'assets/data/sueloN1.json');
+    juego.load.physics('sueloN1Parte1Collisions', 'assets/data/sueloN1Parte1.json');
+    juego.load.physics('sueloN1Parte2Collisions', 'assets/data/sueloN1Parte2.json');
     juego.load.physics('cajaCollisions', 'assets/data/caja.json');
     juego.load.physics('personajeCollisions', 'assets/data/personaje.json');
     juego.load.physics('tuboN1CompletoCollisions', 'assets/data/tuboN1Completo.json');
@@ -85,7 +87,7 @@ function create() {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// NIVEL 1   /////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    nivel1.fondo = background;//juego.add.sprite(0, 0, 'fondoN1');
+    nivel1.fondo = juego.add.sprite(0, 0, 'fondoN1');
 
     nivel1.decorados[0] = juego.add.image(1765, juego.world.height - 650, 'frasco');
     nivel1.decorados[1] = juego.add.image(1450, juego.world.height - 650, 'cable');    
@@ -94,17 +96,29 @@ function create() {
     nivel1.grupo.enableBody = true;
     nivel1.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
-    let sueloN1 = nivel1.grupo.create(0, juego.world.height -300, 'sueloN1');
+    let sueloN1 = nivel1.grupo.create(0, juego.world.height -300, 'sueloN1Parte1');
     juego.physics.p2.enableBody(sueloN1);
 
     sueloN1.body.clearShapes();
-    sueloN1.body.loadPolygon('sueloN1Collisions', 'sueloN1');
+    sueloN1.body.loadPolygon('sueloN1Parte1Collisions', 'sueloN1Parte1');
     sueloN1.body.static = true;
     sueloN1.body.debug = true;
     
-    sueloN1.body.x = 2250;
-    sueloN1.body.y = juego.world.height + 25;
-    nivel1.suelo = sueloN1;
+    sueloN1.body.x = 1700;
+    sueloN1.body.y = juego.world.height - 700;
+
+    sueloN1 = nivel1.grupo.create(0, juego.world.height -300, 'sueloN1Parte2');
+    juego.physics.p2.enableBody(sueloN1);
+
+    sueloN1.body.clearShapes();
+    sueloN1.body.loadPolygon('sueloN1Parte2Collisions', 'sueloN1Parte2');
+    sueloN1.body.static = true;
+    sueloN1.body.debug = true;
+    
+    sueloN1.body.x = 9900;
+    sueloN1.body.y = juego.world.height - 700;
+
+    //nivel1.suelo = sueloN1;
 
     //fondo.fixedToCamera = true; // Lo dejará fijo ante la cámara
     
@@ -172,7 +186,7 @@ function create() {
     cajaCableado.animations.add('caja_rota', [1, 2, 3], 10, true);
     cajaCableado.body.static = true;
     cajaCableado.body.setRectangle(23, 69, 15);
-    cajaCableado.body.x = 2100;
+    cajaCableado.body.x = 1900;
     cajaCableado.body.y = juego.world.height - 210;
     cajasCableado.lista.push(cajaCableado);
 
@@ -229,8 +243,8 @@ function create() {
     plataformaMovil.body.static = true;
     plataformaMovil.pivot.x = 150;
     plataformaMovil.body.setRectangle(300, 25, -150);
-    plataformaMovil.body.x = 2300;
-    plataformaMovil.body.y = juego.world.height - 400;
+    plataformaMovil.body.x = 3000;
+    plataformaMovil.body.y = juego.world.height - 460;
     plataformaMovil.body.collideWorldBounds = true;
 
     plataformasMoviles.lista.push(plataformaMovil);
@@ -319,7 +333,7 @@ function create() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// TANKABAIA   ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    tankabaIA.jugador = juego.add.sprite(2100, juego.world.height - 225, 'cobaIA');
+    tankabaIA.jugador = juego.add.sprite(2400, juego.world.height - 225, 'cobaIA');
     juego.physics.p2.enableBody(tankabaIA.jugador);
     tankabaIA.jugador.body.setRectangle(80, 40);
 
