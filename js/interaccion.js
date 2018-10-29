@@ -32,7 +32,11 @@ function update() {
         acrobaIA.muerta = false;
         acrobaIA.canImove = false;
 
-        juego.camera.follow(talibaIA.jugador);
+        if(!talibaIA.muerta){
+            juego.camera.follow(talibaIA.jugador);
+        }else{
+            juego.camera.follow(tankabaIA.jugador);
+        }
         
     }
 
@@ -67,7 +71,11 @@ function update() {
         talibaIA.muerta = false;
         talibaIA.canImove = false;
 
-        juego.camera.follow(tankabaIA.jugador); 
+        if(!tankabaIA.muerta){
+            juego.camera.follow(tankabaIA.jugador);
+        }else{
+            juego.camera.follow(acrobaIA.jugador);
+        }
 
     }
 
@@ -102,7 +110,11 @@ function update() {
         tankabaIA.muerta = false;
         tankabaIA.canImove = false;
 
-        juego.camera.follow(acrobaIA.jugador);
+        if(!acrobaIA.muerta){
+            juego.camera.follow(acrobaIA.jugador);
+        }else{
+            juego.camera.follow(talibaIA.jugador);
+        }
         
     }
 

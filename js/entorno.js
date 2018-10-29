@@ -72,6 +72,7 @@ function preload() {
     juego.load.physics('cajaCollisions', 'assets/data/caja.json');
     juego.load.physics('personajeCollisions', 'assets/data/personaje.json');
     juego.load.physics('tuboN1CompletoCollisions', 'assets/data/tuboN1Completo.json');
+    juego.load.physics('pilaCadaveresCollisions', 'assets/data/pilaCadaveres.json');
     
 }
 
@@ -351,10 +352,31 @@ function create() {
 
     chips.lista[2] = chip;
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// PILAS DE CADAVERES   //////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////    /////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    pilasCadaveres.grupo = juego.add.group();
+    pilasCadaveres.grupo.enableBody = true;
+    pilasCadaveres.grupo.physicsBodyType = Phaser.Physics.P2JS;
+
+    let pilaCadaveres = pilasCadaveres.grupo.create(0, 0, 'pilaCadaveres');
+
+    pilaCadaveres.body.clearShapes();
+    pilaCadaveres.body.loadPolygon('pilaCadaveresCollisions', 'pilaCadaveres');
+
+    pilaCadaveres.body.debug = true;
+    pilaCadaveres.body.static = true;
+    //pilaCadaveres.pivot.x = 150;
+    //pilaCadaveres.body.setRectangle(300, 25, -150);
+    pilaCadaveres.body.x = 800;
+    pilaCadaveres.body.y = juego.world.height - 260;
+
+    pilasCadaveres.lista.push(pilaCadaveres);
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////    /////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     lasers = juego.add.group(); // Lasers
     lasers.enableBody = true;
 
@@ -522,28 +544,31 @@ function create() {
             }
         }
 
-        if(body.id === 18){ //zona de resurreccion
+        if(body.sprite !== null){
 
-            if(tankabaIA.chip === "acrobaIA"){
+            if(body.sprite.key === 'pilaCadaveres'){ //zona de resurreccion
 
-                acrobaIA.jugador.body.x = tankabaIA.jugador.body.x + 50;
-                acrobaIA.jugador.body.y = tankabaIA.jugador.body.y;
-                acrobaIA.jugador.body.static = false;
-                acrobaIA.canImove = true;
+                if(tankabaIA.chip === "acrobaIA"){
 
-                tankabaIA.chip = null;
+                    acrobaIA.jugador.body.x = tankabaIA.jugador.body.x + 50;
+                    acrobaIA.jugador.body.y = tankabaIA.jugador.body.y;
+                    acrobaIA.jugador.body.static = false;
+                    acrobaIA.canImove = true;
 
-            }else if(tankabaIA.chip === "talibaIA"){
+                    tankabaIA.chip = null;
 
-                talibaIA.jugador.body.x = tankabaIA.jugador.body.x + 50;
-                talibaIA.jugador.body.y = tankabaIA.jugador.body.y;
-                talibaIA.jugador.body.static = false;
-                talibaIA.canImove = true;
+                }else if(tankabaIA.chip === "talibaIA"){
 
-                tankabaIA.chip = null;
+                    talibaIA.jugador.body.x = tankabaIA.jugador.body.x + 50;
+                    talibaIA.jugador.body.y = tankabaIA.jugador.body.y;
+                    talibaIA.jugador.body.static = false;
+                    talibaIA.canImove = true;
 
-            }else{  //el chip esta vacio
-                ;
+                    tankabaIA.chip = null;
+
+                }else{  //el chip esta vacio
+                    ;
+                }
             }
         }
     }
@@ -621,28 +646,31 @@ function create() {
             }
         }
 
-        if(body.id === 18){ //zona de resurreccion
+        if(body.sprite !== null){
 
-            if(acrobaIA.chip === "tankabaIA"){
+            if(body.sprite.key === 'pilaCadaveres'){ //zona de resurreccion
 
-                tankabaIA.jugador.body.x = acrobaIA.jugador.body.x + 50;
-                tankabaIA.jugador.body.y = acrobaIA.jugador.body.y;
-                tankabaIA.jugador.body.static = false;
-                tankabaIA.canImove = true;
+                if(acrobaIA.chip === "tankabaIA"){
 
-                acrobaIA.chip = null;
+                    tankabaIA.jugador.body.x = acrobaIA.jugador.body.x + 50;
+                    tankabaIA.jugador.body.y = acrobaIA.jugador.body.y;
+                    tankabaIA.jugador.body.static = false;
+                    tankabaIA.canImove = true;
 
-            }else if(acrobaIA.chip === "talibaIA"){
+                    acrobaIA.chip = null;
 
-                talibaIA.jugador.body.x = acrobaIA.jugador.body.x + 50;
-                talibaIA.jugador.body.y = acrobaIA.jugador.body.y;
-                talibaIA.jugador.body.static = false;
-                talibaIA.canImove = true;
+                }else if(acrobaIA.chip === "talibaIA"){
 
-                acrobaIA.chip = null;
+                    talibaIA.jugador.body.x = acrobaIA.jugador.body.x + 50;
+                    talibaIA.jugador.body.y = acrobaIA.jugador.body.y;
+                    talibaIA.jugador.body.static = false;
+                    talibaIA.canImove = true;
 
-            }else{  //el chip esta vacio
-                ;
+                    acrobaIA.chip = null;
+
+                }else{  //el chip esta vacio
+                    ;
+                }
             }
         }
     }
@@ -719,28 +747,31 @@ function create() {
             }
         }
 
-        if(body.id === 18){ //zona de resurreccion
+        if(body.sprite !== null){
 
-            if(talibaIA.chip === "tankabaIA"){
+            if(body.sprite.key === 'pilaCadaveres'){ //zona de resurreccion
 
-                tankabaIA.jugador.body.x = talibaIA.jugador.body.x + 50;
-                tankabaIA.jugador.body.y = talibaIA.jugador.body.y;
-                tankabaIA.jugador.body.static = false;
-                tankabaIA.canImove = true;
+                if(talibaIA.chip === "tankabaIA"){
 
-                talibaIA.chip = null;
+                    tankabaIA.jugador.body.x = talibaIA.jugador.body.x + 50;
+                    tankabaIA.jugador.body.y = talibaIA.jugador.body.y;
+                    tankabaIA.jugador.body.static = false;
+                    tankabaIA.canImove = true;
 
-            }else if(talibaIA.chip === "acrobaIA"){
+                    talibaIA.chip = null;
 
-                acrobaIA.jugador.body.x = talibaIA.jugador.body.x + 50;
-                acrobaIA.jugador.body.y = talibaIA.jugador.body.y;
-                acrobaIA.jugador.body.static = false;
-                acrobaIA.canImove = true;
+                }else if(talibaIA.chip === "acrobaIA"){
 
-                talibaIA.chip = null;
+                    acrobaIA.jugador.body.x = talibaIA.jugador.body.x + 50;
+                    acrobaIA.jugador.body.y = talibaIA.jugador.body.y;
+                    acrobaIA.jugador.body.static = false;
+                    acrobaIA.canImove = true;
 
-            }else{  //el chip esta vacio
-                ;
+                    talibaIA.chip = null;
+
+                }else{  //el chip esta vacio
+                    ;
+                }
             }
         }
     }

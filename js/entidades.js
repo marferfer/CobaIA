@@ -126,6 +126,13 @@ class Chips extends Objetos{
     }
 }
 
+class PilaCadaveres extends Objetos{
+
+    constructor(){
+        super();
+    }
+}
+
 cursores = null; // Eventos de teclado
 
 escaleras = null; // Imagenes que pueden permitirnos subir
@@ -164,3 +171,4 @@ lasers = null;
  let plataformasMoviles = new PlataformasMoviles();
  let botones = new Botones();
  let chips = new Chips();
+ let pilasCadaveres = new PilaCadaveres();
