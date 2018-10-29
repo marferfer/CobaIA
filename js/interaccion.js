@@ -31,6 +31,8 @@ function update() {
         acrobaIA.jugador.body.static = true;
         acrobaIA.muerta = false;
         acrobaIA.canImove = false;
+
+        juego.camera.follow(talibaIA.jugador);
         
     }
 
@@ -63,7 +65,9 @@ function update() {
         talibaIA.jugador.body.x =  -120;
         talibaIA.jugador.body.static = true;
         talibaIA.muerta = false;
-        talibaIA.canImove = false;    
+        talibaIA.canImove = false;
+
+        juego.camera.follow(tankabaIA.jugador); 
 
     }
 
@@ -97,6 +101,8 @@ function update() {
         tankabaIA.jugador.body.static = true;
         tankabaIA.muerta = false;
         tankabaIA.canImove = false;
+
+        juego.camera.follow(acrobaIA.jugador);
         
     }
 

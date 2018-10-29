@@ -478,6 +478,11 @@ function create() {
             plataformasMoviles.lista[0].body.rotateRight(25);
         }
 
+        if(body.id === 16){
+
+            tankabaIA.muerta = true;
+        }
+
         if(body.sprite.key === 'chip'){                 //si choca con un chip
             
             if(body.sprite.cobaIA === "acrobaIA" && tankabaIA.chip === null){      //si es de acrobaIA
