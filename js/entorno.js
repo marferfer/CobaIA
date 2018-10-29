@@ -61,6 +61,8 @@ function preload() {
     juego.load.image('indicadorJ3', 'assets/indicadorJ3.png');
     juego.load.image('pilaCadaveres', 'assets/images/pilaCadaveres.png');
 
+    juego.load.image('ascensor','assets/nivel1/ascensor.png');
+
     juego.load.spritesheet('compuerta', 'assets/images/compuerta.png', 125, 547);
     juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
     juego.load.spritesheet('controller-indicator', 'assets/images/controller-indicator.png',16, 16);
@@ -91,6 +93,7 @@ function create() {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// NIVEL 1   /////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    nivelJuego = 1;
     nivel1.fondo = juego.add.sprite(0, 0, 'fondoN1');
 
     //Decorados que se ven detras del jugador
@@ -151,6 +154,9 @@ function create() {
     ctrlB = juego.input.keyboard.addKey(Phaser.Keyboard.B);
     ctrlN = juego.input.keyboard.addKey(Phaser.Keyboard.N);
     ctrlM = juego.input.keyboard.addKey(Phaser.Keyboard.M);
+
+    //Reinicio
+    ctrlR = juego.input.keyboard.addKey(Phaser.Keyboard.R);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// INDICADORES   /////////////////////////////////////////////////////////////////////////////////////////
@@ -386,6 +392,10 @@ function create() {
 
     // To listen to buttons from a specific pad listen directly on that pad game.input.gamepad.padX, where X = pad 1-4
     pad1 = juego.input.gamepad.pad1;
+
+    //paseNivel = juego.add.sprite(3000, juego.world.height - 205, 'ascensor');
+
+    //juego.physics.p2.enableBody(paseNivel);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// TANKABAIA   ///////////////////////////////////////////////////////////////////////////////////////////

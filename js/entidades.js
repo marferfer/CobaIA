@@ -133,6 +133,8 @@ class PilaCadaveres extends Objetos{
     }
 }
 
+var nivelJuego = 0;
+
 cursores = null; // Eventos de teclado
 
 escaleras = null; // Imagenes que pueden permitirnos subir
@@ -156,6 +158,7 @@ ctrlW = null;
 ctrlA = null;
 ctrlS = null;
 ctrlD = null;
+ctrlR = null;
 lasers = null;
 
  let tankabaIA = new TankabaIA();

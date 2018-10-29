@@ -1,4 +1,4 @@
-                                          var game = new Phaser.Game(1920, 800, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
+var game = new Phaser.Game(1920, 800, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
 
 function preload() {
 
@@ -16,6 +16,9 @@ var background;
 var title;
 
 function create() {
+
+    nivelJuego = 0;
+    console.log(nivelJuego);
 
     game.stage.backgroundColor = '#182d3b';
 

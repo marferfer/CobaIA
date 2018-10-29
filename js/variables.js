@@ -33,8 +33,8 @@ var ctrlW;
 var ctrlA;
 var ctrlS;
 var ctrlD;
-var lasers
-;
+var ctrlR;
+var lasers;
 
 var mensajes;
 var lista_mensajes = [];

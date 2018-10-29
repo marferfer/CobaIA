@@ -137,6 +137,12 @@ function update() {
     if (tankabaIA.jugador.position.y > 1500) { // Muerte al caer
         reinicia();
     }
+
+    if (ctrlR.isDown) { // Pase de nivel
+        juego.destroy();
+        inicio();
+    }
+
     if (tankabaIA.inmortal && tankabaIA.tiempo_inmortalidad < tankabaIA.tolerancia_vida) {
         tankabaIA.tiempo_inmortalidad++;
         if (tankabaIA.tiempo_inmortalidad % 5 == 0) {
@@ -385,3 +391,15 @@ function update() {
         talibaIA.jugador.frame = 0;
     }
 }
+
+function reinicia() {
+        //juego.autoStart();
+        if (tankabaIA.muriendo == false) {
+            tankabaIA.muriendo = true;
+            createjs.Sound.play(perder);
+        }
+        setTimeout(function () {
+            location.reload();
+        }, 3000);
+
+    }

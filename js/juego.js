@@ -12,15 +12,5 @@ function inicio() {
         location.reload();
     }
 
-    function reinicia() {
-        //juego.autoStart();
-        if (tankabaIA.muriendo == false) {
-            tankabaIA.muriendo = true;
-            createjs.Sound.play(perder);
-        }
-        setTimeout(function () {
-            location.reload();
-        }, 3000);
-
-    }
+    
 }
