@@ -140,8 +140,8 @@ function update() {
             ;
         }
 
-        tankabaIA.jugador.body.x = 50;
-        talibaIA.jugador.body.y = 0;
+        tankabaIA.jugador.body.x = -120;
+        tankabaIA.jugador.body.y = 0;
         tankabaIA.jugador.body.static = true;
         tankabaIA.muerta = false;
         tankabaIA.canImove = false;
