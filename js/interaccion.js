@@ -11,17 +11,23 @@ function update() {
 
     tankabaIA.jugador.body.velocity.x = 0; //  Reseteamos la velocidad en x. Esto nos permitirá evitar que se acelere (suelo de hielo)
     if(!tankabaIA.canImove){
-        talibaIA.jugador.body.velocity.y = 0;
+        tankabaIA.jugador.body.velocity.y = 0;
+        tankabaIA.jugador.body.setZeroVelocity();
+        tankabaIA.jugador.body.setZeroForce();
     }
 
     acrobaIA.jugador.body.velocity.x = 0;
     if(!acrobaIA.canImove){
         acrobaIA.jugador.body.velocity.y = 0;
+        acrobaIA.jugador.body.setZeroVelocity();
+        acrobaIA.jugador.body.setZeroForce();
     }
 
     talibaIA.jugador.body.velocity.x = 0;
     if(!talibaIA.canImove){
         talibaIA.jugador.body.velocity.y = 0;
+        talibaIA.jugador.body.setZeroVelocity();
+        talibaIA.jugador.body.setZeroForce();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -298,8 +304,10 @@ function update() {
         //createjs.Sound.play(paso);
 
         tankabaIA.jugador.body.moveLeft(350);
-        tankabaIA.jugador.animations.play('movimientoIzquierda');
-        tankabaIA.ultimo_sentido = 'izquierda';
+        if(checkIfCanJump(tankabaIA)){
+            tankabaIA.jugador.animations.play('movimientoIzquierda');
+            tankabaIA.ultimo_sentido = 'izquierda';
+        }
     }
      else if (cursores.right.isDown && tankabaIA.canImove)
     {
@@ -307,8 +315,11 @@ function update() {
         //createjs.Sound.play(paso);
         
         tankabaIA.jugador.body.moveRight(350);
-        tankabaIA.jugador.animations.play('movimientoDerecha');
-        tankabaIA.ultimo_sentido = 'derecha';
+
+        if(checkIfCanJump(tankabaIA)){
+            tankabaIA.jugador.animations.play('movimientoDerecha');
+            tankabaIA.ultimo_sentido = 'derecha';
+        }
 
     } else if (tankabaIA.contadorEscaleras != 0) {// Si el contador de escaleras es <> de cero, quiere decir que estamos escalando
         //tankabaIA.jugador.animations.play('climb');// Animamos la escalada
@@ -377,8 +388,10 @@ function update() {
     }else if(ctrlA.isDown && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveLeft(300);
-        acrobaIA.jugador.animations.play('movimientoIzquierda');
-        acrobaIA.ultimo_sentido = "izquierda";
+        if(checkIfCanJump(acrobaIA)){
+            acrobaIA.jugador.animations.play('movimientoIzquierda');
+            acrobaIA.ultimo_sentido = "izquierda";
+        }
 
     }else if(ctrlD.isDown && acrobaIA.canImove){
 
@@ -411,8 +424,10 @@ function update() {
     }else if(ctrlB.isDown && talibaIA.canImove){
 
         talibaIA.jugador.body.moveLeft(300);
-        talibaIA.jugador.animations.play('movimientoIzquierda');
-        talibaIA.ultimo_sentido = "izquierda";
+        if(checkIfCanJump(talibaIA)){
+            talibaIA.jugador.animations.play('movimientoIzquierda');
+            talibaIA.ultimo_sentido = "izquierda";
+        }
 
     }else if(ctrlM.isDown && talibaIA.canImove){
 
