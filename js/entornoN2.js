@@ -1,186 +1,122 @@
 
 
-function preloadP() {
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////// SONIDO   //////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /*createjs.Sound.registerSound("assets/salto.mp3", salto);
-    createjs.Sound.registerSound("assets/risa.mp3", risa);
-    createjs.Sound.registerSound("assets/posion.mp3", posion);
-    createjs.Sound.registerSound("assets/disparo.mp3", disparo);
-    createjs.Sound.registerSound("assets/pierde_vida.mp3", pierde_vida);
-    createjs.Sound.registerSound("assets/muerte_malo.mp3", muerte_malo);
-    createjs.Sound.registerSound("assets/dolor.mp3", dolor);
-    createjs.Sound.registerSound("assets/paso.mp3", paso);
-    createjs.Sound.registerSound("assets/perder.mp3", perder);
-    createjs.Sound.registerSound("assets/maldad.mp3", maldad);
-    createjs.Sound.registerSound("assets/maldad_2.mp3", maldad_2);
-    createjs.Sound.registerSound("assets/maldad_3.mp3", maldad_3);
-    createjs.Sound.registerSound("assets/maldad_4.mp3", maldad_4);
-    createjs.Sound.registerSound("assets/fondo.mp3", fondo);*/
-   /* setTimeout(function () {
-        instance = createjs.Sound.play(fondo, {interrupt: createjs.Sound.INTERRUPT_ANY, loop: -1});
-        instance.volume = 0.15;
-    }, 3000);*/
-
+function preload2() {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// IMAGENES Y FISICAS  ///////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    juegoPruebas.state.add("recarga", Phaser.Preload);
+    juego2.state.add("recarga", Phaser.Preload);
 
-    juegoPruebas.load.image('fondoN1', 'assets/images/fondoN1.png');
-    juegoPruebas.load.image('sueloN1Parte1', 'assets/images/sueloN1Parte1.png');
-    //juegoPruebas.load.image('sueloN1Parte2', 'assets/images/sueloN1Parte2.png');
-    //juegoPruebas.load.image('sueloN1Parte3', 'assets/images/sueloN1Parte3.png');
+    juego2.load.image('fondoN1', 'assets/Nivel1/fondo.png');
+    juego2.load.image('plataformas', 'assets/Nivel1/plataformas.png');
+    //juego2.load.image('sueloN1Parte2', 'assets/images/sueloN1Parte2.png');
+    //juego2.load.image('sueloN1Parte3', 'assets/images/sueloN1Parte3.png');
 
-    juegoPruebas.load.image('chip', 'assets/images/chip.png');
-    juegoPruebas.load.image('tierra', 'assets/images/tierra.png');
-    juegoPruebas.load.image('tuboMid', 'assets/images/tuboMid.png');
-    juegoPruebas.load.image('escalera', 'assets/images/escalera.png');
-    juegoPruebas.load.image('pua', 'assets/images/puas.png');
-    juegoPruebas.load.image('roca', 'assets/images/roca.png');
-    juegoPruebas.load.image('caja', 'assets/images/caja.png');
-    juegoPruebas.load.image('arbol', 'assets/images/arbol.png');
-    juegoPruebas.load.image('laser_der', 'assets/images/laser_der.png');
-    juegoPruebas.load.image('laser_izq', 'assets/images/laser_izq.png');
-    juegoPruebas.load.image('circulo', 'assets/images/circulo.png');
-    juegoPruebas.load.image('mensaje', 'assets/images/mensaje.png');
-    juegoPruebas.load.image('tuboN1Completo', 'assets/images/tuboN1Completo.png');
-    juegoPruebas.load.image('cobaIA', 'assets/images/cobaIA.png');
-    juegoPruebas.load.image('cable', 'assets/images/cable.png');
-    juegoPruebas.load.image('frasco', 'assets/images/frasco.png');
-    juegoPruebas.load.image('plataformaMovil', 'assets/images/plataformaMovil.png');
-    juegoPruebas.load.image('boton', 'assets/images/boton.png');
-    juegoPruebas.load.image('conexionTuboArriba', 'assets/images/conexionTuboArriba.png');
-    juegoPruebas.load.image('conexionTuboDerecha', 'assets/images/conexionTuboDerecha.png');
-    juegoPruebas.load.image('indicadorJ1', 'assets/indicadorJ1.png');
-    juegoPruebas.load.image('indicadorJ2', 'assets/indicadorJ2.png');
-    juegoPruebas.load.image('indicadorJ3', 'assets/indicadorJ3.png');
-    juegoPruebas.load.image('pilaCadaveres', 'assets/images/pilaCadaveres.png');
+    juego2.load.image('chip', 'assets/images/chip.png');
+    juego2.load.image('tierra', 'assets/images/tierra.png');
+    juego2.load.image('tuboMid', 'assets/images/tuboMid.png');
+    juego2.load.image('caja', 'assets/images/caja.png');
+    juego2.load.image('tuboN1Completo', 'assets/images/tuboN1Completo.png');
+    juego2.load.image('cobaIA', 'assets/images/cobaIA.png');
+    juego2.load.image('cable', 'assets/images/cable.png');
+    juego2.load.image('frasco', 'assets/images/frasco.png');
+    juego2.load.image('plataformaMovil', 'assets/images/plataformaMovil.png');
+    juego2.load.image('boton', 'assets/images/boton.png');
+    juego2.load.image('conexionTuboArriba', 'assets/images/conexionTuboArriba.png');
+    juego2.load.image('conexionTuboDerecha', 'assets/images/conexionTuboDerecha.png');
+    juego2.load.image('indicadorJ1', 'assets/images/J1 azul.png');
+    juego2.load.image('indicadorJ2', 'assets/images/J2 rojo.png');
+    juego2.load.image('indicadorJ3', 'assets/images/J3 rosa.png');
+    juego2.load.image('pilaCadaveres', 'assets/images/pilaCadaveres.png');
 
-    juegoPruebas.load.image('ventilador', 'assets/images/ventilador.png');
-    
+    juego2.load.image('ascensor','assets/nivel1/ascensor.png');
 
-    juegoPruebas.load.image('ascensor','assets/nivel1/ascensor.png');
+    juego2.load.spritesheet('compuerta', 'assets/images/compuerta.png', 125, 547);
+    juego2.load.spritesheet('controller-indicator', 'assets/images/controller-indicator.png',16, 16);
+    juego2.load.spritesheet('cajaCableado', 'assets/images/cajaCableado.png', 54 , 70);
+    juego2.load.spritesheet('talibaIAmovimiento', 'assets/images/talibaIAmovimiento.png', 93, 51, 59, 6, 7);
+    juego2.load.spritesheet('tankabaIAmovimiento', 'assets/images/tankabaIAmovimiento.png', 93, 59, 59, 6, 7);
+    juego2.load.spritesheet('acrobaIAmovimiento', 'assets/images/acrobaIAmovimiento.png', 95, 51, 59, 2, 3);
+    juego2.load.spritesheet('bobina', 'assets/images/bobina.png', 287, 49, 6, 0, 0);
 
-    juegoPruebas.load.spritesheet('compuerta', 'assets/images/compuerta.png', 125, 547);
-    juegoPruebas.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
-    juegoPruebas.load.spritesheet('controller-indicator', 'assets/images/controller-indicator.png',16, 16);
-    juegoPruebas.load.spritesheet('cajaCableado', 'assets/images/cajaCableado.png', 54 , 70);
-    juegoPruebas.load.spritesheet('talibaIAmovimiento', 'assets/images/talibaIAmovimiento.png', 93, 51, 59, 6, 7);
-    juegoPruebas.load.spritesheet('tankabaIAmovimiento', 'assets/images/tankabaIAmovimiento.png', 93, 59, 59, 6, 7);
-    juegoPruebas.load.spritesheet('acrobaIAmovimiento', 'assets/images/acrobaIAmovimiento.png', 95, 51, 59, 2, 3);
-    juegoPruebas.load.spritesheet('bobina', 'assets/images/bobina.png', 287, 49, 6, 0, 0);
-    juegoPruebas.load.spritesheet('viento', 'assets/images/ventilador.png', 175, 295, 5, 0, 0);
-
-    juegoPruebas.load.physics('sueloN1Parte1Collisions', 'assets/data/sueloN1Parte1.json');
-    //juegoPruebas.load.physics('sueloN1Parte2Collisions', 'assets/data/sueloN1Parte2.json');
-    //juegoPruebas.load.physics('sueloN1Parte3Collisions', 'assets/data/sueloN1Parte3.json');
-    juegoPruebas.load.physics('cajaCollisions', 'assets/data/caja.json');
-    juegoPruebas.load.physics('personajeCollisions', 'assets/data/personaje.json');
-    juegoPruebas.load.physics('tuboN1CompletoCollisions', 'assets/data/tuboN1Completo.json');
-    juegoPruebas.load.physics('pilaCadaveresCollisions', 'assets/data/pilaCadaveres.json');
+    juego2.load.physics('sueloN1Parte1Collisions', 'assets/data/sueloN2Parte1.json');
+    juego2.load.physics('cajaCollisions', 'assets/data/caja.json');
+    juego2.load.physics('personajeCollisions', 'assets/data/personaje.json');
+    juego2.load.physics('tuboN1CompletoCollisions', 'assets/data/tuboN1Completo.json');
+    juego2.load.physics('pilaCadaveresCollisions', 'assets/data/pilaCadaveres.json');
     
 }
 
-function createP() {
+function create2() {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// FISICAS DEL MUNDO   ///////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    juegoPruebas.physics.startSystem(Phaser.Physics.P2JS); //activamos el motor de fisicas
-    juegoPruebas.physics.p2.setImpactEvents(true);         //le decimos que detecte los eventos para las colisiones
-    juegoPruebas.physics.p2.gravity.y = 600;               //ajustamos la gravedad
-    juegoPruebas.world.setBounds(0, 0, 25000, 1384);        // Establecemos los límites del juegoPruebas completo
+    juego2.physics.startSystem(Phaser.Physics.P2JS); //activamos el motor de fisicas
+    juego2.physics.p2.setImpactEvents(true);         //le decimos que detecte los eventos para las colisiones
+    juego2.physics.p2.gravity.y = 600;               //ajustamos la gravedad
+    juego2.world.setBounds(0, 0, 25000, 1384);        // Establecemos los límites del juego2 completo
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// NIVEL 1   /////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    niveljuegoPruebas = 1;
-    nivel1.fondo = juegoPruebas.add.sprite(0, 0, 'fondoN1');
+    niveljuego2 = 1;
+    nivel1.fondo = juego2.add.sprite(0, -500, 'fondoN1');
 
     //Decorados que se ven detras del jugador
-    nivel1.decorados[0] = juegoPruebas.add.image(1765, juegoPruebas.world.height - 650, 'frasco');
-    nivel1.decorados[1] = juegoPruebas.add.image(1450, juegoPruebas.world.height - 650, 'cable');
+    /*nivel1.decorados[0] = juego2.add.image(1135, juego2.world.height - 650, 'frasco');
+    nivel1.decorados[1] = juego2.add.image(820, juego2.world.height - 650, 'cable');*/
 
-    nivel1.grupo = juegoPruebas.add.group();
+    nivel1.grupo = juego2.add.group();
     nivel1.grupo.enableBody = true;
     nivel1.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
-    let sueloN1 = nivel1.grupo.create(0, juegoPruebas.world.height -300, 'sueloN1Parte1');
-    juegoPruebas.physics.p2.enableBody(sueloN1);
+    let sueloN1 = nivel1.grupo.create(0, 0, 'plataformas');
+    juego2.physics.p2.enableBody(sueloN1);
 
     sueloN1.body.clearShapes();
-    sueloN1.body.loadPolygon('sueloN1Parte1Collisions', 'sueloN1Parte1');
+    sueloN1.body.loadPolygon('sueloN1Parte1Collisions', 'plataformas');
     sueloN1.body.static = true;
-    sueloN1.body.debug = true;
+    //sueloN1.body.debug = true;
     
-    sueloN1.body.x = 5900;
-    sueloN1.body.y = juegoPruebas.world.height - 655;
-
-    /*sueloN1 = nivel1.grupo.create(0, juegoPruebas.world.height -300, 'sueloN1Parte2');
-    juegoPruebas.physics.p2.enableBody(sueloN1);
-
-    sueloN1.body.clearShapes();
-    sueloN1.body.loadPolygon('sueloN1Parte2Collisions', 'sueloN1Parte2');
-    sueloN1.body.static = true;
-    sueloN1.body.debug = true;
-    
-    sueloN1.body.x = 9900;
-    sueloN1.body.y = juegoPruebas.world.height - 700;
-
-    sueloN1 = nivel1.grupo.create(0, juegoPruebas.world.height -300, 'sueloN1Parte3');
-    juegoPruebas.physics.p2.enableBody(sueloN1);
-
-    sueloN1.body.clearShapes();
-    sueloN1.body.loadPolygon('sueloN1Parte3Collisions', 'sueloN1Parte3');
-    sueloN1.body.static = true;
-    sueloN1.body.debug = true;
-    
-
-
-    //nivel1.suelo = sueloN1;
-
-    //fondo.fixedToCamera = true; // Lo dejará fijo ante la cámara
-    
+    sueloN1.body.x = 1750;
+    sueloN1.body.y = 500;
+    //sueloN1.scale.x = sueloN1.scale.y = 0.25;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// TECLAS   //////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    tecla_laser = juegoPruebas.input.keyboard.addKey(Phaser.Keyboard.E);
+    //tecla_laser = juego2.input.keyboard.addKey(Phaser.Keyboard.E);
 
-    tecla_accion = juegoPruebas.input.keyboard.addKey(Phaser.Keyboard.X);
+    tecla_accion = juego2.input.keyboard.addKey(Phaser.Keyboard.X);
 
     //Movimiento de la TankabaIA
-    cursores = juegoPruebas.input.keyboard.createCursorKeys();
+    cursores = juego2.input.keyboard.createCursorKeys();
 
     //Movimiento de la AcrobaIA
-    ctrlW = juegoPruebas.input.keyboard.addKey(Phaser.Keyboard.W);
-    ctrlA = juegoPruebas.input.keyboard.addKey(Phaser.Keyboard.A);
-    ctrlS = juegoPruebas.input.keyboard.addKey(Phaser.Keyboard.S);
-    ctrlD = juegoPruebas.input.keyboard.addKey(Phaser.Keyboard.D);
+    ctrlW = juego2.input.keyboard.addKey(Phaser.Keyboard.W);
+    ctrlA = juego2.input.keyboard.addKey(Phaser.Keyboard.A);
+    ctrlS = juego2.input.keyboard.addKey(Phaser.Keyboard.S);
+    ctrlD = juego2.input.keyboard.addKey(Phaser.Keyboard.D);
 
     //movimiento de la TalibaIA
-    ctrlH = juegoPruebas.input.keyboard.addKey(Phaser.Keyboard.H);
-    ctrlB = juegoPruebas.input.keyboard.addKey(Phaser.Keyboard.B);
-    ctrlN = juegoPruebas.input.keyboard.addKey(Phaser.Keyboard.N);
-    ctrlM = juegoPruebas.input.keyboard.addKey(Phaser.Keyboard.M);
+    ctrlH = juego2.input.keyboard.addKey(Phaser.Keyboard.H);
+    ctrlB = juego2.input.keyboard.addKey(Phaser.Keyboard.B);
+    ctrlN = juego2.input.keyboard.addKey(Phaser.Keyboard.N);
+    ctrlM = juego2.input.keyboard.addKey(Phaser.Keyboard.M);
 
     //Reinicio
-    ctrlR = juegoPruebas.input.keyboard.addKey(Phaser.Keyboard.R);
+    ctrlR = juego2.input.keyboard.addKey(Phaser.Keyboard.R);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// INDICADORES   /////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    indicator = juegoPruebas.add.sprite(0, 0, 'controller-indicator');
+    indicator = juego2.add.sprite(0, 0, 'controller-indicator');
     indicator.fixedToCamera = true;
     indicator.cameraOffset.x = 10; // Ubicamos el sprite contenedor de la cámara en las coordenadas 10, 10
     indicator.cameraOffset.y = 10;
@@ -193,7 +129,7 @@ function createP() {
     /////////////// COMPUERTAS   //////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    compuertas.grupo = juegoPruebas.add.group();
+    /*compuertas.grupo = juego2.add.group();
     compuertas.grupo.enableBody = true;
     compuertas.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -205,14 +141,14 @@ function createP() {
     compuerta.body.setRectangle(75, 25);
     compuerta.animations.frame = 1;
     compuerta.body.x = 4475;
-    compuerta.body.y = juegoPruebas.world.height - 500;
-    compuertas.lista.push(compuerta);
+    compuerta.body.y = juego2.world.height - 500;
+    compuertas.lista.push(compuerta);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// CAJAS DE CABLEADO   ///////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    cajasCableado.grupo = juegoPruebas.add.group();
+    /*cajasCableado.grupo = juego2.add.group();
     cajasCableado.grupo.enableBody = true;
     cajasCableado.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -224,14 +160,14 @@ function createP() {
     cajaCableado.body.static = true;
     cajaCableado.body.setRectangle(23, 69, 15);
     cajaCableado.body.x = 1900;
-    cajaCableado.body.y = juegoPruebas.world.height - 210;
-    cajasCableado.lista.push(cajaCableado);
+    cajaCableado.body.y = juego2.world.height - 210;
+    cajasCableado.lista.push(cajaCableado);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// TUBOS   ///////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    tubos.grupo = juegoPruebas.add.group();
+    /*tubos.grupo = juego2.add.group();
     tubos.grupo.enableBody = true;
     tubos.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -243,16 +179,16 @@ function createP() {
     tubo.body.static = true;
     tubo.body.debug = true;
     tubo.body.x = 2150;
-    tubo.body.y = juegoPruebas.world.height - 675;
+    tubo.body.y = juego2.world.height - 675;
     tubo.body.collideWorldBounds = true;
     
-    tubos.lista.push(tubo);
+    tubos.lista.push(tubo);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// BOTONES   /////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    botones.grupo = juegoPruebas.add.group();
+    /*botones.grupo = juego2.add.group();
     botones.grupo.enableBody = true;
     botones.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -262,15 +198,15 @@ function createP() {
     boton.body.debug = true;
     boton.body.static = true;
     boton.body.x = 2600;
-    boton.body.y = juegoPruebas.world.height - 275;
+    boton.body.y = juego2.world.height - 275;
 
-    botones.lista.push(boton);
+    botones.lista.push(boton);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// PLATAFORMAS MOVILES   /////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    plataformasMoviles.grupo = juegoPruebas.add.group();
+    /*plataformasMoviles.grupo = juego2.add.group();
     plataformasMoviles.grupo.enableBody = true;
     plataformasMoviles.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -281,26 +217,26 @@ function createP() {
     plataformaMovil.pivot.x = 150;
     plataformaMovil.body.setRectangle(300, 25, -150);
     plataformaMovil.body.x = 3000;
-    plataformaMovil.body.y = juegoPruebas.world.height - 460;
+    plataformaMovil.body.y = juego2.world.height - 460;
     plataformaMovil.body.collideWorldBounds = true;
 
-    plataformasMoviles.lista.push(plataformaMovil);
+    plataformasMoviles.lista.push(plataformaMovil);*/
    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// CAJAS   ///////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        cajas.grupo = juegoPruebas.add.group();
+    cajas.grupo = juego2.add.group();
     cajas.grupo.enableBody = true;
     cajas.grupo.physicsBodyType = Phaser.Physics.P2JS;
-    //cajas.collisionGroup = juegoPruebas.physics.p2.createCollisionGroup();
+    //cajas.collisionGroup = juego2.physics.p2.createCollisionGroup();
 
-    //let caja = juegoPruebas.add.sprite(2315, juegoPruebas.world.height - 300, 'caja');
-    let caja = cajas.grupo.create(100, juegoPruebas.world.height -300, 'caja');
+    //let caja = juego2.add.sprite(2315, juego2.world.height - 300, 'caja');
+    let caja = cajas.grupo.create(100, juego2.world.height -300, 'caja');
     //caja.body.setCollisionGroup(cajas.collisionGroup);
     //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
 
-    juegoPruebas.physics.p2.enableBody(caja);
+    juego2.physics.p2.enableBody(caja);
     caja.body.clearShapes();
     caja.body.loadPolygon('cajaCollisions', 'caja');
     caja.scale.setTo(1, 1);
@@ -310,11 +246,11 @@ function createP() {
     caja.body.collideWorldBounds = true;
     cajas.lista.push(caja);
 
-    caja = cajas.grupo.create(2415, juegoPruebas.world.height -500, 'caja');
+    caja = cajas.grupo.create(2415, juego2.world.height -500, 'caja');
     //caja.body.setCollisionGroup(cajas.collisionGroup);
     //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
  
-    juegoPruebas.physics.p2.enableBody(caja);
+    juego2.physics.p2.enableBody(caja);
     caja.body.clearShapes();
     caja.body.loadPolygon('cajaCollisions', 'caja');
     caja.scale.setTo(1, 1);
@@ -324,14 +260,14 @@ function createP() {
     caja.body.collideWorldBounds = true;
     cajas.lista.push(caja);
 
-    caja = cajas.grupo.create(1000, juegoPruebas.world.height -240, 'caja');
+    caja = cajas.grupo.create(1000, juego2.world.height -240, 'caja');
  
-    juegoPruebas.physics.p2.enableBody(caja);
+    juego2.physics.p2.enableBody(caja);
     caja.body.setRectangle(70, 70);
     caja.scale.setTo(0.5, 0.5);
     caja.body.static = false;
     caja.body.mass = 45;
-    caja.body.debug = true;
+    //caja.body.debug = true;
     cajas.lista.push(caja);
 
 
@@ -339,7 +275,7 @@ function createP() {
     /////////////// CHIPS   ///////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    chips.grupo = juegoPruebas.add.group();
+    /*chips.grupo = juego2.add.group();
     chips.grupo.enableBody = true;
     chips.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -377,13 +313,13 @@ function createP() {
     chip.body.x = 0;
     chip.body.y = -100;
 
-    chips.lista[2] = chip;
+    chips.lista[2] = chip;*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// PILAS DE CADAVERES   //////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    pilasCadaveres.grupo = juegoPruebas.add.group();
+    /*pilasCadaveres.grupo = juego2.add.group();
     pilasCadaveres.grupo.enableBody = true;
     pilasCadaveres.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -396,15 +332,15 @@ function createP() {
     pilaCadaveres.body.static = true;
     
     pilaCadaveres.body.x = 800;
-    pilaCadaveres.body.y = juegoPruebas.world.height - 260;
+    pilaCadaveres.body.y = juego2.world.height - 260;
 
-    pilasCadaveres.lista.push(pilaCadaveres);
+    pilasCadaveres.lista.push(pilaCadaveres);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// BOBINAS   /////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    bobinas.grupo = juegoPruebas.add.group();
+    /*bobinas.grupo = juego2.add.group();
     bobinas.grupo.enableBody = true;
     bobinas.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -417,62 +353,41 @@ function createP() {
     //pilaCadaveres.pivot.x = 150;
     //pilaCadaveres.body.setRectangle(300, 25, -150);
     bobina.body.x = 200;
-    bobina.body.y = juegoPruebas.world.height - 260;
+    bobina.body.y = juego2.world.height - 260;
 
     bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
     bobina.animations.play('bobina_encendida');
 
-    bobinas.lista.push(bobina);
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////// VENTILADORES   /////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    ventiladores.grupo = juegoPruebas.add.group();
-    ventiladores.grupo.enableBody = true;
-    ventiladores.grupo.physicsBodyType = Phaser.Physics.P2JS;
-
-    let ventilador = ventiladores.grupo.create(0, 0, 'ventilador');
-
-    ventilador.body.setRectangle(154, 44);
-
-    ventilador.body.debug = true;
-    ventilador.body.static = true;
-    //pilaCadaveres.pivot.x = 150;
-    //pilaCadaveres.body.setRectangle(300, 25, -150);
-    ventilador.body.x = 16500;
-    ventilador.body.y = juegoPruebas.world.height-150;
-
-    ventiladores.lista.push(bobina);
+    bobinas.lista.push(bobina);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////    /////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    lasers = juegoPruebas.add.group(); // Lasers
-    lasers.enableBody = true;
+    //lasers = juego2.add.group(); // Lasers
+    //lasers.enableBody = true;
 
     
 
-    juegoPruebas.input.gamepad.start();
+    juego2.input.gamepad.start();
 
     // To listen to buttons from a specific pad listen directly on that pad game.input.gamepad.padX, where X = pad 1-4
-    pad1 = juegoPruebas.input.gamepad.pad1;
+    pad1 = juego2.input.gamepad.pad1;
 
-    //paseNivel = juegoPruebas.add.sprite(3000, juegoPruebas.world.height - 205, 'ascensor');
+    //paseNivel = juego2.add.sprite(3000, juego2.world.height - 205, 'ascensor');
 
-    //juegoPruebas.physics.p2.enableBody(paseNivel);
+    //juego2.physics.p2.enableBody(paseNivel);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// TANKABAIA   ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    tankabaIA.jugador = juegoPruebas.add.sprite(16500, juegoPruebas.world.height - 225, 'tankabaIAmovimiento');
+    tankabaIA.jugador = juego2.add.sprite(500, juego2.world.height - 225, 'tankabaIAmovimiento');
     tankabaIA.jugador.scale.setTo(1.3, 1.3);
-    juegoPruebas.physics.p2.enableBody(tankabaIA.jugador);
+    juego2.physics.p2.enableBody(tankabaIA.jugador);
     tankabaIA.jugador.body.setRectangle(95, 60);
 
     tankabaIA.jugador.body.collideWorldBounds = true;
     
-    //tankabaIA.jugador.body.fixedRotation = true;
+    tankabaIA.jugador.body.fixedRotation = true;
     tankabaIA.jugador.body.mass = 100;
     //tankabaIA.jugador.body.clearShapes();
     //tankabaIA.jugador.body.loadPolygon('cajaCollisions', 'caja');
@@ -487,20 +402,20 @@ function createP() {
     tankabaIA.jugador.body.onBeginContact.add(colisionInicialTankabaIA, this);
     tankabaIA.jugador.body.onEndContact.add(colisionFinalTankabaIA, this);
 
-    //indicadorJ1 = juegoPruebas.add.sprite(2100, juegoPruebas.world.height - 225, 'indicadorJ1');
+    //indicadorJ1 = juego2.add.sprite(2100, juego2.world.height - 225, 'indicadorJ1');
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// ACROBAIA   ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    acrobaIA.jugador = juegoPruebas.add.sprite(700, juegoPruebas.world.height - 300, 'acrobaIAmovimiento');
-    juegoPruebas.physics.p2.enableBody(acrobaIA.jugador);
+    acrobaIA.jugador = juego2.add.sprite(700, juego2.world.height - 300, 'acrobaIAmovimiento');
+    juego2.physics.p2.enableBody(acrobaIA.jugador);
     acrobaIA.jugador.body.setRectangle(80, 33);
     
     acrobaIA.jugador.body.fixedRotation = true;
     acrobaIA.jugador.body.mass = 1;
 
     acrobaIA.jugador.dynamic = true;
-    acrobaIA.jugador.body.debug = true;
+    //acrobaIA.jugador.body.debug = true;
 
     acrobaIA.jugador.animations.add('movimientoDerecha', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
                                                             20, 21, 22, 23, 24, 25, 26, 27, 28], 60, true);
@@ -514,8 +429,8 @@ function createP() {
 /////////////// TALIBAIA   ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    talibaIA.jugador = juegoPruebas.add.sprite(700, juegoPruebas.world.height - 300, 'talibaIAmovimiento');
-    juegoPruebas.physics.p2.enableBody(talibaIA.jugador);
+    talibaIA.jugador = juego2.add.sprite(700, juego2.world.height - 300, 'talibaIAmovimiento');
+    juego2.physics.p2.enableBody(talibaIA.jugador);
     talibaIA.jugador.body.setRectangle(80, 40);
     
     talibaIA.jugador.body.fixedRotation = true;
@@ -537,8 +452,8 @@ function createP() {
 /////////DECORADOS POR DELANTE DEL JUGADOR  ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    nivel1.decorados[2] = juegoPruebas.add.image(1610, juegoPruebas.world.height - 490, 'conexionTuboArriba');
-    nivel1.decorados[3] = juegoPruebas.add.image(1634, juegoPruebas.world.height - 1043, 'conexionTuboDerecha');
+    //nivel1.decorados[2] = juego2.add.image(1610, juego2.world.height - 490, 'conexionTuboArriba');
+    //nivel1.decorados[3] = juego2.add.image(1634, juego2.world.height - 1043, 'conexionTuboDerecha');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -549,15 +464,15 @@ function createP() {
     }
 
     function up() {
-        console.log('button up', arguments);
+        //console.log('button up', arguments);
     }
 
     function over() {
-        console.log('button over');
+        //console.log('button over');
     }
 
     function out() {
-        console.log('button out');
+        //console.log('button out');
     }
 
     function actionOnClick () {
@@ -566,11 +481,11 @@ function createP() {
 
     }
 
-     function colisionInicialTankabaIA(body, bodyB, shapeA, shapeB, equation){
+    function colisionInicialTankabaIA(body, bodyB, shapeA, shapeB, equation){
 
         if (body){
             //console.log(body.sprite.key);
-            console.log(body.id);
+            //console.log(body.id);
         }
 
 
@@ -578,7 +493,7 @@ function createP() {
 
             //console.log(body.id);
             cajasCableado.lista[0].animations.play('caja_rota');
-            let timer =  juegoPruebas.time.events.add(1250, stopPlataforma, this, 0);
+            let timer =  juego2.time.events.add(1250, stopPlataforma, this, 0);
             plataformasMoviles.lista[0].body.rotateRight(25);      
 
         }
@@ -589,7 +504,7 @@ function createP() {
             plataformasMoviles.lista[0].body.rotateRight(25);
         }
 
-        if(body.sprite.key === 'bobina'){
+        if(body.id === 16){
 
             tankabaIA.muerta = true;
 
@@ -607,7 +522,7 @@ function createP() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "acrobaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                //chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -623,7 +538,7 @@ function createP() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "talibaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                //chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -680,7 +595,7 @@ function createP() {
         if(body.sprite.key === 'cajaCableado' && tecla_accion.isDown){  
 
             cajasCableado.lista[0].animations.play('caja_rota');
-            let timer =  juegoPruebas.time.events.add(1250, stopPlataforma, this, 0);
+            let timer =  juego2.time.events.add(1250, stopPlataforma, this, 0);
             plataformasMoviles.lista[0].body.rotateRight(25);      
 
         }
@@ -691,7 +606,7 @@ function createP() {
             plataformasMoviles.lista[0].body.rotateRight(25);
         }
 
-        if(body.sprite.key === 'bobina'){
+        if(body.id === 16){
 
             acrobaIA.muerta = true;
         }
@@ -709,7 +624,7 @@ function createP() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "tankabaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                //chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -725,7 +640,7 @@ function createP() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "talibaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                //chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -782,7 +697,7 @@ function createP() {
         if(body.sprite.key === 'cajaCableado' && tecla_accion.isDown){  
 
             cajasCableado.lista[0].animations.play('caja_rota');
-            let timer =  juegoPruebas.time.events.add(1250, stopPlataforma, this, 0);
+            let timer =  juego2.time.events.add(1250, stopPlataforma, this, 0);
             plataformasMoviles.lista[0].body.rotateRight(25);      
 
         }
@@ -793,7 +708,7 @@ function createP() {
             plataformasMoviles.lista[0].body.rotateRight(25);
         }
 
-        if(body.sprite.key === 'bobina'){
+        if(body.id === 16){
 
             talibaIA.muerta = true;
         }
@@ -810,7 +725,7 @@ function createP() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "tankabaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                //chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -826,7 +741,7 @@ function createP() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "acrobaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                //chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -878,19 +793,19 @@ function createP() {
     }
 
      // Creamos un teclado  
-    juegoPruebas.input.keyboard.onUpCallback = function (e) {
+    juego2.input.keyboard.onUpCallback = function (e) {
         if (e.keyCode == Phaser.Keyboard.UP) {
             tankabaIA.contadorSaltos++;
         }
     };
 
-    /*puntajeTexto = juegoPruebas.add.text(100, 16, 'puntaje: 0 disparos: ' + obj_jugador.cantidad_disparos, {fontSize: '20px', fill: 'red'});// Creamos el texto y lo agregamos como hijo del objeto sprite con addChild
+    /*puntajeTexto = juego2.add.text(100, 16, 'puntaje: 0 disparos: ' + obj_jugador.cantidad_disparos, {fontSize: '20px', fill: 'red'});// Creamos el texto y lo agregamos como hijo del objeto sprite con addChild
     sprite.addChild(puntajeTexto);*/
-    juegoPruebas.camera.follow(tankabaIA.jugador); // Le permitimos a la cámara del juegoPruebas, seguir en todo momento al obj_jugador.jugador    
+    juego2.camera.follow(tankabaIA.jugador); // Le permitimos a la cámara del juego2, seguir en todo momento al obj_jugador.jugador    
 
-    juegoPruebas.physics.p2.updateBoundsCollisionGroup();
+    juego2.physics.p2.updateBoundsCollisionGroup();
 
-    juegoPruebas.camera.follow(tankabaIA.jugador); // Le permitimos a la cámara del juegoPruebas, seguir en todo momento al obj_jugador.jugador                
+    juego2.camera.follow(tankabaIA.jugador); // Le permitimos a la cámara del juego2, seguir en todo momento al obj_jugador.jugador                
 
 
     /*
@@ -898,31 +813,31 @@ function createP() {
     
 
     // Create a label to use as a button
-    pause_label = juegoPruebas.add.text(2000, juegoPruebas.world.height - 200, 'Pause', { font: '24px Arial', fill: '#fff' });
+    pause_label = juego2.add.text(2000, juego2.world.height - 200, 'Pause', { font: '24px Arial', fill: '#fff' });
     pause_label.inputEnabled = true;
     pause_label.events.onInputUp.add(function () {
         // When the paus button is pressed, we pause the game
-        juegoPruebas.paused = true;
+        juego2.paused = true;
 
         // Then add the menu
-        menu = juegoPruebas.add.sprite(juegoPruebas.world.width/2, juegoPruebas.world.height/2, 'menu');
+        menu = juego2.add.sprite(juego2.world.width/2, juego2.world.height/2, 'menu');
         menu.anchor.setTo(0.5, 0.5);
 
         // And a label to illustrate which menu item was chosen. (This is not necessary)
-        choiseLabel = juegoPruebas.add.text(juegoPruebas.world.width/2, juegoPruebas.world.height-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
+        choiseLabel = juego2.add.text(juego2.world.width/2, juego2.world.height-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
         choiseLabel.anchor.setTo(0.5, 0.5);
     });
 
     // Add a input listener that can help us return from being paused
-    juegoPruebas.input.onDown.add(unpause, self);
+    juego2.input.onDown.add(unpause, self);
 
     // And finally the method that handels the pause menu
     function unpause(event){
         // Only act if paused
-        if(juegoPruebas.paused){
+        if(juego2.paused){
             // Calculate the corners of the menu
-            var x1 = juegoPruebas.world.width/2 - 270/2, x2 = juegoPruebas.world.width/2 + 270/2,
-                y1 = juegoPruebas.world.height/2 - 180/2, y2 = juegoPruebas.world.height/2 + 180/2;
+            var x1 = juego2.world.width/2 - 270/2, x2 = juego2.world.width/2 + 270/2,
+                y1 = juego2.world.height/2 - 180/2, y2 = juego2.world.height/2 + 180/2;
 
             // Check if the click was inside the menu
             if(event.x > x1 && event.x < x2 && event.y > y1 && event.y < y2 ){
@@ -945,7 +860,7 @@ function createP() {
                 choiseLabel.destroy();
 
                 // Unpause the game
-                juegoPruebas.paused = false;
+                juego2.paused = false;
             }
         }
     };*/
