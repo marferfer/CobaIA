@@ -92,7 +92,7 @@ function create() {
     juego.physics.startSystem(Phaser.Physics.P2JS); //activamos el motor de fisicas
     juego.physics.p2.setImpactEvents(true);         //le decimos que detecte los eventos para las colisiones
     juego.physics.p2.gravity.y = 600;               //ajustamos la gravedad
-    juego.world.setBounds(0, 0, 15000, 1384);        // Establecemos los límites del juego completo
+    juego.world.setBounds(0, 0, 25000, 1384);        // Establecemos los límites del juego completo
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -129,6 +129,17 @@ function create() {
     sueloN1.body.debug = true;
     
     sueloN1.body.x = 9900;
+    sueloN1.body.y = juego.world.height - 700;
+
+    sueloN1 = nivel1.grupo.create(0, juego.world.height -300, 'sueloN1Parte3');
+    juego.physics.p2.enableBody(sueloN1);
+
+    sueloN1.body.clearShapes();
+    sueloN1.body.loadPolygon('sueloN1Parte3Collisions', 'sueloN1Parte3');
+    sueloN1.body.static = true;
+    sueloN1.body.debug = true;
+    
+    sueloN1.body.x = 19900;
     sueloN1.body.y = juego.world.height - 700;
 
     //nivel1.suelo = sueloN1;
@@ -393,7 +404,7 @@ function create() {
 
     let bobina = bobinas.grupo.create(0, 0, 'bobina');
 
-    bobina.body.setRectangle(220, 8);
+    bobina.body.setRectangle(220, 10);
 
     bobina.body.debug = true;
     bobina.body.static = true;
