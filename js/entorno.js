@@ -35,6 +35,7 @@ function preload() {
     juego.load.image('fondoN1', 'assets/images/fondoN1.png');
     juego.load.image('sueloN1Parte1', 'assets/images/sueloN1Parte1.png');
     juego.load.image('sueloN1Parte2', 'assets/images/sueloN1Parte2.png');
+    juego.load.image('sueloN1Parte3', 'assets/images/sueloN1Parte3.png');
 
     juego.load.image('chip', 'assets/images/chip.png');
     juego.load.image('tierra', 'assets/images/tierra.png');
@@ -70,9 +71,11 @@ function preload() {
     juego.load.spritesheet('talibaIAmovimiento', 'assets/images/talibaIAmovimiento.png', 93, 51, 59, 6, 7);
     juego.load.spritesheet('tankabaIAmovimiento', 'assets/images/tankabaIAmovimiento.png', 93, 59, 59, 6, 7);
     juego.load.spritesheet('acrobaIAmovimiento', 'assets/images/acrobaIAmovimiento.png', 95, 51, 59, 2, 3);
+    juego.load.spritesheet('bobina', 'assets/images/bobina.png', 287, 49, 6, 0, 0);
 
     juego.load.physics('sueloN1Parte1Collisions', 'assets/data/sueloN1Parte1.json');
     juego.load.physics('sueloN1Parte2Collisions', 'assets/data/sueloN1Parte2.json');
+    juego.load.physics('sueloN1Parte3Collisions', 'assets/data/sueloN1Parte3.json');
     juego.load.physics('cajaCollisions', 'assets/data/caja.json');
     juego.load.physics('personajeCollisions', 'assets/data/personaje.json');
     juego.load.physics('tuboN1CompletoCollisions', 'assets/data/tuboN1Completo.json');
@@ -374,12 +377,35 @@ function create() {
 
     pilaCadaveres.body.debug = true;
     pilaCadaveres.body.static = true;
-    //pilaCadaveres.pivot.x = 150;
-    //pilaCadaveres.body.setRectangle(300, 25, -150);
+    
     pilaCadaveres.body.x = 800;
     pilaCadaveres.body.y = juego.world.height - 260;
 
     pilasCadaveres.lista.push(pilaCadaveres);
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// BOBINAS   /////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    bobinas.grupo = juego.add.group();
+    bobinas.grupo.enableBody = true;
+    bobinas.grupo.physicsBodyType = Phaser.Physics.P2JS;
+
+    let bobina = bobinas.grupo.create(0, 0, 'bobina');
+
+    bobina.body.setRectangle(220, 8);
+
+    bobina.body.debug = true;
+    bobina.body.static = true;
+    //pilaCadaveres.pivot.x = 150;
+    //pilaCadaveres.body.setRectangle(300, 25, -150);
+    bobina.body.x = 200;
+    bobina.body.y = juego.world.height - 260;
+
+    bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
+    bobina.animations.play('bobina_encendida');
+
+    bobinas.lista.push(bobina);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////    /////////////////////////////////////////////////////////////////////////////////////////
@@ -577,7 +603,7 @@ function create() {
                 if(tankabaIA.chip === "acrobaIA"){
 
                     acrobaIA.jugador.body.x = tankabaIA.jugador.body.x + 50;
-                    acrobaIA.jugador.body.y = tankabaIA.jugador.body.y;
+                    acrobaIA.jugador.body.y = tankabaIA.jugador.body.y + 50;
                     acrobaIA.jugador.body.static = false;
                     acrobaIA.canImove = true;
 
@@ -586,7 +612,7 @@ function create() {
                 }else if(tankabaIA.chip === "talibaIA"){
 
                     talibaIA.jugador.body.x = tankabaIA.jugador.body.x + 50;
-                    talibaIA.jugador.body.y = tankabaIA.jugador.body.y;
+                    talibaIA.jugador.body.y = tankabaIA.jugador.body.y + 50;
                     talibaIA.jugador.body.static = false;
                     talibaIA.canImove = true;
 
@@ -679,7 +705,7 @@ function create() {
                 if(acrobaIA.chip === "tankabaIA"){
 
                     tankabaIA.jugador.body.x = acrobaIA.jugador.body.x + 50;
-                    tankabaIA.jugador.body.y = acrobaIA.jugador.body.y;
+                    tankabaIA.jugador.body.y = acrobaIA.jugador.body.y + 50;
                     tankabaIA.jugador.body.static = false;
                     tankabaIA.canImove = true;
 
@@ -688,7 +714,7 @@ function create() {
                 }else if(acrobaIA.chip === "talibaIA"){
 
                     talibaIA.jugador.body.x = acrobaIA.jugador.body.x + 50;
-                    talibaIA.jugador.body.y = acrobaIA.jugador.body.y;
+                    talibaIA.jugador.body.y = acrobaIA.jugador.body.y + 50;
                     talibaIA.jugador.body.static = false;
                     talibaIA.canImove = true;
 
@@ -780,7 +806,7 @@ function create() {
                 if(talibaIA.chip === "tankabaIA"){
 
                     tankabaIA.jugador.body.x = talibaIA.jugador.body.x + 50;
-                    tankabaIA.jugador.body.y = talibaIA.jugador.body.y;
+                    tankabaIA.jugador.body.y = talibaIA.jugador.body.y + 50;
                     tankabaIA.jugador.body.static = false;
                     tankabaIA.canImove = true;
 
@@ -789,7 +815,7 @@ function create() {
                 }else if(talibaIA.chip === "acrobaIA"){
 
                     acrobaIA.jugador.body.x = talibaIA.jugador.body.x + 50;
-                    acrobaIA.jugador.body.y = talibaIA.jugador.body.y;
+                    acrobaIA.jugador.body.y = talibaIA.jugador.body.y + 50;
                     acrobaIA.jugador.body.static = false;
                     acrobaIA.canImove = true;
 
