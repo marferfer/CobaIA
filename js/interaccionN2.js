@@ -1,5 +1,5 @@
 // Update
-function update() {
+function update2() {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // REINICIAR VARIABLES  ///////////////////////////////////////////////////////////////////////////////////////
@@ -66,9 +66,9 @@ function update() {
         acrobaIA.canImove = false;
 
         if(!talibaIA.muerta){
-            juego.camera.follow(talibaIA.jugador);
+            juego2.camera.follow(talibaIA.jugador);
         }else{
-            juego.camera.follow(tankabaIA.jugador);
+            juego2.camera.follow(tankabaIA.jugador);
         }
         
     }
@@ -106,9 +106,9 @@ function update() {
         talibaIA.canImove = false;
 
         if(!tankabaIA.muerta){
-            juego.camera.follow(tankabaIA.jugador);
+            juego2.camera.follow(tankabaIA.jugador);
         }else{
-            juego.camera.follow(acrobaIA.jugador);
+            juego2.camera.follow(acrobaIA.jugador);
         }
 
     }
@@ -146,9 +146,9 @@ function update() {
         tankabaIA.canImove = false;
 
         if(!acrobaIA.muerta){
-            juego.camera.follow(acrobaIA.jugador);
+            juego2.camera.follow(acrobaIA.jugador);
         }else{
-            juego.camera.follow(talibaIA.jugador);
+            juego2.camera.follow(talibaIA.jugador);
         }
         
     }
@@ -156,7 +156,7 @@ function update() {
     //Indicador
 
     // Pad "connected or not" indicator
-    if (juego.input.gamepad.supported && juego.input.gamepad.active && pad1.connected)
+    if (juego2.input.gamepad.supported && juego2.input.gamepad.active && pad1.connected)
     {
         indicator.animations.frame = 0;
     }
@@ -166,12 +166,12 @@ function update() {
     }
 
 
-    if (tankabaIA.jugador.position.y > 1500) { // Muerte al caer
+    /*if (tankabaIA.jugador.position.y > 1500) { // Muerte al caer
         reinicia();
-    }
+    }*/
 
     if (ctrlR.isDown) { // Pase de nivel
-        juego.destroy();
+        juego2.destroy();
         inicio();
     }
 
@@ -256,9 +256,9 @@ function update() {
         var yAxis = p2.vec2.fromValues(0, 1);
         var result = false;
 
-        for (var i = 0; i < juego.physics.p2.world.narrowphase.contactEquations.length; i++){
+        for (var i = 0; i < juego2.physics.p2.world.narrowphase.contactEquations.length; i++){
 
-            var c = juego.physics.p2.world.narrowphase.contactEquations[i];
+            var c = juego2.physics.p2.world.narrowphase.contactEquations[i];
 
             if (c.bodyA === cobaIA.jugador.body.data || c.bodyB === cobaIA.jugador.body.data){
                 var d = p2.vec2.dot(c.normalA, yAxis); // Normal dot Y-axis
@@ -459,13 +459,13 @@ function update() {
 
 
     if (tankabaIA.jugador.position.x > 2500) { 
-        juego.destroy();
+        juego2.destroy();
         nivel2();
     }
 }
 
 function reinicia() {
-        //juego.autoStart();
+        //juego2.autoStart();
         if (tankabaIA.muriendo == false) {
             tankabaIA.muriendo = true;
             createjs.Sound.play(perder);
