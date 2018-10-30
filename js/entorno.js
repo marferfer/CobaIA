@@ -69,6 +69,7 @@ function preload() {
     juego.load.spritesheet('cajaCableado', 'assets/images/cajaCableado.png', 54 , 70);
     juego.load.spritesheet('talibaIAmovimiento', 'assets/images/talibaIAmovimiento.png', 93, 51, 59, 6, 7);
     juego.load.spritesheet('tankabaIAmovimiento', 'assets/images/tankabaIAmovimiento.png', 93, 59, 59, 6, 7);
+    juego.load.spritesheet('acrobaIAmovimiento', 'assets/images/acrobaIAmovimiento.png', 95, 51, 59, 2, 3);
 
     juego.load.physics('sueloN1Parte1Collisions', 'assets/data/sueloN1Parte1.json');
     juego.load.physics('sueloN1Parte2Collisions', 'assets/data/sueloN1Parte2.json');
@@ -88,7 +89,7 @@ function create() {
     juego.physics.startSystem(Phaser.Physics.P2JS); //activamos el motor de fisicas
     juego.physics.p2.setImpactEvents(true);         //le decimos que detecte los eventos para las colisiones
     juego.physics.p2.gravity.y = 600;               //ajustamos la gravedad
-    juego.world.setBounds(0, 0, 5000, 1384);        // Establecemos los límites del juego completo
+    juego.world.setBounds(0, 0, 15000, 1384);        // Establecemos los límites del juego completo
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -408,7 +409,7 @@ function create() {
     tankabaIA.jugador.body.collideWorldBounds = true;
     
     tankabaIA.jugador.body.fixedRotation = true;
-    tankabaIA.jugador.body.mass = 1;
+    tankabaIA.jugador.body.mass = 100;
     //tankabaIA.jugador.body.clearShapes();
     //tankabaIA.jugador.body.loadPolygon('cajaCollisions', 'caja');
     tankabaIA.jugador.dynamic = true;
@@ -427,15 +428,21 @@ function create() {
 /////////////// ACROBAIA   ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    acrobaIA.jugador = juego.add.sprite(700, juego.world.height - 300, 'cobaIA');
+    acrobaIA.jugador = juego.add.sprite(700, juego.world.height - 300, 'acrobaIAmovimiento');
     juego.physics.p2.enableBody(acrobaIA.jugador);
-    acrobaIA.jugador.body.setRectangle(90, 70);
+    acrobaIA.jugador.body.setRectangle(80, 33);
     
     acrobaIA.jugador.body.fixedRotation = true;
     acrobaIA.jugador.body.mass = 1;
 
     acrobaIA.jugador.dynamic = true;
-    acrobaIA.jugador.body.debug = false;
+    acrobaIA.jugador.body.debug = true;
+
+    acrobaIA.jugador.animations.add('movimientoDerecha', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                                                            20, 21, 22, 23, 24, 25, 26, 27, 28], 60, true);
+    acrobaIA.jugador.animations.add('movimientoIzquierda', [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+                                                             47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58], 60, true);
+
     acrobaIA.jugador.body.onBeginContact.add(colisionInicialAcrobaIA, this);
     acrobaIA.jugador.body.onEndContact.add(colisionFinalAcrobaIA, this);
 
@@ -448,7 +455,7 @@ function create() {
     talibaIA.jugador.body.setRectangle(80, 40);
     
     talibaIA.jugador.body.fixedRotation = true;
-    talibaIA.jugador.body.mass = 1;
+    talibaIA.jugador.body.mass = 5;
     
     talibaIA.jugador.dynamic = true;
     talibaIA.jugador.body.debug = false  ;
@@ -521,6 +528,7 @@ function create() {
         if(body.id === 16){
 
             tankabaIA.muerta = true;
+
         }
 
         if(body.sprite.key === 'chip'){                 //si choca con un chip

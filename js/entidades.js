@@ -133,6 +133,13 @@ class PilaCadaveres extends Objetos{
     }
 }
 
+class Bobinas extends Objetos{
+
+    constructor(){
+        super();
+    }
+}
+
 var nivelJuego = 0;
 
 cursores = null; // Eventos de teclado
@@ -175,3 +182,4 @@ lasers = null;
  let botones = new Botones();
  let chips = new Chips();
  let pilasCadaveres = new PilaCadaveres();
+ let bobinas = new Bobinas();

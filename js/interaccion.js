@@ -11,17 +11,23 @@ function update() {
 
     tankabaIA.jugador.body.velocity.x = 0; //  Reseteamos la velocidad en x. Esto nos permitirá evitar que se acelere (suelo de hielo)
     if(!tankabaIA.canImove){
-        talibaIA.jugador.body.y = 0;
+        tankabaIA.jugador.body.velocity.y = 0;
+        tankabaIA.jugador.body.setZeroVelocity();
+        tankabaIA.jugador.body.setZeroForce();
     }
 
     acrobaIA.jugador.body.velocity.x = 0;
     if(!acrobaIA.canImove){
-        acrobaIA.jugador.body.y = 0;
+        acrobaIA.jugador.body.velocity.y = 0;
+        acrobaIA.jugador.body.setZeroVelocity();
+        acrobaIA.jugador.body.setZeroForce();
     }
 
     talibaIA.jugador.body.velocity.x = 0;
     if(!talibaIA.canImove){
-        talibaIA.jugador.body.y = 0;
+        talibaIA.jugador.body.velocity.y = 0;
+        talibaIA.jugador.body.setZeroVelocity();
+        talibaIA.jugador.body.setZeroForce();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -305,8 +311,10 @@ function update() {
         //createjs.Sound.play(paso);
 
         tankabaIA.jugador.body.moveLeft(350);
-        tankabaIA.jugador.animations.play('movimientoIzquierda');
-        tankabaIA.ultimo_sentido = 'izquierda';
+        if(checkIfCanJump(tankabaIA)){
+            tankabaIA.jugador.animations.play('movimientoIzquierda');
+            tankabaIA.ultimo_sentido = 'izquierda';
+        }
     }
      else if ((cursores.right.isDown && tankabaIA.canImove) || (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1))
     {
@@ -314,8 +322,11 @@ function update() {
         //createjs.Sound.play(paso);
         
         tankabaIA.jugador.body.moveRight(350);
-        tankabaIA.jugador.animations.play('movimientoDerecha');
-        tankabaIA.ultimo_sentido = 'derecha';
+
+        if(checkIfCanJump(tankabaIA)){
+            tankabaIA.jugador.animations.play('movimientoDerecha');
+            tankabaIA.ultimo_sentido = 'derecha';
+        }
 
     } else if (tankabaIA.contadorEscaleras != 0) {// Si el contador de escaleras es <> de cero, quiere decir que estamos escalando
         //tankabaIA.jugador.animations.play('climb');// Animamos la escalada
@@ -380,16 +391,35 @@ function update() {
     if(ctrlW.isDown && checkIfCanJump(acrobaIA) && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveUp(300);
-    }
-    
-    if(ctrlA.isDown && acrobaIA.canImove){
+
+    }else if(ctrlA.isDown && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveLeft(300);
-    }
+        if(checkIfCanJump(acrobaIA)){
+            acrobaIA.jugador.animations.play('movimientoIzquierda');
+            acrobaIA.ultimo_sentido = "izquierda";
+        }
 
-    if(ctrlD.isDown && acrobaIA.canImove){
+    }else if(ctrlD.isDown && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveRight(300);
+        if(checkIfCanJump(acrobaIA)){
+            acrobaIA.jugador.animations.play('movimientoDerecha');
+            acrobaIA.ultimo_sentido = "derecha";
+        }
+
+    }else{
+
+        acrobaIA.jugador.animations.stop();
+        if(acrobaIA.ultimo_sentido === "derecha"){
+            
+            acrobaIA.jugador.frame = 0;
+
+        }else{
+
+            acrobaIA.jugador.frame = 30;
+        }
+        
     }
 
     ///////////////////////////////////////////////////////controles talibaIA
@@ -401,8 +431,10 @@ function update() {
     }else if(ctrlB.isDown && talibaIA.canImove){
 
         talibaIA.jugador.body.moveLeft(300);
-        talibaIA.jugador.animations.play('movimientoIzquierda');
-        talibaIA.ultimo_sentido = "izquierda";
+        if(checkIfCanJump(talibaIA)){
+            talibaIA.jugador.animations.play('movimientoIzquierda');
+            talibaIA.ultimo_sentido = "izquierda";
+        }
 
     }else if(ctrlM.isDown && talibaIA.canImove){
 
