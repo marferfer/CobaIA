@@ -62,6 +62,9 @@ function preloadP() {
     juegoPruebas.load.image('indicadorJ3', 'assets/indicadorJ3.png');
     juegoPruebas.load.image('pilaCadaveres', 'assets/images/pilaCadaveres.png');
 
+    juegoPruebas.load.image('ventilador', 'assets/images/ventilador.png');
+    
+
     juegoPruebas.load.image('ascensor','assets/nivel1/ascensor.png');
 
     juegoPruebas.load.spritesheet('compuerta', 'assets/images/compuerta.png', 125, 547);
@@ -72,6 +75,7 @@ function preloadP() {
     juegoPruebas.load.spritesheet('tankabaIAmovimiento', 'assets/images/tankabaIAmovimiento.png', 93, 59, 59, 6, 7);
     juegoPruebas.load.spritesheet('acrobaIAmovimiento', 'assets/images/acrobaIAmovimiento.png', 95, 51, 59, 2, 3);
     juegoPruebas.load.spritesheet('bobina', 'assets/images/bobina.png', 287, 49, 6, 0, 0);
+    juegoPruebas.load.spritesheet('viento', 'assets/images/ventilador.png', 175, 295, 5, 0, 0);
 
     juegoPruebas.load.physics('sueloN1Parte1Collisions', 'assets/data/sueloN1Parte1.json');
     //juegoPruebas.load.physics('sueloN1Parte2Collisions', 'assets/data/sueloN1Parte2.json');
@@ -139,8 +143,13 @@ function createP() {
     sueloN1.body.static = true;
     sueloN1.body.debug = true;
     
+<<<<<<< HEAD
     sueloN1.body.x = 19900;
     sueloN1.body.y = juegoPruebas.world.height - 700;*/
+=======
+    sueloN1.body.x = 19200;
+    sueloN1.body.y = juegoPruebas.world.height - 700;
+>>>>>>> cd0c1c93e26a8b208464003fc6b281af433cc8ba
 
     //nivel1.suelo = sueloN1;
 
@@ -422,6 +431,27 @@ function createP() {
     bobinas.lista.push(bobina);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// VENTILADORES   /////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    ventiladores.grupo = juegoPruebas.add.group();
+    ventiladores.grupo.enableBody = true;
+    ventiladores.grupo.physicsBodyType = Phaser.Physics.P2JS;
+
+    let ventilador = ventiladores.grupo.create(0, 0, 'ventilador');
+
+    ventilador.body.setRectangle(154, 44);
+
+    ventilador.body.debug = true;
+    ventilador.body.static = true;
+    //pilaCadaveres.pivot.x = 150;
+    //pilaCadaveres.body.setRectangle(300, 25, -150);
+    ventilador.body.x = 16500;
+    ventilador.body.y = juegoPruebas.world.height-150;
+
+    ventiladores.lista.push(bobina);
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////    /////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     lasers = juegoPruebas.add.group(); // Lasers
@@ -441,7 +471,7 @@ function createP() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// TANKABAIA   ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    tankabaIA.jugador = juegoPruebas.add.sprite(500, juegoPruebas.world.height - 225, 'tankabaIAmovimiento');
+    tankabaIA.jugador = juegoPruebas.add.sprite(16500, juegoPruebas.world.height - 225, 'tankabaIAmovimiento');
     tankabaIA.jugador.scale.setTo(1.3, 1.3);
     juegoPruebas.physics.p2.enableBody(tankabaIA.jugador);
     tankabaIA.jugador.body.setRectangle(95, 60);
@@ -565,7 +595,7 @@ function createP() {
             plataformasMoviles.lista[0].body.rotateRight(25);
         }
 
-        if(body.id === 16){
+        if(body.sprite.key === 'bobina'){
 
             tankabaIA.muerta = true;
 
@@ -667,7 +697,7 @@ function createP() {
             plataformasMoviles.lista[0].body.rotateRight(25);
         }
 
-        if(body.id === 16){
+        if(body.sprite.key === 'bobina'){
 
             acrobaIA.muerta = true;
         }
@@ -769,7 +799,7 @@ function createP() {
             plataformasMoviles.lista[0].body.rotateRight(25);
         }
 
-        if(body.id === 16){
+        if(body.sprite.key === 'bobina'){
 
             talibaIA.muerta = true;
         }

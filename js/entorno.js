@@ -139,7 +139,7 @@ function create() {
     sueloN1.body.static = true;
     sueloN1.body.debug = true;
     
-    sueloN1.body.x = 19900;
+    sueloN1.body.x = 19200;
     sueloN1.body.y = juego.world.height - 700;
 
     //nivel1.suelo = sueloN1;

@@ -1,7 +1,7 @@
 // Update
 function updateP() {
 
-    console.log(tankabaIA.jugador.body.x);
+    //console.log(tankabaIA.jugador.body.x);
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // REINICIAR VARIABLES  ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -266,6 +266,11 @@ function updateP() {
 
     if (tecla_laser.isUp) {
         tankabaIA.tiempo_disparo = 0;
+    }
+    if (!checkIfCanJump(tankabaIA)) {
+        console.log("hola");
+        //let timer =  juegoPruebas.time.events.add(1250, function(){tankabaIA.jugador.body.angle = 0;}, this, 0);
+        tankabaIA.jugador.body.angle = 0;
     }
     if (tecla_laser.isDown && tankabaIA.tiempo_disparo < tankabaIA.tolerancia_disparo && tankabaIA.cantidad_disparos > 0) {
         tankabaIA.tiempo_disparo++;

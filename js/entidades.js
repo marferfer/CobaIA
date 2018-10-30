@@ -140,6 +140,13 @@ class Bobinas extends Objetos{
     }
 }
 
+class Ventiladores extends Objetos{
+
+    constructor(){
+        super();
+    }
+}
+
 var nivelJuego = 0;
 
 cursores = null; // Eventos de teclado
@@ -183,3 +190,4 @@ lasers = null;
  let chips = new Chips();
  let pilasCadaveres = new PilaCadaveres();
  let bobinas = new Bobinas();
+ let ventiladores = new Ventiladores();
