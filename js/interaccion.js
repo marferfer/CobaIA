@@ -264,21 +264,55 @@ function update() {
     }
 
     if (!checkIfCanJump(tankabaIA)) {
-        console.log(tankabaIA.jugador.body.angle + ', ' + (tankabaIA.jugador.body.angle >= 0.0 && tankabaIA.jugador.body.angle <= 45.0));
+        //console.log(tankabaIA.jugador.body.angle + ', ' + (tankabaIA.jugador.body.angle >= 0.0 && tankabaIA.jugador.body.angle <= 45.0));
         //let timer =  juego.time.events.add(1250, function(){tankabaIA.jugador.body.angle = 0;}, this, 0);
         //tankabaIA.jugador.body.angle = 0;
         tankabaIA.jugador.body.fixedRotation = true;
         if (!(tankabaIA.jugador.body.angle >= -45 && tankabaIA.jugador.body.angle <= 45) && tankabaIA.ultimo_sentido == 'derecha') {
             tankabaIA.jugador.body.angle = 0;
-            console.log("hola");
+            //console.log("hola");
         }
         else if (!(tankabaIA.jugador.body.angle >= 135 && tankabaIA.jugador.body.angle <= 225) && tankabaIA.ultimo_sentido == 'izquierda') {
             tankabaIA.jugador.body.angle = 0;
-            console.log("hola");
+            //console.log("hola");
         }
     }
     else {
         tankabaIA.jugador.body.fixedRotation = false;
+    }
+    if (!checkIfCanJump(acrobaIA)) {
+        //console.log(acrobaIA.jugador.body.angle + ', ' + (acrobaIA.jugador.body.angle >= 0.0 && acrobaIA.jugador.body.angle <= 45.0));
+        //let timer =  juego.time.events.add(1250, function(){acrobaIA.jugador.body.angle = 0;}, this, 0);
+        //acrobaIA.jugador.body.angle = 0;
+        acrobaIA.jugador.body.fixedRotation = true;
+        if (!(acrobaIA.jugador.body.angle >= -45 && acrobaIA.jugador.body.angle <= 45) && acrobaIA.ultimo_sentido == 'derecha') {
+            acrobaIA.jugador.body.angle = 0;
+            //console.log("hola");
+        }
+        else if (!(acrobaIA.jugador.body.angle >= 135 && acrobaIA.jugador.body.angle <= 225) && acrobaIA.ultimo_sentido == 'izquierda') {
+            acrobaIA.jugador.body.angle = 0;
+            //console.log("hola");
+        }
+    }
+    else {
+        acrobaIA.jugador.body.fixedRotation = false;
+    }
+    if (!checkIfCanJump(talibaIA)) {
+        //console.log(talibaIA.jugador.body.angle + ', ' + (talibaIA.jugador.body.angle >= 0.0 && talibaIA.jugador.body.angle <= 45.0));
+        //let timer =  juego.time.events.add(1250, function(){talibaIA.jugador.body.angle = 0;}, this, 0);
+        //talibaIA.jugador.body.angle = 0;
+        talibaIA.jugador.body.fixedRotation = true;
+        if (!(talibaIA.jugador.body.angle >= -45 && talibaIA.jugador.body.angle <= 45) && talibaIA.ultimo_sentido == 'derecha') {
+            talibaIA.jugador.body.angle = 0;
+            //console.log("hola");
+        }
+        else if (!(talibaIA.jugador.body.angle >= 135 && talibaIA.jugador.body.angle <= 225) && talibaIA.ultimo_sentido == 'izquierda') {
+            talibaIA.jugador.body.angle = 0;
+            //console.log("hola");
+        }
+    }
+    else {
+        talibaIA.jugador.body.fixedRotation = false;
     }
     
     if (cursores.left.isDown && tankabaIA.canImove)// Si presionamos LEFT

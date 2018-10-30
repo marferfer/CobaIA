@@ -77,7 +77,6 @@ function preload() {
     juego.load.physics('personajeCollisions', 'assets/data/personaje.json');
     juego.load.physics('tuboN1CompletoCollisions', 'assets/data/tuboN1Completo.json');
     juego.load.physics('pilaCadaveresCollisions', 'assets/data/pilaCadaveres.json');
-
     
 }
 
@@ -190,8 +189,8 @@ function create() {
     cajaCableado.animations.add('caja_rota', [1, 2, 3], 10, true);
     cajaCableado.body.static = true;
     cajaCableado.body.setRectangle(23, 69, 15);
-    cajaCableado.body.x = 1900;
-    cajaCableado.body.y = juego.world.height - 210;
+    cajaCableado.body.x = 2770;
+    cajaCableado.body.y = juego.world.height - 70;
     cajasCableado.lista.push(cajaCableado);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -208,8 +207,8 @@ function create() {
     tubo.body.loadPolygon('tuboN1CompletoCollisions', 'tuboN1Completo');
 
     tubo.body.static = true;
-    tubo.body.debug = true;
-    tubo.body.x = 2150;
+    //tubo.body.debug = true;
+    tubo.body.x = 1800;
     tubo.body.y = juego.world.height - 675;
     tubo.body.collideWorldBounds = true;
     
@@ -257,7 +256,7 @@ function create() {
     /////////////// CAJAS   ///////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        cajas.grupo = juego.add.group();
+    cajas.grupo = juego.add.group();
     cajas.grupo.enableBody = true;
     cajas.grupo.physicsBodyType = Phaser.Physics.P2JS;
     //cajas.collisionGroup = juego.physics.p2.createCollisionGroup();
@@ -299,7 +298,7 @@ function create() {
     caja.body.static = false;
     caja.body.mass = 45;
     caja.body.debug = true;
-    cajas.lista.push(caja);
+    cajas.lista.push(caja);*/
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -350,7 +349,7 @@ function create() {
     /////////////// PILAS DE CADAVERES   //////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    pilasCadaveres.grupo = juego.add.group();
+    /*pilasCadaveres.grupo = juego.add.group();
     pilasCadaveres.grupo.enableBody = true;
     pilasCadaveres.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -365,13 +364,13 @@ function create() {
     pilaCadaveres.body.x = 800;
     pilaCadaveres.body.y = juego.world.height - 260;
 
-    pilasCadaveres.lista.push(pilaCadaveres);
+    pilasCadaveres.lista.push(pilaCadaveres);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// BOBINAS   /////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    bobinas.grupo = juego.add.group();
+    /*bobinas.grupo = juego.add.group();
     bobinas.grupo.enableBody = true;
     bobinas.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -389,7 +388,7 @@ function create() {
     bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
     bobina.animations.play('bobina_encendida');
 
-    bobinas.lista.push(bobina);
+    bobinas.lista.push(bobina);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// VENTILADORES   /////////////////////////////////////////////////////////////////////////////////////////////
@@ -457,7 +456,7 @@ function create() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// TANKABAIA   ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    tankabaIA.jugador = juego.add.sprite(0, juego.world.height - 225, 'tankabaIAmovimiento');
+    tankabaIA.jugador = juego.add.sprite(340, juego.world.height - 225, 'tankabaIAmovimiento');
     tankabaIA.jugador.scale.setTo(1.3, 1.3);
     juego.physics.p2.enableBody(tankabaIA.jugador);
     tankabaIA.jugador.body.setRectangle(95, 60);
@@ -493,7 +492,7 @@ function create() {
     //acrobaIA.jugador.body.allowGravity = false;
 
     acrobaIA.jugador.dynamic = true;
-    acrobaIA.jugador.body.debug = true;
+    acrobaIA.jugador.body.debug = false;
 
     acrobaIA.jugador.animations.add('movimientoDerecha', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
                                                             20, 21, 22, 23, 24, 25, 26, 27, 28], 60, true);
@@ -530,8 +529,8 @@ function create() {
 /////////DECORADOS POR DELANTE DEL JUGADOR  ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    nivel1.decorados[2] = juego.add.image(1610, juego.world.height - 490, 'conexionTuboArriba');
-    nivel1.decorados[3] = juego.add.image(1634, juego.world.height - 1043, 'conexionTuboDerecha');
+    nivel1.decorados[2] = juego.add.image(1260, juego.world.height - 490, 'conexionTuboArriba');
+    nivel1.decorados[3] = juego.add.image(1290, juego.world.height - 1043, 'conexionTuboDerecha');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -895,5 +894,5 @@ function create() {
 
     juego.physics.p2.updateBoundsCollisionGroup();
 
-    juego.camera.follow(tankabaIA.jugador);
+    juego.camera.follow(acrobaIA.jugador);
 }
