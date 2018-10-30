@@ -1,7 +1,7 @@
 // Update
 function update() {
 
-
+    console.log(tankabaIA.jugador.body.x);
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // REINICIAR VARIABLES  ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -339,7 +339,7 @@ function update() {
 
     
 
-    if (cursores.up.isDown && checkIfCanJump(tankabaIA) && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
+    if (cursores.up.isDown /*&& checkIfCanJump(tankabaIA)*/ && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
         
 
         tankabaIA.jugador.body.moveUp(300);
