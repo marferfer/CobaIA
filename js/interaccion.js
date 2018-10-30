@@ -1,6 +1,33 @@
 // Update
 function update() {
 
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // REINICIAR VARIABLES  ///////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    tankabaIA.colisionEscalera = false; 
+    tankabaIA.contadorEscaleras = 0;
+
+    tankabaIA.jugador.body.velocity.x = 0; //  Reseteamos la velocidad en x. Esto nos permitirá evitar que se acelere (suelo de hielo)
+    if(!tankabaIA.canImove){
+        talibaIA.jugador.body.y = 0;
+    }
+
+    acrobaIA.jugador.body.velocity.x = 0;
+    if(!acrobaIA.canImove){
+        acrobaIA.jugador.body.y = 0;
+    }
+
+    talibaIA.jugador.body.velocity.x = 0;
+    if(!talibaIA.canImove){
+        talibaIA.jugador.body.y = 0;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////// COBAIAS MUERTAS  ////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     if(acrobaIA.muerta){
 
         chips.lista[0].body.static = false;
@@ -28,6 +55,7 @@ function update() {
         }
 
         acrobaIA.jugador.body.x = -120;
+        acrobaIA.jugador.body.y = 0;
         acrobaIA.jugador.body.static = true;
         acrobaIA.muerta = false;
         acrobaIA.canImove = false;
@@ -67,6 +95,7 @@ function update() {
         }
 
         talibaIA.jugador.body.x =  -120;
+        talibaIA.jugador.body.y = 0;
         talibaIA.jugador.body.static = true;
         talibaIA.muerta = false;
         talibaIA.canImove = false;
@@ -105,7 +134,8 @@ function update() {
             ;
         }
 
-        tankabaIA.jugador.body.x = -120;
+        tankabaIA.jugador.body.x = 50;
+        talibaIA.jugador.body.y = 0;
         tankabaIA.jugador.body.static = true;
         tankabaIA.muerta = false;
         tankabaIA.canImove = false;
@@ -118,9 +148,6 @@ function update() {
         
     }
 
-
-    acrobaIA.jugador.body.velocity.x = 0;
-    talibaIA.jugador.body.velocity.x = 0;
     //Indicador
 
     // Pad "connected or not" indicator
@@ -211,11 +238,6 @@ function update() {
             tankabaIA.jugador.y += rightStickY * 10;
         }
     }*/
-
-
-    tankabaIA.colisionEscalera = false; // Reiniciamos variables
-    tankabaIA.contadorEscaleras = 0;
-    tankabaIA.jugador.body.velocity.x = 0; //  Reseteamos la velocidad del tankabaIA.jugador en x, esto nos permitirá evitar que se acelere
     
     function checkIfCanJump(cobaIA) {
 
@@ -236,11 +258,6 @@ function update() {
         return result;
     }
 
-    if (!tankabaIA.colisionEscalera) { // Si no hay colisión con las escaleras, entonces reestablecemos la gravedad
-        tankabaIA.jugador.body.gravity.y = 500;
-    } else {// Si hay colisión con las escaleras, entonces la gravedad la llevamos a cero, por lo tanto, el tankabaIA.jugador no caerá, dando la sensación de estar suspendido en uno de sus escalones
-        tankabaIA.jugador.body.velocity.y = 0;
-    }
     if (tecla_laser.isUp) {
         tankabaIA.tiempo_disparo = 0;
     }
@@ -275,42 +292,43 @@ function update() {
             }
         }
         actualiza_informacion();
-    } else if (cursores.left.isDown)// Si presionamos LEFT
+    } else if (cursores.left.isDown && tankabaIA.canImove)// Si presionamos LEFT
     {
-        /*tankabaIA.retrasa_paso++;
-         if (tankabaIA.retrasa_paso % 10 == 0) {
-         paso.volume = 0.0
-         createjs.Sound.play(paso);
-         }*/
-        //  Lo movemos a la izquierda
-        tankabaIA.jugador.body.moveLeft(350);
+        
+        //createjs.Sound.play(paso);
 
-        //tankabaIA.jugador.animations.play('left');
+        tankabaIA.jugador.body.moveLeft(350);
+        tankabaIA.jugador.animations.play('movimientoIzquierda');
         tankabaIA.ultimo_sentido = 'izquierda';
     }
-     else if (cursores.right.isDown)
+     else if (cursores.right.isDown && tankabaIA.canImove)
     {
-        /*tankabaIA.retrasa_paso++;
-         if (tankabaIA.retrasa_paso % 10 == 0) {
-         paso.volume = 0.0;
-         createjs.Sound.play(paso);
-         }*/
-        //  Move to the right
+        
+        //createjs.Sound.play(paso);
+        
         tankabaIA.jugador.body.moveRight(350);
-
-        //tankabaIA.jugador.animations.play('right');
+        tankabaIA.jugador.animations.play('movimientoDerecha');
         tankabaIA.ultimo_sentido = 'derecha';
+
     } else if (tankabaIA.contadorEscaleras != 0) {// Si el contador de escaleras es <> de cero, quiere decir que estamos escalando
         //tankabaIA.jugador.animations.play('climb');// Animamos la escalada
     } else {
-        //  No estamos precionando ninguna tecla
-        //tankabaIA.jugador.animations.stop();
-       // tankabaIA.jugador.frame = 1;
-    }
+        
+        tankabaIA.jugador.animations.stop();
+
+        if(tankabaIA.ultimo_sentido === "derecha"){
+
+            tankabaIA.jugador.frame = 0;
+
+        }else{
+            
+            tankabaIA.jugador.frame = 30;
+        }
+    }   
 
     
 
-    if (cursores.up.isDown && checkIfCanJump(tankabaIA)) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
+    if (cursores.up.isDown && checkIfCanJump(tankabaIA) && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
         
 
         tankabaIA.jugador.body.moveUp(300);
@@ -376,19 +394,28 @@ function update() {
     }else if(ctrlB.isDown && talibaIA.canImove){
 
         talibaIA.jugador.body.moveLeft(300);
-        //talibaIA.jugador.animations.play('movimientoIzquierda');
+        talibaIA.jugador.animations.play('movimientoIzquierda');
+        talibaIA.ultimo_sentido = "izquierda";
 
     }else if(ctrlM.isDown && talibaIA.canImove){
 
         talibaIA.jugador.body.moveRight(300);
         if(checkIfCanJump(talibaIA)){
             talibaIA.jugador.animations.play('movimientoDerecha');
+            talibaIA.ultimo_sentido = "derecha";
         }
 
     }else{
 
         talibaIA.jugador.animations.stop();
-        talibaIA.jugador.frame = 0;
+        if(talibaIA.ultimo_sentido === "derecha"){
+            
+            talibaIA.jugador.frame = 0;    
+        }else{
+
+            talibaIA.jugador.frame = 30;
+        }
+        
     }
 }
 

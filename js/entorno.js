@@ -67,7 +67,8 @@ function preload() {
     juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
     juego.load.spritesheet('controller-indicator', 'assets/images/controller-indicator.png',16, 16);
     juego.load.spritesheet('cajaCableado', 'assets/images/cajaCableado.png', 54 , 70);
-    juego.load.spritesheet('talibaIAmovimiento', 'assets/images/talibaIAmovimiento.png', 93, 51, 29, 6, 7);
+    juego.load.spritesheet('talibaIAmovimiento', 'assets/images/talibaIAmovimiento.png', 93, 51, 59, 6, 7);
+    juego.load.spritesheet('tankabaIAmovimiento', 'assets/images/tankabaIAmovimiento.png', 93, 59, 59, 6, 7);
 
     juego.load.physics('sueloN1Parte1Collisions', 'assets/data/sueloN1Parte1.json');
     juego.load.physics('sueloN1Parte2Collisions', 'assets/data/sueloN1Parte2.json');
@@ -99,7 +100,6 @@ function create() {
     //Decorados que se ven detras del jugador
     nivel1.decorados[0] = juego.add.image(1765, juego.world.height - 650, 'frasco');
     nivel1.decorados[1] = juego.add.image(1450, juego.world.height - 650, 'cable');
-
 
     nivel1.grupo = juego.add.group();
     nivel1.grupo.enableBody = true;
@@ -400,7 +400,8 @@ function create() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// TANKABAIA   ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    tankabaIA.jugador = juego.add.sprite(2400, juego.world.height - 225, 'cobaIA');
+    tankabaIA.jugador = juego.add.sprite(500, juego.world.height - 225, 'tankabaIAmovimiento');
+    tankabaIA.jugador.scale.setTo(1.3, 1.3);
     juego.physics.p2.enableBody(tankabaIA.jugador);
     tankabaIA.jugador.body.setRectangle(80, 40);
 
@@ -412,6 +413,12 @@ function create() {
     //tankabaIA.jugador.body.loadPolygon('cajaCollisions', 'caja');
     tankabaIA.jugador.dynamic = true;
     tankabaIA.jugador.body.debug = false;
+
+    tankabaIA.jugador.animations.add('movimientoDerecha', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                                                            20, 21, 22, 23, 24, 25, 26, 27, 28], 60, true);
+    tankabaIA.jugador.animations.add('movimientoIzquierda', [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+                                                             47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58], 60, true);
+
     tankabaIA.jugador.body.onBeginContact.add(colisionInicialTankabaIA, this);
     tankabaIA.jugador.body.onEndContact.add(colisionFinalTankabaIA, this);
 
@@ -449,7 +456,8 @@ function create() {
     //animaciones
     talibaIA.jugador.animations.add('movimientoDerecha', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
                                                             20, 21, 22, 23, 24, 25, 26, 27, 28], 60, true);
-    talibaIA.jugador.animations.add('stop', [0], true);
+    talibaIA.jugador.animations.add('movimientoIzquierda', [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
+                                                             47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58], 60, true);
 
     talibaIA.jugador.body.onBeginContact.add(colisionInicialTalibaIA, this);
     talibaIA.jugador.body.onEndContact.add(colisionFinalTalibaIA, this);
