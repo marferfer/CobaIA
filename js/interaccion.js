@@ -194,7 +194,7 @@ function update() {
     //////// COMPROBAR SI SE ESTA EN ZONA DE VENTILADORES   /////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*for(let i = 0; i < ventiladores.lista.length; i++){
+    for(let i = 0; i < ventiladores.lista.length; i++){
 
         let ventilador = ventiladores.lista[i];
 
@@ -235,8 +235,14 @@ function update() {
             }
 
         }else if(ventilador.posicion === "horizontal_izquierda"){
-
-            if(talibaIA.jugador.body.x >= ventilador.zona[0] && talibaIA.jugador.body.x <= ventilador.zona[1] 
+            var superX = 0;
+            if ((tankabaIA.jugador.body.x + 47 - ventilador.zona[0]) > 0) {
+                superX = (tankabaIA.jugador.body.x + 47 - ventilador.zona[0]);
+            }
+            else {
+                superX = 0;
+            }
+            if(talibaIA.jugador.body.x >= (ventilador.zona[0] + superX) && talibaIA.jugador.body.x <= ventilador.zona[1] 
                     && talibaIA.jugador.body.y <= ventilador.zona[2] && talibaIA.jugador.body.y >= ventilador.zona[3]){
 
                     talibaIA.jugador.body.moveLeft(500);
@@ -246,7 +252,7 @@ function update() {
                     talibaIA.canImove = true;
             }
 
-            if(acrobaIA.jugador.body.x >= ventilador.zona[0] && acrobaIA.jugador.body.x <= ventilador.zona[1] 
+            if(acrobaIA.jugador.body.x >= (ventilador.zona[0] + superX) && acrobaIA.jugador.body.x <= ventilador.zona[1] 
                     && acrobaIA.jugador.body.y <= ventilador.zona[2] && acrobaIA.jugador.body.y >= ventilador.zona[3]){
 
                     acrobaIA.jugador.body.moveLeft(500);
@@ -262,7 +268,7 @@ function update() {
                     tankabaIA.jugador.body.moveLeft(500);
             }
         }
-    }*/
+    }
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -427,7 +433,7 @@ function update() {
 
     
 
-    if (cursores.up.isDown && checkIfCanJump(tankabaIA) && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
+    if (cursores.up.isDown /*&& checkIfCanJump(tankabaIA)*/ && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
         
 
         tankabaIA.jugador.body.moveUp(300);
@@ -448,7 +454,7 @@ function update() {
             acrobaIA.trepando = true
             let timer =  juego.time.events.add(250, function(){acrobaIA.trepando = false;}, this, 0);
         }
-        console.log(acrobaIA.jugador.body.x + ', ' + acrobaIA.jugador.body.y);
+        console.log(tankabaIA.jugador.body.x + ', ' + tankabaIA.jugador.body.y);
     }    
     else {
         acrobaIA.jugador.body.angle = 0;

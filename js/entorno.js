@@ -46,6 +46,7 @@ function preload() {
     juego.load.image('cable', 'assets/images/cable.png');
     juego.load.image('frasco', 'assets/images/frasco.png');
     juego.load.image('plataformaMovil', 'assets/images/plataformaMovil.png');
+    juego.load.image('plataformaBasic', 'assets/images/plataformaBasic.png');
     juego.load.image('boton', 'assets/images/boton.png');
     juego.load.image('conexionTuboArriba', 'assets/images/conexionTuboArriba.png');
     juego.load.image('conexionTuboDerecha', 'assets/images/conexionTuboDerecha.png');
@@ -237,6 +238,19 @@ function create() {
 
     botones.lista.push(boton);
 
+    // BOTON 2
+
+    boton = botones.grupo.create(0, 0, 'boton');
+
+    boton.body.setRectangle(61, 15, 0, -5);
+    boton.body.debug = true;
+    console.log(boton.body.id); //id: 14
+    boton.body.static = true;
+    boton.body.x = 2960;
+    boton.body.y = 1331;
+
+    botones.lista.push(boton);
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// PLATAFORMAS MOVILES   /////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -256,6 +270,26 @@ function create() {
     plataformaMovil.body.collideWorldBounds = true;
 
     plataformasMoviles.lista.push(plataformaMovil);
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// PLATAFORMAS BASIC   /////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    plataformasBasic.grupo = juego.add.group();
+    plataformasBasic.grupo.enableBody = true;
+    plataformasBasic.grupo.physicsBodyType = Phaser.Physics.P2JS;
+
+    let plataformaBasic = plataformasBasic.grupo.create(0, 0, 'plataformaBasic');
+
+    //plataformaMovil.body.debug = true;
+    plataformaBasic.body.static = true;
+    plataformaBasic.body.setRectangle(26, 302);
+    plataformaBasic.body.x = 4726;
+    plataformaBasic.body.y = 1303;
+    console.log(plataformaBasic.body.id); //id: 16
+    plataformaBasic.body.collideWorldBounds = true;
+
+    plataformasBasic.lista.push(plataformaBasic);
    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// CAJAS   ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -401,17 +435,18 @@ function create() {
     /////////////// VENTILADORES   ////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*ventiladores.grupo = juegoPruebas.add.group();
+    ventiladores.grupo = juego.add.group();
     ventiladores.grupo.enableBody = true;
     ventiladores.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
     let ventilador = ventiladores.grupo.create(0, 0, 'ventilador');
 
     ventilador.body.setRectangle(154, 44);
-    ventilador.body.debug = true;
+    //ventilador.body.debug = true;
     ventilador.body.static = true;
-    ventilador.body.x = 16500;
-    ventilador.body.y = juegoPruebas.world.height-100;
+
+    ventilador.body.x = 3992;
+    ventilador.body.y = 1139;
 
     ventilador.zona = [ventilador.body.x - 88, ventilador.body.x + 88, ventilador.body.y - 22, ventilador.body.y - 300];
     ventilador.posicion = "vertical";
@@ -419,14 +454,14 @@ function create() {
     ventiladores.lista.push(ventilador);
 
 
-    let aire = juegoPruebas.add.image(ventilador.zona[0], ventilador.zona[3], 'aire');
+    let aire = juego.add.image(ventilador.zona[0], ventilador.zona[3], 'aire');
     aire.animations.add('aire_funciona', [0, 1, 2, 3, 4], 30, true);
     aire.animations.play('aire_funciona');
 
     
     /////////////////ventilador horizontal derecha
 
-    ventilador = ventiladores.grupo.create(0, 0, 'ventilador');
+    /*ventilador = ventiladores.grupo.create(0, 0, 'ventilador');
 
     ventilador.body.setRectangle(154, 44);
     ventilador.body.debug = true;
@@ -445,7 +480,7 @@ function create() {
 
     aire.angle = -90;
     aire.animations.add('aire_funciona', [0, 1, 2, 3, 4], 30, true);
-    aire.animations.play('aire_funciona');
+    aire.animations.play('aire_funciona');*/
 
 
     ///////////ventilador horizontal izquierda
@@ -453,10 +488,10 @@ function create() {
     ventilador = ventiladores.grupo.create(0, 0, 'ventilador');
 
     ventilador.body.setRectangle(154, 44);
-    ventilador.body.debug = true;
+    //ventilador.body.debug = true;
     ventilador.body.static = true;
-    ventilador.body.x = 17000;
-    ventilador.body.y = juegoPruebas.world.height-400;
+    ventilador.body.x = 4639;
+    ventilador.body.y = 1075;
     ventilador.body.angle = -90;
 
     ventilador.zona = [ventilador.body.x - 300, ventilador.body.x - 22, ventilador.body.y + 88, ventilador.body.y - 88];
@@ -465,11 +500,11 @@ function create() {
 
     ventiladores.lista.push(ventilador);
 
-    aire = juegoPruebas.add.image(ventilador.zona[0], ventilador.zona[2], 'aire');
+    aire = juego.add.image(ventilador.zona[0], ventilador.zona[2], 'aire');
 
     aire.angle = -90;
     aire.animations.add('aire_funciona', [0, 1, 2, 3, 4], 30, true);
-    aire.animations.play('aire_funciona');*/
+    aire.animations.play('aire_funciona');
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////    /////////////////////////////////////////////////////////////////////////////////////////
@@ -625,9 +660,13 @@ function create() {
         }
 
         if(body.sprite.key === 'boton'){
-
+            if(body.id == 14) {
+                plataformasBasic.lista[0].body.y = 0;
+            }
             //animacion de boton presionado
-            plataformasMoviles.lista[0].body.rotateRight(25);
+            if(body.id == 15) {
+                plataformasMoviles.lista[0].body.rotateRight(25);
+            }
         }
 
         if(body.sprite.key === 'bobina'){
@@ -709,6 +748,9 @@ function create() {
         if(body.sprite !== null){
 
             if(body.sprite.key === 'boton'){
+                if(body.id == 14) {
+                    plataformasBasic.lista[0].body.y = 1303;
+                }
                 plataformasMoviles.lista[0].body.rotateRight(0);
                 //stopPlataforma(0);
             }
@@ -939,9 +981,9 @@ function create() {
 
     /*puntajeTexto = juego.add.text(100, 16, 'puntaje: 0 disparos: ' + obj_jugador.cantidad_disparos, {fontSize: '20px', fill: 'red'});// Creamos el texto y lo agregamos como hijo del objeto sprite con addChild
     sprite.addChild(puntajeTexto);*/
-    juego.camera.follow(acrobaIA.jugador); // Le permitimos a la cámara del juego, seguir en todo momento al obj_jugador.jugador    
+    juego.camera.follow(tankabaIA.jugador); // Le permitimos a la cámara del juego, seguir en todo momento al obj_jugador.jugador    
 
     juego.physics.p2.updateBoundsCollisionGroup();
 
-    juego.camera.follow(acrobaIA.jugador);
+    juego.camera.follow(tankabaIA.jugador);
 }

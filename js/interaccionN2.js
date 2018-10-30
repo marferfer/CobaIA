@@ -1,6 +1,7 @@
 // Update
 function update2() {
 
+    //console.log(tankabaIA.jugador.body.y);
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // REINICIAR VARIABLES  ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -99,6 +100,7 @@ function update2() {
             ;
         }
 
+
         talibaIA.jugador.body.x =  -120;
         talibaIA.jugador.body.y = 0;
         talibaIA.jugador.body.static = true;
@@ -112,6 +114,8 @@ function update2() {
         }
 
     }
+
+    //console.log(ascensores.lista[0].body.y);
 
     if(tankabaIA.muerta){
 
@@ -165,68 +169,60 @@ function update2() {
         indicator.animations.frame = 1;
     }
 
+    for(let i = 0; i < ventiladores.lista.length; i++){
+        
+        let ventilador = ventiladores.lista[i];
 
-    /*if (tankabaIA.jugador.position.y > 1500) { // Muerte al caer
+        if(ventilador.posicion === "vertical"){
+
+            if(tankabaIA.jugador.x >= ventilador.zona[0] && tankabaIA.jugador.x <= ventilador.zona[1] 
+                && tankabaIA.jugador.y <= ventilador.zona[2] && tankabaIA.jugador.y >= ventilador.zona[3]){
+
+                tankabaIA.jugador.body.moveUp(150);
+            }
+        }
+    }
+
+    if (tankabaIA.jugador.position.y > 1500) { // Muerte al caer
         reinicia();
-    }*/
+    }
 
     if (ctrlR.isDown) { // Pase de nivel
         juego2.destroy();
         inicio();
     }
 
-    if (tankabaIA.inmortal && tankabaIA.tiempo_inmortalidad < tankabaIA.tolerancia_vida) {
-        tankabaIA.tiempo_inmortalidad++;
-        if (tankabaIA.tiempo_inmortalidad % 5 == 0) {
-            tankabaIA.jugador.alpha = 0;
-        } else {
-            tankabaIA.jugador.alpha = 1;
-        }
-        if (tankabaIA.tiempo_inmortalidad == tankabaIA.tolerancia_vida) {
-            tankabaIA.vidas--;
-            tankabaIA.inmortal = false;
-            tankabaIA.tiempo_inmortalidad = 0;
-            tankabaIA.jugador.alpha = 1;
-        }
-    }
 
     // Controls
-    /*if ((pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) && tankabaIA.canImove)
+    /*if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1)
     {
-        tankabaIA.jugador.body.moveLeft(300);
-        tankabaIA.jugador.animations.play('movimientoIzquierda');
-        tankabaIA.ultimo_sentido = "izquierda";
+        tankabaIA3.jugador.x-=5;
+        tankabaIA3.jugador.animations.play('left');
+        tankabaIA3.ultimo_sentido = 'izquierda';
     }
-    else if ((pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) && tankabaIA.canImove)
+    else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1)
     {
-        tankabaIA.jugador.body.moveRight(350);
-        tankabaIA.jugador.animations.play('movimientoDerecha');
-        tankabaIA.ultimo_sentido = 'derecha';
-    }*/
+        tankabaIA3.jugador.x+=5;
+        tankabaIA3.jugador.animations.play('right');
+        tankabaIA3.ultimo_sentido = 'derecha';
+    }
 
-    /*if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_UP) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -0.1)
+    if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_UP) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -0.1)
     {
         tankabaIA3.jugador.y-=5;
         tankabaIA3.jugador.animations.play('jump');
-    }
-    else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_DOWN) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.1)
+    }*/
+    /*else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_DOWN) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.1)
     {
         tankabaIA.jugador.y+=5;
     }*/
 
-    if (pad1.justPressed(Phaser.Gamepad.XBOX360_A) && checkIfCanJump(tankabaIA) && tankabaIA.canImove)
+    /*if (pad1.justPressed(Phaser.Gamepad.XBOX360_A))
     {
-        tankabaIA.jugador.body.moveUp(300);
-
-     
-        //tankabaIA.jugador.animations.play('jump');
-        createjs.Sound.play(salto);
-        if (tankabaIA.contadorSaltos == 1) {
-            tankabaIA.contadorSaltos = 2;
-        }
+        tankabaIA.jugador.angle += 5;
     }
 
-    /*if (pad1.justReleased(Phaser.Gamepad.XBOX360_B))
+    if (pad1.justReleased(Phaser.Gamepad.XBOX360_B))
     {
         tankabaIA.jugador.scale.x += 0.01;
         tankabaIA.jugador.scale.y = tankabaIA.jugador.scale.x;
@@ -235,7 +231,7 @@ function update2() {
 
     // Pad derecho controles
 
-    if (pad1.connected)
+    /*if (pad1.connected)
     {
         var rightStickX = pad1.axis(Phaser.Gamepad.XBOX360_STICK_RIGHT_X);
         var rightStickY = pad1.axis(Phaser.Gamepad.XBOX360_STICK_RIGHT_Y);
@@ -249,7 +245,7 @@ function update2() {
         {
             tankabaIA.jugador.y += rightStickY * 10;
         }
-    }
+    }*/
     
     function checkIfCanJump(cobaIA) {
 
@@ -270,83 +266,59 @@ function update2() {
         return result;
     }
 
-    /*if (tecla_laser.isUp) {
-        tankabaIA.tiempo_disparo = 0;
-    }
-    if (tecla_laser.isDown && tankabaIA.tiempo_disparo < tankabaIA.tolerancia_disparo && tankabaIA.cantidad_disparos > 0) {
-        tankabaIA.tiempo_disparo++;
-        var ajuste = 25;
-        if (tankabaIA.ultimo_sentido == 'derecha') {
-            //tankabaIA.jugador.animations.play('disparo_derecha');
-            if (tankabaIA.tiempo_disparo == 1) {
-                tankabaIA.cantidad_disparos--;
-                var jnLaser = {
-                    distancia: 0,
-                    distancia_max: 20,
-                    laser: lasers.create(tankabaIA.jugador.position.x + 2 * ajuste, tankabaIA.jugador.position.y + ajuste, 'laser_der')
-                };
-                tankabaIA.lasers_der.push(jnLaser);
-                var instance = createjs.Sound.play(disparo);
-                instance.volume = 0.15;
-            }
-        } else {
-            //tankabaIA.jugador.animations.play('disparo_izquierda');
-            if (tankabaIA.tiempo_disparo == 1) {
-                tankabaIA.cantidad_disparos--;
-                var jnLaser = {
-                    distancia: 0,
-                    distancia_max: 20,
-                    laser: lasers.create(tankabaIA.jugador.position.x - ajuste, tankabaIA.jugador.position.y + ajuste, 'laser_izq')
-                };
-                tankabaIA.lasers_izq.push(jnLaser);
-                var instance = createjs.Sound.play(disparo);
-                instance.volume = 0.15;
-            }
+    if (!checkIfCanJump(tankabaIA)) {
+        //console.log(tankabaIA.jugador.body.angle + ', ' + (tankabaIA.jugador.body.angle >= 0.0 && tankabaIA.jugador.body.angle <= 45.0));
+        //let timer =  juego2.time.events.add(1250, function(){tankabaIA.jugador.body.angle = 0;}, this, 0);
+        //tankabaIA.jugador.body.angle = 0;
+        tankabaIA.jugador.body.fixedRotation = true;
+        if (!(tankabaIA.jugador.body.angle >= -45 && tankabaIA.jugador.body.angle <= 45) && tankabaIA.ultimo_sentido == 'derecha') {
+            tankabaIA.jugador.body.angle = 0;
+            console.log("hola");
         }
-        actualiza_informacion();
-    }*/
+        else if (!(tankabaIA.jugador.body.angle >= 135 && tankabaIA.jugador.body.angle <= 225) && tankabaIA.ultimo_sentido == 'izquierda') {
+            tankabaIA.jugador.body.angle = 0;
+            console.log("hola");
+        }
+    }
+    else {
+        tankabaIA.jugador.body.fixedRotation = false;
+    }
+    
     if (cursores.left.isDown && tankabaIA.canImove)// Si presionamos LEFT
     {
         
         //createjs.Sound.play(paso);
 
         tankabaIA.jugador.body.moveLeft(350);
-        if(checkIfCanJump(tankabaIA)){
-            tankabaIA.jugador.animations.play('movimientoIzquierda');
-            tankabaIA.ultimo_sentido = 'izquierda';
-        }
+        tankabaIA.jugador.animations.play('movimientoIzquierda');
+        tankabaIA.ultimo_sentido = 'izquierda';
     }
-     else if ((cursores.right.isDown && tankabaIA.canImove) || (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1))
+     else if (cursores.right.isDown && tankabaIA.canImove)
     {
         
         //createjs.Sound.play(paso);
         
         tankabaIA.jugador.body.moveRight(350);
+        tankabaIA.jugador.animations.play('movimientoDerecha');
+        tankabaIA.ultimo_sentido = 'derecha';
 
-        if(checkIfCanJump(tankabaIA)){
-            tankabaIA.jugador.animations.play('movimientoDerecha');
-            tankabaIA.ultimo_sentido = 'derecha';
-        }
-
-    } else if (tankabaIA.contadorEscaleras != 0) {// Si el contador de escaleras es <> de cero, quiere decir que estamos escalando
-        //tankabaIA.jugador.animations.play('climb');// Animamos la escalada
     } else {
         
         tankabaIA.jugador.animations.stop();
 
-        if(tankabaIA.ultimo_sentido === "derecha"){
+        if(tankabaIA.ultimo_sentido === "izquierda"){
 
-            tankabaIA.jugador.frame = 0;
+            tankabaIA.jugador.frame = 30;
 
         }else{
 
-            tankabaIA.jugador.frame = 30;
+            tankabaIA.jugador.frame = 0;
         }
     }   
 
     
 
-    if (cursores.up.isDown /*&& checkIfCanJump(tankabaIA)*/ && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
+    if (cursores.up.isDown && checkIfCanJump(tankabaIA) && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
         
 
         tankabaIA.jugador.body.moveUp(300);
@@ -354,35 +326,12 @@ function update2() {
      
         //tankabaIA.jugador.animations.play('jump');
         createjs.Sound.play(salto);
-        if (tankabaIA.contadorSaltos == 1) {
-            tankabaIA.contadorSaltos = 2;
-        }
     }
 
-    
 
-    if (tankabaIA.contadorEscaleras < -1) {
-        tankabaIA.contadorEscaleras = -1;
-    }
     tankabaIA.jugador.position.y += (tankabaIA.contadorEscaleras * 2);
     if (tankabaIA.contadorEscaleras != 0) {
         //tankabaIA.jugador.animations.play('climb');
-    }
-    for (var i = 0; i < tankabaIA.lasers_der.length; i++) {
-        var laserAux = tankabaIA.lasers_der[i].laser;
-        tankabaIA.lasers_der[i].distancia++;
-        laserAux.position.x += 5;
-        if (tankabaIA.lasers_der[i].distancia == tankabaIA.lasers_der[i].distancia_max) {
-            tankabaIA.lasers_der[i].laser.kill();
-        }
-    }
-    for (var i = 0; i < tankabaIA.lasers_izq.length; i++) {
-        var laserAux = tankabaIA.lasers_izq[i].laser;
-        tankabaIA.lasers_izq[i].distancia++;
-        laserAux.position.x -= 5;
-        if (tankabaIA.lasers_izq[i].distancia == tankabaIA.lasers_izq[i].distancia_max) {
-            tankabaIA.lasers_izq[i].laser.kill();
-        }
     }
 
 
@@ -456,12 +405,6 @@ function update2() {
         }
         
     }
-
-
-    if (tankabaIA.jugador.position.x > 2500) { 
-        juego2.destroy();
-        nivel2();
-    }
 }
 
 function reinicia() {
@@ -474,4 +417,4 @@ function reinicia() {
             location.reload();
         }, 3000);
 
-}
+    }

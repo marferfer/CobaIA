@@ -103,6 +103,13 @@ class PlataformasMoviles extends Objetos{
     }
 }
 
+class PlataformasBasic extends Objetos{
+
+    constructor(){
+        super();
+    }
+}
+
 class Botones extends Objetos{
     
     constructor(){
@@ -178,6 +185,7 @@ lasers = null;
  let cajasCableado = new CajasCableado();
  let tankabaIA2 = new TankabaIA();
  let plataformasMoviles = new PlataformasMoviles();
+ let plataformasBasic = new PlataformasBasic();
  let botones = new Botones();
  let chips = new Chips();
  let pilasCadaveres = new PilaCadaveres();
