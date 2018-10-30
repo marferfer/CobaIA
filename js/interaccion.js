@@ -186,35 +186,42 @@ function update() {
     }
 
     // Controls
-    /*if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1)
+    /*if ((pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) && tankabaIA.canImove)
     {
-        tankabaIA3.jugador.x-=5;
-        tankabaIA3.jugador.animations.play('left');
-        tankabaIA3.ultimo_sentido = 'izquierda';
+        tankabaIA.jugador.body.moveLeft(300);
+        tankabaIA.jugador.animations.play('movimientoIzquierda');
+        tankabaIA.ultimo_sentido = "izquierda";
     }
-    else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1)
+    else if ((pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) && tankabaIA.canImove)
     {
-        tankabaIA3.jugador.x+=5;
-        tankabaIA3.jugador.animations.play('right');
-        tankabaIA3.ultimo_sentido = 'derecha';
-    }
+        tankabaIA.jugador.body.moveRight(350);
+        tankabaIA.jugador.animations.play('movimientoDerecha');
+        tankabaIA.ultimo_sentido = 'derecha';
+    }*/
 
-    if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_UP) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -0.1)
+    /*if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_UP) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) < -0.1)
     {
         tankabaIA3.jugador.y-=5;
         tankabaIA3.jugador.animations.play('jump');
-    }*/
-    /*else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_DOWN) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.1)
+    }
+    else if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_DOWN) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_Y) > 0.1)
     {
         tankabaIA.jugador.y+=5;
     }*/
 
-    /*if (pad1.justPressed(Phaser.Gamepad.XBOX360_A))
+    if (pad1.justPressed(Phaser.Gamepad.XBOX360_A) && checkIfCanJump(tankabaIA) && tankabaIA.canImove)
     {
-        tankabaIA.jugador.angle += 5;
+        tankabaIA.jugador.body.moveUp(300);
+
+     
+        //tankabaIA.jugador.animations.play('jump');
+        createjs.Sound.play(salto);
+        if (tankabaIA.contadorSaltos == 1) {
+            tankabaIA.contadorSaltos = 2;
+        }
     }
 
-    if (pad1.justReleased(Phaser.Gamepad.XBOX360_B))
+    /*if (pad1.justReleased(Phaser.Gamepad.XBOX360_B))
     {
         tankabaIA.jugador.scale.x += 0.01;
         tankabaIA.jugador.scale.y = tankabaIA.jugador.scale.x;
@@ -223,7 +230,7 @@ function update() {
 
     // Pad derecho controles
 
-    /*if (pad1.connected)
+    if (pad1.connected)
     {
         var rightStickX = pad1.axis(Phaser.Gamepad.XBOX360_STICK_RIGHT_X);
         var rightStickY = pad1.axis(Phaser.Gamepad.XBOX360_STICK_RIGHT_Y);
@@ -237,7 +244,7 @@ function update() {
         {
             tankabaIA.jugador.y += rightStickY * 10;
         }
-    }*/
+    }
     
     function checkIfCanJump(cobaIA) {
 
@@ -292,7 +299,7 @@ function update() {
             }
         }
         actualiza_informacion();
-    } else if (cursores.left.isDown && tankabaIA.canImove)// Si presionamos LEFT
+    } else if ((cursores.left.isDown && tankabaIA.canImove) || (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1))// Si presionamos LEFT
     {
         
         //createjs.Sound.play(paso);
@@ -301,7 +308,7 @@ function update() {
         tankabaIA.jugador.animations.play('movimientoIzquierda');
         tankabaIA.ultimo_sentido = 'izquierda';
     }
-     else if (cursores.right.isDown && tankabaIA.canImove)
+     else if ((cursores.right.isDown && tankabaIA.canImove) || (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1))
     {
         
         //createjs.Sound.play(paso);
