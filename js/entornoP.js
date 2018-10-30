@@ -34,8 +34,8 @@ function preloadP() {
 
     juegoPruebas.load.image('fondoN1', 'assets/images/fondoN1.png');
     juegoPruebas.load.image('sueloN1Parte1', 'assets/images/sueloN1Parte1.png');
-    juegoPruebas.load.image('sueloN1Parte2', 'assets/images/sueloN1Parte2.png');
-    juegoPruebas.load.image('sueloN1Parte3', 'assets/images/sueloN1Parte3.png');
+    //juegoPruebas.load.image('sueloN1Parte2', 'assets/images/sueloN1Parte2.png');
+    //juegoPruebas.load.image('sueloN1Parte3', 'assets/images/sueloN1Parte3.png');
 
     juegoPruebas.load.image('chip', 'assets/images/chip.png');
     juegoPruebas.load.image('tierra', 'assets/images/tierra.png');
@@ -74,8 +74,8 @@ function preloadP() {
     juegoPruebas.load.spritesheet('bobina', 'assets/images/bobina.png', 287, 49, 6, 0, 0);
 
     juegoPruebas.load.physics('sueloN1Parte1Collisions', 'assets/data/sueloN1Parte1.json');
-    juegoPruebas.load.physics('sueloN1Parte2Collisions', 'assets/data/sueloN1Parte2.json');
-    juegoPruebas.load.physics('sueloN1Parte3Collisions', 'assets/data/sueloN1Parte3.json');
+    //juegoPruebas.load.physics('sueloN1Parte2Collisions', 'assets/data/sueloN1Parte2.json');
+    //juegoPruebas.load.physics('sueloN1Parte3Collisions', 'assets/data/sueloN1Parte3.json');
     juegoPruebas.load.physics('cajaCollisions', 'assets/data/caja.json');
     juegoPruebas.load.physics('personajeCollisions', 'assets/data/personaje.json');
     juegoPruebas.load.physics('tuboN1CompletoCollisions', 'assets/data/tuboN1Completo.json');
@@ -117,10 +117,10 @@ function createP() {
     sueloN1.body.static = true;
     sueloN1.body.debug = true;
     
-    sueloN1.body.x = 1700;
-    sueloN1.body.y = juegoPruebas.world.height - 700;
+    sueloN1.body.x = 5900;
+    sueloN1.body.y = juegoPruebas.world.height - 655;
 
-    sueloN1 = nivel1.grupo.create(0, juegoPruebas.world.height -300, 'sueloN1Parte2');
+    /*sueloN1 = nivel1.grupo.create(0, juegoPruebas.world.height -300, 'sueloN1Parte2');
     juegoPruebas.physics.p2.enableBody(sueloN1);
 
     sueloN1.body.clearShapes();
@@ -140,7 +140,7 @@ function createP() {
     sueloN1.body.debug = true;
     
     sueloN1.body.x = 19900;
-    sueloN1.body.y = juegoPruebas.world.height - 700;
+    sueloN1.body.y = juegoPruebas.world.height - 700;*/
 
     //nivel1.suelo = sueloN1;
 
@@ -448,7 +448,7 @@ function createP() {
 
     tankabaIA.jugador.body.collideWorldBounds = true;
     
-    tankabaIA.jugador.body.fixedRotation = true;
+    //tankabaIA.jugador.body.fixedRotation = true;
     tankabaIA.jugador.body.mass = 100;
     //tankabaIA.jugador.body.clearShapes();
     //tankabaIA.jugador.body.loadPolygon('cajaCollisions', 'caja');
