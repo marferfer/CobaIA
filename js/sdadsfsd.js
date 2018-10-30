@@ -1,5 +1,5 @@
 // Update
-function update() {
+function updateP() {
 
     //console.log(tankabaIA.jugador.body.y);
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -67,9 +67,9 @@ function update() {
         acrobaIA.canImove = false;
 
         if(!talibaIA.muerta){
-            juego.camera.follow(talibaIA.jugador);
+            juegoPruebas.camera.follow(talibaIA.jugador);
         }else{
-            juego.camera.follow(tankabaIA.jugador);
+            juegoPruebas.camera.follow(tankabaIA.jugador);
         }
         
     }
@@ -107,9 +107,9 @@ function update() {
         talibaIA.canImove = false;
 
         if(!tankabaIA.muerta){
-            juego.camera.follow(tankabaIA.jugador);
+            juegoPruebas.camera.follow(tankabaIA.jugador);
         }else{
-            juego.camera.follow(acrobaIA.jugador);
+            juegoPruebas.camera.follow(acrobaIA.jugador);
         }
 
     }
@@ -147,9 +147,9 @@ function update() {
         tankabaIA.canImove = false;
 
         if(!acrobaIA.muerta){
-            juego.camera.follow(acrobaIA.jugador);
+            juegoPruebas.camera.follow(acrobaIA.jugador);
         }else{
-            juego.camera.follow(talibaIA.jugador);
+            juegoPruebas.camera.follow(talibaIA.jugador);
         }
         
     }
@@ -157,7 +157,7 @@ function update() {
     //Indicador
 
     // Pad "connected or not" indicator
-    if (juego.input.gamepad.supported && juego.input.gamepad.active && pad1.connected)
+    if (juegoPruebas.input.gamepad.supported && juegoPruebas.input.gamepad.active && pad1.connected)
     {
         indicator.animations.frame = 0;
     }
@@ -166,7 +166,7 @@ function update() {
         indicator.animations.frame = 1;
     }
 
-    for(let i = 0; i < ventiladores.lista.length; i++){
+    /*for(let i = 0; i < ventiladores.lista.length; i++){
         
         let ventilador = ventiladores.lista[i];
 
@@ -178,14 +178,14 @@ function update() {
                 tankabaIA.jugador.body.moveUp(150);
             }
         }
-    }
+    }*/
 
     if (tankabaIA.jugador.position.y > 1500) { // Muerte al caer
         reinicia();
     }
 
     if (ctrlR.isDown) { // Pase de nivel
-        juego.destroy();
+        juegoPruebas.destroy();
         inicio();
     }
 
@@ -249,9 +249,9 @@ function update() {
         var yAxis = p2.vec2.fromValues(0, 1);
         var result = false;
 
-        for (var i = 0; i < juego.physics.p2.world.narrowphase.contactEquations.length; i++){
+        for (var i = 0; i < juegoPruebas.physics.p2.world.narrowphase.contactEquations.length; i++){
 
-            var c = juego.physics.p2.world.narrowphase.contactEquations[i];
+            var c = juegoPruebas.physics.p2.world.narrowphase.contactEquations[i];
 
             if (c.bodyA === cobaIA.jugador.body.data || c.bodyB === cobaIA.jugador.body.data){
                 var d = p2.vec2.dot(c.normalA, yAxis); // Normal dot Y-axis
@@ -265,14 +265,14 @@ function update() {
 
     if (!checkIfCanJump(tankabaIA)) {
         console.log(tankabaIA.jugador.body.angle + ', ' + (tankabaIA.jugador.body.angle >= 0.0 && tankabaIA.jugador.body.angle <= 45.0));
-        //let timer =  juego.time.events.add(1250, function(){tankabaIA.jugador.body.angle = 0;}, this, 0);
+        //let timer =  juegoPruebas.time.events.add(1250, function(){tankabaIA.jugador.body.angle = 0;}, this, 0);
         //tankabaIA.jugador.body.angle = 0;
         tankabaIA.jugador.body.fixedRotation = true;
         if (!(tankabaIA.jugador.body.angle >= -45 && tankabaIA.jugador.body.angle <= 45) && tankabaIA.ultimo_sentido == 'derecha') {
             tankabaIA.jugador.body.angle = 0;
             console.log("hola");
         }
-        else if (!(tankabaIA.jugador.body.angle >= 135 && tankabaIA.jugador.body.angle <= 225) && tankabaIA.ultimo_sentido == 'izquierda') {
+        if (!(tankabaIA.jugador.body.angle >= 135 && tankabaIA.jugador.body.angle <= 225) && tankabaIA.ultimo_sentido == 'izquierda') {
             tankabaIA.jugador.body.angle = 0;
             console.log("hola");
         }
@@ -287,8 +287,10 @@ function update() {
         //createjs.Sound.play(paso);
 
         tankabaIA.jugador.body.moveLeft(350);
-        tankabaIA.jugador.animations.play('movimientoIzquierda');
-        tankabaIA.ultimo_sentido = 'izquierda';
+        if(checkIfCanJump(tankabaIA)){
+            tankabaIA.jugador.animations.play('movimientoIzquierda');
+            tankabaIA.ultimo_sentido = 'izquierda';
+        }
     }
      else if (cursores.right.isDown && tankabaIA.canImove)
     {
@@ -296,20 +298,23 @@ function update() {
         //createjs.Sound.play(paso);
         
         tankabaIA.jugador.body.moveRight(350);
-        tankabaIA.jugador.animations.play('movimientoDerecha');
-        tankabaIA.ultimo_sentido = 'derecha';
+
+        if(checkIfCanJump(tankabaIA)){
+            tankabaIA.jugador.animations.play('movimientoDerecha');
+            tankabaIA.ultimo_sentido = 'derecha';
+        }
 
     } else {
         
         tankabaIA.jugador.animations.stop();
 
-        if(tankabaIA.ultimo_sentido === "izquierda"){
+        if(tankabaIA.ultimo_sentido === "derecha"){
 
-            tankabaIA.jugador.frame = 30;
+            tankabaIA.jugador.frame = 0;
 
         }else{
 
-            tankabaIA.jugador.frame = 0;
+            tankabaIA.jugador.frame = 30;
         }
     }   
 
@@ -405,7 +410,7 @@ function update() {
 }
 
 function reinicia() {
-        //juego.autoStart();
+        //juegoPruebas.autoStart();
         if (tankabaIA.muriendo == false) {
             tankabaIA.muriendo = true;
             createjs.Sound.play(perder);

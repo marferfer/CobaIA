@@ -1,7 +1,6 @@
 // Update
 function updateP() {
 
-    //console.log(tankabaIA.jugador.body.y);
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // REINICIAR VARIABLES  ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -166,19 +165,83 @@ function updateP() {
         indicator.animations.frame = 1;
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////// COMPROBAR SI SE ESTA EN ZONA DE VENTILADORES   /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     for(let i = 0; i < ventiladores.lista.length; i++){
-        
+
         let ventilador = ventiladores.lista[i];
 
         if(ventilador.posicion === "vertical"){
 
-            if(tankabaIA.jugador.x >= ventilador.zona[0] && tankabaIA.jugador.x <= ventilador.zona[1] 
-                && tankabaIA.jugador.y <= ventilador.zona[2] && tankabaIA.jugador.y >= ventilador.zona[3]){
+            if(talibaIA.jugador.body.x >= ventilador.zona[0] && talibaIA.jugador.body.x <= ventilador.zona[1] 
+                && talibaIA.jugador.body.y <= ventilador.zona[2] && talibaIA.jugador.body.y >= ventilador.zona[3]){
 
-                tankabaIA.jugador.body.moveUp(150);
+                talibaIA.jugador.body.moveUp(150);
+            }
+
+        } else if(ventilador.posicion === "horizontal_derecha"){
+
+            if(talibaIA.jugador.body.x >= ventilador.zona[0] && talibaIA.jugador.body.x <= ventilador.zona[1] 
+                    && talibaIA.jugador.body.y <= ventilador.zona[2] && talibaIA.jugador.body.y >= ventilador.zona[3]){
+
+                    talibaIA.jugador.body.moveRight(500);
+                    talibaIA.canImove = false;
+            }else{
+
+                    talibaIA.canImove = true;
+            }
+
+            if(acrobaIA.jugador.body.x >= ventilador.zona[0] && acrobaIA.jugador.body.x <= ventilador.zona[1] 
+                    && acrobaIA.jugador.body.y <= ventilador.zona[2] && acrobaIA.jugador.body.y >= ventilador.zona[3]){
+
+                    acrobaIA.jugador.body.moveRight(500);
+                    acrobaIA.canImove = false;
+            }else{
+
+                    acrobaIA.canImove = true;
+            }
+
+            if(tankabaIA.jugador.body.x >= ventilador.zona[0] && tankabaIA.jugador.body.x <= ventilador.zona[1] 
+                    && tankabaIA.jugador.body.y <= ventilador.zona[2] && tankabaIA.jugador.body.y >= ventilador.zona[3]){
+
+                    tankabaIA.jugador.body.moveRight(500);
+            }
+
+        }else if(ventilador.posicion === "horizontal_izquierda"){
+
+            if(talibaIA.jugador.body.x >= ventilador.zona[0] && talibaIA.jugador.body.x <= ventilador.zona[1] 
+                    && talibaIA.jugador.body.y <= ventilador.zona[2] && talibaIA.jugador.body.y >= ventilador.zona[3]){
+
+                    talibaIA.jugador.body.moveLeft(500);
+                    talibaIA.canImove = false;
+            }else{
+
+                    talibaIA.canImove = true;
+            }
+
+            if(acrobaIA.jugador.body.x >= ventilador.zona[0] && acrobaIA.jugador.body.x <= ventilador.zona[1] 
+                    && acrobaIA.jugador.body.y <= ventilador.zona[2] && acrobaIA.jugador.body.y >= ventilador.zona[3]){
+
+                    acrobaIA.jugador.body.moveLeft(500);
+                    acrobaIA.canImove = false;
+            }else{
+
+                    acrobaIA.canImove = true;
+            }
+
+            if(tankabaIA.jugador.body.x >= ventilador.zona[0] && tankabaIA.jugador.body.x <= ventilador.zona[1] 
+                    && tankabaIA.jugador.body.y <= ventilador.zona[2] && tankabaIA.jugador.body.y >= ventilador.zona[3]){
+
+                    tankabaIA.jugador.body.moveLeft(500);
             }
         }
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     if (tankabaIA.jugador.position.y > 1500) { // Muerte al caer
         reinicia();
@@ -264,17 +327,13 @@ function updateP() {
     }
 
     if (!checkIfCanJump(tankabaIA)) {
-        console.log(tankabaIA.jugador.body.angle + ', ' + (tankabaIA.jugador.body.angle >= 0.0 && tankabaIA.jugador.body.angle <= 45.0));
-        //let timer =  juegoPruebas.time.events.add(1250, function(){tankabaIA.jugador.body.angle = 0;}, this, 0);
-        //tankabaIA.jugador.body.angle = 0;
+
         tankabaIA.jugador.body.fixedRotation = true;
         if (!(tankabaIA.jugador.body.angle >= -45 && tankabaIA.jugador.body.angle <= 45) && tankabaIA.ultimo_sentido == 'derecha') {
             tankabaIA.jugador.body.angle = 0;
-            console.log("hola");
         }
-        if (!(tankabaIA.jugador.body.angle >= 135 && tankabaIA.jugador.body.angle <= 225) && tankabaIA.ultimo_sentido == 'izquierda') {
+        else if (!(tankabaIA.jugador.body.angle >= 135 && tankabaIA.jugador.body.angle <= 225) && tankabaIA.ultimo_sentido == 'izquierda') {
             tankabaIA.jugador.body.angle = 0;
-            console.log("hola");
         }
     }
     else {
@@ -287,10 +346,8 @@ function updateP() {
         //createjs.Sound.play(paso);
 
         tankabaIA.jugador.body.moveLeft(350);
-        if(checkIfCanJump(tankabaIA)){
-            tankabaIA.jugador.animations.play('movimientoIzquierda');
-            tankabaIA.ultimo_sentido = 'izquierda';
-        }
+        tankabaIA.jugador.animations.play('movimientoIzquierda');
+        tankabaIA.ultimo_sentido = 'izquierda';
     }
      else if (cursores.right.isDown && tankabaIA.canImove)
     {
@@ -298,23 +355,20 @@ function updateP() {
         //createjs.Sound.play(paso);
         
         tankabaIA.jugador.body.moveRight(350);
-
-        if(checkIfCanJump(tankabaIA)){
-            tankabaIA.jugador.animations.play('movimientoDerecha');
-            tankabaIA.ultimo_sentido = 'derecha';
-        }
+        tankabaIA.jugador.animations.play('movimientoDerecha');
+        tankabaIA.ultimo_sentido = 'derecha';
 
     } else {
         
         tankabaIA.jugador.animations.stop();
 
-        if(tankabaIA.ultimo_sentido === "derecha"){
+        if(tankabaIA.ultimo_sentido === "izquierda"){
 
-            tankabaIA.jugador.frame = 0;
+            tankabaIA.jugador.frame = 30;
 
         }else{
 
-            tankabaIA.jugador.frame = 30;
+            tankabaIA.jugador.frame = 0;
         }
     }   
 
@@ -346,18 +400,16 @@ function updateP() {
     }else if(ctrlA.isDown && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveLeft(300);
-        if(checkIfCanJump(acrobaIA)){
-            acrobaIA.jugador.animations.play('movimientoIzquierda');
-            acrobaIA.ultimo_sentido = "izquierda";
-        }
+
+        acrobaIA.jugador.animations.play('movimientoIzquierda');
+        acrobaIA.ultimo_sentido = "izquierda";
 
     }else if(ctrlD.isDown && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveRight(300);
-        if(checkIfCanJump(acrobaIA)){
-            acrobaIA.jugador.animations.play('movimientoDerecha');
-            acrobaIA.ultimo_sentido = "derecha";
-        }
+
+        acrobaIA.jugador.animations.play('movimientoDerecha');
+        acrobaIA.ultimo_sentido = "derecha";
 
     }else{
 
@@ -382,18 +434,18 @@ function updateP() {
     }else if(ctrlB.isDown && talibaIA.canImove){
 
         talibaIA.jugador.body.moveLeft(300);
-        if(checkIfCanJump(talibaIA)){
-            talibaIA.jugador.animations.play('movimientoIzquierda');
-            talibaIA.ultimo_sentido = "izquierda";
-        }
+
+        talibaIA.jugador.animations.play('movimientoIzquierda');
+        talibaIA.ultimo_sentido = "izquierda";
+
 
     }else if(ctrlM.isDown && talibaIA.canImove){
 
         talibaIA.jugador.body.moveRight(300);
-        if(checkIfCanJump(talibaIA)){
-            talibaIA.jugador.animations.play('movimientoDerecha');
-            talibaIA.ultimo_sentido = "derecha";
-        }
+      
+        talibaIA.jugador.animations.play('movimientoDerecha');
+        talibaIA.ultimo_sentido = "derecha";
+        
 
     }else{
 
