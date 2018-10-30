@@ -146,10 +146,9 @@ function createP() {
 <<<<<<< HEAD
     sueloN1.body.x = 19900;
     sueloN1.body.y = juegoPruebas.world.height - 700;*/
-=======
     sueloN1.body.x = 19200;
     sueloN1.body.y = juegoPruebas.world.height - 700;
->>>>>>> cd0c1c93e26a8b208464003fc6b281af433cc8ba
+
 
     //nivel1.suelo = sueloN1;
 

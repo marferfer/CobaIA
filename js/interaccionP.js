@@ -268,9 +268,21 @@ function updateP() {
         tankabaIA.tiempo_disparo = 0;
     }
     if (!checkIfCanJump(tankabaIA)) {
-        console.log("hola");
+        console.log(tankabaIA.jugador.body.angle + ', ' + (tankabaIA.jugador.body.angle >= 0.0 && tankabaIA.jugador.body.angle <= 45.0));
         //let timer =  juegoPruebas.time.events.add(1250, function(){tankabaIA.jugador.body.angle = 0;}, this, 0);
-        tankabaIA.jugador.body.angle = 0;
+        //tankabaIA.jugador.body.angle = 0;
+        tankabaIA.jugador.body.fixedRotation = true;
+        if (!(tankabaIA.jugador.body.angle >= -45 && tankabaIA.jugador.body.angle <= 45) && tankabaIA.ultimo_sentido == 'derecha') {
+            tankabaIA.jugador.body.angle = 0;
+            console.log("hola");
+        }
+        if (!(tankabaIA.jugador.body.angle >= 135 && tankabaIA.jugador.body.angle <= 225) && tankabaIA.ultimo_sentido == 'izquierda') {
+            tankabaIA.jugador.body.angle = 0;
+            console.log("hola");
+        }
+    }
+    else {
+        tankabaIA.jugador.body.fixedRotation = false;
     }
     if (tecla_laser.isDown && tankabaIA.tiempo_disparo < tankabaIA.tolerancia_disparo && tankabaIA.cantidad_disparos > 0) {
         tankabaIA.tiempo_disparo++;
