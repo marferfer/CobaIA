@@ -36,6 +36,7 @@ function preloadP() {
     juegoPruebas.load.image('sueloN1Parte1', 'assets/images/sueloN1Parte1.png');
     //juegoPruebas.load.image('sueloN1Parte2', 'assets/images/sueloN1Parte2.png');
     //juegoPruebas.load.image('sueloN1Parte3', 'assets/images/sueloN1Parte3.png');
+    
 
     juegoPruebas.load.image('chip', 'assets/images/chip.png');
     juegoPruebas.load.image('tierra', 'assets/images/tierra.png');
