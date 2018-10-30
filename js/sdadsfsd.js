@@ -166,7 +166,7 @@ function updateP() {
         indicator.animations.frame = 1;
     }
 
-    for(let i = 0; i < ventiladores.lista.length; i++){
+    /*for(let i = 0; i < ventiladores.lista.length; i++){
         
         let ventilador = ventiladores.lista[i];
 
@@ -178,7 +178,7 @@ function updateP() {
                 tankabaIA.jugador.body.moveUp(150);
             }
         }
-    }
+    }*/
 
     if (tankabaIA.jugador.position.y > 1500) { // Muerte al caer
         reinicia();

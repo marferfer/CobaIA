@@ -190,19 +190,19 @@ function create() {
     /////////////// TUBOS   ///////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*tubos.grupo = juego.add.group();
+   /*tubos.grupo = juego.add.group();
     tubos.grupo.enableBody = true;
     tubos.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
     let tubo = tubos.grupo.create(0, 0, 'tuboN1Completo');
 
-    tubo.body.clearShapes();
-    tubo.body.loadPolygon('tuboN1CompletoCollisions', 'tuboN1Completo');
+    //tubo.body.clearShapes();
+    //tubo.body.loadPolygon('tuboN1CompletoCollisions', 'tuboN1Completo');
 
     tubo.body.static = true;
     tubo.body.debug = true;
-    tubo.body.x = 2150;
-    tubo.body.y = juego.world.height - 875;
+    //tubo.body.x = 2150;
+    //tubo.body.y = juego.world.height - 875;
     tubo.body.collideWorldBounds = true;
     
     tubos.lista.push(tubo);*/

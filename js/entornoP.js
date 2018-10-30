@@ -36,22 +36,12 @@ function preloadP() {
     juegoPruebas.load.image('sueloN1Parte1', 'assets/images/sueloN1Parte1.png');
     //juegoPruebas.load.image('sueloN1Parte2', 'assets/images/sueloN1Parte2.png');
     //juegoPruebas.load.image('sueloN1Parte3', 'assets/images/sueloN1Parte3.png');
-    
 
     juegoPruebas.load.image('chip', 'assets/images/chip.png');
     juegoPruebas.load.image('tierra', 'assets/images/tierra.png');
     juegoPruebas.load.image('tuboMid', 'assets/images/tuboMid.png');
-    juegoPruebas.load.image('escalera', 'assets/images/escalera.png');
-    juegoPruebas.load.image('pua', 'assets/images/puas.png');
-    juegoPruebas.load.image('roca', 'assets/images/roca.png');
     juegoPruebas.load.image('caja', 'assets/images/caja.png');
-    juegoPruebas.load.image('arbol', 'assets/images/arbol.png');
-    juegoPruebas.load.image('laser_der', 'assets/images/laser_der.png');
-    juegoPruebas.load.image('laser_izq', 'assets/images/laser_izq.png');
-    juegoPruebas.load.image('circulo', 'assets/images/circulo.png');
-    juegoPruebas.load.image('mensaje', 'assets/images/mensaje.png');
     juegoPruebas.load.image('tuboN1Completo', 'assets/images/tuboN1Completo.png');
-    juegoPruebas.load.image('cobaIA', 'assets/images/cobaIA.png');
     juegoPruebas.load.image('cable', 'assets/images/cable.png');
     juegoPruebas.load.image('frasco', 'assets/images/frasco.png');
     juegoPruebas.load.image('plataformaMovil', 'assets/images/plataformaMovil.png');
@@ -76,7 +66,7 @@ function preloadP() {
     juegoPruebas.load.spritesheet('tankabaIAmovimiento', 'assets/images/tankabaIAmovimiento.png', 93, 59, 59, 6, 7);
     juegoPruebas.load.spritesheet('acrobaIAmovimiento', 'assets/images/acrobaIAmovimiento.png', 95, 51, 59, 2, 3);
     juegoPruebas.load.spritesheet('bobina', 'assets/images/bobina.png', 287, 49, 6, 0, 0);
-    juegoPruebas.load.spritesheet('viento', 'assets/images/ventilador.png', 175, 295, 5, 0, 0);
+    juegoPruebas.load.spritesheet('aire', 'assets/images/aire.png', 175, 295, 5, 0, 0);
 
     juegoPruebas.load.physics('sueloN1Parte1Collisions', 'assets/data/sueloN1Parte1.json');
     //juegoPruebas.load.physics('sueloN1Parte2Collisions', 'assets/data/sueloN1Parte2.json');
@@ -144,6 +134,11 @@ function createP() {
     sueloN1.body.static = true;
     sueloN1.body.debug = true;
     
+<<<<<<< HEAD
+    sueloN1.body.x = 19900;
+    sueloN1.body.y = juegoPruebas.world.height - 700;*/
+    sueloN1.body.x = 19200;
+    sueloN1.body.y = juegoPruebas.world.height - 700;
 
 
     //nivel1.suelo = sueloN1;
@@ -439,18 +434,27 @@ function createP() {
 
     ventilador.body.debug = true;
     ventilador.body.static = true;
-    //pilaCadaveres.pivot.x = 150;
-    //pilaCadaveres.body.setRectangle(300, 25, -150);
-    ventilador.body.x = 16500;
-    ventilador.body.y = juegoPruebas.world.height-150;
 
-    ventiladores.lista.push(bobina);
+    ventilador.body.x = 16500;
+    ventilador.body.y = juegoPruebas.world.height-100;
+
+    ventilador.zona = [ventilador.body.x - 88, ventilador.body.x + 88, ventilador.body.y - 22, ventilador.body.y - 300];
+    ventilador.posicion = "vertical";
+
+    ventiladores.lista.push(ventilador);
+
+
+    let aire = juegoPruebas.add.image(ventilador.zona[0], ventilador.zona[3], 'aire');
+
+    aire.animations.add('aire_funciona', [0, 1, 2, 3, 4], 30, true);
+    aire.animations.play('aire_funciona');
+
+    
+
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////    /////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    lasers = juegoPruebas.add.group(); // Lasers
-    lasers.enableBody = true;
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     
 
