@@ -30,6 +30,8 @@ function create() {
     //buttonOnline = game.add.button(game.world.centerX - 620, 550, 'button', actionOnClickOnline, this, 2, 1, 0);
     buttonExit = game.add.button(game.world.centerX - 420, 550, 'buttonSalir', actionOnClickExit, this, 2, 1, 0); //game.world.centerX - 320, 550
 
+    buttonPruebas = game.add.button(game.world.centerX - 220, 550, 'buttonSalir', actionOnClickPruebas, this, 2, 1, 0); //game.world.centerX - 320, 550
+
     button.onInputOver.add(over, this);
     button.onInputOut.add(out, this);
     button.onInputUp.add(up, this);
@@ -62,5 +64,12 @@ function actionOnClickOnline () {
 
 function actionOnClickExit () {
     game.destroy();
+
+}
+
+
+function actionOnClickPruebas () {
+    game.destroy();
+    pruebas();
 
 }

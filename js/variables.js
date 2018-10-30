@@ -1,6 +1,6 @@
 var juego;
 
-
+var juegoPruebas;
 
 var pad1;
 var indicator;

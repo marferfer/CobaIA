@@ -14,3 +14,20 @@ function inicio() {
 
     
 }
+
+function pruebas() {
+     juegoPruebas = new Phaser.Game(1920, 800, Phaser.AUTO, '', {preload: preloadP, create: createP, update: updateP, render: renderP});                
+    
+    
+
+    function renderP() { // Render
+        //juego.debug.cameraInfo(juego.camera, 32, 32);
+        //juego.debug.spriteCoords(obj_jugador.jugador, 32, 500);
+    }
+
+    function reinicia_inmediato() {
+        location.reload();
+    }
+
+    
+}
