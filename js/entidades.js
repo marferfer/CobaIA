@@ -13,24 +13,7 @@ class Nivel{
 class CobaIA {
 
     constructor(){
-        this.muriendo = false;
-        this.musica_diabolica = false;
         this.jugador = null;
-        this.vidas = 3;
-        this.retrasa_paso = 0;
-        this.corazones = [];
-        this.inmortal = false;
-        this.tiempo_inmortalidad = 0;
-        this.tolerancia_vida = 100;
-        this.tiempo_disparo = 0;
-        this.tolerancia_disparo = 10;
-        this.cantidad_disparos = 5;
-        this.lasers_der = [];
-        this.lasers_izq = [];
-        this.puntaje = 0;
-        this.contadorSaltos = 0;
-        this.colisionEscalera = false;
-        this.contadorEscaleras = 0;
         this.ultimo_sentido = 'derecha';
         this.muerta = false;
         this.canImove = true;
