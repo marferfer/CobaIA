@@ -53,6 +53,7 @@ function preload() {
     juego.load.image('indicadorJ2', 'assets/indicadorJ2.png');
     juego.load.image('indicadorJ3', 'assets/indicadorJ3.png');
     juego.load.image('pilaCadaveres', 'assets/images/pilaCadaveres.png');
+    juego.load.image('baseTrepar', 'assets/images/baseParaTrepar.png');
 
     juego.load.image('ventilador', 'assets/images/ventilador.png');
     
@@ -133,6 +134,7 @@ function create() {
     ctrlA = juego.input.keyboard.addKey(Phaser.Keyboard.A);
     ctrlS = juego.input.keyboard.addKey(Phaser.Keyboard.S);
     ctrlD = juego.input.keyboard.addKey(Phaser.Keyboard.D);
+    ctrlQ = juego.input.keyboard.addKey(Phaser.Keyboard.Q);
 
     //movimiento de la TalibaIA
     ctrlH = juego.input.keyboard.addKey(Phaser.Keyboard.H);
@@ -226,8 +228,8 @@ function create() {
     boton.body.setRectangle(61, 15, 0, -5);
     boton.body.debug = true;
     boton.body.static = true;
-    boton.body.x = 2600;
-    boton.body.y = juego.world.height - 275;
+    boton.body.x = 2447;
+    boton.body.y = 480;
 
     botones.lista.push(boton);
 
@@ -241,12 +243,12 @@ function create() {
 
     let plataformaMovil = plataformasMoviles.grupo.create(0, 0, 'plataformaMovil');
 
-    plataformaMovil.body.debug = true;
+    //plataformaMovil.body.debug = true;
     plataformaMovil.body.static = true;
     plataformaMovil.pivot.x = 150;
     plataformaMovil.body.setRectangle(300, 25, -150);
-    plataformaMovil.body.x = 3000;
-    plataformaMovil.body.y = juego.world.height - 460;
+    plataformaMovil.body.x = 2440;
+    plataformaMovil.body.y = juego.world.height - 402;
     plataformaMovil.body.collideWorldBounds = true;
 
     plataformasMoviles.lista.push(plataformaMovil);
@@ -261,7 +263,7 @@ function create() {
     //cajas.collisionGroup = juego.physics.p2.createCollisionGroup();
 
     //let caja = juego.add.sprite(2315, juego.world.height - 300, 'caja');
-    let caja = cajas.grupo.create(100, juego.world.height -300, 'caja');
+    let caja = cajas.grupo.create(480, juego.world.height -300, 'caja');
     //caja.body.setCollisionGroup(cajas.collisionGroup);
     //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
 
@@ -275,7 +277,7 @@ function create() {
     caja.body.collideWorldBounds = true;
     cajas.lista.push(caja);
 
-    caja = cajas.grupo.create(2415, juego.world.height -500, 'caja');
+    /*caja = cajas.grupo.create(2415, juego.world.height -500, 'caja');
     //caja.body.setCollisionGroup(cajas.collisionGroup);
     //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
  
@@ -436,6 +438,22 @@ function create() {
 
     //juego.physics.p2.enableBody(paseNivel);
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////// BASE PARA TREPAR ////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    baseTrepar = juego.add.sprite(0, 0, 'baseTrepar');
+    juego.physics.p2.enableBody(baseTrepar);
+    //baseTrepar.physicsBodyType = Phaser.Physics.P2JS;
+
+    baseTrepar.body.setRectangle(80, 2);
+
+    //baseTrepar.body.debug = true;
+    baseTrepar.body.static = true;
+
+    baseTrepar.body.x = 50;
+    baseTrepar.body.y = juego.world.height-100;
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// TANKABAIA   ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -466,12 +484,13 @@ function create() {
 /////////////// ACROBAIA   ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    acrobaIA.jugador = juego.add.sprite(700, juego.world.height - 300, 'acrobaIAmovimiento');
+    acrobaIA.jugador = juego.add.sprite(220, juego.world.height - 300, 'acrobaIAmovimiento');
     juego.physics.p2.enableBody(acrobaIA.jugador);
     acrobaIA.jugador.body.setRectangle(80, 33);
     
-    acrobaIA.jugador.body.fixedRotation = true;
+    //acrobaIA.jugador.body.fixedRotation = true;
     acrobaIA.jugador.body.mass = 1;
+    //acrobaIA.jugador.body.allowGravity = false;
 
     acrobaIA.jugador.dynamic = true;
     acrobaIA.jugador.body.debug = true;
@@ -488,11 +507,11 @@ function create() {
 /////////////// TALIBAIA   ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    talibaIA.jugador = juego.add.sprite(700, juego.world.height - 300, 'talibaIAmovimiento');
+    talibaIA.jugador = juego.add.sprite(100, juego.world.height - 300, 'talibaIAmovimiento');
     juego.physics.p2.enableBody(talibaIA.jugador);
     talibaIA.jugador.body.setRectangle(80, 40);
     
-    talibaIA.jugador.body.fixedRotation = true;
+    talibaIA.jugador.body.fixedRotation = false;
     talibaIA.jugador.body.mass = 5;
     
     talibaIA.jugador.dynamic = true;
@@ -656,6 +675,18 @@ function create() {
             cajasCableado.lista[0].animations.play('caja_rota');
             let timer =  juego.time.events.add(1250, stopPlataforma, this, 0);
             plataformasMoviles.lista[0].body.rotateRight(25);      
+
+        }
+
+        if(body.sprite.key === 'tuboN1Completo'){  
+
+            acrobaIA.puedoTrepar = true;    
+
+        }
+
+        else {
+
+            acrobaIA.puedoTrepar = false;
 
         }
 
@@ -860,7 +891,7 @@ function create() {
 
     /*puntajeTexto = juego.add.text(100, 16, 'puntaje: 0 disparos: ' + obj_jugador.cantidad_disparos, {fontSize: '20px', fill: 'red'});// Creamos el texto y lo agregamos como hijo del objeto sprite con addChild
     sprite.addChild(puntajeTexto);*/
-    juego.camera.follow(tankabaIA.jugador); // Le permitimos a la cámara del juego, seguir en todo momento al obj_jugador.jugador    
+    juego.camera.follow(acrobaIA.jugador); // Le permitimos a la cámara del juego, seguir en todo momento al obj_jugador.jugador    
 
     juego.physics.p2.updateBoundsCollisionGroup();
 

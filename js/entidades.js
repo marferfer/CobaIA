@@ -18,6 +18,8 @@ class CobaIA {
         this.muerta = false;
         this.canImove = true;
         this.chip = null;
+        this.trepando = false;
+        this.puedoTrepar = false;
     }
 };
 

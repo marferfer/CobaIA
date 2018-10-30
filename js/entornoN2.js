@@ -167,6 +167,23 @@ function create2() {
 
     console.log(cajaCableado.body.id);
 
+    tubos.grupo = juego2.add.group();
+    tubos.grupo.enableBody = true;
+    tubos.grupo.physicsBodyType = Phaser.Physics.P2JS;
+
+    let tubo = tubos.grupo.create(0, 0, 'tuboN1Completo');
+
+    tubo.body.clearShapes();
+    tubo.body.loadPolygon('tuboN1CompletoCollisions', 'tuboN1Completo');
+
+    tubo.body.static = true;
+    tubo.body.debug = true;
+    tubo.body.x = 2150;
+    tubo.body.y = juego2.world.height - 675;
+    tubo.body.collideWorldBounds = true;
+    
+    tubos.lista.push(tubo);
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// BOTONES   /////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
