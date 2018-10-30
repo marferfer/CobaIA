@@ -403,7 +403,7 @@ function create() {
     tankabaIA.jugador = juego.add.sprite(500, juego.world.height - 225, 'tankabaIAmovimiento');
     tankabaIA.jugador.scale.setTo(1.3, 1.3);
     juego.physics.p2.enableBody(tankabaIA.jugador);
-    tankabaIA.jugador.body.setRectangle(80, 40);
+    tankabaIA.jugador.body.setRectangle(95, 60);
 
     tankabaIA.jugador.body.collideWorldBounds = true;
     

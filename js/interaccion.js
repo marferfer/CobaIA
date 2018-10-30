@@ -321,7 +321,7 @@ function update() {
             tankabaIA.jugador.frame = 0;
 
         }else{
-            
+
             tankabaIA.jugador.frame = 30;
         }
     }   
