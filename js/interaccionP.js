@@ -1,7 +1,7 @@
 // Update
 function updateP() {
 
-    //console.log(tankabaIA.jugador.body.x);
+    //console.log(tankabaIA.jugador.body.y);
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // REINICIAR VARIABLES  ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -166,6 +166,19 @@ function updateP() {
         indicator.animations.frame = 1;
     }
 
+    for(let i = 0; i < ventiladores.lista.length; i++){
+        
+        let ventilador = ventiladores.lista[i];
+
+        if(ventilador.posicion === "vertical"){
+
+            if(tankabaIA.jugador.x >= ventilador.zona[0] && tankabaIA.jugador.x <= ventilador.zona[1] 
+                && tankabaIA.jugador.y <= ventilador.zona[2] && tankabaIA.jugador.y >= ventilador.zona[3]){
+
+                tankabaIA.jugador.body.moveUp(150);
+            }
+        }
+    }
 
     if (tankabaIA.jugador.position.y > 1500) { // Muerte al caer
         reinicia();
@@ -176,20 +189,6 @@ function updateP() {
         inicio();
     }
 
-    if (tankabaIA.inmortal && tankabaIA.tiempo_inmortalidad < tankabaIA.tolerancia_vida) {
-        tankabaIA.tiempo_inmortalidad++;
-        if (tankabaIA.tiempo_inmortalidad % 5 == 0) {
-            tankabaIA.jugador.alpha = 0;
-        } else {
-            tankabaIA.jugador.alpha = 1;
-        }
-        if (tankabaIA.tiempo_inmortalidad == tankabaIA.tolerancia_vida) {
-            tankabaIA.vidas--;
-            tankabaIA.inmortal = false;
-            tankabaIA.tiempo_inmortalidad = 0;
-            tankabaIA.jugador.alpha = 1;
-        }
-    }
 
     // Controls
     /*if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1)
@@ -264,9 +263,6 @@ function updateP() {
         return result;
     }
 
-    if (tecla_laser.isUp) {
-        tankabaIA.tiempo_disparo = 0;
-    }
     if (!checkIfCanJump(tankabaIA)) {
         console.log(tankabaIA.jugador.body.angle + ', ' + (tankabaIA.jugador.body.angle >= 0.0 && tankabaIA.jugador.body.angle <= 45.0));
         //let timer =  juegoPruebas.time.events.add(1250, function(){tankabaIA.jugador.body.angle = 0;}, this, 0);
@@ -284,38 +280,8 @@ function updateP() {
     else {
         tankabaIA.jugador.body.fixedRotation = false;
     }
-    if (tecla_laser.isDown && tankabaIA.tiempo_disparo < tankabaIA.tolerancia_disparo && tankabaIA.cantidad_disparos > 0) {
-        tankabaIA.tiempo_disparo++;
-        var ajuste = 25;
-        if (tankabaIA.ultimo_sentido == 'derecha') {
-            //tankabaIA.jugador.animations.play('disparo_derecha');
-            if (tankabaIA.tiempo_disparo == 1) {
-                tankabaIA.cantidad_disparos--;
-                var jnLaser = {
-                    distancia: 0,
-                    distancia_max: 20,
-                    laser: lasers.create(tankabaIA.jugador.position.x + 2 * ajuste, tankabaIA.jugador.position.y + ajuste, 'laser_der')
-                };
-                tankabaIA.lasers_der.push(jnLaser);
-                var instance = createjs.Sound.play(disparo);
-                instance.volume = 0.15;
-            }
-        } else {
-            //tankabaIA.jugador.animations.play('disparo_izquierda');
-            if (tankabaIA.tiempo_disparo == 1) {
-                tankabaIA.cantidad_disparos--;
-                var jnLaser = {
-                    distancia: 0,
-                    distancia_max: 20,
-                    laser: lasers.create(tankabaIA.jugador.position.x - ajuste, tankabaIA.jugador.position.y + ajuste, 'laser_izq')
-                };
-                tankabaIA.lasers_izq.push(jnLaser);
-                var instance = createjs.Sound.play(disparo);
-                instance.volume = 0.15;
-            }
-        }
-        actualiza_informacion();
-    } else if (cursores.left.isDown && tankabaIA.canImove)// Si presionamos LEFT
+    
+    if (cursores.left.isDown && tankabaIA.canImove)// Si presionamos LEFT
     {
         
         //createjs.Sound.play(paso);
@@ -338,8 +304,6 @@ function updateP() {
             tankabaIA.ultimo_sentido = 'derecha';
         }
 
-    } else if (tankabaIA.contadorEscaleras != 0) {// Si el contador de escaleras es <> de cero, quiere decir que estamos escalando
-        //tankabaIA.jugador.animations.play('climb');// Animamos la escalada
     } else {
         
         tankabaIA.jugador.animations.stop();
@@ -356,7 +320,7 @@ function updateP() {
 
     
 
-    if (cursores.up.isDown /*&& checkIfCanJump(tankabaIA)*/ && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
+    if (cursores.up.isDown && checkIfCanJump(tankabaIA) && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
         
 
         tankabaIA.jugador.body.moveUp(300);
@@ -364,35 +328,12 @@ function updateP() {
      
         //tankabaIA.jugador.animations.play('jump');
         createjs.Sound.play(salto);
-        if (tankabaIA.contadorSaltos == 1) {
-            tankabaIA.contadorSaltos = 2;
-        }
     }
 
-    
 
-    if (tankabaIA.contadorEscaleras < -1) {
-        tankabaIA.contadorEscaleras = -1;
-    }
     tankabaIA.jugador.position.y += (tankabaIA.contadorEscaleras * 2);
     if (tankabaIA.contadorEscaleras != 0) {
         //tankabaIA.jugador.animations.play('climb');
-    }
-    for (var i = 0; i < tankabaIA.lasers_der.length; i++) {
-        var laserAux = tankabaIA.lasers_der[i].laser;
-        tankabaIA.lasers_der[i].distancia++;
-        laserAux.position.x += 5;
-        if (tankabaIA.lasers_der[i].distancia == tankabaIA.lasers_der[i].distancia_max) {
-            tankabaIA.lasers_der[i].laser.kill();
-        }
-    }
-    for (var i = 0; i < tankabaIA.lasers_izq.length; i++) {
-        var laserAux = tankabaIA.lasers_izq[i].laser;
-        tankabaIA.lasers_izq[i].distancia++;
-        laserAux.position.x -= 5;
-        if (tankabaIA.lasers_izq[i].distancia == tankabaIA.lasers_izq[i].distancia_max) {
-            tankabaIA.lasers_izq[i].laser.kill();
-        }
     }
 
 
