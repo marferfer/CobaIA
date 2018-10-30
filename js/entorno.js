@@ -166,7 +166,10 @@ function create() {
     /////////////// INDICADORES   /////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    indicator = juego.add.sprite(1000, juego.world.height - 300, 'controller-indicator');
+    indicator = juego.add.sprite(0, 0, 'controller-indicator');
+    indicator.fixedToCamera = true;
+    indicator.cameraOffset.x = 10; // Ubicamos el sprite contenedor de la cámara en las coordenadas 10, 10
+    indicator.cameraOffset.y = 10;
     indicator.scale.x = indicator.scale.y = 2;
     indicator.animations.frame = 1;
 
@@ -846,12 +849,8 @@ function create() {
         }
     };
 
-    var sprite = juego.add.sprite(0, 0); // Creamos un Sprite para contener el texto de puntaje y lo dejamos fijo en relación a la cámara. Esto quiere decir que se moverá con ella fixedToCamera = true
-    sprite.fixedToCamera = true; // Lo dejará fijo ante la cámara
     /*puntajeTexto = juego.add.text(100, 16, 'puntaje: 0 disparos: ' + obj_jugador.cantidad_disparos, {fontSize: '20px', fill: 'red'});// Creamos el texto y lo agregamos como hijo del objeto sprite con addChild
     sprite.addChild(puntajeTexto);*/
-    sprite.cameraOffset.x = 10; // Ubicamos el sprite contenedor de la cámara en las coordenadas 10, 10
-    sprite.cameraOffset.y = 10;
     juego.camera.follow(tankabaIA.jugador); // Le permitimos a la cámara del juego, seguir en todo momento al obj_jugador.jugador    
 
     juego.physics.p2.updateBoundsCollisionGroup();
