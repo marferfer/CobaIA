@@ -37,6 +37,7 @@ function preloadP() {
     //juegoPruebas.load.image('sueloN1Parte2', 'assets/images/sueloN1Parte2.png');
     //juegoPruebas.load.image('sueloN1Parte3', 'assets/images/sueloN1Parte3.png');
 
+
     juegoPruebas.load.image('chip', 'assets/images/chip.png');
     juegoPruebas.load.image('tierra', 'assets/images/tierra.png');
     juegoPruebas.load.image('tuboMid', 'assets/images/tuboMid.png');
@@ -94,7 +95,7 @@ function createP() {
     /////////////// NIVEL 1   /////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     niveljuegoPruebas = 1;
-    nivel1.fondo = juegoPruebas.add.sprite(0, 0, 'fondoN1');
+    nivel1.fondo = juegoPruebas.add.sprite(12730, 0, 'fondoN1');
 
     //Decorados que se ven detras del jugador
     nivel1.decorados[0] = juegoPruebas.add.image(1765, juegoPruebas.world.height - 650, 'frasco');
@@ -110,7 +111,7 @@ function createP() {
     sueloN1.body.clearShapes();
     sueloN1.body.loadPolygon('sueloN1Parte1Collisions', 'sueloN1Parte1');
     sueloN1.body.static = true;
-    sueloN1.body.debug = true;
+    //sueloN1.body.debug = true;
     
     sueloN1.body.x = 5900;
     sueloN1.body.y = juegoPruebas.world.height - 655;

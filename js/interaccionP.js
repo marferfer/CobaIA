@@ -272,7 +272,7 @@ function updateP() {
             tankabaIA.jugador.body.angle = 0;
             console.log("hola");
         }
-        if (!(tankabaIA.jugador.body.angle >= 135 && tankabaIA.jugador.body.angle <= 225) && tankabaIA.ultimo_sentido == 'izquierda') {
+        else if (!(tankabaIA.jugador.body.angle >= 135 && tankabaIA.jugador.body.angle <= 225) && tankabaIA.ultimo_sentido == 'izquierda') {
             tankabaIA.jugador.body.angle = 0;
             console.log("hola");
         }
@@ -287,10 +287,8 @@ function updateP() {
         //createjs.Sound.play(paso);
 
         tankabaIA.jugador.body.moveLeft(350);
-        if(checkIfCanJump(tankabaIA)){
-            tankabaIA.jugador.animations.play('movimientoIzquierda');
-            tankabaIA.ultimo_sentido = 'izquierda';
-        }
+        tankabaIA.jugador.animations.play('movimientoIzquierda');
+        tankabaIA.ultimo_sentido = 'izquierda';
     }
      else if (cursores.right.isDown && tankabaIA.canImove)
     {
@@ -298,23 +296,20 @@ function updateP() {
         //createjs.Sound.play(paso);
         
         tankabaIA.jugador.body.moveRight(350);
-
-        if(checkIfCanJump(tankabaIA)){
-            tankabaIA.jugador.animations.play('movimientoDerecha');
-            tankabaIA.ultimo_sentido = 'derecha';
-        }
+        tankabaIA.jugador.animations.play('movimientoDerecha');
+        tankabaIA.ultimo_sentido = 'derecha';
 
     } else {
         
         tankabaIA.jugador.animations.stop();
 
-        if(tankabaIA.ultimo_sentido === "derecha"){
+        if(tankabaIA.ultimo_sentido === "izquierda"){
 
-            tankabaIA.jugador.frame = 0;
+            tankabaIA.jugador.frame = 30;
 
         }else{
 
-            tankabaIA.jugador.frame = 30;
+            tankabaIA.jugador.frame = 0;
         }
     }   
 
