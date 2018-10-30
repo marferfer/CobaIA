@@ -32,23 +32,13 @@ function preload() {
 
     juego.state.add("recarga", Phaser.Preload);
 
-    juego.load.image('fondoN1', 'assets/images/fondoN1.png');
-    juego.load.image('sueloN1Parte1', 'assets/images/sueloN1Parte1.png');
-    juego.load.image('sueloN1Parte2', 'assets/images/sueloN1Parte2.png');
-    juego.load.image('sueloN1Parte3', 'assets/images/sueloN1Parte3.png');
+    juego.load.image('fondoN1', 'assets/Nivel0/fondoN1.png');
+    juego.load.image('sueloN0', 'assets/Nivel0/Suelo.png');
 
     juego.load.image('chip', 'assets/images/chip.png');
     juego.load.image('tierra', 'assets/images/tierra.png');
     juego.load.image('tuboMid', 'assets/images/tuboMid.png');
-    juego.load.image('escalera', 'assets/images/escalera.png');
-    juego.load.image('pua', 'assets/images/puas.png');
-    juego.load.image('roca', 'assets/images/roca.png');
     juego.load.image('caja', 'assets/images/caja.png');
-    juego.load.image('arbol', 'assets/images/arbol.png');
-    juego.load.image('laser_der', 'assets/images/laser_der.png');
-    juego.load.image('laser_izq', 'assets/images/laser_izq.png');
-    juego.load.image('circulo', 'assets/images/circulo.png');
-    juego.load.image('mensaje', 'assets/images/mensaje.png');
     juego.load.image('tuboN1Completo', 'assets/images/tuboN1Completo.png');
     juego.load.image('cobaIA', 'assets/images/cobaIA.png');
     juego.load.image('cable', 'assets/images/cable.png');
@@ -57,15 +47,14 @@ function preload() {
     juego.load.image('boton', 'assets/images/boton.png');
     juego.load.image('conexionTuboArriba', 'assets/images/conexionTuboArriba.png');
     juego.load.image('conexionTuboDerecha', 'assets/images/conexionTuboDerecha.png');
-    juego.load.image('indicadorJ1', 'assets/indicadorJ1.png');
-    juego.load.image('indicadorJ2', 'assets/indicadorJ2.png');
-    juego.load.image('indicadorJ3', 'assets/indicadorJ3.png');
+    juego.load.image('indicadorJ1', 'assets/images/J1 azul.png');
+    juego.load.image('indicadorJ2', 'assets/images/J2 rojo.png');
+    juego.load.image('indicadorJ3', 'assets/images/J3 rosa.png');
     juego.load.image('pilaCadaveres', 'assets/images/pilaCadaveres.png');
 
     juego.load.image('ascensor','assets/nivel1/ascensor.png');
 
     juego.load.spritesheet('compuerta', 'assets/images/compuerta.png', 125, 547);
-    juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
     juego.load.spritesheet('controller-indicator', 'assets/images/controller-indicator.png',16, 16);
     juego.load.spritesheet('cajaCableado', 'assets/images/cajaCableado.png', 54 , 70);
     juego.load.spritesheet('talibaIAmovimiento', 'assets/images/talibaIAmovimiento.png', 93, 51, 59, 6, 7);
@@ -141,17 +130,13 @@ function create() {
     
     sueloN1.body.x = 19200;
     sueloN1.body.y = juego.world.height - 700;
-
-    //nivel1.suelo = sueloN1;
-
-    //fondo.fixedToCamera = true; // Lo dejará fijo ante la cámara
     
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// TECLAS   //////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    tecla_laser = juego.input.keyboard.addKey(Phaser.Keyboard.E);
+    //tecla_laser = juego.input.keyboard.addKey(Phaser.Keyboard.E);
 
     tecla_accion = juego.input.keyboard.addKey(Phaser.Keyboard.X);
 
@@ -190,7 +175,7 @@ function create() {
     /////////////// COMPUERTAS   //////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    compuertas.grupo = juego.add.group();
+    /*compuertas.grupo = juego.add.group();
     compuertas.grupo.enableBody = true;
     compuertas.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -203,13 +188,13 @@ function create() {
     compuerta.animations.frame = 1;
     compuerta.body.x = 4475;
     compuerta.body.y = juego.world.height - 500;
-    compuertas.lista.push(compuerta);
+    compuertas.lista.push(compuerta);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// CAJAS DE CABLEADO   ///////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    cajasCableado.grupo = juego.add.group();
+    /*cajasCableado.grupo = juego.add.group();
     cajasCableado.grupo.enableBody = true;
     cajasCableado.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -222,13 +207,13 @@ function create() {
     cajaCableado.body.setRectangle(23, 69, 15);
     cajaCableado.body.x = 1900;
     cajaCableado.body.y = juego.world.height - 210;
-    cajasCableado.lista.push(cajaCableado);
+    cajasCableado.lista.push(cajaCableado);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// TUBOS   ///////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    tubos.grupo = juego.add.group();
+    /*tubos.grupo = juego.add.group();
     tubos.grupo.enableBody = true;
     tubos.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -243,13 +228,13 @@ function create() {
     tubo.body.y = juego.world.height - 675;
     tubo.body.collideWorldBounds = true;
     
-    tubos.lista.push(tubo);
+    tubos.lista.push(tubo);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// BOTONES   /////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    botones.grupo = juego.add.group();
+    /*botones.grupo = juego.add.group();
     botones.grupo.enableBody = true;
     botones.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -261,13 +246,13 @@ function create() {
     boton.body.x = 2600;
     boton.body.y = juego.world.height - 275;
 
-    botones.lista.push(boton);
+    botones.lista.push(boton);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// PLATAFORMAS MOVILES   /////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    plataformasMoviles.grupo = juego.add.group();
+    /*plataformasMoviles.grupo = juego.add.group();
     plataformasMoviles.grupo.enableBody = true;
     plataformasMoviles.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -281,13 +266,13 @@ function create() {
     plataformaMovil.body.y = juego.world.height - 460;
     plataformaMovil.body.collideWorldBounds = true;
 
-    plataformasMoviles.lista.push(plataformaMovil);
+    plataformasMoviles.lista.push(plataformaMovil);*/
    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// CAJAS   ///////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        cajas.grupo = juego.add.group();
+    /*cajas.grupo = juego.add.group();
     cajas.grupo.enableBody = true;
     cajas.grupo.physicsBodyType = Phaser.Physics.P2JS;
     //cajas.collisionGroup = juego.physics.p2.createCollisionGroup();
@@ -329,14 +314,14 @@ function create() {
     caja.body.static = false;
     caja.body.mass = 45;
     caja.body.debug = true;
-    cajas.lista.push(caja);
+    cajas.lista.push(caja);*/
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// CHIPS   ///////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    chips.grupo = juego.add.group();
+    /*chips.grupo = juego.add.group();
     chips.grupo.enableBody = true;
     chips.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -374,13 +359,13 @@ function create() {
     chip.body.x = 0;
     chip.body.y = -100;
 
-    chips.lista[2] = chip;
+    chips.lista[2] = chip;*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// PILAS DE CADAVERES   //////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    pilasCadaveres.grupo = juego.add.group();
+    /*pilasCadaveres.grupo = juego.add.group();
     pilasCadaveres.grupo.enableBody = true;
     pilasCadaveres.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -395,13 +380,13 @@ function create() {
     pilaCadaveres.body.x = 800;
     pilaCadaveres.body.y = juego.world.height - 260;
 
-    pilasCadaveres.lista.push(pilaCadaveres);
+    pilasCadaveres.lista.push(pilaCadaveres);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// BOBINAS   /////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    bobinas.grupo = juego.add.group();
+    /*bobinas.grupo = juego.add.group();
     bobinas.grupo.enableBody = true;
     bobinas.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -419,13 +404,13 @@ function create() {
     bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
     bobina.animations.play('bobina_encendida');
 
-    bobinas.lista.push(bobina);
+    bobinas.lista.push(bobina);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////    /////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    lasers = juego.add.group(); // Lasers
-    lasers.enableBody = true;
+    //lasers = juego.add.group(); // Lasers
+    //lasers.enableBody = true;
 
     
 
@@ -476,7 +461,7 @@ function create() {
     acrobaIA.jugador.body.mass = 1;
 
     acrobaIA.jugador.dynamic = true;
-    acrobaIA.jugador.body.debug = true;
+    //acrobaIA.jugador.body.debug = true;
 
     acrobaIA.jugador.animations.add('movimientoDerecha', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
                                                             20, 21, 22, 23, 24, 25, 26, 27, 28], 60, true);
@@ -513,8 +498,8 @@ function create() {
 /////////DECORADOS POR DELANTE DEL JUGADOR  ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    nivel1.decorados[2] = juego.add.image(1610, juego.world.height - 490, 'conexionTuboArriba');
-    nivel1.decorados[3] = juego.add.image(1634, juego.world.height - 1043, 'conexionTuboDerecha');
+    //nivel1.decorados[2] = juego.add.image(1610, juego.world.height - 490, 'conexionTuboArriba');
+    //nivel1.decorados[3] = juego.add.image(1634, juego.world.height - 1043, 'conexionTuboDerecha');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -525,15 +510,15 @@ function create() {
     }
 
     function up() {
-        console.log('button up', arguments);
+        //console.log('button up', arguments);
     }
 
     function over() {
-        console.log('button over');
+        //console.log('button over');
     }
 
     function out() {
-        console.log('button out');
+        //console.log('button out');
     }
 
     function actionOnClick () {
@@ -542,11 +527,11 @@ function create() {
 
     }
 
-     function colisionInicialTankabaIA(body, bodyB, shapeA, shapeB, equation){
+    function colisionInicialTankabaIA(body, bodyB, shapeA, shapeB, equation){
 
         if (body){
             //console.log(body.sprite.key);
-            console.log(body.id);
+            //console.log(body.id);
         }
 
 
@@ -583,7 +568,7 @@ function create() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "acrobaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                //chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -599,7 +584,7 @@ function create() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "talibaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                //chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -685,7 +670,7 @@ function create() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "tankabaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                //chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -701,7 +686,7 @@ function create() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "talibaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                //chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -786,7 +771,7 @@ function create() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "tankabaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                //chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -802,7 +787,7 @@ function create() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "acrobaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                //chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;

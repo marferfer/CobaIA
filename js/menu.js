@@ -2,10 +2,10 @@ var game = new Phaser.Game(1920, 800, Phaser.AUTO, 'phaser-example', { preload: 
 
 function preload() {
 
-    game.load.spritesheet('button', 'assets/button_sprite_sheet.png', 193, 71);
-    game.load.spritesheet('buttonSalir', 'assets/button_sprite_sheet salir.png', 193, 71);
-    game.load.spritesheet('title', 'assets/TituloJuego.png');
-    game.load.image('background','assets/Portada.png');
+    game.load.spritesheet('button', 'assets/Menu/button_sprite_sheet.png', 193, 71);
+    game.load.spritesheet('buttonSalir', 'assets/Menu/button_sprite_sheet salir.png', 193, 71);
+    game.load.spritesheet('title', 'assets/Menu/TituloJuego.png');
+    game.load.image('background','assets/Menu/Portada.png');
 
 }
 

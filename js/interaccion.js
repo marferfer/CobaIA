@@ -1,7 +1,6 @@
 // Update
 function update() {
 
-    console.log(tankabaIA.jugador.body.x);
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // REINICIAR VARIABLES  ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -271,7 +270,7 @@ function update() {
         return result;
     }
 
-    if (tecla_laser.isUp) {
+    /*if (tecla_laser.isUp) {
         tankabaIA.tiempo_disparo = 0;
     }
     if (tecla_laser.isDown && tankabaIA.tiempo_disparo < tankabaIA.tolerancia_disparo && tankabaIA.cantidad_disparos > 0) {
@@ -305,7 +304,8 @@ function update() {
             }
         }
         actualiza_informacion();
-    } else if ((cursores.left.isDown && tankabaIA.canImove) || (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1))// Si presionamos LEFT
+    }*/
+    if (cursores.left.isDown && tankabaIA.canImove)// Si presionamos LEFT
     {
         
         //createjs.Sound.play(paso);
