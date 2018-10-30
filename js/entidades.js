@@ -66,6 +66,13 @@ class Cajas extends Objetos{
     }
 };
 
+class Ascensor extends Objetos{
+
+    constructor(){
+        super();
+    }
+};
+
 class Compuertas extends Objetos{
 
     constructor(){
@@ -174,3 +181,4 @@ lasers = null;
  let pilasCadaveres = new PilaCadaveres();
  let bobinas = new Bobinas();
  let ventiladores = new Ventiladores();
+ let ascensores = new Ascensor();

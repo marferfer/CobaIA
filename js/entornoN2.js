@@ -1,5 +1,6 @@
 
 
+
 function preload2() {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,6 +31,8 @@ function preload2() {
     juego2.load.image('indicadorJ3', 'assets/images/J3 rosa.png');
     juego2.load.image('pilaCadaveres', 'assets/images/pilaCadaveres.png');
 
+    //juego.load.image('ventilador', 'assets/images/ventilador.png');
+
     juego2.load.image('ascensor','assets/nivel1/ascensor.png');
 
     juego2.load.spritesheet('compuerta', 'assets/images/compuerta.png', 125, 547);
@@ -39,6 +42,7 @@ function preload2() {
     juego2.load.spritesheet('tankabaIAmovimiento', 'assets/images/tankabaIAmovimiento.png', 93, 59, 59, 6, 7);
     juego2.load.spritesheet('acrobaIAmovimiento', 'assets/images/acrobaIAmovimiento.png', 95, 51, 59, 2, 3);
     juego2.load.spritesheet('bobina', 'assets/images/bobina.png', 287, 49, 6, 0, 0);
+    //juego.load.spritesheet('aire', 'assets/images/aire.png', 175, 295, 5, 0, 0);
 
     juego2.load.physics('sueloN1Parte1Collisions', 'assets/data/sueloN2Parte1.json');
     juego2.load.physics('cajaCollisions', 'assets/data/caja.json');
@@ -85,6 +89,7 @@ function create2() {
     sueloN1.body.x = 1750;
     sueloN1.body.y = 500;
     //sueloN1.scale.x = sueloN1.scale.y = 0.25;
+   
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// TECLAS   //////////////////////////////////////////////////////////////////////////////////////////////
@@ -121,9 +126,7 @@ function create2() {
     indicator.cameraOffset.x = 10; // Ubicamos el sprite contenedor de la cámara en las coordenadas 10, 10
     indicator.cameraOffset.y = 10;
     indicator.scale.x = indicator.scale.y = 2;
-    indicator.animations.frame = 1;
-
-    
+    indicator.animations.frame = 1; 
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// COMPUERTAS   //////////////////////////////////////////////////////////////////////////////////////////
@@ -148,59 +151,39 @@ function create2() {
     /////////////// CAJAS DE CABLEADO   ///////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*cajasCableado.grupo = juego2.add.group();
+    cajasCableado.grupo = juego2.add.group();
     cajasCableado.grupo.enableBody = true;
     cajasCableado.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
-    let cajaCableado = cajasCableado.grupo.create(0, 0, 'cajaCableado');
+    let cajaCableado = cajasCableado.grupo.create(790, juego2.world.height - 205, 'cajaCableado');
+    cajaCableado.body.angle = 180;
 
     cajaCableado.body.debug = false;
     cajaCableado.animations.frame = 0;
     cajaCableado.animations.add('caja_rota', [1, 2, 3], 10, true);
     cajaCableado.body.static = true;
     cajaCableado.body.setRectangle(23, 69, 15);
-    cajaCableado.body.x = 1900;
-    cajaCableado.body.y = juego2.world.height - 210;
-    cajasCableado.lista.push(cajaCableado);*/
+    cajasCableado.lista.push(cajaCableado);
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////// TUBOS   ///////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /*tubos.grupo = juego2.add.group();
-    tubos.grupo.enableBody = true;
-    tubos.grupo.physicsBodyType = Phaser.Physics.P2JS;
-
-    let tubo = tubos.grupo.create(0, 0, 'tuboN1Completo');
-
-    tubo.body.clearShapes();
-    tubo.body.loadPolygon('tuboN1CompletoCollisions', 'tuboN1Completo');
-
-    tubo.body.static = true;
-    tubo.body.debug = true;
-    tubo.body.x = 2150;
-    tubo.body.y = juego2.world.height - 675;
-    tubo.body.collideWorldBounds = true;
-    
-    tubos.lista.push(tubo);*/
+    console.log(cajaCableado.body.id);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// BOTONES   /////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*botones.grupo = juego2.add.group();
+    botones.grupo = juego2.add.group();
     botones.grupo.enableBody = true;
     botones.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
-    let boton = botones.grupo.create(0, 0, 'boton');
+    let boton = botones.grupo.create(3348, 1175, 'boton');
 
     boton.body.setRectangle(61, 15, 0, -5);
-    boton.body.debug = true;
+    //boton.body.debug = true;
     boton.body.static = true;
-    boton.body.x = 2600;
-    boton.body.y = juego2.world.height - 275;
+    //boton.body.x = 2600;
+    //boton.body.y = juego2.world.height - 275;
 
-    botones.lista.push(boton);*/
+    botones.lista.push(boton);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// PLATAFORMAS MOVILES   /////////////////////////////////////////////////////////////////////////////////
@@ -229,12 +212,9 @@ function create2() {
     cajas.grupo = juego2.add.group();
     cajas.grupo.enableBody = true;
     cajas.grupo.physicsBodyType = Phaser.Physics.P2JS;
-    //cajas.collisionGroup = juego2.physics.p2.createCollisionGroup();
 
     //let caja = juego2.add.sprite(2315, juego2.world.height - 300, 'caja');
-    let caja = cajas.grupo.create(100, juego2.world.height -300, 'caja');
-    //caja.body.setCollisionGroup(cajas.collisionGroup);
-    //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
+    let caja = cajas.grupo.create(2819, 430, 'caja');
 
     juego2.physics.p2.enableBody(caja);
     caja.body.clearShapes();
@@ -246,29 +226,6 @@ function create2() {
     caja.body.collideWorldBounds = true;
     cajas.lista.push(caja);
 
-    caja = cajas.grupo.create(2415, juego2.world.height -500, 'caja');
-    //caja.body.setCollisionGroup(cajas.collisionGroup);
-    //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
- 
-    juego2.physics.p2.enableBody(caja);
-    caja.body.clearShapes();
-    caja.body.loadPolygon('cajaCollisions', 'caja');
-    caja.scale.setTo(1, 1);
-    caja.body.static = false;
-    caja.body.mass = 100;
-    caja.body.debug = true;
-    caja.body.collideWorldBounds = true;
-    cajas.lista.push(caja);
-
-    caja = cajas.grupo.create(1000, juego2.world.height -240, 'caja');
- 
-    juego2.physics.p2.enableBody(caja);
-    caja.body.setRectangle(70, 70);
-    caja.scale.setTo(0.5, 0.5);
-    caja.body.static = false;
-    caja.body.mass = 45;
-    //caja.body.debug = true;
-    cajas.lista.push(caja);
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -319,7 +276,7 @@ function create2() {
     /////////////// PILAS DE CADAVERES   //////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*pilasCadaveres.grupo = juego2.add.group();
+    pilasCadaveres.grupo = juego2.add.group();
     pilasCadaveres.grupo.enableBody = true;
     pilasCadaveres.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -328,13 +285,14 @@ function create2() {
     pilaCadaveres.body.clearShapes();
     pilaCadaveres.body.loadPolygon('pilaCadaveresCollisions', 'pilaCadaveres');
 
-    pilaCadaveres.body.debug = true;
+    //pilaCadaveres.body.debug = true;
     pilaCadaveres.body.static = true;
     
-    pilaCadaveres.body.x = 800;
-    pilaCadaveres.body.y = juego2.world.height - 260;
+    pilaCadaveres.body.x = 150;
+    pilaCadaveres.body.y = juego2.world.height - 200;
+    pilaCadaveres.scale.setTo(2,1.5);
 
-    pilasCadaveres.lista.push(pilaCadaveres);*/
+    pilasCadaveres.lista.push(pilaCadaveres);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// BOBINAS   /////////////////////////////////////////////////////////////////////////////////////////////
@@ -361,11 +319,64 @@ function create2() {
     bobinas.lista.push(bobina);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////    /////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// VENTILADORES   /////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //lasers = juego2.add.group(); // Lasers
-    //lasers.enableBody = true;
 
+    /*ventiladores.grupo = juego2.add.group();
+    ventiladores.grupo.enableBody = true;
+    ventiladores.grupo.physicsBodyType = Phaser.Physics.P2JS;
+
+    let ventilador = ventiladores.grupo.create(0, 0, 'ventilador');
+
+    ventilador.body.setRectangle(154, 44);
+
+    ventilador.body.debug = true;
+    ventilador.body.static = true;
+
+    ventilador.body.x = 16500;
+    ventilador.body.y = juego2.world.height-100;
+
+    ventilador.zona = [ventilador.body.x - 88, ventilador.body.x + 88, ventilador.body.y - 22, ventilador.body.y - 300];
+    ventilador.posicion = "vertical";
+
+    ventiladores.lista.push(ventilador);*/
+
+
+    /*let aire = juego2.add.image(ventilador.zona[0], ventilador.zona[3], 'aire');
+
+    aire.animations.add('aire_funciona', [0, 1, 2, 3, 4], 30, true);
+    aire.animations.play('aire_funciona');*/
+
+    
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ascensores.grupo = juego2.add.group();
+    ascensores.grupo.enableBody = true;
+    ascensores.grupo.physicsBodyType = Phaser.Physics.P2JS;
+
+
+
+    let ascensor = ascensores.grupo.create(1582, juego2.world.height - 255, 'ascensor');
+
+    //ascensor.body.debug = true;
+    ascensor.body.static = true;
+    ascensor.direccion = "subiendo";
+    console.log(ascensor.body.id);
+    
+    //ascensor.body.setRectangle(300, 25, -150);
+    /*ascensor.body.x = 3000;
+    ascensor.body.y = juego2.world.height - 460;*/
+    //ascensor.body.collideWorldBounds = true;
+
+    ascensores.lista.push(ascensor);
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     
 
     juego2.input.gamepad.start();
@@ -373,21 +384,22 @@ function create2() {
     // To listen to buttons from a specific pad listen directly on that pad game.input.gamepad.padX, where X = pad 1-4
     pad1 = juego2.input.gamepad.pad1;
 
-    //paseNivel = juego2.add.sprite(3000, juego2.world.height - 205, 'ascensor');
+
+    
 
     //juego2.physics.p2.enableBody(paseNivel);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// TANKABAIA   ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    tankabaIA.jugador = juego2.add.sprite(500, juego2.world.height - 225, 'tankabaIAmovimiento');
+    tankabaIA.jugador = juego2.add.sprite(100, juego2.world.height - 825, 'tankabaIAmovimiento');
     tankabaIA.jugador.scale.setTo(1.3, 1.3);
     juego2.physics.p2.enableBody(tankabaIA.jugador);
     tankabaIA.jugador.body.setRectangle(95, 60);
 
     tankabaIA.jugador.body.collideWorldBounds = true;
     
-    tankabaIA.jugador.body.fixedRotation = true;
+    //tankabaIA.jugador.body.fixedRotation = true;
     tankabaIA.jugador.body.mass = 100;
     //tankabaIA.jugador.body.clearShapes();
     //tankabaIA.jugador.body.loadPolygon('cajaCollisions', 'caja');
@@ -415,7 +427,7 @@ function create2() {
     acrobaIA.jugador.body.mass = 1;
 
     acrobaIA.jugador.dynamic = true;
-    //acrobaIA.jugador.body.debug = true;
+    acrobaIA.jugador.body.debug = true;
 
     acrobaIA.jugador.animations.add('movimientoDerecha', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
                                                             20, 21, 22, 23, 24, 25, 26, 27, 28], 60, true);
@@ -463,16 +475,32 @@ function create2() {
         plataformasMoviles.lista[i].body.rotateRight(0);
     }
 
+    function cambiarDirAscensor(estado){
+       //console.log("ENTRA");
+       var velocidad = -125;
+       if(estado==="subiendo"){
+        ascensores.lista[0].direccion = "bajando";
+       }
+
+       if(estado==="bajando"){
+        velocidad = 125;
+        ascensores.lista[0].direccion = "subiendo";
+       }
+        ascensores.lista[0].body.moveUp(velocidad);
+        //ascensores.lista[0].body.moveUp(0);
+
+    }
+
     function up() {
-        //console.log('button up', arguments);
+        console.log('button up', arguments);
     }
 
     function over() {
-        //console.log('button over');
+        console.log('button over');
     }
 
     function out() {
-        //console.log('button out');
+        console.log('button out');
     }
 
     function actionOnClick () {
@@ -481,11 +509,11 @@ function create2() {
 
     }
 
-    function colisionInicialTankabaIA(body, bodyB, shapeA, shapeB, equation){
+     function colisionInicialTankabaIA(body, bodyB, shapeA, shapeB, equation){
 
         if (body){
             //console.log(body.sprite.key);
-            //console.log(body.id);
+            console.log(body.id);
         }
 
 
@@ -501,10 +529,10 @@ function create2() {
         if(body.sprite.key === 'boton'){
 
             //animacion de boton presionado
-            plataformasMoviles.lista[0].body.rotateRight(25);
+            //plataformasMoviles.lista[0].body.rotateRight(25);
         }
 
-        if(body.id === 16){
+        if(body.sprite.key === 'bobina'){
 
             tankabaIA.muerta = true;
 
@@ -522,7 +550,7 @@ function create2() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "acrobaIA";
                 chip.body.setRectangle(10, 10);
-                //chip.body.debug = true;
+                chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -538,7 +566,7 @@ function create2() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "talibaIA";
                 chip.body.setRectangle(10, 10);
-                //chip.body.debug = true;
+                chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -583,7 +611,7 @@ function create2() {
         if(body.sprite !== null){
 
             if(body.sprite.key === 'boton'){
-                plataformasMoviles.lista[0].body.rotateRight(0);
+                //plataformasMoviles.lista[0].body.rotateRight(0);
                 //stopPlataforma(0);
             }
         }
@@ -606,7 +634,7 @@ function create2() {
             plataformasMoviles.lista[0].body.rotateRight(25);
         }
 
-        if(body.id === 16){
+        if(body.sprite.key === 'bobina'){
 
             acrobaIA.muerta = true;
         }
@@ -624,7 +652,7 @@ function create2() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "tankabaIA";
                 chip.body.setRectangle(10, 10);
-                //chip.body.debug = true;
+                chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -640,7 +668,7 @@ function create2() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "talibaIA";
                 chip.body.setRectangle(10, 10);
-                //chip.body.debug = true;
+                chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -695,11 +723,20 @@ function create2() {
 
 
         if(body.sprite.key === 'cajaCableado' && tecla_accion.isDown){  
+            if(body.id=== 10){
+                cajasCableado.lista[0].animations.play('caja_rota');
+                //ascensores.lista[0].body.moveUp(75);
 
-            cajasCableado.lista[0].animations.play('caja_rota');
-            let timer =  juego2.time.events.add(1250, stopPlataforma, this, 0);
-            plataformasMoviles.lista[0].body.rotateRight(25);      
+                let timer =  juego2.time.events.loop(1250, cambiarDirAscensor, this, ascensores.lista[0].direccion);
+                ascensores.lista[0].body.moveUp(125);
 
+                /*if(ascensores.lista[0].body.y>1078){
+                    ascensores.lista[0].body.y;    
+                }
+                if(ascensores.lista[0].body.y<209){
+                    ascensores.lista[0].body.moveDown(75);
+                }*/
+            }
         }
 
         if(body.sprite.key === 'boton'){
@@ -708,7 +745,7 @@ function create2() {
             plataformasMoviles.lista[0].body.rotateRight(25);
         }
 
-        if(body.id === 16){
+        if(body.sprite.key === 'bobina'){
 
             talibaIA.muerta = true;
         }
@@ -725,7 +762,7 @@ function create2() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "tankabaIA";
                 chip.body.setRectangle(10, 10);
-                //chip.body.debug = true;
+                chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -741,7 +778,7 @@ function create2() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "acrobaIA";
                 chip.body.setRectangle(10, 10);
-                //chip.body.debug = true;
+                chip.body.debug = true;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -805,63 +842,5 @@ function create2() {
 
     juego2.physics.p2.updateBoundsCollisionGroup();
 
-    juego2.camera.follow(tankabaIA.jugador); // Le permitimos a la cámara del juego2, seguir en todo momento al obj_jugador.jugador                
-
-
-    /*
-        Code for the pause menu
-    
-
-    // Create a label to use as a button
-    pause_label = juego2.add.text(2000, juego2.world.height - 200, 'Pause', { font: '24px Arial', fill: '#fff' });
-    pause_label.inputEnabled = true;
-    pause_label.events.onInputUp.add(function () {
-        // When the paus button is pressed, we pause the game
-        juego2.paused = true;
-
-        // Then add the menu
-        menu = juego2.add.sprite(juego2.world.width/2, juego2.world.height/2, 'menu');
-        menu.anchor.setTo(0.5, 0.5);
-
-        // And a label to illustrate which menu item was chosen. (This is not necessary)
-        choiseLabel = juego2.add.text(juego2.world.width/2, juego2.world.height-150, 'Click outside menu to continue', { font: '30px Arial', fill: '#fff' });
-        choiseLabel.anchor.setTo(0.5, 0.5);
-    });
-
-    // Add a input listener that can help us return from being paused
-    juego2.input.onDown.add(unpause, self);
-
-    // And finally the method that handels the pause menu
-    function unpause(event){
-        // Only act if paused
-        if(juego2.paused){
-            // Calculate the corners of the menu
-            var x1 = juego2.world.width/2 - 270/2, x2 = juego2.world.width/2 + 270/2,
-                y1 = juego2.world.height/2 - 180/2, y2 = juego2.world.height/2 + 180/2;
-
-            // Check if the click was inside the menu
-            if(event.x > x1 && event.x < x2 && event.y > y1 && event.y < y2 ){
-                // The choicemap is an array that will help us see which item was clicked
-                var choisemap = ['one', 'two', 'three', 'four', 'five', 'six'];
-
-                // Get menu local coordinates for the click
-                var x = event.x - x1,
-                    y = event.y - y1;
-
-                // Calculate the choice 
-                var choise = Math.floor(x / 90) + 3*Math.floor(y / 90);
-
-                // Display the choice
-                choiseLabel.text = 'You chose menu item: ' + choisemap[choise];
-            }
-            else{
-                // Remove the menu and the label
-                menu.destroy();
-                choiseLabel.destroy();
-
-                // Unpause the game
-                juego2.paused = false;
-            }
-        }
-    };*/
+    juego2.camera.follow(tankabaIA.jugador);
 }
