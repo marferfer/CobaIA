@@ -144,6 +144,11 @@ function create() {
     //Reinicio
     ctrlR = juego.input.keyboard.addKey(Phaser.Keyboard.R);
 
+    //Cambio de camara
+    ctrlT = juego.input.keyboard.addKey(Phaser.Keyboard.T);
+    ctrlY = juego.input.keyboard.addKey(Phaser.Keyboard.Y);
+    ctrlU = juego.input.keyboard.addKey(Phaser.Keyboard.U);
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// INDICADORES   /////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -390,23 +395,23 @@ function create() {
 
     bobinas.lista.push(bobina);*/
 
+    
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /////////////// VENTILADORES   /////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// VENTILADORES   ////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    ventiladores.grupo = juego.add.group();
+    /*ventiladores.grupo = juegoPruebas.add.group();
     ventiladores.grupo.enableBody = true;
     ventiladores.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
     let ventilador = ventiladores.grupo.create(0, 0, 'ventilador');
 
     ventilador.body.setRectangle(154, 44);
-
     ventilador.body.debug = true;
     ventilador.body.static = true;
-
     ventilador.body.x = 16500;
-    ventilador.body.y = juego.world.height-100;
+    ventilador.body.y = juegoPruebas.world.height-100;
 
     ventilador.zona = [ventilador.body.x - 88, ventilador.body.x + 88, ventilador.body.y - 22, ventilador.body.y - 300];
     ventilador.posicion = "vertical";
@@ -414,13 +419,57 @@ function create() {
     ventiladores.lista.push(ventilador);
 
 
-    let aire = juego.add.image(ventilador.zona[0], ventilador.zona[3], 'aire');
-
+    let aire = juegoPruebas.add.image(ventilador.zona[0], ventilador.zona[3], 'aire');
     aire.animations.add('aire_funciona', [0, 1, 2, 3, 4], 30, true);
     aire.animations.play('aire_funciona');
 
     
+    /////////////////ventilador horizontal derecha
 
+    ventilador = ventiladores.grupo.create(0, 0, 'ventilador');
+
+    ventilador.body.setRectangle(154, 44);
+    ventilador.body.debug = true;
+    ventilador.body.static = true;
+    ventilador.body.x = 16150;
+    ventilador.body.y = juegoPruebas.world.height-200;
+    ventilador.body.angle = -90;
+
+    ventilador.zona = [ventilador.body.x + 22, ventilador.body.x + 300, ventilador.body.y + 88, ventilador.body.y - 88];
+
+    ventilador.posicion = "horizontal_derecha";
+
+    ventiladores.lista.push(ventilador);
+
+    aire = juegoPruebas.add.image(ventilador.zona[0], ventilador.zona[2], 'aire');
+
+    aire.angle = -90;
+    aire.animations.add('aire_funciona', [0, 1, 2, 3, 4], 30, true);
+    aire.animations.play('aire_funciona');
+
+
+    ///////////ventilador horizontal izquierda
+
+    ventilador = ventiladores.grupo.create(0, 0, 'ventilador');
+
+    ventilador.body.setRectangle(154, 44);
+    ventilador.body.debug = true;
+    ventilador.body.static = true;
+    ventilador.body.x = 17000;
+    ventilador.body.y = juegoPruebas.world.height-400;
+    ventilador.body.angle = -90;
+
+    ventilador.zona = [ventilador.body.x - 300, ventilador.body.x - 22, ventilador.body.y + 88, ventilador.body.y - 88];
+
+    ventilador.posicion = "horizontal_izquierda";
+
+    ventiladores.lista.push(ventilador);
+
+    aire = juegoPruebas.add.image(ventilador.zona[0], ventilador.zona[2], 'aire');
+
+    aire.angle = -90;
+    aire.animations.add('aire_funciona', [0, 1, 2, 3, 4], 30, true);
+    aire.animations.play('aire_funciona');*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////    /////////////////////////////////////////////////////////////////////////////////////////

@@ -5,9 +5,6 @@ function updateP() {
     // REINICIAR VARIABLES  ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    tankabaIA.colisionEscalera = false; 
-    tankabaIA.contadorEscaleras = 0;
-
     tankabaIA.jugador.body.velocity.x = 0; //  Reseteamos la velocidad en x. Esto nos permitirá evitar que se acelere (suelo de hielo)
     if(!tankabaIA.canImove){
         tankabaIA.jugador.body.velocity.y = 0;

@@ -1,13 +1,9 @@
 // Update
 function update() {
 
-    //console.log(tankabaIA.jugador.body.y);
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // REINICIAR VARIABLES  ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    tankabaIA.colisionEscalera = false; 
-    tankabaIA.contadorEscaleras = 0;
 
     tankabaIA.jugador.body.velocity.x = 0; //  Reseteamos la velocidad en x. Esto nos permitirá evitar que se acelere (suelo de hielo)
     if(!tankabaIA.canImove){
@@ -28,6 +24,25 @@ function update() {
         talibaIA.jugador.body.velocity.y = 0;
         talibaIA.jugador.body.setZeroVelocity();
         talibaIA.jugador.body.setZeroForce();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////// CAMBIOS DE CAMARA  //////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    if(ctrlT.isDown){
+
+        juego.camera.follow(tankabaIA.jugador);
+    }
+
+    if(ctrlY.isDown){
+
+        juego.camera.follow(acrobaIA.jugador);
+    }
+
+    if(ctrlU.isDown){
+
+        juego.camera.follow(talibaIA.jugador);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -166,20 +181,6 @@ function update() {
         indicator.animations.frame = 1;
     }
 
-    for(let i = 0; i < ventiladores.lista.length; i++){
-        
-        let ventilador = ventiladores.lista[i];
-
-        if(ventilador.posicion === "vertical"){
-
-            if(tankabaIA.jugador.x >= ventilador.zona[0] && tankabaIA.jugador.x <= ventilador.zona[1] 
-                && tankabaIA.jugador.y <= ventilador.zona[2] && tankabaIA.jugador.y >= ventilador.zona[3]){
-
-                tankabaIA.jugador.body.moveUp(150);
-            }
-        }
-    }
-
     if (tankabaIA.jugador.position.y > 1500) { // Muerte al caer
         reinicia();
     }
@@ -189,6 +190,83 @@ function update() {
         inicio();
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////// COMPROBAR SI SE ESTA EN ZONA DE VENTILADORES   /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /*for(let i = 0; i < ventiladores.lista.length; i++){
+
+        let ventilador = ventiladores.lista[i];
+
+        if(ventilador.posicion === "vertical"){
+
+            if(talibaIA.jugador.body.x >= ventilador.zona[0] && talibaIA.jugador.body.x <= ventilador.zona[1] 
+                && talibaIA.jugador.body.y <= ventilador.zona[2] && talibaIA.jugador.body.y >= ventilador.zona[3]){
+
+                talibaIA.jugador.body.moveUp(150);
+            }
+
+        } else if(ventilador.posicion === "horizontal_derecha"){
+
+            if(talibaIA.jugador.body.x >= ventilador.zona[0] && talibaIA.jugador.body.x <= ventilador.zona[1] 
+                    && talibaIA.jugador.body.y <= ventilador.zona[2] && talibaIA.jugador.body.y >= ventilador.zona[3]){
+
+                    talibaIA.jugador.body.moveRight(500);
+                    talibaIA.canImove = false;
+            }else{
+
+                    talibaIA.canImove = true;
+            }
+
+            if(acrobaIA.jugador.body.x >= ventilador.zona[0] && acrobaIA.jugador.body.x <= ventilador.zona[1] 
+                    && acrobaIA.jugador.body.y <= ventilador.zona[2] && acrobaIA.jugador.body.y >= ventilador.zona[3]){
+
+                    acrobaIA.jugador.body.moveRight(500);
+                    acrobaIA.canImove = false;
+            }else{
+
+                    acrobaIA.canImove = true;
+            }
+
+            if(tankabaIA.jugador.body.x >= ventilador.zona[0] && tankabaIA.jugador.body.x <= ventilador.zona[1] 
+                    && tankabaIA.jugador.body.y <= ventilador.zona[2] && tankabaIA.jugador.body.y >= ventilador.zona[3]){
+
+                    tankabaIA.jugador.body.moveRight(500);
+            }
+
+        }else if(ventilador.posicion === "horizontal_izquierda"){
+
+            if(talibaIA.jugador.body.x >= ventilador.zona[0] && talibaIA.jugador.body.x <= ventilador.zona[1] 
+                    && talibaIA.jugador.body.y <= ventilador.zona[2] && talibaIA.jugador.body.y >= ventilador.zona[3]){
+
+                    talibaIA.jugador.body.moveLeft(500);
+                    talibaIA.canImove = false;
+            }else{
+
+                    talibaIA.canImove = true;
+            }
+
+            if(acrobaIA.jugador.body.x >= ventilador.zona[0] && acrobaIA.jugador.body.x <= ventilador.zona[1] 
+                    && acrobaIA.jugador.body.y <= ventilador.zona[2] && acrobaIA.jugador.body.y >= ventilador.zona[3]){
+
+                    acrobaIA.jugador.body.moveLeft(500);
+                    acrobaIA.canImove = false;
+            }else{
+
+                    acrobaIA.canImove = true;
+            }
+
+            if(tankabaIA.jugador.body.x >= ventilador.zona[0] && tankabaIA.jugador.body.x <= ventilador.zona[1] 
+                    && tankabaIA.jugador.body.y <= ventilador.zona[2] && tankabaIA.jugador.body.y >= ventilador.zona[3]){
+
+                    tankabaIA.jugador.body.moveLeft(500);
+            }
+        }
+    }*/
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // Controls
     /*if (pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1)
@@ -354,17 +432,8 @@ function update() {
 
         tankabaIA.jugador.body.moveUp(300);
 
-     
-        //tankabaIA.jugador.animations.play('jump');
         createjs.Sound.play(salto);
     }
-
-
-    tankabaIA.jugador.position.y += (tankabaIA.contadorEscaleras * 2);
-    if (tankabaIA.contadorEscaleras != 0) {
-        //tankabaIA.jugador.animations.play('climb');
-    }
-
 
     ///////////////////////////////////////////////////////controles AcrobaIA
 
