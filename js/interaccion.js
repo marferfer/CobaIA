@@ -31,17 +31,17 @@ function update() {
     ////////// CAMBIOS DE CAMARA  //////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    if(ctrlT.isDown){
+    if(ctrlT.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_Y)){
 
         juego.camera.follow(tankabaIA.jugador);
     }
 
-    if(ctrlY.isDown){
+    if(ctrlY.isDown || pad2.isDown(Phaser.Gamepad.XBOX360_Y)){
 
         juego.camera.follow(acrobaIA.jugador);
     }
 
-    if(ctrlU.isDown){
+    if(ctrlU.isDown || pad3.isDown(Phaser.Gamepad.XBOX360_Y)){
 
         juego.camera.follow(talibaIA.jugador);
     }
@@ -470,7 +470,7 @@ function update() {
 
     
 
-    if (((pad1.justPressed(Phaser.Gamepad.XBOX360_A)) || cursores.up.isDown) /*&& checkIfCanJump(tankabaIA)*/ && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
+    if (((pad1.justPressed(Phaser.Gamepad.XBOX360_A)) || cursores.up.isDown) && checkIfCanJump(tankabaIA) && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
         
 
         tankabaIA.jugador.body.moveUp(300);
@@ -480,7 +480,7 @@ function update() {
 
     ///////////////////////////////////////////////////////controles AcrobaIA
 
-    if (ctrlQ.isDown) {
+    if ((pad2.isDown(Phaser.Gamepad.XBOX360_X)) || ctrlQ.isDown) {
         //acrobaIA.jugador.body.gravity = 0;
         if(!acrobaIA.trepando && acrobaIA.puedoTrepar) {
             baseTrepar.body.x = acrobaIA.jugador.body.x;

@@ -130,6 +130,7 @@ function create() {
     //tecla_laser = juego.input.keyboard.addKey(Phaser.Keyboard.E);
 
     tecla_accion = juego.input.keyboard.addKey(Phaser.Keyboard.X);
+    tecla_accion_mando = juego.input.gamepad.pad3.isDown(Phaser.Gamepad.XBOX360_X);
 
     //Movimiento de la TankabaIA
     cursores = juego.input.keyboard.createCursorKeys();
@@ -1214,7 +1215,7 @@ function create() {
     function colisionInicialTalibaIA(body, bodyB, shapeA, shapeB, equation){
 
 
-        if(body.sprite.key === 'cajaCableado' && tecla_accion.isDown){  
+        if(body.sprite.key === 'cajaCableado' && (tecla_accion.isDown || juego.input.gamepad.pad3.isDown(Phaser.Gamepad.XBOX360_X))) {  
 
             if(body.id === 13){
                 compuertas.lista[0].frame = 1;
