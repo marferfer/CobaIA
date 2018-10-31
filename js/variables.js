@@ -34,6 +34,9 @@ var ctrlA;
 var ctrlS;
 var ctrlD;
 var ctrlR;
+var ctrlT;
+var ctrlU;
+var ctrlY;
 var lasers;
 
 var mensajes;
