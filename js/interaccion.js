@@ -5,7 +5,7 @@ function update() {
     // REINICIAR VARIABLES  ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    console.log(tankabaIA.jugador.body.x + " , "+tankabaIA.jugador.body.y);
+    //console.log(tankabaIA.jugador.body.x + " , "+tankabaIA.jugador.body.y);
     tankabaIA.jugador.body.velocity.x = 0; //  Reseteamos la velocidad en x. Esto nos permitirá evitar que se acelere (suelo de hielo)
     if(!tankabaIA.canImove){
         tankabaIA.jugador.body.velocity.y = 0;
@@ -460,7 +460,7 @@ function update() {
             acrobaIA.trepando = true
             let timer =  juego.time.events.add(250, function(){acrobaIA.trepando = false;}, this, 0);
         }
-        console.log(tankabaIA.jugador.body.x + ', ' + tankabaIA.jugador.body.y);
+        //console.log(tankabaIA.jugador.body.x + ', ' + tankabaIA.jugador.body.y);
     }    
     else {
         acrobaIA.jugador.body.angle = 0;

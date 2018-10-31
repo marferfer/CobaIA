@@ -50,9 +50,9 @@ function preload() {
     juego.load.image('boton', 'assets/images/boton.png');
     juego.load.image('conexionTuboArriba', 'assets/images/conexionTuboArriba.png');
     juego.load.image('conexionTuboDerecha', 'assets/images/conexionTuboDerecha.png');
-    juego.load.image('indicadorJ1', 'assets/indicadorJ1.png');
+    /*juego.load.image('indicadorJ1', 'assets/indicadorJ1.png');
     juego.load.image('indicadorJ2', 'assets/indicadorJ2.png');
-    juego.load.image('indicadorJ3', 'assets/indicadorJ3.png');
+    juego.load.image('indicadorJ3', 'assets/indicadorJ3.png');*/
     juego.load.image('pilaCadaveres', 'assets/images/pilaCadaveres.png');
     juego.load.image('baseTrepar', 'assets/images/baseParaTrepar.png');
 
@@ -62,7 +62,7 @@ function preload() {
     juego.load.image('ascensor','assets/nivel1/ascensor.png');
 
     juego.load.spritesheet('compuerta', 'assets/images/compuerta.png', 125, 547);
-    juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
+    //juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
     juego.load.spritesheet('controller-indicator', 'assets/images/controller-indicator.png',16, 16);
     juego.load.spritesheet('cajaCableado', 'assets/images/cajaCableado.png', 54 , 70);
     juego.load.spritesheet('talibaIAmovimiento', 'assets/images/talibaIAmovimiento.png', 93, 51, 59, 6, 7);
@@ -263,7 +263,7 @@ function create() {
     let boton = botones.grupo.create(0, 0, 'boton');
 
     boton.body.setRectangle(61, 15, 0, -5);
-    boton.body.debug = true;
+    //boton.body.debug = true;
     boton.body.static = true;
     boton.body.x = 2447;
     boton.body.y = 480;
@@ -275,8 +275,8 @@ function create() {
     boton = botones.grupo.create(0, 0, 'boton');
 
     boton.body.setRectangle(61, 15, 0, -5);
-    boton.body.debug = true;
-    console.log(boton.body.id); //id: 14
+    //boton.body.debug = true;
+    //console.log(boton.body.id); //id: 14
     boton.body.static = true;
     boton.body.angle = 90;
     boton.body.x = 2843;
@@ -289,8 +289,8 @@ function create() {
     boton = botones.grupo.create(0, 0, 'boton');
 
     boton.body.setRectangle(61, 15, 0, -5);
-    boton.body.debug = true;
-    console.log(boton.body.id); //id: 
+    //boton.body.debug = true;
+    //console.log(boton.body.id); //id: 
     boton.body.static = true;
     boton.body.x = 6260;
     boton.body.y = 750;
@@ -302,8 +302,8 @@ function create() {
     boton = botones.grupo.create(0, 0, 'boton');
 
     boton.body.setRectangle(61, 15, 0, -5);
-    boton.body.debug = true;
-    console.log(boton.body.id); //id: 
+    //boton.body.debug = true;
+    //console.log(boton.body.id); //id: 
     boton.body.static = true;
     boton.body.x = 5825;
     boton.body.y = 1371;
@@ -315,8 +315,8 @@ function create() {
     boton = botones.grupo.create(0, 0, 'boton');
 
     boton.body.setRectangle(61, 15, 0, -5);
-    boton.body.debug = true;
-    console.log(boton.body.id); //id: 
+    //boton.body.debug = true;
+    //console.log(boton.body.id); //id: 
     boton.body.static = true;
     boton.body.x = 32960;
     boton.body.y = 1331;
@@ -328,8 +328,8 @@ function create() {
     boton = botones.grupo.create(0, 0, 'boton');
 
     boton.body.setRectangle(61, 15, 0, -5);
-    boton.body.debug = true;
-    console.log(boton.body.id); //id: 
+    //boton.body.debug = true;
+    //console.log(boton.body.id); //id: 
     boton.body.static = true;
     boton.body.x = 42960;
     boton.body.y = 1331;
@@ -341,8 +341,8 @@ function create() {
     boton = botones.grupo.create(7805, 1346, 'boton');
 
     boton.body.setRectangle(61, 15, 0, -5);
-    boton.body.debug = true;
-    console.log(boton.body.id); //id: 
+    //boton.body.debug = true;
+    //console.log(boton.body.id); //id: 
     boton.body.static = true;
     /*boton.body.x = 52960;
     boton.body.y = 1331;*/
@@ -408,7 +408,7 @@ function create() {
     plataformaBasic.body.setRectangle(26, 302);
     plataformaBasic.body.x = 4726;
     plataformaBasic.body.y = 1303;
-    console.log(plataformaBasic.body.id);
+    //console.log(plataformaBasic.body.id);
 
     plataformasBasic.lista.push(plataformaBasic);
 
@@ -427,7 +427,7 @@ function create() {
     plataformaBasic.body.setRectangle(26, 302);
     plataformaBasic.body.x = 24726;
     plataformaBasic.body.y = 1303;
-    console.log(plataformaBasic.body.id); //id: 16
+    //console.log(plataformaBasic.body.id); //id: 16
     plataformaBasic.body.collideWorldBounds = true;
 
     plataformasBasic.lista.push(plataformaBasic);
@@ -468,7 +468,7 @@ function create() {
     caja.scale.setTo(1, 1);
     caja.body.static = false;
     caja.body.mass = 100;
-    caja.body.debug = true;
+    //caja.body.debug = true;
     cajas.lista.push(caja);
 
     //CAJA 3
@@ -481,7 +481,7 @@ function create() {
     caja.scale.setTo(1, 1);
     caja.body.static = false;
     caja.body.mass = 100;
-    caja.body.debug = true;
+    //caja.body.debug = true;
     caja.body.collideWorldBounds = true;
     cajas.lista.push(caja);
 
@@ -498,7 +498,7 @@ function create() {
 
     chip.cobaIA = "acrobaIA";
     chip.body.setRectangle(10, 10);
-    chip.body.debug = true;
+    //chip.body.debug = true;
     chip.body.static = true;        //Se deja static y apartado para que no se vea hasta que sea necesario.
 
     chip.body.x = 0;
@@ -510,7 +510,7 @@ function create() {
 
     chip.cobaIA = "talibaIA";
     chip.body.setRectangle(10, 10);
-    chip.body.debug = true;
+    //chip.body.debug = true;
     chip.body.static = true;        //Se deja static y apartado para que no se vea hasta que sea necesario.
 
     chip.body.x = 0;
@@ -522,7 +522,7 @@ function create() {
 
     chip.cobaIA = "tankabaIA";
     chip.body.setRectangle(10, 10);
-    chip.body.debug = true;
+    //chip.body.debug = true;
     chip.body.static = true;        //Se deja static y apartado para que no se vea hasta que sea necesario.
 
     chip.body.x = 0;
@@ -926,7 +926,7 @@ function create() {
 
         if (body){
             //console.log(body.sprite.key);
-            console.log(body.id);
+            //console.log(body.id);
         }
 
 
