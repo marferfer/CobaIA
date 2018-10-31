@@ -5,6 +5,7 @@ function update() {
     // REINICIAR VARIABLES  ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    console.log(tankabaIA.jugador.body.x + " , "+tankabaIA.jugador.body.y);
     tankabaIA.jugador.body.velocity.x = 0; //  Reseteamos la velocidad en x. Esto nos permitirá evitar que se acelere (suelo de hielo)
     if(!tankabaIA.canImove){
         tankabaIA.jugador.body.velocity.y = 0;
@@ -430,6 +431,11 @@ function update() {
             tankabaIA.jugador.frame = 0;
         }
     }   
+
+    if(tankabaIA.jugador.body.x > 11000){
+        juego.destroy();
+        nivel2();
+    }
 
     
 

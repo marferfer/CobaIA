@@ -197,7 +197,7 @@ function create() {
     compuerta.body.debug = true;
     compuerta.body.static = true;
     compuerta.body.setRectangle(50, 500);
-    compuerta.animations.frame = 0;
+    compuerta.animations.frame = 1;
     compuertas.lista.push(compuerta);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -336,16 +336,16 @@ function create() {
 
     botones.lista.push(boton);
 
-    // BOTON 7
+    // BOTON 7 zona 3
 
-    boton = botones.grupo.create(0, 0, 'boton');
+    boton = botones.grupo.create(7805, 1346, 'boton');
 
     boton.body.setRectangle(61, 15, 0, -5);
     boton.body.debug = true;
     console.log(boton.body.id); //id: 
     boton.body.static = true;
-    boton.body.x = 52960;
-    boton.body.y = 1331;
+    /*boton.body.x = 52960;
+    boton.body.y = 1331;*/
 
     botones.lista.push(boton);
 
@@ -538,16 +538,21 @@ function create() {
     pilasCadaveres.grupo.enableBody = true;
     pilasCadaveres.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
-    let pilaCadaveres = pilasCadaveres.grupo.create(0, 0, 'pilaCadaveres');
+    let pilaCadaveres = pilasCadaveres.grupo.create(6960, 1300, 'pilaCadaveres');
 
     pilaCadaveres.body.clearShapes();
     pilaCadaveres.body.loadPolygon('pilaCadaveresCollisions', 'pilaCadaveres');
 
-    pilaCadaveres.body.debug = true;
+    //pilaCadaveres.body.debug = true;
     pilaCadaveres.body.static = true;
     
-    pilaCadaveres.body.x = 18800;
-    pilaCadaveres.body.y = juego.world.height - 260;
+
+    /*pilaCadaveres.body.x = 18800;
+    pilaCadaveres.body.y = juego.world.height - 260;*/
+
+    //pilaCadaveres.body.x = 800;
+    //pilaCadaveres.body.y = juego.world.height - 260;
+
 
     pilasCadaveres.lista.push(pilaCadaveres);
 
@@ -559,16 +564,18 @@ function create() {
     bobinas.grupo.enableBody = true;
     bobinas.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
-    let bobina = bobinas.grupo.create(0, 0, 'bobina');
+    let bobina = bobinas.grupo.create(9124, 830, 'bobina');
 
     bobina.body.setRectangle(220, 10);
 
-    bobina.body.debug = true;
+    //bobina.body.debug = true;
     bobina.body.static = true;
     //pilaCadaveres.pivot.x = 150;
     //pilaCadaveres.body.setRectangle(300, 25, -150);
-    bobina.body.x = 12000;
-    bobina.body.y = juego.world.height - 1260;
+
+    //bobina.body.x = 12000;
+    //bobina.body.y = juego.world.height - 1260;
+
 
     bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
     bobina.animations.play('bobina_encendida');
@@ -577,34 +584,81 @@ function create() {
 
     //BOBINA 2
 
-    bobina = bobinas.grupo.create(0, 0, 'bobina');
+    bobina = bobinas.grupo.create(9404, 830, 'bobina');
+    //bobina.body.angle = 90;
 
     bobina.body.setRectangle(220, 10);
 
-    bobina.body.debug = true;
+    //bobina.body.debug = true;
     bobina.body.static = true;
     //pilaCadaveres.pivot.x = 150;
     //pilaCadaveres.body.setRectangle(300, 25, -150);
-    bobina.body.x = 12000;
-    bobina.body.y = juego.world.height - 260;
+
+    //bobina.body.x = 12000;
+    //bobina.body.y = juego.world.height - 260;
+
+    //bobina.body.x = 1200;
+    //bobina.body.y = juego.world.height - 260;
+
+
+    bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
+    bobina.animations.play('bobina_encendida');
+
+    bobinas.lista.push(bobina);  
+
+    //BOBINA 3
+
+    bobina = bobinas.grupo.create(9684, 830, 'bobina');
+    //bobina.body.angle = 90;
+
+    bobina.body.setRectangle(220, 10);
+
+    //bobina.body.debug = true;
+    bobina.body.static = true;
+    //pilaCadaveres.pivot.x = 150;
+    //pilaCadaveres.body.setRectangle(300, 25, -150);
+
+    //bobina.body.x = 12000;
+    //bobina.body.y = juego.world.height - 260;
+    //bobina.body.x = 1200;
+    //bobina.body.y = juego.world.height - 260;
+
+    bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
+    bobina.animations.play('bobina_encendida');
+
+    bobinas.lista.push(bobina);  
+
+    //BOBINA 4
+
+    bobina = bobinas.grupo.create(7474, 1250, 'bobina');
+    bobina.body.angle = 90;
+
+    bobina.body.setRectangle(220, 10);
+
+    //bobina.body.debug = true;
+    bobina.body.static = true;
+    //pilaCadaveres.pivot.x = 150;
+    //pilaCadaveres.body.setRectangle(300, 25, -150);
+    //bobina.body.x = 1200;
+    //bobina.body.y = juego.world.height - 260;
 
     bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
     bobina.animations.play('bobina_encendida');
 
     bobinas.lista.push(bobina);    
 
-    //BOBINA 3
+    //BOBINA 5
 
-    bobina = bobinas.grupo.create(0, 0, 'bobina');
+    bobina = bobinas.grupo.create(7324, 1050, 'bobina');
 
     bobina.body.setRectangle(220, 10);
 
-    bobina.body.debug = true;
+    //bobina.body.debug = true;
     bobina.body.static = true;
     //pilaCadaveres.pivot.x = 150;
     //pilaCadaveres.body.setRectangle(300, 25, -150);
-    bobina.body.x = 12000;
-    bobina.body.y = juego.world.height - 260;
+    /*bobina.body.x = 2200;
+    bobina.body.y = juego.world.height - 260;*/
 
     bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
     bobina.animations.play('bobina_encendida');
@@ -640,14 +694,11 @@ function create() {
 
     //VENT UP 2
 
-    ventilador = ventiladores.grupo.create(0, 0, 'ventilador');
+    ventilador = ventiladores.grupo.create(7308, 1336, 'ventilador');
 
     ventilador.body.setRectangle(154, 44);
     //ventilador.body.debug = true;
     ventilador.body.static = true;
-
-    ventilador.body.x = 13992;
-    ventilador.body.y = 1139;
 
     ventilador.zona = [ventilador.body.x - 88, ventilador.body.x + 88, ventilador.body.y - 22, ventilador.body.y - 300];
     ventilador.posicion = "vertical";
@@ -662,13 +713,11 @@ function create() {
     
     /////////////////ventilador horizontal derecha
 
-    ventilador = ventiladores.grupo.create(0, 0, 'ventilador');
+    ventilador = ventiladores.grupo.create(8547, 930, 'ventilador');
 
     ventilador.body.setRectangle(154, 44);
-    ventilador.body.debug = true;
+    //ventilador.body.debug = true;
     ventilador.body.static = true;
-    ventilador.body.x = 16150;
-    ventilador.body.y = juego.world.height-200;
     ventilador.body.angle = -90;
 
     ventilador.zona = [ventilador.body.x + 22, ventilador.body.x + 300, ventilador.body.y + 88, ventilador.body.y - 88];
@@ -766,7 +815,12 @@ function create() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// TANKABAIA   ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    tankabaIA.jugador = juego.add.sprite(11200, juego.world.height - 225, 'tankabaIAmovimiento');
+
+    //tankabaIA.jugador = juego.add.sprite(11200, juego.world.height - 225, 'tankabaIAmovimiento');
+
+    //Cambiar 340, juego.world.height - 225
+    tankabaIA.jugador = juego.add.sprite(340, juego.world.height - 225, 'tankabaIAmovimiento');
+
     tankabaIA.jugador.scale.setTo(1.3, 1.3);
     juego.physics.p2.enableBody(tankabaIA.jugador);
     tankabaIA.jugador.body.setRectangle(95, 60);
