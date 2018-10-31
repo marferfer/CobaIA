@@ -222,7 +222,9 @@ function create() {
     cajaCableado.body.setRectangle(23, 69, 15);
     cajaCableado.body.x = 2770;
     cajaCableado.body.y = juego.world.height - 70;
+
     cajasCableado.lista.push(cajaCableado);
+
 
     // CAJA DE CABLEADO 2
 
@@ -463,6 +465,7 @@ function create() {
     caja.body.mass = 80;
     caja.body.debug = false;
     caja.body.collideWorldBounds = true;
+
     cajas.lista.push(caja);
 
     //CAJA 2
@@ -478,6 +481,7 @@ function create() {
     caja.body.static = false;
     caja.body.mass = 100;
     //caja.body.debug = true;
+
     cajas.lista.push(caja);
 
     //CAJA 3
@@ -492,6 +496,8 @@ function create() {
     caja.body.mass = 100;
     //caja.body.debug = true;
     caja.body.collideWorldBounds = true;
+
+
     cajas.lista.push(caja);
 
 
@@ -965,11 +971,12 @@ function create() {
 
     }
 
+
      function colisionInicialTankabaIA(body, bodyB, shapeA, shapeB, equation){
 
         if (body){
             //console.log(body.sprite.key);
-            //console.log(body.id);
+            console.log(body.id);
         }
 
 
@@ -987,8 +994,12 @@ function create() {
                 plataformasBasic.lista[0].body.y = 0;
             }
             //animacion de boton presionado
-            if(body.id == 15) {
+            if(body.id == 16) {
                 plataformasMoviles.lista[0].body.rotateRight(25);
+            }
+            if(body.id === 18){
+                let timer =  juego.time.events.add(1250, stopPlataforma, this, 2);
+                plataformasMoviles.lista[2].body.rotateRight(-25);
             }
         }
 
@@ -997,6 +1008,8 @@ function create() {
             tankabaIA.muerta = true;
 
         }
+
+
 
         if(body.sprite.key === 'chip'){                 //si choca con un chip
             
@@ -1075,6 +1088,7 @@ function create() {
                     plataformasBasic.lista[0].body.y = 1303;
                 }
                 plataformasMoviles.lista[0].body.rotateRight(0);
+                plataformasMoviles.lista[2].body.rotateRight(0);
                 //stopPlataforma(0);
             }
         }
@@ -1105,8 +1119,13 @@ function create() {
 
         if(body.sprite.key === 'boton'){
 
-            //animacion de boton presionado
-            plataformasMoviles.lista[0].body.rotateRight(25);
+            if(body.id === 16){
+                plataformasMoviles.lista[0].body.rotateRight(-25);
+            }
+            if(body.id === 18){
+                let timer =  juego.time.events.add(1250, stopPlataforma, this, 2);
+                plataformasMoviles.lista[2].body.rotateRight(-25);
+            }
         }
 
         if(body.sprite.key === 'bobina'){
@@ -1190,6 +1209,7 @@ function create() {
             if(body.sprite.key === 'boton'){
                 plataformasMoviles.lista[0].body.rotateRight(0);
                 //stopPlataforma(0);
+                plataformasMoviles.lista[2].body.rotateRight(0);
             }
         }
     }
@@ -1199,16 +1219,29 @@ function create() {
 
         if(body.sprite.key === 'cajaCableado' && tecla_accion.isDown){  
 
-            cajasCableado.lista[0].animations.play('caja_rota');
-            let timer =  juego.time.events.add(1250, stopPlataforma, this, 0);
-            plataformasMoviles.lista[0].body.rotateRight(25);      
+            if(body.id === 13){
+                compuertas.lista[0].frame = 1;
+                compuertas.lista[0].body.setRectangle(100, 25);
+                compuertas.lista[0].pivot.y = +250;
+                compuertas.lista[0].body.y += 250; 
+            
+            }else if(body.id === 14){
+
+                let timer =  juego.time.events.add(1250, stopPlataforma, this, 1);
+                plataformasMoviles.lista[1].body.rotateRight(-25);
+
+            }else{
+                ;
+            }    
 
         }
 
         if(body.sprite.key === 'boton'){
 
-            //animacion de boton presionado
-            plataformasMoviles.lista[0].body.rotateRight(25);
+            if(body.id === 18){
+                let timer =  juego.time.events.add(1250, stopPlataforma, this, 2);
+                plataformasMoviles.lista[2].body.rotateRight(-25);
+            }
         }
 
         if(body.sprite.key === 'bobina'){
@@ -1289,7 +1322,7 @@ function create() {
        if(body.sprite !== null){
 
             if(body.sprite.key === 'boton'){
-                plataformasMoviles.lista[0].body.rotateRight(0);
+                plataformasMoviles.lista[2].body.rotateRight(0);
                 //stopPlataforma(0);
             }
         }

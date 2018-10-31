@@ -205,6 +205,22 @@ function update() {
     plataformasBasic.lista[2].body.y = plataformasBasic.lista[2].pos;
     //console.log(plataformasBasic.lista[1].pos);
 
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    let posInicial = plataformasBasic.lista[0].body.y;
+    if(cajas.lista[1].body.x <= 2935){
+        plataformasBasic.lista[0].body.y = 2000;
+    }else{
+        plataformasBasic.lista[0].body.y = posInicial;
+    }
+
+    if(cajas.lista[2].body.x < 5849){
+        compuertas.lista[1].frame = 1;
+        compuertas.lista[1].body.setRectangle(100, 25);
+        compuertas.lista[1].pivot.y = +250;
+        compuertas.lista[1].body.y += 250;
+    }
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////// COMPROBAR SI SE ESTA EN ZONA DE VENTILADORES   /////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
