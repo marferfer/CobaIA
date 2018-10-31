@@ -19,8 +19,8 @@ Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños
 <h2> COBAIAS: </h2>
 <p>Cada cobaIA tendrá sus propias características físicas y habilidades:</p>
 <p><b>1. CobaIA tanque (TANKABAIA)</b>: Gracias a su complexión fuerte y su peso, esta robusta criatura puede soportar los flujos de aire de los ventiladores que harían volar a las demás. Sumado a esto, posee una fuerza natural que le permite mover objetos pesados como cajas. Por ello la <b>TANKABAIA</b> es el escudo y el músculo del equipo.</p>
-<p><b>2. CobaIA ágil (AGILBAIA)</b>: Gracias a su flexibilidad y cuerpo alargado esta cobaya posee un don natural para trepar por paredes. La <b>AGILBAIA</b> es la que se encarga de llegar a los lugares difíciles para facilitar el acceso a sus compañeras.</p>
-<p><b>3. CobaIA exploradora (SCOUTBAIA)</b>: Por último nuestra <b>SCOUTBAIA</b> es una cobaya de riesgos, la IA que le controla al no poseer un módulo de autopreservación, hace que tome decisiones de dudosa seguridad. Ella se lanza de cabeza a planear por el aire si necesita alcanzar plataformas lejanas a las que solo un mamífero de pequeñas dimensiones podría llegar. Además no tiene reparo en morder con sus poderosos dientes los cables de los sistemas electrónicos o las enredaderas con tal de despejar el camino.</p>
+<p><b>2. CobaIA ágil (ACROBAIA)</b>: Gracias a su flexibilidad y cuerpo alargado esta cobaya posee un don natural para trepar por paredes. La <b>ACROBAIA</b> es la que se encarga de llegar a los lugares difíciles para facilitar el acceso a sus compañeras.</p>
+<p><b>3. CobaIA exploradora (TALIBAIA)</b>: Por último nuestra <b>TALIBAIA</b> es una cobaya de riesgos, la IA que le controla al no poseer un módulo de autopreservación, hace que tome decisiones de dudosa seguridad. Ella se lanza de cabeza a planear por el aire si necesita alcanzar plataformas lejanas a las que solo un mamífero de pequeñas dimensiones podría llegar. Además no tiene reparo en morder con sus poderosos dientes los cables de los sistemas electrónicos o las enredaderas con tal de despejar el camino.</p>
 
 <h2> ESTRUCTURA NARRATIVA: </h2>
 <p>El juego consta de dos fases:</p>
@@ -31,9 +31,9 @@ Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños
 <p>Son los elementos con los que construiremos los niveles:</p>
 <p><b>1. Cajas:</b> Son objetos pesados y contundentes que sirven para activar placas de presión, sortear huecos, alcanzar alturas superiores y servir de barricada. Normalmente son las <b>TANKABAIAS</b> las encargadas de posicionar estos objetos.</p>
 <p><b>2. Bobinas:</b> Son elementos peligros que restringen el acceso a una zona y que de ser tocados pueden suponer la muerte de la cobaya.</p>
-<p><b>3. Ventiladores:</b> Los ventiladores los encontraremos posicionados en distintos lugares y según esta posición jugarán distintos roles. Pueden servir como trampas para atraer o empujar a las cobayas a lugares indeseados, como impulso para la <b>SCOUTBAIA</b> en sus vuelos o incluso como medida para restringir el acceso a una determinada área.</p>
+<p><b>3. Ventiladores:</b> Los ventiladores los encontraremos posicionados en distintos lugares y según esta posición jugarán distintos roles. Pueden servir como trampas para atraer o empujar a las cobayas a lugares indeseados, como impulso para la <b>TALIBAIA</b> en sus vuelos o incluso como medida para restringir el acceso a una determinada área.</p>
 <p><b>4. Cadáveres de cobayas:</b> Las cobayas son meros instrumentos de las IA que les controlan, así que si una de ellas muere basta con implantar el chip que contiene a la IA en otra cobaya.</p>
-<p><b>5. Cajas de cableado:</b> Algunas compuertas estarán selladas electrónicamente y la única forma de poder atravesarlas será encontrando su caja de cableado, después una <b>SCOUTBAIA</b> deberá encargarse usar sus dientes para hacerlas un desastre y activar las compuertas.</p>
+<p><b>5. Cajas de cableado:</b> Algunas compuertas estarán selladas electrónicamente y la única forma de poder atravesarlas será encontrando su caja de cableado, después una <b>TALIBAIA</b> deberá encargarse usar sus dientes para hacerlas un desastre y activar las compuertas.</p>
 <p><b>6. Compuertas:</b> compuertas.</p>
 <p><b>7. Botones:</b>..son solo botones.</p>
 
