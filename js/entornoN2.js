@@ -544,10 +544,18 @@ function create2() {
 
         }
 
-        if(body.sprite.key === 'boton'){
-
+        if(body.id === 13){
+            //console.log(body.id);
             //animacion de boton presionado
-            //plataformasMoviles.lista[0].body.rotateRight(25);
+            let timer =  juego2.time.events.add(6900, stopPlataforma, this, ascensores.lista[0].direccion);
+            ascensores.lista[0].body.moveDown(125);
+        }
+
+        if(body.id === 12){
+            //console.log(body.id);
+            //animacion de boton presionado
+            let timer =  juego2.time.events.add(6900, stopPlataforma, this, ascensores.lista[0].direccion);
+            ascensores.lista[0].body.moveUp(125);
         }
 
         if(body.sprite.key === 'bobina'){
@@ -646,11 +654,18 @@ function create2() {
 
         }
 
-        if(body.sprite.key === 'boton'){
-
+        if(body.id === 13){
+            //console.log(body.id);
             //animacion de boton presionado
             let timer =  juego2.time.events.add(6900, stopPlataforma, this, ascensores.lista[0].direccion);
             ascensores.lista[0].body.moveDown(125);
+        }
+
+        if(body.id === 12){
+            //console.log(body.id);
+            //animacion de boton presionado
+            let timer =  juego2.time.events.add(6900, stopPlataforma, this, ascensores.lista[0].direccion);
+            ascensores.lista[0].body.moveUp(125);
         }
 
         if(body.sprite.key === 'bobina'){
@@ -759,8 +774,15 @@ function create2() {
             }
         }
 
-        if(body.sprite.key === 'boton'){
+        if(body.id === 13){
+            //console.log(body.id);
+            //animacion de boton presionado
+            let timer =  juego2.time.events.add(6900, stopPlataforma, this, ascensores.lista[0].direccion);
+            ascensores.lista[0].body.moveDown(125);
+        }
 
+        if(body.id === 12){
+            //console.log(body.id);
             //animacion de boton presionado
             let timer =  juego2.time.events.add(6900, stopPlataforma, this, ascensores.lista[0].direccion);
             ascensores.lista[0].body.moveUp(125);
