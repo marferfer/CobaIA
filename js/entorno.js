@@ -180,31 +180,25 @@ function create() {
     compuerta.body.y = 700;
     compuertas.lista.push(compuerta);
 
-    /*//COMPUERTA 2
+    //COMPUERTA 2
 
-    compuerta = compuertas.grupo.create(0, 0, 'compuerta');
+    compuerta = compuertas.grupo.create(6774, 1085, 'compuerta');
 
     compuerta.body.debug = true;
     compuerta.body.static = true;
-    compuerta.pivot.y = 250;
-    compuerta.body.setRectangle(75, 25);
-    compuerta.animations.frame = 1;
-    compuerta.body.x = 14475;
-    compuerta.body.y = juego.world.height - 500;
+    compuerta.body.setRectangle(50, 500);
+    compuerta.animations.frame = 0;
     compuertas.lista.push(compuerta);
 
     //COMPUERTA 3
 
-    compuerta = compuertas.grupo.create(0, 0, 'compuerta');
+    compuerta = compuertas.grupo.create(10450, 760, 'compuerta');
 
     compuerta.body.debug = true;
     compuerta.body.static = true;
-    compuerta.pivot.y = 250;
-    compuerta.body.setRectangle(75, 25);
-    compuerta.animations.frame = 1;
-    compuerta.body.x = 24475;
-    compuerta.body.y = juego.world.height - 500;
-    compuertas.lista.push(compuerta);*/
+    compuerta.body.setRectangle(50, 500);
+    compuerta.animations.frame = 0;
+    compuertas.lista.push(compuerta);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// CAJAS DE CABLEADO   ///////////////////////////////////////////////////////////////////////////////////
@@ -311,8 +305,8 @@ function create() {
     boton.body.debug = true;
     console.log(boton.body.id); //id: 
     boton.body.static = true;
-    boton.body.x = 22960;
-    boton.body.y = 1331;
+    boton.body.x = 5825;
+    boton.body.y = 1371;
 
     botones.lista.push(boton);
 
@@ -479,7 +473,7 @@ function create() {
 
     //CAJA 3
 
-    caja = cajas.grupo.create(10000, juego.world.height -240, 'caja');
+    caja = cajas.grupo.create(6000, 1300, 'caja');
  
     juego.physics.p2.enableBody(caja);
     caja.body.clearShapes();
@@ -772,7 +766,7 @@ function create() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// TANKABAIA   ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    tankabaIA.jugador = juego.add.sprite(5500, juego.world.height - 225, 'tankabaIAmovimiento');
+    tankabaIA.jugador = juego.add.sprite(11200, juego.world.height - 225, 'tankabaIAmovimiento');
     tankabaIA.jugador.scale.setTo(1.3, 1.3);
     juego.physics.p2.enableBody(tankabaIA.jugador);
     tankabaIA.jugador.body.setRectangle(95, 60);
