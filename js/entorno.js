@@ -173,11 +173,11 @@ function create() {
 
     compuerta.body.debug = true;
     compuerta.body.static = true;
-    compuerta.pivot.y = 250;
-    compuerta.body.setRectangle(75, 25);
+    
+    compuerta.body.setRectangle(50, 500);
     compuerta.animations.frame = 1;
-    compuerta.body.x = 4475;
-    compuerta.body.y = juego.world.height - 500;
+    compuerta.body.x = 2820;
+    compuerta.body.y = 700;
     compuertas.lista.push(compuerta);
 
     /*//COMPUERTA 2
@@ -225,18 +225,17 @@ function create() {
     cajaCableado.body.y = juego.world.height - 70;
     cajasCableado.lista.push(cajaCableado);
 
-    /*// CAJA DE CABLEADO 2
+    // CAJA DE CABLEADO 2
 
-    cajaCableado = cajasCableado.grupo.create(0, 0, 'cajaCableado');
+    cajaCableado = cajasCableado.grupo.create(3655, 800, 'cajaCableado');
 
     cajaCableado.body.debug = false;
+    cajaCableado.body.angle = 180;
     cajaCableado.animations.frame = 0;
     cajaCableado.animations.add('caja_rota', [1, 2, 3], 10, true);
     cajaCableado.body.static = true;
     cajaCableado.body.setRectangle(23, 69, 15);
-    cajaCableado.body.x = 12770;
-    cajaCableado.body.y = juego.world.height - 70;
-    cajasCableado.lista.push(cajaCableado);*/
+    cajasCableado.lista.push(cajaCableado);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// TUBOS   ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -253,7 +252,7 @@ function create() {
 
     tubo.body.static = true;
     //tubo.body.debug = true;
-    tubo.body.x = 1800;
+    tubo.body.x = 1550;
     tubo.body.y = juego.world.height - 675;
     tubo.body.collideWorldBounds = true;
     
@@ -285,8 +284,9 @@ function create() {
     boton.body.debug = true;
     console.log(boton.body.id); //id: 14
     boton.body.static = true;
-    boton.body.x = 2960;
-    boton.body.y = 1331;
+    boton.body.angle = 90;
+    boton.body.x = 2843;
+    boton.body.y = 1311;
 
     botones.lista.push(boton);
 
@@ -298,8 +298,8 @@ function create() {
     boton.body.debug = true;
     console.log(boton.body.id); //id: 
     boton.body.static = true;
-    boton.body.x = 12960;
-    boton.body.y = 1331;
+    boton.body.x = 6260;
+    boton.body.y = 750;
 
     botones.lista.push(boton);
 
@@ -383,9 +383,19 @@ function create() {
     plataformaMovil.body.static = true;
     plataformaMovil.pivot.x = 150;
     plataformaMovil.body.setRectangle(300, 25, -150);
-    plataformaMovil.body.x = 12440;
-    plataformaMovil.body.y = juego.world.height - 402;
-    plataformaMovil.body.collideWorldBounds = true;
+    plataformaMovil.body.x = 3595;
+    plataformaMovil.body.y = 605;
+
+    plataformasMoviles.lista.push(plataformaMovil);
+
+    //PLAT 3
+
+    plataformaMovil = plataformasMoviles.grupo.create(6190, 810, 'plataformaMovil');
+
+    //plataformaMovil.body.debug = true;
+    plataformaMovil.body.static = true;
+    plataformaMovil.pivot.x = 150;
+    plataformaMovil.body.setRectangle(300, 25, -150);
 
     plataformasMoviles.lista.push(plataformaMovil);
 
@@ -399,13 +409,12 @@ function create() {
 
     let plataformaBasic = plataformasBasic.grupo.create(0, 0, 'plataformaBasic');
 
-    //plataformaMovil.body.debug = true;
+    plataformaMovil.body.debug = false;
     plataformaBasic.body.static = true;
     plataformaBasic.body.setRectangle(26, 302);
     plataformaBasic.body.x = 4726;
     plataformaBasic.body.y = 1303;
-    console.log(plataformaBasic.body.id); //id: 16
-    plataformaBasic.body.collideWorldBounds = true;
+    console.log(plataformaBasic.body.id);
 
     plataformasBasic.lista.push(plataformaBasic);
 
@@ -413,17 +422,7 @@ function create() {
     /////////////// ASCENSORES   /////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    plataformaBasic = plataformasBasic.grupo.create(0, 0, 'plataformaBasic');
-
-    //plataformaMovil.body.debug = true;
-    plataformaBasic.body.static = true;
-    plataformaBasic.body.setRectangle(26, 302);
-    plataformaBasic.body.x = 14726;
-    plataformaBasic.body.y = 1303;
-    console.log(plataformaBasic.body.id); //id: 16
-    plataformaBasic.body.collideWorldBounds = true;
-
-    plataformasBasic.lista.push(plataformaBasic);
+    
 
     //ASCENSOR 2
 
@@ -465,7 +464,7 @@ function create() {
 
     //CAJA 2
 
-    caja = cajas.grupo.create(2415, juego.world.height -500, 'caja');
+    caja = cajas.grupo.create(3400, 525, 'caja');
     //caja.body.setCollisionGroup(cajas.collisionGroup);
     //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
  
@@ -476,12 +475,11 @@ function create() {
     caja.body.static = false;
     caja.body.mass = 100;
     caja.body.debug = true;
-    caja.body.collideWorldBounds = true;
     cajas.lista.push(caja);
 
     //CAJA 3
 
-    caja = cajas.grupo.create(1000, juego.world.height -240, 'caja');
+    caja = cajas.grupo.create(10000, juego.world.height -240, 'caja');
  
     juego.physics.p2.enableBody(caja);
     caja.body.clearShapes();
@@ -554,7 +552,7 @@ function create() {
     pilaCadaveres.body.debug = true;
     pilaCadaveres.body.static = true;
     
-    pilaCadaveres.body.x = 800;
+    pilaCadaveres.body.x = 18800;
     pilaCadaveres.body.y = juego.world.height - 260;
 
     pilasCadaveres.lista.push(pilaCadaveres);
@@ -575,7 +573,7 @@ function create() {
     bobina.body.static = true;
     //pilaCadaveres.pivot.x = 150;
     //pilaCadaveres.body.setRectangle(300, 25, -150);
-    bobina.body.x = 200;
+    bobina.body.x = 12000;
     bobina.body.y = juego.world.height - 1260;
 
     bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
@@ -593,7 +591,7 @@ function create() {
     bobina.body.static = true;
     //pilaCadaveres.pivot.x = 150;
     //pilaCadaveres.body.setRectangle(300, 25, -150);
-    bobina.body.x = 1200;
+    bobina.body.x = 12000;
     bobina.body.y = juego.world.height - 260;
 
     bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
@@ -611,7 +609,7 @@ function create() {
     bobina.body.static = true;
     //pilaCadaveres.pivot.x = 150;
     //pilaCadaveres.body.setRectangle(300, 25, -150);
-    bobina.body.x = 2200;
+    bobina.body.x = 12000;
     bobina.body.y = juego.world.height - 260;
 
     bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
@@ -772,7 +770,7 @@ function create() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////// TANKABAIA   ///////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    tankabaIA.jugador = juego.add.sprite(340, juego.world.height - 225, 'tankabaIAmovimiento');
+    tankabaIA.jugador = juego.add.sprite(5500, juego.world.height - 225, 'tankabaIAmovimiento');
     tankabaIA.jugador.scale.setTo(1.3, 1.3);
     juego.physics.p2.enableBody(tankabaIA.jugador);
     tankabaIA.jugador.body.setRectangle(95, 60);
@@ -845,8 +843,8 @@ function create() {
 /////////DECORADOS POR DELANTE DEL JUGADOR  ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    nivel1.decorados[2] = juego.add.image(1260, juego.world.height - 490, 'conexionTuboArriba');
-    nivel1.decorados[3] = juego.add.image(1290, juego.world.height - 1043, 'conexionTuboDerecha');
+    nivel1.decorados[2] = juego.add.image(1000, juego.world.height - 490, 'conexionTuboArriba');
+    nivel1.decorados[3] = juego.add.image(1035, juego.world.height - 1043, 'conexionTuboDerecha');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
