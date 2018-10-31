@@ -55,6 +55,7 @@ function preload() {
     juego.load.image('indicadorJ3', 'assets/indicadorJ3.png');*/
     juego.load.image('pilaCadaveres', 'assets/images/pilaCadaveres.png');
     juego.load.image('baseTrepar', 'assets/images/baseParaTrepar.png');
+    juego.load.image('compuertaParteSuperior', 'assets/images/compuertaParteSuperior.png');
 
     juego.load.image('ventilador', 'assets/images/ventilador.png');
     
@@ -895,6 +896,9 @@ function create() {
 
     nivel1.decorados[2] = juego.add.image(1000, juego.world.height - 490, 'conexionTuboArriba');
     nivel1.decorados[3] = juego.add.image(1035, juego.world.height - 1043, 'conexionTuboDerecha');
+    nivel1.decorados[4] = juego.add.image(2800, 420, 'compuertaParteSuperior');
+    nivel1.decorados[5] = juego.add.image(6750, 800, 'compuertaParteSuperior');
+    nivel1.decorados[6] = juego.add.image(10430, 475, 'compuertaParteSuperior');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
