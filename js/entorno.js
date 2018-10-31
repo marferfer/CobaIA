@@ -45,6 +45,10 @@ function preload() {
     juego.load.image('tuboN1Completo', 'assets/images/tuboN1Completo.png');
     juego.load.image('cable', 'assets/images/cable.png');
     juego.load.image('frasco', 'assets/images/frasco.png');
+
+    juego.load.image('mesaOrdenador', 'assets/Nivel0/mesaLab.png');
+    juego.load.image('urna', 'assets/Nivel0/urnaLaboratorio.png');
+
     juego.load.image('plataformaMovil', 'assets/images/plataformaMovil.png');
     juego.load.image('plataformaBasic', 'assets/images/plataformaBasic.png');
     juego.load.image('boton', 'assets/images/boton.png');
@@ -923,9 +927,17 @@ function create() {
 
     nivel1.decorados[2] = juego.add.image(1000, juego.world.height - 490, 'conexionTuboArriba');
     nivel1.decorados[3] = juego.add.image(1035, juego.world.height - 1043, 'conexionTuboDerecha');
+
     nivel1.decorados[4] = juego.add.image(2800, 420, 'compuertaParteSuperior');
     nivel1.decorados[5] = juego.add.image(6750, 800, 'compuertaParteSuperior');
     nivel1.decorados[6] = juego.add.image(10430, 475, 'compuertaParteSuperior');
+
+
+
+
+    nivel1.decorados[7] = juego.add.image(1835, juego.world.height - 535, 'urna');
+    nivel1.decorados[8] = juego.add.image(2935, juego.world.height - 225, 'mesaOrdenador');
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
