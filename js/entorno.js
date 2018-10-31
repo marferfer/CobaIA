@@ -746,6 +746,8 @@ function create() {
 
     // To listen to buttons from a specific pad listen directly on that pad game.input.gamepad.padX, where X = pad 1-4
     pad1 = juego.input.gamepad.pad1;
+    pad2 = juego.input.gamepad.pad2;
+    pad3 = juego.input.gamepad.pad3;
 
     //paseNivel = juego.add.sprite(3000, juego.world.height - 205, 'ascensor');
 

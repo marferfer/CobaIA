@@ -3,6 +3,8 @@ var juego;
 var juegoPruebas;
 
 var pad1;
+var pad2;
+var pad3;
 var indicator;
 
 var indicadorJ1;

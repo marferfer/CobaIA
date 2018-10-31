@@ -172,7 +172,7 @@ function update() {
     //Indicador
 
     // Pad "connected or not" indicator
-    if (juego.input.gamepad.supported && juego.input.gamepad.active && pad1.connected)
+    if (juego.input.gamepad.supported && juego.input.gamepad.active && pad3.connected)
     {
         indicator.animations.frame = 0;
     }
@@ -399,7 +399,7 @@ function update() {
         talibaIA.jugador.body.fixedRotation = false;
     }
     
-    if (cursores.left.isDown && tankabaIA.canImove)// Si presionamos LEFT
+    if (((pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || cursores.left.isDown) && tankabaIA.canImove)// Si presionamos LEFT
     {
         
         //createjs.Sound.play(paso);
@@ -408,7 +408,7 @@ function update() {
         tankabaIA.jugador.animations.play('movimientoIzquierda');
         tankabaIA.ultimo_sentido = 'izquierda';
     }
-     else if (cursores.right.isDown && tankabaIA.canImove)
+     else if (((pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || cursores.right.isDown) && tankabaIA.canImove)
     {
         
         //createjs.Sound.play(paso);
@@ -433,7 +433,7 @@ function update() {
 
     
 
-    if (cursores.up.isDown /*&& checkIfCanJump(tankabaIA)*/ && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
+    if (((pad1.justPressed(Phaser.Gamepad.XBOX360_A)) || cursores.up.isDown) /*&& checkIfCanJump(tankabaIA)*/ && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
         
 
         tankabaIA.jugador.body.moveUp(300);
@@ -461,17 +461,17 @@ function update() {
         baseTrepar.body.x = 0;
         baseTrepar.body.y = 0;
     }
-    if(ctrlW.isDown && checkIfCanJump(acrobaIA) && acrobaIA.canImove){
+    if(((pad2.justPressed(Phaser.Gamepad.XBOX360_A)) || ctrlW.isDown) && checkIfCanJump(acrobaIA) && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveUp(300);
 
-    }else if(ctrlA.isDown && acrobaIA.canImove){
+    }else if(((pad2.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad2.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || ctrlA.isDown) && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveLeft(300);
         acrobaIA.jugador.animations.play('movimientoIzquierda');
         acrobaIA.ultimo_sentido = "izquierda";
 
-    }else if(ctrlD.isDown && acrobaIA.canImove){
+    }else if(((pad2.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad2.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || ctrlD.isDown) && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveRight(300);
         acrobaIA.jugador.animations.play('movimientoDerecha');
@@ -493,17 +493,17 @@ function update() {
 
     ///////////////////////////////////////////////////////controles talibaIA
 
-    if(ctrlH.isDown && checkIfCanJump(talibaIA) && talibaIA.canImove){
+    if(((pad3.justPressed(Phaser.Gamepad.XBOX360_A)) || ctrlH.isDown) && checkIfCanJump(talibaIA) && talibaIA.canImove){
 
         talibaIA.jugador.body.moveUp(300);
 
-    }else if(ctrlB.isDown && talibaIA.canImove){
+    }else if(((pad3.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad3.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || ctrlB.isDown) && talibaIA.canImove){
 
         talibaIA.jugador.body.moveLeft(300);
         talibaIA.jugador.animations.play('movimientoIzquierda');
         talibaIA.ultimo_sentido = "izquierda";
 
-    }else if(ctrlM.isDown && talibaIA.canImove){
+    }else if(((pad3.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad3.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || ctrlM.isDown) && talibaIA.canImove){
 
         talibaIA.jugador.body.moveRight(300);
         talibaIA.jugador.animations.play('movimientoDerecha');
