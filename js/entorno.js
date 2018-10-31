@@ -180,6 +180,32 @@ function create() {
     compuerta.body.y = juego.world.height - 500;
     compuertas.lista.push(compuerta);
 
+    /*//COMPUERTA 2
+
+    compuerta = compuertas.grupo.create(0, 0, 'compuerta');
+
+    compuerta.body.debug = true;
+    compuerta.body.static = true;
+    compuerta.pivot.y = 250;
+    compuerta.body.setRectangle(75, 25);
+    compuerta.animations.frame = 1;
+    compuerta.body.x = 14475;
+    compuerta.body.y = juego.world.height - 500;
+    compuertas.lista.push(compuerta);
+
+    //COMPUERTA 3
+
+    compuerta = compuertas.grupo.create(0, 0, 'compuerta');
+
+    compuerta.body.debug = true;
+    compuerta.body.static = true;
+    compuerta.pivot.y = 250;
+    compuerta.body.setRectangle(75, 25);
+    compuerta.animations.frame = 1;
+    compuerta.body.x = 24475;
+    compuerta.body.y = juego.world.height - 500;
+    compuertas.lista.push(compuerta);*/
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// CAJAS DE CABLEADO   ///////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -198,6 +224,19 @@ function create() {
     cajaCableado.body.x = 2770;
     cajaCableado.body.y = juego.world.height - 70;
     cajasCableado.lista.push(cajaCableado);
+
+    /*// CAJA DE CABLEADO 2
+
+    cajaCableado = cajasCableado.grupo.create(0, 0, 'cajaCableado');
+
+    cajaCableado.body.debug = false;
+    cajaCableado.animations.frame = 0;
+    cajaCableado.animations.add('caja_rota', [1, 2, 3], 10, true);
+    cajaCableado.body.static = true;
+    cajaCableado.body.setRectangle(23, 69, 15);
+    cajaCableado.body.x = 12770;
+    cajaCableado.body.y = juego.world.height - 70;
+    cajasCableado.lista.push(cajaCableado);*/
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// TUBOS   ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -251,6 +290,71 @@ function create() {
 
     botones.lista.push(boton);
 
+    // BOTON 3
+
+    boton = botones.grupo.create(0, 0, 'boton');
+
+    boton.body.setRectangle(61, 15, 0, -5);
+    boton.body.debug = true;
+    console.log(boton.body.id); //id: 
+    boton.body.static = true;
+    boton.body.x = 12960;
+    boton.body.y = 1331;
+
+    botones.lista.push(boton);
+
+    // BOTON 4
+
+    boton = botones.grupo.create(0, 0, 'boton');
+
+    boton.body.setRectangle(61, 15, 0, -5);
+    boton.body.debug = true;
+    console.log(boton.body.id); //id: 
+    boton.body.static = true;
+    boton.body.x = 22960;
+    boton.body.y = 1331;
+
+    botones.lista.push(boton);
+
+    // BOTON 5
+
+    boton = botones.grupo.create(0, 0, 'boton');
+
+    boton.body.setRectangle(61, 15, 0, -5);
+    boton.body.debug = true;
+    console.log(boton.body.id); //id: 
+    boton.body.static = true;
+    boton.body.x = 32960;
+    boton.body.y = 1331;
+
+    botones.lista.push(boton);
+
+    // BOTON 6
+
+    boton = botones.grupo.create(0, 0, 'boton');
+
+    boton.body.setRectangle(61, 15, 0, -5);
+    boton.body.debug = true;
+    console.log(boton.body.id); //id: 
+    boton.body.static = true;
+    boton.body.x = 42960;
+    boton.body.y = 1331;
+
+    botones.lista.push(boton);
+
+    // BOTON 7
+
+    boton = botones.grupo.create(0, 0, 'boton');
+
+    boton.body.setRectangle(61, 15, 0, -5);
+    boton.body.debug = true;
+    console.log(boton.body.id); //id: 
+    boton.body.static = true;
+    boton.body.x = 52960;
+    boton.body.y = 1331;
+
+    botones.lista.push(boton);
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// PLATAFORMAS MOVILES   /////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -271,6 +375,20 @@ function create() {
 
     plataformasMoviles.lista.push(plataformaMovil);
 
+    // PLAT 2
+
+    plataformaMovil = plataformasMoviles.grupo.create(0, 0, 'plataformaMovil');
+
+    //plataformaMovil.body.debug = true;
+    plataformaMovil.body.static = true;
+    plataformaMovil.pivot.x = 150;
+    plataformaMovil.body.setRectangle(300, 25, -150);
+    plataformaMovil.body.x = 12440;
+    plataformaMovil.body.y = juego.world.height - 402;
+    plataformaMovil.body.collideWorldBounds = true;
+
+    plataformasMoviles.lista.push(plataformaMovil);
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// PLATAFORMAS BASIC   /////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -285,6 +403,36 @@ function create() {
     plataformaBasic.body.static = true;
     plataformaBasic.body.setRectangle(26, 302);
     plataformaBasic.body.x = 4726;
+    plataformaBasic.body.y = 1303;
+    console.log(plataformaBasic.body.id); //id: 16
+    plataformaBasic.body.collideWorldBounds = true;
+
+    plataformasBasic.lista.push(plataformaBasic);
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// ASCENSORES   /////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    plataformaBasic = plataformasBasic.grupo.create(0, 0, 'plataformaBasic');
+
+    //plataformaMovil.body.debug = true;
+    plataformaBasic.body.static = true;
+    plataformaBasic.body.setRectangle(26, 302);
+    plataformaBasic.body.x = 14726;
+    plataformaBasic.body.y = 1303;
+    console.log(plataformaBasic.body.id); //id: 16
+    plataformaBasic.body.collideWorldBounds = true;
+
+    plataformasBasic.lista.push(plataformaBasic);
+
+    //ASCENSOR 2
+
+    plataformaBasic = plataformasBasic.grupo.create(0, 0, 'plataformaBasic');
+
+    //plataformaMovil.body.debug = true;
+    plataformaBasic.body.static = true;
+    plataformaBasic.body.setRectangle(26, 302);
+    plataformaBasic.body.x = 24726;
     plataformaBasic.body.y = 1303;
     console.log(plataformaBasic.body.id); //id: 16
     plataformaBasic.body.collideWorldBounds = true;
@@ -315,7 +463,9 @@ function create() {
     caja.body.collideWorldBounds = true;
     cajas.lista.push(caja);
 
-    /*caja = cajas.grupo.create(2415, juego.world.height -500, 'caja');
+    //CAJA 2
+
+    caja = cajas.grupo.create(2415, juego.world.height -500, 'caja');
     //caja.body.setCollisionGroup(cajas.collisionGroup);
     //caja.body.collides([cajas.collisionGroup, nivel1.collisionGroup]);
  
@@ -329,15 +479,19 @@ function create() {
     caja.body.collideWorldBounds = true;
     cajas.lista.push(caja);
 
+    //CAJA 3
+
     caja = cajas.grupo.create(1000, juego.world.height -240, 'caja');
  
     juego.physics.p2.enableBody(caja);
-    caja.body.setRectangle(70, 70);
-    caja.scale.setTo(0.5, 0.5);
+    caja.body.clearShapes();
+    caja.body.loadPolygon('cajaCollisions', 'caja');
+    caja.scale.setTo(1, 1);
     caja.body.static = false;
-    caja.body.mass = 45;
+    caja.body.mass = 100;
     caja.body.debug = true;
-    cajas.lista.push(caja);*/
+    caja.body.collideWorldBounds = true;
+    cajas.lista.push(caja);
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -388,7 +542,7 @@ function create() {
     /////////////// PILAS DE CADAVERES   //////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*pilasCadaveres.grupo = juego.add.group();
+    pilasCadaveres.grupo = juego.add.group();
     pilasCadaveres.grupo.enableBody = true;
     pilasCadaveres.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -403,13 +557,13 @@ function create() {
     pilaCadaveres.body.x = 800;
     pilaCadaveres.body.y = juego.world.height - 260;
 
-    pilasCadaveres.lista.push(pilaCadaveres);*/
+    pilasCadaveres.lista.push(pilaCadaveres);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// BOBINAS   /////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*bobinas.grupo = juego.add.group();
+    bobinas.grupo = juego.add.group();
     bobinas.grupo.enableBody = true;
     bobinas.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
@@ -422,14 +576,48 @@ function create() {
     //pilaCadaveres.pivot.x = 150;
     //pilaCadaveres.body.setRectangle(300, 25, -150);
     bobina.body.x = 200;
+    bobina.body.y = juego.world.height - 1260;
+
+    bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
+    bobina.animations.play('bobina_encendida');
+
+    bobinas.lista.push(bobina);
+
+    //BOBINA 2
+
+    bobina = bobinas.grupo.create(0, 0, 'bobina');
+
+    bobina.body.setRectangle(220, 10);
+
+    bobina.body.debug = true;
+    bobina.body.static = true;
+    //pilaCadaveres.pivot.x = 150;
+    //pilaCadaveres.body.setRectangle(300, 25, -150);
+    bobina.body.x = 1200;
     bobina.body.y = juego.world.height - 260;
 
     bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
     bobina.animations.play('bobina_encendida');
 
-    bobinas.lista.push(bobina);*/
+    bobinas.lista.push(bobina);    
 
-    
+    //BOBINA 3
+
+    bobina = bobinas.grupo.create(0, 0, 'bobina');
+
+    bobina.body.setRectangle(220, 10);
+
+    bobina.body.debug = true;
+    bobina.body.static = true;
+    //pilaCadaveres.pivot.x = 150;
+    //pilaCadaveres.body.setRectangle(300, 25, -150);
+    bobina.body.x = 2200;
+    bobina.body.y = juego.world.height - 260;
+
+    bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
+    bobina.animations.play('bobina_encendida');
+
+    bobinas.lista.push(bobina);   
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// VENTILADORES   ////////////////////////////////////////////////////////////////////////////////////////
@@ -458,16 +646,37 @@ function create() {
     aire.animations.add('aire_funciona', [0, 1, 2, 3, 4], 30, true);
     aire.animations.play('aire_funciona');
 
+    //VENT UP 2
+
+    ventilador = ventiladores.grupo.create(0, 0, 'ventilador');
+
+    ventilador.body.setRectangle(154, 44);
+    //ventilador.body.debug = true;
+    ventilador.body.static = true;
+
+    ventilador.body.x = 13992;
+    ventilador.body.y = 1139;
+
+    ventilador.zona = [ventilador.body.x - 88, ventilador.body.x + 88, ventilador.body.y - 22, ventilador.body.y - 300];
+    ventilador.posicion = "vertical";
+
+    ventiladores.lista.push(ventilador);
+
+
+    aire = juego.add.image(ventilador.zona[0], ventilador.zona[3], 'aire');
+    aire.animations.add('aire_funciona', [0, 1, 2, 3, 4], 30, true);
+    aire.animations.play('aire_funciona');
+
     
     /////////////////ventilador horizontal derecha
 
-    /*ventilador = ventiladores.grupo.create(0, 0, 'ventilador');
+    ventilador = ventiladores.grupo.create(0, 0, 'ventilador');
 
     ventilador.body.setRectangle(154, 44);
     ventilador.body.debug = true;
     ventilador.body.static = true;
     ventilador.body.x = 16150;
-    ventilador.body.y = juegoPruebas.world.height-200;
+    ventilador.body.y = juego.world.height-200;
     ventilador.body.angle = -90;
 
     ventilador.zona = [ventilador.body.x + 22, ventilador.body.x + 300, ventilador.body.y + 88, ventilador.body.y - 88];
@@ -476,11 +685,11 @@ function create() {
 
     ventiladores.lista.push(ventilador);
 
-    aire = juegoPruebas.add.image(ventilador.zona[0], ventilador.zona[2], 'aire');
+    aire = juego.add.image(ventilador.zona[0], ventilador.zona[2], 'aire');
 
     aire.angle = -90;
     aire.animations.add('aire_funciona', [0, 1, 2, 3, 4], 30, true);
-    aire.animations.play('aire_funciona');*/
+    aire.animations.play('aire_funciona');
 
 
     ///////////ventilador horizontal izquierda
@@ -491,6 +700,29 @@ function create() {
     //ventilador.body.debug = true;
     ventilador.body.static = true;
     ventilador.body.x = 4639;
+    ventilador.body.y = 1075;
+    ventilador.body.angle = -90;
+
+    ventilador.zona = [ventilador.body.x - 300, ventilador.body.x - 22, ventilador.body.y + 88, ventilador.body.y - 88];
+
+    ventilador.posicion = "horizontal_izquierda";
+
+    ventiladores.lista.push(ventilador);
+
+    aire = juego.add.image(ventilador.zona[0], ventilador.zona[2], 'aire');
+
+    aire.angle = -90;
+    aire.animations.add('aire_funciona', [0, 1, 2, 3, 4], 30, true);
+    aire.animations.play('aire_funciona');
+
+    //VENT IZQ 2
+
+    ventilador = ventiladores.grupo.create(0, 0, 'ventilador');
+
+    ventilador.body.setRectangle(154, 44);
+    //ventilador.body.debug = true;
+    ventilador.body.static = true;
+    ventilador.body.x = 14639;
     ventilador.body.y = 1075;
     ventilador.body.angle = -90;
 
