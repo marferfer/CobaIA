@@ -203,6 +203,7 @@ function update() {
     }
     plataformasBasic.lista[2].pos -= plataformasBasic.lista[2].incremento;
     plataformasBasic.lista[2].body.y = plataformasBasic.lista[2].pos;
+
     //console.log(plataformasBasic.lista[1].pos);
 
 

@@ -201,6 +201,11 @@ function create() {
     compuerta.animations.frame = 1;
     compuertas.lista.push(compuerta);
 
+    compuertas.lista[2].frame = 1;
+        compuertas.lista[2].body.setRectangle(100, 25);
+        compuertas.lista[2].pivot.y = +250;
+        compuertas.lista[2].body.y += 250;
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// CAJAS DE CABLEADO   ///////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -661,7 +666,7 @@ function create() {
 
     //BOBINA 5
 
-    bobina = bobinas.grupo.create(7324, 1050, 'bobina');
+    bobina = bobinas.grupo.create(7324, 0, 'bobina');
 
     bobina.body.setRectangle(220, 10);
 
@@ -831,7 +836,7 @@ function create() {
     //tankabaIA.jugador = juego.add.sprite(11200, juego.world.height - 225, 'tankabaIAmovimiento');
 
     //Cambiar 340, juego.world.height - 225
-    tankabaIA.jugador = juego.add.sprite(6884, juego.world.height - 425, 'tankabaIAmovimiento');
+    tankabaIA.jugador = juego.add.sprite(340, juego.world.height - 425, 'tankabaIAmovimiento');
 
     tankabaIA.jugador.scale.setTo(1.3, 1.3);
     juego.physics.p2.enableBody(tankabaIA.jugador);
@@ -1085,14 +1090,6 @@ function create() {
     function colisionInicialAcrobaIA(body, bodyB, shapeA, shapeB, equation){
 
 
-        if(body.sprite.key === 'cajaCableado' && tecla_accion.isDown){  
-
-            cajasCableado.lista[0].animations.play('caja_rota');
-            let timer =  juego.time.events.add(1250, stopPlataforma, this, 0);
-            plataformasMoviles.lista[0].body.rotateRight(25);      
-
-        }
-
         if(body.sprite.key === 'tuboN1Completo'){  
 
             acrobaIA.puedoTrepar = true;    
@@ -1211,12 +1208,14 @@ function create() {
                 compuertas.lista[0].frame = 1;
                 compuertas.lista[0].body.setRectangle(100, 25);
                 compuertas.lista[0].pivot.y = +250;
-                compuertas.lista[0].body.y += 250; 
+                compuertas.lista[0].body.y += 250;
+                cajasCableado.lista[0].animations.play('caja_rota');
             
             }else if(body.id === 14){
 
                 let timer =  juego.time.events.add(1250, stopPlataforma, this, 1);
                 plataformasMoviles.lista[1].body.rotateRight(-25);
+                cajasCableado.lista[0].animations.play('caja_rota');
 
             }else{
                 ;
@@ -1229,6 +1228,10 @@ function create() {
             if(body.id === 18){
                 let timer =  juego.time.events.add(1250, stopPlataforma, this, 2);
                 plataformasMoviles.lista[2].body.rotateRight(-25);
+            }
+
+            if(body.id === 22){
+                bobinas.lista[3].body.y = 0;
             }
         }
 
