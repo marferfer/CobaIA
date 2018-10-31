@@ -176,7 +176,7 @@ function create() {
 
     let compuerta = compuertas.grupo.create(0, 0, 'compuerta');
 
-    compuerta.body.debug = true;
+    compuerta.body.debug = false;
     compuerta.body.static = true;
     
     compuerta.body.setRectangle(50, 500);
@@ -189,7 +189,7 @@ function create() {
 
     compuerta = compuertas.grupo.create(6774, 1085, 'compuerta');
 
-    compuerta.body.debug = true;
+    compuerta.body.debug = false;
     compuerta.body.static = true;
     compuerta.body.setRectangle(50, 500);
     compuerta.animations.frame = 0;
@@ -199,7 +199,7 @@ function create() {
 
     compuerta = compuertas.grupo.create(10450, 760, 'compuerta');
 
-    compuerta.body.debug = true;
+    compuerta.body.debug = false;
     compuerta.body.static = true;
     compuerta.body.setRectangle(50, 500);
     compuerta.animations.frame = 1;
@@ -1028,7 +1028,7 @@ function create() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "acrobaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                chip.body.debug = false;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -1044,7 +1044,7 @@ function create() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "talibaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                chip.body.debug = false;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -1143,7 +1143,7 @@ function create() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "tankabaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                chip.body.debug = false;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -1159,7 +1159,7 @@ function create() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "talibaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                chip.body.debug = false;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -1264,7 +1264,7 @@ function create() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "tankabaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                chip.body.debug = false;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
@@ -1280,7 +1280,7 @@ function create() {
                 chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
                 chip.cobaIA = "acrobaIA";
                 chip.body.setRectangle(10, 10);
-                chip.body.debug = true;
+                chip.body.debug = false;
                 chip.body.static = true;
                 chip.body.x = 0;
                 chip.body.y = -100;
