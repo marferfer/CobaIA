@@ -196,7 +196,14 @@ function update() {
     }
     plataformasBasic.lista[1].pos -= plataformasBasic.lista[1].incremento;
     plataformasBasic.lista[1].body.y = plataformasBasic.lista[1].pos;
-    console.log(plataformasBasic.lista[1].pos);
+    //console.log(plataformasBasic.lista[1].pos);
+
+    if (plataformasBasic.lista[2].pos < 700 || plataformasBasic.lista[2].pos > 1310) {
+        plataformasBasic.lista[2].incremento *= -1;
+    }
+    plataformasBasic.lista[2].pos -= plataformasBasic.lista[2].incremento;
+    plataformasBasic.lista[2].body.y = plataformasBasic.lista[2].pos;
+    //console.log(plataformasBasic.lista[1].pos);
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////// COMPROBAR SI SE ESTA EN ZONA DE VENTILADORES   /////////////////////////////////////////////////////////////////

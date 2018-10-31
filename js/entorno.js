@@ -569,12 +569,13 @@ function create() {
     bobinas.grupo.enableBody = true;
     bobinas.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
-    let bobina = bobinas.grupo.create(9124, 830, 'bobina');
+    let bobina = bobinas.grupo.create(8900, 940, 'bobina');
 
     bobina.body.setRectangle(220, 10);
 
     //bobina.body.debug = true;
     bobina.body.static = true;
+    bobina.body.angle = 90;
     //pilaCadaveres.pivot.x = 150;
     //pilaCadaveres.body.setRectangle(300, 25, -150);
 
@@ -908,7 +909,7 @@ function create() {
     plataformaBasic.body.angle = 90;
     plataformaBasic.body.x = 8686;
     plataformaBasic.body.y = 1327;
-    plataformaBasic.scale.setTo(1, 4);
+    plataformaBasic.scale.setTo(1, 3);
     plataformaBasic.pos = 1300;
     plataformaBasic.incremento = 2;
     //console.log(plataformaBasic.body.id); //id: 16
