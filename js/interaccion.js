@@ -465,7 +465,7 @@ function update() {
 
     if(tankabaIA.jugador.body.x > 11000){
         juego.destroy();
-        nivel2();
+        nivel3();
     }
 
     
