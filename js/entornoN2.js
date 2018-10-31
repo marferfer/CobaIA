@@ -132,30 +132,33 @@ function create2() {
     /////////////// COMPUERTAS   //////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*compuertas.grupo = juego2.add.group();
+    compuertas.grupo = juego2.add.group();
     compuertas.grupo.enableBody = true;
     compuertas.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
-    let compuerta = compuertas.grupo.create(0, 0, 'compuerta');
+    let compuerta = compuertas.grupo.create(3448, 1175, 'compuerta');
 
-    compuerta.body.debug = true;
+    //compuerta.body.debug = true;
     compuerta.body.static = true;
     compuerta.pivot.y = 250;
     compuerta.body.setRectangle(75, 25);
-    compuerta.animations.frame = 1;
-    compuerta.body.x = 4475;
-    compuerta.body.y = juego2.world.height - 500;
-    compuertas.lista.push(compuerta);*/
+    compuerta.animations.frame = 0;
+    //compuerta.body.x = 4475;
+    //compuerta.body.y = juego2.world.height - 500;
+    compuertas.lista.push(compuerta);
+
+    compuerta.body.onBeginContact.add(colisionInicialCaja, this);
+    compuerta.body.onEndContact.add(colisionFinalCaja, this);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// CAJAS DE CABLEADO   ///////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    cajasCableado.grupo = juego2.add.group();
+    /*cajasCableado.grupo = juego2.add.group();
     cajasCableado.grupo.enableBody = true;
     cajasCableado.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
-    let cajaCableado = cajasCableado.grupo.create(790, juego2.world.height - 205, 'cajaCableado');
+    let cajaCableado = cajasCableado.grupo.create(790, juego2.world.height - 225, 'cajaCableado');
     cajaCableado.body.angle = 180;
 
     cajaCableado.body.debug = false;
@@ -163,9 +166,9 @@ function create2() {
     cajaCableado.animations.add('caja_rota', [1, 2, 3], 10, true);
     cajaCableado.body.static = true;
     cajaCableado.body.setRectangle(23, 69, 15);
-    cajasCableado.lista.push(cajaCableado);
+    cajasCableado.lista.push(cajaCableado);*/
 
-    console.log(cajaCableado.body.id);
+    //console.log(cajaCableado.body.id);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// BOTONES   /////////////////////////////////////////////////////////////////////////////////////////////
@@ -175,7 +178,7 @@ function create2() {
     botones.grupo.enableBody = true;
     botones.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
-    let boton = botones.grupo.create(3348, 1175, 'boton');
+    let boton = botones.grupo.create(3048, 1185, 'boton');
 
     boton.body.setRectangle(61, 15, 0, -5);
     //boton.body.debug = true;
@@ -184,6 +187,26 @@ function create2() {
     //boton.body.y = juego2.world.height - 275;
 
     botones.lista.push(boton);
+
+    let botonSubir = botones.grupo.create(1282, juego2.world.height - 205, 'boton');
+
+    botonSubir.body.setRectangle(61, 15, 0, -5);
+    //boton.body.debug = true;
+    botonSubir.body.static = true;
+    //boton.body.x = 2600;
+    //boton.body.y = juego2.world.height - 275;
+
+    botones.lista.push(botonSubir);
+
+    let botonBajar = botones.grupo.create(1182, juego2.world.height - 205, 'boton');
+
+    botonBajar.body.setRectangle(61, 15, 0, -5);
+    //boton.body.debug = true;
+    botonBajar.body.static = true;
+    //boton.body.x = 2600;
+    //boton.body.y = juego2.world.height - 275;
+
+    botones.lista.push(botonBajar);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// PLATAFORMAS MOVILES   /////////////////////////////////////////////////////////////////////////////////
@@ -364,7 +387,7 @@ function create2() {
     //ascensor.body.debug = true;
     ascensor.body.static = true;
     ascensor.direccion = "subiendo";
-    console.log(ascensor.body.id);
+    //console.log(ascensor.body.id);
     
     //ascensor.body.setRectangle(300, 25, -150);
     /*ascensor.body.x = 3000;
@@ -472,7 +495,7 @@ function create2() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     function stopPlataforma(i){
-        plataformasMoviles.lista[i].body.rotateRight(0);
+        ascensores.lista[0].body.moveUp(0);
     }
 
     function cambiarDirAscensor(estado){
@@ -492,15 +515,15 @@ function create2() {
     }
 
     function up() {
-        console.log('button up', arguments);
+        //console.log('button up', arguments);
     }
 
     function over() {
-        console.log('button over');
+        //console.log('button over');
     }
 
     function out() {
-        console.log('button out');
+        //console.log('button out');
     }
 
     function actionOnClick () {
@@ -510,11 +533,6 @@ function create2() {
     }
 
      function colisionInicialTankabaIA(body, bodyB, shapeA, shapeB, equation){
-
-        if (body){
-            //console.log(body.sprite.key);
-            console.log(body.id);
-        }
 
 
         if(body.sprite.key === 'cajaCableado' && tecla_accion.isDown){  
@@ -631,7 +649,8 @@ function create2() {
         if(body.sprite.key === 'boton'){
 
             //animacion de boton presionado
-            plataformasMoviles.lista[0].body.rotateRight(25);
+            let timer =  juego2.time.events.add(6900, stopPlataforma, this, ascensores.lista[0].direccion);
+            ascensores.lista[0].body.moveDown(125);
         }
 
         if(body.sprite.key === 'bobina'){
@@ -713,7 +732,7 @@ function create2() {
         if(body.sprite !== null){
 
             if(body.sprite.key === 'boton'){
-                plataformasMoviles.lista[0].body.rotateRight(0);
+                //plataformasMoviles.lista[0].body.rotateRight(0);
                 //stopPlataforma(0);
             }
         }
@@ -722,13 +741,14 @@ function create2() {
     function colisionInicialTalibaIA(body, bodyB, shapeA, shapeB, equation){
 
 
-        if(body.sprite.key === 'cajaCableado' && tecla_accion.isDown){  
-            if(body.id=== 10){
+        if(body.sprite.key === 'cajaCableado' && tecla_accion.isDown){ 
+        //console.log(body.id); 
+            if(body.id=== 11){
                 cajasCableado.lista[0].animations.play('caja_rota');
                 //ascensores.lista[0].body.moveUp(75);
 
                 let timer =  juego2.time.events.loop(1250, cambiarDirAscensor, this, ascensores.lista[0].direccion);
-                ascensores.lista[0].body.moveUp(125);
+                //ascensores.lista[0].body.moveUp(125);
 
                 /*if(ascensores.lista[0].body.y>1078){
                     ascensores.lista[0].body.y;    
@@ -742,7 +762,8 @@ function create2() {
         if(body.sprite.key === 'boton'){
 
             //animacion de boton presionado
-            plataformasMoviles.lista[0].body.rotateRight(25);
+            let timer =  juego2.time.events.add(6900, stopPlataforma, this, ascensores.lista[0].direccion);
+            ascensores.lista[0].body.moveUp(125);
         }
 
         if(body.sprite.key === 'bobina'){
@@ -823,10 +844,32 @@ function create2() {
        if(body.sprite !== null){
 
             if(body.sprite.key === 'boton'){
-                plataformasMoviles.lista[0].body.rotateRight(0);
+                //plataformasMoviles.lista[0].body.rotateRight(0);
                 //stopPlataforma(0);
             }
         }
+    }
+
+    function colisionInicialCaja(body, bodyB, shapeA, shapeB, equation){
+
+       //if(body.sprite !== null){
+
+            //if(body.sprite.key === 'boton'){
+                compuertas.lista[0].animations.frame = 1;
+                //stopPlataforma(0);
+            //}
+        //}
+    }
+
+    function colisionFinalCaja(body, bodyB, shapeA, shapeB, equation){
+
+       //if(body.sprite !== null){
+
+            //if(body.sprite.key === 'boton'){
+                compuertas.lista[0].animations.frame = 0;
+                //stopPlataforma(0);
+            //}
+        //}
     }
 
      // Creamos un teclado  

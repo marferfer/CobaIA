@@ -1,10 +1,9 @@
-var game = new Phaser.Game(1920, 800, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
 
-function preload() {
+function preload3() {
 
-    game.load.spritesheet('button', 'assets/Menu/button_sprite_sheet.png', 193, 71);
+    //game.load.spritesheet('button', 'assets/Menu/button_sprite_sheet.png', 193, 71);
     game.load.spritesheet('buttonSalir', 'assets/Menu/button_sprite_sheet salir.png', 193, 71);
-    game.load.spritesheet('title', 'assets/Menu/TituloJuego.png');
+    game.load.spritesheet('title', 'assets/Final.png');
     game.load.image('background','assets/Menu/Portada.png');
 
 }
@@ -15,10 +14,10 @@ var buttonExit;
 var background;
 var title;
 
-function create() {
+function create3() {
 
-    nivelJuego = 0;
-    console.log(nivelJuego);
+    nivelJuego = 2;
+    //console.log(nivelJuego);
 
     game.stage.backgroundColor = '#182d3b';
 
@@ -26,7 +25,7 @@ function create() {
 
     title = game.add.sprite(game.world.centerX - 769, 50, 'title');
 
-    button = game.add.button(game.world.centerX - 720, 550, 'button', actionOnClickGame, this, 2, 1, 0);
+    //button = game.add.button(game.world.centerX - 720, 550, 'button', actionOnClickGame, this, 2, 1, 0);
     //buttonOnline = game.add.button(game.world.centerX - 620, 550, 'button', actionOnClickOnline, this, 2, 1, 0);
     buttonExit = game.add.button(game.world.centerX - 420, 550, 'buttonSalir', actionOnClickExit, this, 2, 1, 0); //game.world.centerX - 320, 550
 

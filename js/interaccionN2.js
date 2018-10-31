@@ -189,7 +189,13 @@ function update2() {
 
     if (ctrlR.isDown) { // Pase de nivel
         juego2.destroy();
-        inicio();
+        nivel2();
+    }
+
+
+    if(tankabaIA.jugador.body.x>3450){
+        juego2.destroy();
+        nivel3();
     }
 
 
@@ -273,11 +279,11 @@ function update2() {
         tankabaIA.jugador.body.fixedRotation = true;
         if (!(tankabaIA.jugador.body.angle >= -45 && tankabaIA.jugador.body.angle <= 45) && tankabaIA.ultimo_sentido == 'derecha') {
             tankabaIA.jugador.body.angle = 0;
-            console.log("hola");
+            //console.log("hola");
         }
         else if (!(tankabaIA.jugador.body.angle >= 135 && tankabaIA.jugador.body.angle <= 225) && tankabaIA.ultimo_sentido == 'izquierda') {
             tankabaIA.jugador.body.angle = 0;
-            console.log("hola");
+            //console.log("hola");
         }
     }
     else {
@@ -370,6 +376,8 @@ function update2() {
         }
         
     }
+
+    //console.log(tankabaIA.jugador.body.x);
 
     ///////////////////////////////////////////////////////controles talibaIA
 
