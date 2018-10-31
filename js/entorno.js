@@ -293,7 +293,7 @@ function create() {
     //boton.body.debug = true;
     //console.log(boton.body.id); //id: 
     boton.body.static = true;
-    boton.body.x = 6260;
+    boton.body.x = 6200;
     boton.body.y = 750;
 
     botones.lista.push(boton);
@@ -426,8 +426,12 @@ function create() {
     //plataformaMovil.body.debug = true;
     plataformaBasic.body.static = true;
     plataformaBasic.body.setRectangle(26, 302);
-    plataformaBasic.body.x = 24726;
-    plataformaBasic.body.y = 1303;
+    plataformaBasic.body.angle = 90;
+    plataformaBasic.body.x = 5472;
+    plataformaBasic.body.y = 1300;
+    plataformaBasic.scale.setTo(1, 4);
+    plataformaBasic.pos = 1300;
+    plataformaBasic.incremento = 2;
     //console.log(plataformaBasic.body.id); //id: 16
     plataformaBasic.body.collideWorldBounds = true;
 
@@ -764,8 +768,8 @@ function create() {
     ventilador.body.setRectangle(154, 44);
     //ventilador.body.debug = true;
     ventilador.body.static = true;
-    ventilador.body.x = 14639;
-    ventilador.body.y = 1075;
+    ventilador.body.x = 6270;
+    ventilador.body.y = 680;
     ventilador.body.angle = -90;
 
     ventilador.zona = [ventilador.body.x - 300, ventilador.body.x - 22, ventilador.body.y + 88, ventilador.body.y - 88];
@@ -820,7 +824,7 @@ function create() {
     //tankabaIA.jugador = juego.add.sprite(11200, juego.world.height - 225, 'tankabaIAmovimiento');
 
     //Cambiar 340, juego.world.height - 225
-    tankabaIA.jugador = juego.add.sprite(340, juego.world.height - 225, 'tankabaIAmovimiento');
+    tankabaIA.jugador = juego.add.sprite(6884, juego.world.height - 425, 'tankabaIAmovimiento');
 
     tankabaIA.jugador.scale.setTo(1.3, 1.3);
     juego.physics.p2.enableBody(tankabaIA.jugador);

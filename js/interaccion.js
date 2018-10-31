@@ -191,6 +191,13 @@ function update() {
         inicio();
     }
 
+    if (plataformasBasic.lista[1].pos < 700 || plataformasBasic.lista[1].pos > 1310) {
+        plataformasBasic.lista[1].incremento *= -1;
+    }
+    plataformasBasic.lista[1].pos -= plataformasBasic.lista[1].incremento;
+    plataformasBasic.lista[1].body.y = plataformasBasic.lista[1].pos;
+    console.log(plataformasBasic.lista[1].pos);
+
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////// COMPROBAR SI SE ESTA EN ZONA DE VENTILADORES   /////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -460,7 +467,7 @@ function update() {
             acrobaIA.trepando = true
             let timer =  juego.time.events.add(250, function(){acrobaIA.trepando = false;}, this, 0);
         }
-        //console.log(tankabaIA.jugador.body.x + ', ' + tankabaIA.jugador.body.y);
+        console.log(tankabaIA.jugador.body.x + ', ' + tankabaIA.jugador.body.y);
     }    
     else {
         acrobaIA.jugador.body.angle = 0;
