@@ -148,12 +148,6 @@ function create() {
     ctrlN = juego.input.keyboard.addKey(Phaser.Keyboard.N);
     ctrlM = juego.input.keyboard.addKey(Phaser.Keyboard.M);
 
-    //movimiento de la RastabaIA
-    ctrlI = juego.input.keyboard.addKey(Phaser.Keyboard.I);
-    ctrlJ = juego.input.keyboard.addKey(Phaser.Keyboard.J);
-    ctrlK = juego.input.keyboard.addKey(Phaser.Keyboard.K);
-    ctrlL = juego.input.keyboard.addKey(Phaser.Keyboard.L);
-
     //Reinicio
     ctrlR = juego.input.keyboard.addKey(Phaser.Keyboard.R);
 
@@ -879,8 +873,9 @@ function create() {
     juego.physics.p2.enableBody(acrobaIA.jugador);
     acrobaIA.jugador.body.setRectangle(80, 33);
     
-    acrobaIA.jugador.body.fixedRotation = false;
+    //acrobaIA.jugador.body.fixedRotation = true;
     acrobaIA.jugador.body.mass = 1;
+    //acrobaIA.jugador.body.allowGravity = false;
 
     acrobaIA.jugador.dynamic = true;
     acrobaIA.jugador.body.debug = false;
@@ -905,7 +900,7 @@ function create() {
     talibaIA.jugador.body.mass = 5;
     
     talibaIA.jugador.dynamic = true;
-    talibaIA.jugador.body.debug = false;
+    talibaIA.jugador.body.debug = false  ;
     
     //animaciones
     talibaIA.jugador.animations.add('movimientoDerecha', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
@@ -915,29 +910,6 @@ function create() {
 
     talibaIA.jugador.body.onBeginContact.add(colisionInicialTalibaIA, this);
     talibaIA.jugador.body.onEndContact.add(colisionFinalTalibaIA, this);
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////// RASTABAIA   ////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    rastabaIA.jugador = juego.add.sprite(100, juego.world.height - 300, 'acrobaIAmovimiento');
-    juego.physics.p2.enableBody(rastabaIA.jugador);
-    rastabaIA.jugador.body.setRectangle(80, 40);
-    
-    rastabaIA.jugador.body.fixedRotation = false;
-    rastabaIA.jugador.body.mass = 5;
-    
-    rastabaIA.jugador.dynamic = true;
-    rastabaIA.jugador.body.debug = false;
-    
-    //animaciones
-    rastabaIA.jugador.animations.add('movimientoDerecha', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
-                                                            20, 21, 22, 23, 24, 25, 26, 27, 28], 60, true);
-    rastabaIA.jugador.animations.add('movimientoIzquierda', [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
-                                                             47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58], 60, true);
-
-    rastabaIA.jugador.body.onBeginContact.add(colisionInicialRastabaIA, this);
-    rastabaIA.jugador.body.onEndContact.add(colisionFinalRastabaIA, this);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////ULTIMOS OBJETOS  ///////////////////////////////////////////////////////////////////////////
@@ -1350,120 +1322,6 @@ function create() {
     }
 
     function colisionFinalTalibaIA(body, bodyB, shapeA, shapeB, equation){
-
-       if(body.sprite !== null){
-
-            if(body.sprite.key === 'boton'){
-                plataformasMoviles.lista[2].body.rotateRight(0);
-                //stopPlataforma(0);
-            }
-        }
-    }
-
-    function colisionInicialRastabaIA(body, bodyB, shapeA, shapeB, equation){
-
-        if(body.sprite.key === 'tuboN1Completo'){  
-
-            rastabaIA.puedoTrepar = true;    
-
-        }
-
-        else {
-
-            rastabaIA.puedoTrepar = false;
-
-        }
-
-        if(body.sprite.key === 'boton'){
-
-            
-            if(body.id === 16){
-                plataformasMoviles.lista[0].body.rotateRight(-25);
-            }
-            if(body.id === 18){
-                let timer =  juego.time.events.add(1250, stopPlataforma, this, 2);
-                plataformasMoviles.lista[2].body.rotateRight(-25);
-            }
-
-            if(body.id === 22){
-                bobinas.lista[3].body.y = 0;
-            }
-        }
-
-        if(body.sprite.key === 'bobina'){
-
-            rastabaIA.muerta = true;
-        }
-
-        if(body.sprite.key === 'chip'){                 //si choca con un chip
-            
-            if(body.sprite.cobaIA === "tankabaIA" && rastabaIA.chip === null){ 
-                
-                rastabaIA.chip = "tankabaIA";            //lo guardamos
-                body.sprite.visible = false;            //desaparecemos sl sprite del chip
-                body.destroy();                         //destruimos el chip en si mismo
-
-
-                chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
-                chip.cobaIA = "tankabaIA";
-                chip.body.setRectangle(10, 10);
-                chip.body.debug = false;
-                chip.body.static = true;
-                chip.body.x = 0;
-                chip.body.y = -100;
-                chips.lista[2] = chip;
-
-            }else if(body.sprite.cobaIA === "rastabaIA" && rastabaIA.chip === null){
-
-                rastabaIA.chip = "rastabaIA";            //lo guardamos
-                body.sprite.visible = false;            //desaparecemos sl sprite del chip
-                body.destroy();                         //destruimos el chip en si mismo
-
-
-                chip = chips.grupo.create(0, 0, 'chip'); //lo volvemos a crear en un lugar que no moleste
-                chip.cobaIA = "rastabaIA";
-                chip.body.setRectangle(10, 10);
-                chip.body.debug = false;
-                chip.body.static = true;
-                chip.body.x = 0;
-                chip.body.y = -100;
-                chips.lista[0] = chip;
-
-            }else{  //si ya tengo un chip de otra cobaIA no hago nada
-                ;
-            }
-        }
-
-        if(body.sprite !== null){
-
-            if(body.sprite.key === 'pilaCadaveres'){ //zona de resurreccion
-
-                if(rastabaIA.chip === "tankabaIA"){
-
-                    tankabaIA.jugador.body.x = rastabaIA.jugador.body.x + 50;
-                    tankabaIA.jugador.body.y = rastabaIA.jugador.body.y + 50;
-                    tankabaIA.jugador.body.static = false;
-                    tankabaIA.canImove = true;
-
-                    rastabaIA.chip = null;
-
-                }else if(rastabaIA.chip === "rastabaIA"){
-
-                    rastabaIA.jugador.body.x = rastabaIA.jugador.body.x + 50;
-                    rastabaIA.jugador.body.y = rastabaIA.jugador.body.y + 50;
-                    rastabaIA.jugador.body.static = false;
-                    rastabaIA.canImove = true;
-
-                    rastabaIA.chip = null;
-
-                }else{  //el chip esta vacio
-                    ;
-                }
-            }
-        }
-    }
-
-    function colisionFinalRastabaIA(body, bodyB, shapeA, shapeB, equation){
 
        if(body.sprite !== null){
 
