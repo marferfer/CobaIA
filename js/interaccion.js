@@ -384,13 +384,13 @@ function update() {
         //let timer =  juego.time.events.add(1250, function(){tankabaIA.jugador.body.angle = 0;}, this, 0);
         //tankabaIA.jugador.body.angle = 0;
         tankabaIA.jugador.body.fixedRotation = true;
-        if (!(tankabaIA.jugador.body.angle >= -45 && tankabaIA.jugador.body.angle <= 45) && tankabaIA.ultimo_sentido == 'derecha') {
+        if (!(tankabaIA.jugador.body.angle >= -45 && tankabaIA.jugador.body.angle <= 45)/* && tankabaIA.ultimo_sentido == 'derecha'*/) {
             tankabaIA.jugador.body.angle = 0;
             //console.log("hola");
         }
         else if (!(tankabaIA.jugador.body.angle >= 135 && tankabaIA.jugador.body.angle <= 225) && tankabaIA.ultimo_sentido == 'izquierda') {
-            tankabaIA.jugador.body.angle = 0;
-            //console.log("hola");
+            //tankabaIA.jugador.body.angle = 0;
+            console.log("hola");
         }
     }
     else {
@@ -436,7 +436,9 @@ function update() {
         
         //createjs.Sound.play(paso);
 
-        tankabaIA.jugador.body.moveLeft(350);
+        //tankabaIA.jugador.body.moveLeft(350);
+        tankabaIA.jugador.body.x -= 5 * Math.cos(tankabaIA.jugador.body.angle * (Math.PI/180));
+        tankabaIA.jugador.body.y -= 5 * Math.sin(tankabaIA.jugador.body.angle * (Math.PI/180));
         tankabaIA.jugador.animations.play('movimientoIzquierda');
         tankabaIA.ultimo_sentido = 'izquierda';
     }
@@ -445,7 +447,9 @@ function update() {
         
         //createjs.Sound.play(paso);
         
-        tankabaIA.jugador.body.moveRight(350);
+        //tankabaIA.jugador.body.moveRight(350);
+        tankabaIA.jugador.body.x += 5 * Math.cos(tankabaIA.jugador.body.angle * (Math.PI/180));
+        tankabaIA.jugador.body.y += 5 * Math.sin(tankabaIA.jugador.body.angle * (Math.PI/180));
         tankabaIA.jugador.animations.play('movimientoDerecha');
         tankabaIA.ultimo_sentido = 'derecha';
 
