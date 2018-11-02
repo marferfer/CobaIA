@@ -384,11 +384,7 @@ function update() {
         //let timer =  juego.time.events.add(1250, function(){tankabaIA.jugador.body.angle = 0;}, this, 0);
         //tankabaIA.jugador.body.angle = 0;
         tankabaIA.jugador.body.fixedRotation = true;
-        if (!(tankabaIA.jugador.body.angle >= -45 && tankabaIA.jugador.body.angle <= 45) && tankabaIA.ultimo_sentido == 'derecha') {
-            tankabaIA.jugador.body.angle = 0;
-            //console.log("hola");
-        }
-        else if (!(tankabaIA.jugador.body.angle >= 135 && tankabaIA.jugador.body.angle <= 225) && tankabaIA.ultimo_sentido == 'izquierda') {
+        if (!(tankabaIA.jugador.body.angle >= -45 && tankabaIA.jugador.body.angle <= 45)) {
             tankabaIA.jugador.body.angle = 0;
             //console.log("hola");
         }
@@ -401,11 +397,7 @@ function update() {
         //let timer =  juego.time.events.add(1250, function(){acrobaIA.jugador.body.angle = 0;}, this, 0);
         //acrobaIA.jugador.body.angle = 0;
         acrobaIA.jugador.body.fixedRotation = true;
-        if (!(acrobaIA.jugador.body.angle >= -45 && acrobaIA.jugador.body.angle <= 45) && acrobaIA.ultimo_sentido == 'derecha') {
-            acrobaIA.jugador.body.angle = 0;
-            //console.log("hola");
-        }
-        else if (!(acrobaIA.jugador.body.angle >= 135 && acrobaIA.jugador.body.angle <= 225) && acrobaIA.ultimo_sentido == 'izquierda') {
+        if (!(acrobaIA.jugador.body.angle >= -45 && acrobaIA.jugador.body.angle <= 45)) {
             acrobaIA.jugador.body.angle = 0;
             //console.log("hola");
         }
@@ -418,11 +410,7 @@ function update() {
         //let timer =  juego.time.events.add(1250, function(){talibaIA.jugador.body.angle = 0;}, this, 0);
         //talibaIA.jugador.body.angle = 0;
         talibaIA.jugador.body.fixedRotation = true;
-        if (!(talibaIA.jugador.body.angle >= -45 && talibaIA.jugador.body.angle <= 45) && talibaIA.ultimo_sentido == 'derecha') {
-            talibaIA.jugador.body.angle = 0;
-            //console.log("hola");
-        }
-        else if (!(talibaIA.jugador.body.angle >= 135 && talibaIA.jugador.body.angle <= 225) && talibaIA.ultimo_sentido == 'izquierda') {
+        if (!(talibaIA.jugador.body.angle >= -45 && talibaIA.jugador.body.angle <= 45)) {
             talibaIA.jugador.body.angle = 0;
             //console.log("hola");
         }
@@ -436,7 +424,8 @@ function update() {
         
         //createjs.Sound.play(paso);
 
-        tankabaIA.jugador.body.moveLeft(350);
+        tankabaIA.jugador.body.x -= 5 * Math.cos(tankabaIA.jugador.body.angle * (Math.PI/180));
+        tankabaIA.jugador.body.y -= 5 * Math.sin(tankabaIA.jugador.body.angle * (Math.PI/180));
         tankabaIA.jugador.animations.play('movimientoIzquierda');
         tankabaIA.ultimo_sentido = 'izquierda';
     }
@@ -445,7 +434,8 @@ function update() {
         
         //createjs.Sound.play(paso);
         
-        tankabaIA.jugador.body.moveRight(350);
+        tankabaIA.jugador.body.x += 5 * Math.cos(tankabaIA.jugador.body.angle * (Math.PI/180));
+        tankabaIA.jugador.body.y += 5 * Math.sin(tankabaIA.jugador.body.angle * (Math.PI/180));
         tankabaIA.jugador.animations.play('movimientoDerecha');
         tankabaIA.ultimo_sentido = 'derecha';
 
@@ -494,7 +484,7 @@ function update() {
         console.log(tankabaIA.jugador.body.x + ', ' + tankabaIA.jugador.body.y);
     }    
     else {
-        acrobaIA.jugador.body.angle = 0;
+        //acrobaIA.jugador.body.angle = 0;
         baseTrepar.body.x = 0;
         baseTrepar.body.y = 0;
     }
@@ -504,13 +494,15 @@ function update() {
 
     }else if(((pad2.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad2.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || ctrlA.isDown) && acrobaIA.canImove){
 
-        acrobaIA.jugador.body.moveLeft(300);
+        acrobaIA.jugador.body.x -= 5 * Math.cos(acrobaIA.jugador.body.angle * (Math.PI/180));
+        acrobaIA.jugador.body.y -= 5 * Math.sin(acrobaIA.jugador.body.angle * (Math.PI/180));
         acrobaIA.jugador.animations.play('movimientoIzquierda');
         acrobaIA.ultimo_sentido = "izquierda";
 
     }else if(((pad2.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad2.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || ctrlD.isDown) && acrobaIA.canImove){
 
-        acrobaIA.jugador.body.moveRight(300);
+        acrobaIA.jugador.body.x += 5 * Math.cos(acrobaIA.jugador.body.angle * (Math.PI/180));
+        acrobaIA.jugador.body.y += 5 * Math.sin(acrobaIA.jugador.body.angle * (Math.PI/180));
         acrobaIA.jugador.animations.play('movimientoDerecha');
             acrobaIA.ultimo_sentido = "derecha";
 
@@ -536,13 +528,15 @@ function update() {
 
     }else if(((pad3.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad3.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || ctrlB.isDown) && talibaIA.canImove){
 
-        talibaIA.jugador.body.moveLeft(300);
+        talibaIA.jugador.body.x -= 5 * Math.cos(talibaIA.jugador.body.angle * (Math.PI/180));
+        talibaIA.jugador.body.y -= 5 * Math.sin(talibaIA.jugador.body.angle * (Math.PI/180));
         talibaIA.jugador.animations.play('movimientoIzquierda');
         talibaIA.ultimo_sentido = "izquierda";
 
     }else if(((pad3.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad3.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || ctrlM.isDown) && talibaIA.canImove){
 
-        talibaIA.jugador.body.moveRight(300);
+        talibaIA.jugador.body.x += 5 * Math.cos(talibaIA.jugador.body.angle * (Math.PI/180));
+        talibaIA.jugador.body.y += 5 * Math.sin(talibaIA.jugador.body.angle * (Math.PI/180));
         talibaIA.jugador.animations.play('movimientoDerecha');
         talibaIA.ultimo_sentido = "derecha";
     }else{
