@@ -27,6 +27,13 @@ function update() {
         talibaIA.jugador.body.setZeroForce();
     }
 
+    rastabaIA.jugador.body.velocity.x = 0;
+    if(!rastabaIA.canImove){
+        rastabaIA.jugador.body.velocity.y = 0;
+        rastabaIA.jugador.body.setZeroVelocity();
+        rastabaIA.jugador.body.setZeroForce();
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////// CAMBIOS DE CAMARA  //////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,7 +45,7 @@ function update() {
 
     if(ctrlY.isDown || pad2.isDown(Phaser.Gamepad.XBOX360_Y)){
 
-        juego.camera.follow(acrobaIA.jugador);
+        juego.camera.follow(rastabaIA.jugador);
     }
 
     if(ctrlU.isDown || pad3.isDown(Phaser.Gamepad.XBOX360_Y)){
@@ -125,7 +132,46 @@ function update() {
         if(!tankabaIA.muerta){
             juego.camera.follow(tankabaIA.jugador);
         }else{
-            juego.camera.follow(acrobaIA.jugador);
+            juego.camera.follow(rastabaIA.jugador);
+        }
+
+    }
+    if(rastabaIA.muerta){
+
+        chips.lista[1].body.static = false;
+        chips.lista[1].body.x = rastabaIA.jugador.body.x - 15;
+        chips.lista[1].body.y = rastabaIA.jugador.body.y;
+
+        if(rastabaIA.chip === "tankabaIA"){
+
+            chips.lista[2].body.static = false;
+            chips.lista[2].body.x = rastabaIA.jugador.body.x - 15;
+            chips.lista[2].body.y = rastabaIA.jugador.body.y;
+
+            rastabaIA.chip = null;
+
+        }else if(rastabaIA.chip === "acrobaIA"){
+
+            chips.lista[0].body.static = false;
+            chips.lista[0].body.x = rastabaIA.jugador.body.x - 15;
+            chips.lista[0].body.y = rastabaIA.jugador.body.y;
+
+            rastabaIA.chip = null;
+            
+        }else{
+            ;
+        }
+
+        rastabaIA.jugador.body.x =  -120;
+        rastabaIA.jugador.body.y = 0;
+        rastabaIA.jugador.body.static = true;
+        rastabaIA.muerta = false;
+        rastabaIA.canImove = false;
+
+        if(!tankabaIA.muerta){
+            juego.camera.follow(tankabaIA.jugador);
+        }else{
+            juego.camera.follow(talibaIA.jugador);
         }
 
     }
@@ -163,7 +209,7 @@ function update() {
         tankabaIA.canImove = false;
 
         if(!acrobaIA.muerta){
-            juego.camera.follow(acrobaIA.jugador);
+            juego.camera.follow(rastabaIA.jugador);
         }else{
             juego.camera.follow(talibaIA.jugador);
         }
@@ -418,17 +464,26 @@ function update() {
         //let timer =  juego.time.events.add(1250, function(){talibaIA.jugador.body.angle = 0;}, this, 0);
         //talibaIA.jugador.body.angle = 0;
         talibaIA.jugador.body.fixedRotation = true;
-        if (!(talibaIA.jugador.body.angle >= -45 && talibaIA.jugador.body.angle <= 45) && talibaIA.ultimo_sentido == 'derecha') {
-            talibaIA.jugador.body.angle = 0;
-            //console.log("hola");
-        }
-        else if (!(talibaIA.jugador.body.angle >= 135 && talibaIA.jugador.body.angle <= 225) && talibaIA.ultimo_sentido == 'izquierda') {
+        if (!(talibaIA.jugador.body.angle >= -45 && talibaIA.jugador.body.angle <= 45)) {
             talibaIA.jugador.body.angle = 0;
             //console.log("hola");
         }
     }
     else {
         talibaIA.jugador.body.fixedRotation = false;
+    }
+    if (!checkIfCanJump(rastabaIA)) {
+        //console.log(rastabaIA.jugador.body.angle + ', ' + (rastabaIA.jugador.body.angle >= 0.0 && rastabaIA.jugador.body.angle <= 45.0));
+        //let timer =  juego.time.events.add(1250, function(){rastabaIA.jugador.body.angle = 0;}, this, 0);
+        //rastabaIA.jugador.body.angle = 0;
+        rastabaIA.jugador.body.fixedRotation = true;
+        if (!(rastabaIA.jugador.body.angle >= -45 && rastabaIA.jugador.body.angle <= 45)) {
+            rastabaIA.jugador.body.angle = 0;
+            //console.log("hola");
+        }
+    }
+    else {
+        rastabaIA.jugador.body.fixedRotation = false;
     }
     
     if (((pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || cursores.left.isDown) && tankabaIA.canImove)// Si presionamos LEFT
@@ -485,15 +540,15 @@ function update() {
     ///////////////////////////////////////////////////////controles AcrobaIA
 
     if ((pad2.isDown(Phaser.Gamepad.XBOX360_X)) || ctrlQ.isDown) {
-        //acrobaIA.jugador.body.gravity = 0;
-        if(!acrobaIA.trepando && acrobaIA.puedoTrepar) {
-            baseTrepar.body.x = acrobaIA.jugador.body.x;
-            baseTrepar.body.y = acrobaIA.jugador.body.y + 20;
-            if (acrobaIA.ultimo_sentido == "derecha") {
-                acrobaIA.jugador.body.angle = -90;
+        //rastabaIA.jugador.body.gravity = 0;
+        if(!rastabaIA.trepando && rastabaIA.puedoTrepar) {
+            baseTrepar.body.x = rastabaIA.jugador.body.x;
+            baseTrepar.body.y = rastabaIA.jugador.body.y + 20;
+            if (rastabaIA.ultimo_sentido == "derecha") {
+                rastabaIA.jugador.body.angle = -90;
             }
-            acrobaIA.trepando = true
-            let timer =  juego.time.events.add(250, function(){acrobaIA.trepando = false;}, this, 0);
+            rastabaIA.trepando = true
+            let timer =  juego.time.events.add(250, function(){rastabaIA.trepando = false;}, this, 0);
         }
         console.log(tankabaIA.jugador.body.x + ', ' + tankabaIA.jugador.body.y);
     }    
@@ -540,13 +595,15 @@ function update() {
 
     }else if(((pad3.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad3.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || ctrlB.isDown) && talibaIA.canImove){
 
-        talibaIA.jugador.body.moveLeft(300);
+        talibaIA.jugador.body.x -= 5 * Math.cos(talibaIA.jugador.body.angle * (Math.PI/180));
+        talibaIA.jugador.body.y -= 5 * Math.sin(talibaIA.jugador.body.angle * (Math.PI/180));
         talibaIA.jugador.animations.play('movimientoIzquierda');
         talibaIA.ultimo_sentido = "izquierda";
 
     }else if(((pad3.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad3.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || ctrlM.isDown) && talibaIA.canImove){
 
-        talibaIA.jugador.body.moveRight(300);
+        talibaIA.jugador.body.x += 5 * Math.cos(talibaIA.jugador.body.angle * (Math.PI/180));
+        talibaIA.jugador.body.y += 5 * Math.sin(talibaIA.jugador.body.angle * (Math.PI/180));
         talibaIA.jugador.animations.play('movimientoDerecha');
         talibaIA.ultimo_sentido = "derecha";
     }else{
@@ -558,6 +615,38 @@ function update() {
         }else{
 
             talibaIA.jugador.frame = 30;
+        }
+        
+    }
+
+     ///////////////////////////////////////////////////////controles rastabaIA
+
+    if(((pad3.justPressed(Phaser.Gamepad.XBOX360_A)) || ctrlI.isDown) && checkIfCanJump(rastabaIA) && rastabaIA.canImove){
+
+        rastabaIA.jugador.body.moveUp(300);
+
+    }else if(((pad3.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad3.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || ctrlJ.isDown) && rastabaIA.canImove){
+
+        rastabaIA.jugador.body.x -= 5 * Math.cos(rastabaIA.jugador.body.angle * (Math.PI/180));
+        rastabaIA.jugador.body.y -= 5 * Math.sin(rastabaIA.jugador.body.angle * (Math.PI/180));
+        rastabaIA.jugador.animations.play('movimientoIzquierda');
+        rastabaIA.ultimo_sentido = "izquierda";
+
+    }else if(((pad3.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad3.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || ctrlL.isDown) && rastabaIA.canImove){
+
+        rastabaIA.jugador.body.x += 5 * Math.cos(rastabaIA.jugador.body.angle * (Math.PI/180));
+        rastabaIA.jugador.body.y += 5 * Math.sin(rastabaIA.jugador.body.angle * (Math.PI/180));
+        rastabaIA.jugador.animations.play('movimientoDerecha');
+        rastabaIA.ultimo_sentido = "derecha";
+    }else{
+
+        rastabaIA.jugador.animations.stop();
+        if(rastabaIA.ultimo_sentido === "derecha"){
+            
+            rastabaIA.jugador.frame = 0;    
+        }else{
+
+            rastabaIA.jugador.frame = 30;
         }
         
     }

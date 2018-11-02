@@ -45,6 +45,13 @@ class AcrobaIA extends CobaIA{
     }
 };
 
+class RastabaIA extends CobaIA{
+
+    constructor(){
+        super();
+    }
+};
+
 class Objetos {
 
     constructor(){
@@ -177,6 +184,7 @@ lasers = null;
  let tankabaIA = new TankabaIA();
  let acrobaIA = new AcrobaIA();
  let talibaIA = new TalibaIA();
+ let rastabaIA = new RastabaIA();
  let plataformas = new Plataformas();
  let cajas = new Cajas();
  let nivel1 = new Nivel();
