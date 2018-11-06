@@ -31,20 +31,31 @@ function update() {
     ////////// CAMBIOS DE CAMARA  //////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    if(ctrlT.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_Y)){
+    if((ctrlT.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_Y)) && !tankabaIA.muerta){
 
         juego.camera.follow(tankabaIA.jugador);
     }
+    else if((ctrlT.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_Y)) && tankabaIA.muerta){
+        juego.camera.follow(chips.lista[2]);
+    }
 
-    if(ctrlY.isDown || pad2.isDown(Phaser.Gamepad.XBOX360_Y)){
+    if((ctrlY.isDown || pad2.isDown(Phaser.Gamepad.XBOX360_Y)) && !acrobaIA.muerta){
 
         juego.camera.follow(acrobaIA.jugador);
     }
+    else if((ctrlY.isDown || pad2.isDown(Phaser.Gamepad.XBOX360_Y)) && acrobaIA.muerta){
+        juego.camera.follow(chips.lista[0]);
+    }
 
     if(ctrlU.isDown || pad3.isDown(Phaser.Gamepad.XBOX360_Y)){
-
-        juego.camera.follow(talibaIA.jugador);
+        if (talibaIA.muerta){
+            juego.camera.follow(chips.lista[1]);
+        }
+        else {
+            juego.camera.follow(talibaIA.jugador);
+        }
     }
+    
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////// COBAIAS MUERTAS  ////////////////////////////////////////////////////////////////////////////////////
@@ -81,12 +92,7 @@ function update() {
         acrobaIA.jugador.body.static = true;
         acrobaIA.muerta = false;
         acrobaIA.canImove = false;
-
-        if(!talibaIA.muerta){
-            juego.camera.follow(talibaIA.jugador);
-        }else{
-            juego.camera.follow(tankabaIA.jugador);
-        }
+        juego.camera.follow(chips.lista[0]);
         
     }
 
@@ -121,12 +127,7 @@ function update() {
         talibaIA.jugador.body.static = true;
         talibaIA.muerta = false;
         talibaIA.canImove = false;
-
-        if(!tankabaIA.muerta){
-            juego.camera.follow(tankabaIA.jugador);
-        }else{
-            juego.camera.follow(acrobaIA.jugador);
-        }
+        juego.camera.follow(chips.lista[1]);
 
     }
 
@@ -161,12 +162,7 @@ function update() {
         tankabaIA.jugador.body.static = true;
         tankabaIA.muerta = false;
         tankabaIA.canImove = false;
-
-        if(!acrobaIA.muerta){
-            juego.camera.follow(acrobaIA.jugador);
-        }else{
-            juego.camera.follow(talibaIA.jugador);
-        }
+        juego.camera.follow(chips.lista[2]);
         
     }
 
@@ -263,7 +259,7 @@ function update() {
             if(tankabaIA.jugador.body.x >= ventilador.zona[0] && tankabaIA.jugador.body.x <= ventilador.zona[1] 
                     && tankabaIA.jugador.body.y <= ventilador.zona[2] && tankabaIA.jugador.body.y >= ventilador.zona[3]){
 
-                    tankabaIA.jugador.body.moveRight(500);
+                    tankabaIA.jugador.body.moveRight(100);
             }
 
         }else if(ventilador.posicion === "horizontal_izquierda"){
@@ -297,7 +293,7 @@ function update() {
             if(tankabaIA.jugador.body.x >= ventilador.zona[0] && tankabaIA.jugador.body.x <= ventilador.zona[1] 
                     && tankabaIA.jugador.body.y <= ventilador.zona[2] && tankabaIA.jugador.body.y >= ventilador.zona[3]){
 
-                    tankabaIA.jugador.body.moveLeft(500);
+                    tankabaIA.jugador.body.moveLeft(100);
             }
         }
     }

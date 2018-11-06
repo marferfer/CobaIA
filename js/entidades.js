@@ -132,6 +132,13 @@ class PilaCadaveres extends Objetos{
     }
 }
 
+class Rayos extends Objetos{
+
+    constructor(){
+        super();
+    }
+}
+
 class Bobinas extends Objetos{
 
     constructor(){
@@ -189,6 +196,7 @@ lasers = null;
  let botones = new Botones();
  let chips = new Chips();
  let pilasCadaveres = new PilaCadaveres();
+ let rayos = new Rayos();
  let bobinas = new Bobinas();
  let ventiladores = new Ventiladores();
  let ascensores = new Ascensor();

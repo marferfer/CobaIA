@@ -62,6 +62,7 @@ function preload() {
     juego.load.image('compuertaParteSuperior', 'assets/images/compuertaParteSuperior.png');
 
     juego.load.image('ventilador', 'assets/images/ventilador.png');
+    juego.load.image('bobina2', 'assets/images/bobina2.png');
     
 
     juego.load.image('ascensor','assets/nivel1/ascensor.png');
@@ -83,6 +84,7 @@ function preload() {
     juego.load.physics('personajeCollisions', 'assets/data/personaje.json');
     juego.load.physics('tuboN1CompletoCollisions', 'assets/data/tuboN1Completo.json');
     juego.load.physics('pilaCadaveresCollisions', 'assets/data/pilaCadaveres.json');
+    juego.load.physics('bobina2Collisions', 'assets/data/bobina.json');
     
 }
 
@@ -95,7 +97,8 @@ function create() {
     juego.physics.startSystem(Phaser.Physics.P2JS); //activamos el motor de fisicas
     juego.physics.p2.setImpactEvents(true);         //le decimos que detecte los eventos para las colisiones
     juego.physics.p2.gravity.y = 600;               //ajustamos la gravedad
-    juego.world.setBounds(0, 0, 25000, 1384);        // Establecemos los límites del juego completo
+    //juego.physics.p2.restitution = 0.8;           //rebote de los objetos (investigar material)
+    juego.world.setBounds(0, 0, 25000, 1384);       // Establecemos los límites del juego completo
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -107,6 +110,9 @@ function create() {
     //Decorados que se ven detras del jugador
     nivel1.decorados[0] = juego.add.image(1135, juego.world.height - 650, 'frasco');
     nivel1.decorados[1] = juego.add.image(820, juego.world.height - 650, 'cable');
+
+    nivel1.decorados[7] = juego.add.image(1835, juego.world.height - 534, 'urna');
+    nivel1.decorados[8] = juego.add.image(2935, juego.world.height - 225, 'mesaOrdenador');
 
     nivel1.grupo = juego.add.group();
     nivel1.grupo.enableBody = true;
@@ -585,34 +591,55 @@ function create() {
     bobinas.grupo.enableBody = true;
     bobinas.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
-    let bobina = bobinas.grupo.create(8900, 940, 'bobina');
+    let bobina = bobinas.grupo.create(8900, 940, 'bobina2');
+    bobina.body.angle = 90;
 
-    bobina.body.setRectangle(220, 10);
+    bobina.body.clearShapes();
+    bobina.body.loadPolygon('bobina2Collisions', 'bobina2');
 
     //bobina.body.debug = true;
     bobina.body.static = true;
-    bobina.body.angle = 90;
     //pilaCadaveres.pivot.x = 150;
     //pilaCadaveres.body.setRectangle(300, 25, -150);
-
-    //bobina.body.x = 12000;
-    //bobina.body.y = juego.world.height - 1260;
-
-
-    bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
-    bobina.animations.play('bobina_encendida');
+    //bobina.body.x = 1200;
+    //bobina.body.y = juego.world.height - 260;
 
     bobinas.lista.push(bobina);
 
-    //BOBINA 2
+    rayos.grupo = juego.add.group();
+    rayos.grupo.enableBody = true;
+    rayos.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
-    bobina = bobinas.grupo.create(9404, 830, 'bobina');
-    //bobina.body.angle = 90;
+    let rayo = rayos.grupo.create(bobina.body.x, bobina.body.y, 'bobina');
 
-    bobina.body.setRectangle(220, 10);
+    rayo.body.setRectangle(220, 10);
 
     //bobina.body.debug = true;
-    bobina.body.static = true;
+    rayo.body.static = true;
+    rayo.body.angle = 90;
+    //pilaCadaveres.pivot.x = 150;
+    //pilaCadaveres.body.setRectangle(300, 25, -150);
+
+    //rayo.body.x = 12000;
+    //rayo.body.y = juego.world.height - 1260;
+
+
+    rayo.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
+    rayo.animations.play('bobina_encendida');
+
+    rayos.lista.push(rayo);
+
+
+
+    //BOBINA 2
+
+    rayo = rayos.grupo.create(9404, 830, 'bobina');
+    //bobina.body.angle = 90;
+
+    rayo.body.setRectangle(220, 10);
+
+    //bobina.body.debug = true;
+    rayo.body.static = true;
     //pilaCadaveres.pivot.x = 150;
     //pilaCadaveres.body.setRectangle(300, 25, -150);
 
@@ -623,39 +650,40 @@ function create() {
     //bobina.body.y = juego.world.height - 260;
 
 
-    bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
-    bobina.animations.play('bobina_encendida');
+    rayo.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
+    rayo.animations.play('bobina_encendida');
 
-    bobinas.lista.push(bobina);  
+    rayos.lista.push(rayo);  
 
     //BOBINA 3
 
-    bobina = bobinas.grupo.create(9684, 830, 'bobina');
-    //bobina.body.angle = 90;
+    rayo = rayos.grupo.create(9684, 830, 'bobina');
+    //rayo.body.angle = 90;
 
-    bobina.body.setRectangle(220, 10);
+    rayo.body.setRectangle(220, 10);
 
-    //bobina.body.debug = true;
-    bobina.body.static = true;
+    //rayo.body.debug = true;
+    rayo.body.static = true;
     //pilaCadaveres.pivot.x = 150;
     //pilaCadaveres.body.setRectangle(300, 25, -150);
 
-    //bobina.body.x = 12000;
-    //bobina.body.y = juego.world.height - 260;
+    //rayo.body.x = 12000;
+    //rayo.body.y = juego.world.height - 260;
     //bobina.body.x = 1200;
     //bobina.body.y = juego.world.height - 260;
 
-    bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
-    bobina.animations.play('bobina_encendida');
+    rayo.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
+    rayo.animations.play('bobina_encendida');
 
-    bobinas.lista.push(bobina);  
+    rayos.lista.push(rayo);  
 
     //BOBINA 4
 
-    bobina = bobinas.grupo.create(7474, 1250, 'bobina');
+    bobina = bobinas.grupo.create(7474, 1250, 'bobina2');
     bobina.body.angle = 90;
 
-    bobina.body.setRectangle(220, 10);
+    bobina.body.clearShapes();
+    bobina.body.loadPolygon('bobina2Collisions', 'bobina2');
 
     //bobina.body.debug = true;
     bobina.body.static = true;
@@ -664,28 +692,43 @@ function create() {
     //bobina.body.x = 1200;
     //bobina.body.y = juego.world.height - 260;
 
-    bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
-    bobina.animations.play('bobina_encendida');
+    bobinas.lista.push(bobina);
 
-    bobinas.lista.push(bobina);    
+    rayo = rayos.grupo.create(bobina.body.x, bobina.body.y, 'bobina');
+    rayo.body.angle = 90;
+
+    rayo.body.setRectangle(220, 10);
+
+    //bobina.body.debug = true;
+    rayo.body.static = true;
+    //pilaCadaveres.pivot.x = 150;
+    //pilaCadaveres.body.setRectangle(300, 25, -150);
+    //bobina.body.x = 1200;
+    //bobina.body.y = juego.world.height - 260;
+
+    rayo.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
+    rayo.animations.play('bobina_encendida');
+
+    rayos.lista.push(rayo);
+
 
     //BOBINA 5
 
-    bobina = bobinas.grupo.create(7324, 0, 'bobina');
+    rayo = rayos.grupo.create(7324, 0, 'bobina');
 
-    bobina.body.setRectangle(220, 10);
+    rayo.body.setRectangle(220, 10);
 
     //bobina.body.debug = true;
-    bobina.body.static = true;
+    rayo.body.static = true;
     //pilaCadaveres.pivot.x = 150;
     //pilaCadaveres.body.setRectangle(300, 25, -150);
     /*bobina.body.x = 2200;
     bobina.body.y = juego.world.height - 260;*/
 
-    bobina.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
-    bobina.animations.play('bobina_encendida');
+    rayo.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
+    rayo.animations.play('bobina_encendida');
 
-    bobinas.lista.push(bobina);   
+    rayos.lista.push(rayo);   
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// VENTILADORES   ////////////////////////////////////////////////////////////////////////////////////////
@@ -892,7 +935,7 @@ function create() {
 /////////////// TALIBAIA   ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    talibaIA.jugador = juego.add.sprite(100, juego.world.height - 300, 'talibaIAmovimiento');
+    talibaIA.jugador = juego.add.sprite(7300, juego.world.height - 300, 'talibaIAmovimiento');
     juego.physics.p2.enableBody(talibaIA.jugador);
     talibaIA.jugador.body.setRectangle(80, 40);
     
@@ -943,13 +986,6 @@ function create() {
     nivel1.decorados[4] = juego.add.image(2800, 420, 'compuertaParteSuperior');
     nivel1.decorados[5] = juego.add.image(6750, 800, 'compuertaParteSuperior');
     nivel1.decorados[6] = juego.add.image(10430, 475, 'compuertaParteSuperior');
-
-
-
-
-    nivel1.decorados[7] = juego.add.image(1835, juego.world.height - 535, 'urna');
-    nivel1.decorados[8] = juego.add.image(2935, juego.world.height - 225, 'mesaOrdenador');
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1244,7 +1280,10 @@ function create() {
             }
 
             if(body.id === 22){
-                bobinas.lista[3].body.y = 0;
+                //rayos.lista[3].body.y = 0;
+                rayos.lista[3].body.clearShapes();
+                rayos.lista[3].animations.stop();
+                rayos.lista[3].animations.frame = 0;
             }
         }
 
