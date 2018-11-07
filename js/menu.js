@@ -1,5 +1,8 @@
 var game = new Phaser.Game(1920, 800, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
 
+function menu(){
+    game = new Phaser.Game(1920, 800, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
+}
 function preload() {
 
     game.load.spritesheet('button', 'assets/Menu/button_sprite_sheet.png', 193, 71);
@@ -27,7 +30,7 @@ function create() {
     title = game.add.sprite(game.world.centerX - 769, 50, 'title');
 
     button = game.add.button(game.world.centerX - 720, 550, 'button', actionOnClickGame, this, 2, 1, 0);
-    //buttonOnline = game.add.button(game.world.centerX - 620, 550, 'button', actionOnClickOnline, this, 2, 1, 0);
+    buttonControles = game.add.button(game.world.centerX - 620, 550, 'button', actionOnClickControl, this, 2, 1, 0);
     buttonExit = game.add.button(game.world.centerX - 420, 550, 'buttonSalir', actionOnClickExit, this, 2, 1, 0); //game.world.centerX - 320, 550
 
     //buttonPruebas = game.add.button(game.world.centerX - 220, 550, 'buttonSalir', actionOnClickPruebas, this, 2, 1, 0); //game.world.centerX - 320, 550
@@ -56,9 +59,9 @@ function actionOnClickGame () {
 
 }
 
-function actionOnClickOnline () {
+function actionOnClickControl () {
     game.destroy();
-    inicio();
+    controles();
 
 }
 
