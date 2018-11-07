@@ -1,7 +1,7 @@
 class Nivel{
 
     constructor(){
-
+        this.siguiendo = "tankabaIA";
         this.fondo = null;
         this.suelo = null;
         this.grupo = [];
@@ -20,6 +20,7 @@ class CobaIA {
         this.chip = null;
         this.trepando = false;
         this.puedoTrepar = false;
+        this.actor = "cobaIA";
     }
 };
 

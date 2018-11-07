@@ -884,7 +884,7 @@ function create() {
     //tankabaIA.jugador = juego.add.sprite(11200, juego.world.height - 225, 'tankabaIAmovimiento');
 
     //Cambiar 340, juego.world.height - 225
-    tankabaIA.jugador = juego.add.sprite(340, juego.world.height - 425, 'tankabaIAmovimiento');
+    tankabaIA.jugador = juego.add.sprite(7300, juego.world.height - 425, 'tankabaIAmovimiento');
 
     tankabaIA.jugador.scale.setTo(1.3, 1.3);
     juego.physics.p2.enableBody(tankabaIA.jugador);
@@ -903,6 +903,7 @@ function create() {
                                                             20, 21, 22, 23, 24, 25, 26, 27, 28], 60, true);
     tankabaIA.jugador.animations.add('movimientoIzquierda', [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
                                                              47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58], 60, true);
+    tankabaIA.actor = "tankabaIA";
 
     tankabaIA.jugador.body.onBeginContact.add(colisionInicialTankabaIA, this);
     tankabaIA.jugador.body.onEndContact.add(colisionFinalTankabaIA, this);
@@ -928,6 +929,8 @@ function create() {
     acrobaIA.jugador.animations.add('movimientoIzquierda', [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
                                                              47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58], 60, true);
 
+    acrobaIA.actor = "acrobaIA";
+
     acrobaIA.jugador.body.onBeginContact.add(colisionInicialAcrobaIA, this);
     acrobaIA.jugador.body.onEndContact.add(colisionFinalAcrobaIA, this);
 
@@ -950,6 +953,8 @@ function create() {
                                                             20, 21, 22, 23, 24, 25, 26, 27, 28], 60, true);
     talibaIA.jugador.animations.add('movimientoIzquierda', [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
                                                              47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58], 60, true);
+
+    talibaIA.actor = "talibaIA";
 
     talibaIA.jugador.body.onBeginContact.add(colisionInicialTalibaIA, this);
     talibaIA.jugador.body.onEndContact.add(colisionFinalTalibaIA, this);
@@ -1018,7 +1023,7 @@ function create() {
 
         if (body){
             //console.log(body.sprite.key);
-            console.log(body.id);
+            //console.log(body.id);
         }
 
 
@@ -1309,6 +1314,7 @@ function create() {
                 chip.body.x = 0;
                 chip.body.y = -100;
                 chips.lista[2] = chip;
+                tankabaIA.actor = "talibaIA"
 
             }else if(body.sprite.cobaIA === "acrobaIA" && talibaIA.chip === null){
 
@@ -1341,6 +1347,7 @@ function create() {
                     tankabaIA.jugador.body.y = talibaIA.jugador.body.y + 50;
                     tankabaIA.jugador.body.static = false;
                     tankabaIA.canImove = true;
+                    tankabaIA.actor = "tankabaIA";
 
                     talibaIA.chip = null;
 

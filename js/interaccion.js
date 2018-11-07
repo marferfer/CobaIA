@@ -31,29 +31,51 @@ function update() {
     ////////// CAMBIOS DE CAMARA  //////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    if((ctrlT.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_Y)) && !tankabaIA.muerta){
-
-        juego.camera.follow(tankabaIA.jugador);
+    if (nivel1.siguiendo == "tankabaIA") {
+        console.log(tankabaIA.actor);
+        if (tankabaIA.actor == "chip") {
+            juego.camera.follow(chips.lista[2]);
+        }
+        else if (tankabaIA.actor == "tankabaIA") {
+            juego.camera.follow(tankabaIA.jugador);
+        }
+        else if (tankabaIA.actor == "talibaIA") {
+            juego.camera.follow(talibaIA.jugador);
+        }
     }
-    else if((ctrlT.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_Y)) && tankabaIA.muerta){
-        juego.camera.follow(chips.lista[2]);
+
+    if (nivel1.siguiendo == "acrobaIA") {
+        if (acrobaIA.actor == "chip") {
+            juego.camera.follow(chips.lista[0]);
+        }
+        else if (acrobaIA.actor == "acrobaIA") {
+            juego.camera.follow(acrobaIA.jugador);
+        }
     }
 
-    if((ctrlY.isDown || pad2.isDown(Phaser.Gamepad.XBOX360_Y)) && !acrobaIA.muerta){
-
-        juego.camera.follow(acrobaIA.jugador);
+    if (nivel1.siguiendo == "talibaIA") {
+        //console.log(talibaIA.muerta);
+        if (talibaIA.actor == "chip"){
+            juego.camera.follow(chips.lista[1]);
+        }
+        else if (talibaIA.actor == "talibaIA") {
+            juego.camera.follow(talibaIA.jugador);
+        }
+        //juego.camera.follow(talibaIA.actor);
     }
-    else if((ctrlY.isDown || pad2.isDown(Phaser.Gamepad.XBOX360_Y)) && acrobaIA.muerta){
-        juego.camera.follow(chips.lista[0]);
+
+    if(ctrlT.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_Y)){
+        nivel1.siguiendo = "tankabaIA";
+    }
+
+    if(ctrlY.isDown || pad2.isDown(Phaser.Gamepad.XBOX360_Y)){
+        nivel1.siguiendo = "acrobaIA";
     }
 
     if(ctrlU.isDown || pad3.isDown(Phaser.Gamepad.XBOX360_Y)){
-        if (talibaIA.muerta){
-            juego.camera.follow(chips.lista[1]);
-        }
-        else {
-            juego.camera.follow(talibaIA.jugador);
-        }
+        //console.log(talibaIA.muerta);
+        nivel1.siguiendo = "talibaIA";
+        //juego.camera.follow(talibaIA.actor);
     }
     
 
@@ -92,6 +114,7 @@ function update() {
         acrobaIA.jugador.body.static = true;
         acrobaIA.muerta = false;
         acrobaIA.canImove = false;
+        acrobaIA.actor = "chip";
         juego.camera.follow(chips.lista[0]);
         
     }
@@ -127,6 +150,7 @@ function update() {
         talibaIA.jugador.body.static = true;
         talibaIA.muerta = false;
         talibaIA.canImove = false;
+        talibaIA.actor = "chip";
         juego.camera.follow(chips.lista[1]);
 
     }
@@ -162,6 +186,7 @@ function update() {
         tankabaIA.jugador.body.static = true;
         tankabaIA.muerta = false;
         tankabaIA.canImove = false;
+        tankabaIA.actor = "chip";
         juego.camera.follow(chips.lista[2]);
         
     }
