@@ -49,7 +49,7 @@ class AcrobaIA extends CobaIA{
 class Objetos {
 
     constructor(){
-
+        this.idNum = null
         this.grupo = null;
         this.lista = [];
     }

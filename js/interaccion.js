@@ -31,19 +31,7 @@ function update5() {
     ////////// CAMBIOS DE CAMARA  //////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    if(ctrlT.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_Y)){
-        nivel1.siguiendo = "tankabaIA";
-    }
-
-    if(ctrlY.isDown || pad2.isDown(Phaser.Gamepad.XBOX360_Y)){
-        nivel1.siguiendo = "acrobaIA";
-    }
-
-    if(ctrlU.isDown || pad3.isDown(Phaser.Gamepad.XBOX360_Y)){
-        //console.log(talibaIA.muerta);
-        nivel1.siguiendo = "talibaIA";
-        //juego.camera.follow(talibaIA.actor);
-    }
+    
 
     if (nivel1.siguiendo == "tankabaIA") {
         //console.log(tankabaIA.jugador.body.angle);
@@ -65,13 +53,13 @@ function update5() {
         if (acrobaIA.actor == "chip") {
             juego.camera.follow(chips.lista[0]);
         }
-        else if (tankabaIA.actor == "tankabaIA") {
+        else if (acrobaIA.actor == "tankabaIA") {
             juego.camera.follow(tankabaIA.jugador);
         }
-        else if (tankabaIA.actor == "talibaIA") {
+        else if (acrobaIA.actor == "talibaIA") {
             juego.camera.follow(talibaIA.jugador);
         }
-        else if (tankabaIA.actor == "acrobaIA") {
+        else if (acrobaIA.actor == "acrobaIA") {
             juego.camera.follow(acrobaIA.jugador);
         }
     }
@@ -81,17 +69,32 @@ function update5() {
         if (talibaIA.actor == "chip"){
             juego.camera.follow(chips.lista[1]);
         }
-        else if (tankabaIA.actor == "tankabaIA") {
+        else if (talibaIA.actor == "tankabaIA") {
             juego.camera.follow(tankabaIA.jugador);
         }
-        else if (tankabaIA.actor == "talibaIA") {
+        else if (talibaIA.actor == "talibaIA") {
             juego.camera.follow(talibaIA.jugador);
         }
-        else if (tankabaIA.actor == "acrobaIA") {
+        else if (talibaIA.actor == "acrobaIA") {
             juego.camera.follow(acrobaIA.jugador);
         }
         //juego.camera.follow(talibaIA.actor);
     }    
+
+    if(ctrlT.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_Y)){
+        nivel1.siguiendo = "tankabaIA";
+    }
+
+    if(ctrlY.isDown || pad2.isDown(Phaser.Gamepad.XBOX360_Y)){
+        nivel1.siguiendo = "acrobaIA";
+    }
+
+    if(ctrlU.isDown || pad3.isDown(Phaser.Gamepad.XBOX360_Y)){
+        //console.log(talibaIA.muerta);
+        //console.log('hola');
+        nivel1.siguiendo = "talibaIA";
+        //juego.camera.follow(talibaIA.actor);
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////// COBAIAS MUERTAS  ////////////////////////////////////////////////////////////////////////////////////

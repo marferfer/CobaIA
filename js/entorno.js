@@ -51,7 +51,7 @@ function preload5() {
 
     juego.load.image('plataformaMovil', 'assets/images/plataformaMovil.png');
     juego.load.image('plataformaBasic', 'assets/images/plataformaBasic.png');
-    juego.load.image('boton', 'assets/images/boton.png');
+    //juego.load.image('boton', 'assets/images/boton.png');
     juego.load.image('conexionTuboArriba', 'assets/images/conexionTuboArriba.png');
     juego.load.image('conexionTuboDerecha', 'assets/images/conexionTuboDerecha.png');
     /*juego.load.image('indicadorJ1', 'assets/indicadorJ1.png');
@@ -76,6 +76,7 @@ function preload5() {
     juego.load.spritesheet('acrobaIAmovimiento', 'assets/images/acrobaIAmovimiento.png', 95, 51, 59, 2, 3);
     juego.load.spritesheet('bobina', 'assets/images/bobina.png', 287, 49, 6, 0, 0);
     juego.load.spritesheet('aire', 'assets/images/aire.png', 175, 295, 5, 0, 0);
+    juego.load.spritesheet('boton', 'assets/images/button.png', 99, 28, 10, 0, 0);
 
     juego.load.physics('sueloN1Parte1Collisions', 'assets/data/sueloN1Parte1.json');
     //juego.load.physics('sueloN1Parte2Collisions', 'assets/data/sueloN1Parte2.json');
@@ -359,9 +360,12 @@ function create5() {
 
     boton = botones.grupo.create(7805, 1346, 'boton');
 
-    boton.body.setRectangle(61, 15, 0, -5);
+    boton.animations.frame = 6;
+
+    boton.body.setRectangle(61, 15, 0, 6);
     //boton.body.debug = true;
     //console.log(boton.body.id); //id: 
+    boton.idNum = boton.body.id;
     boton.body.static = true;
     /*boton.body.x = 52960;
     boton.body.y = 1331;*/
@@ -1292,11 +1296,14 @@ function create5() {
                 plataformasMoviles.lista[2].body.rotateRight(-25);
             }
 
-            if(body.id === 22){
+            if(body.id === botones.lista[6].idNum){
                 //rayos.lista[3].body.y = 0;
                 rayos.lista[3].body.clearShapes();
                 rayos.lista[3].animations.stop();
                 rayos.lista[3].animations.frame = 0;
+                botones.lista[6].animations.frame = 8;
+                //botones.lista[6].body.clearShapes();
+                //botones.lista[6].body.setRectangle(61, 15, 0, 4);
             }
         }
 
@@ -1383,6 +1390,11 @@ function create5() {
 
             if(body.sprite.key === 'boton'){
                 plataformasMoviles.lista[2].body.rotateRight(0);
+                if(body.id === botones.lista[6].idNum) {
+                    botones.lista[6].animations.frame = 6;
+                    //botones.lista[6].body.clearShapes();
+                    //botones.lista[6].body.setRectangle(61, 15, 0, 2);
+                }
                 //stopPlataforma(0);
             }
         }
