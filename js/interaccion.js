@@ -31,39 +31,6 @@ function update5() {
     ////////// CAMBIOS DE CAMARA  //////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    if (nivel1.siguiendo == "tankabaIA") {
-        console.log(tankabaIA.actor);
-        if (tankabaIA.actor == "chip") {
-            juego.camera.follow(chips.lista[2]);
-        }
-        else if (tankabaIA.actor == "tankabaIA") {
-            juego.camera.follow(tankabaIA.jugador);
-        }
-        else if (tankabaIA.actor == "talibaIA") {
-            juego.camera.follow(talibaIA.jugador);
-        }
-    }
-
-    if (nivel1.siguiendo == "acrobaIA") {
-        if (acrobaIA.actor == "chip") {
-            juego.camera.follow(chips.lista[0]);
-        }
-        else if (acrobaIA.actor == "acrobaIA") {
-            juego.camera.follow(acrobaIA.jugador);
-        }
-    }
-
-    if (nivel1.siguiendo == "talibaIA") {
-        //console.log(talibaIA.muerta);
-        if (talibaIA.actor == "chip"){
-            juego.camera.follow(chips.lista[1]);
-        }
-        else if (talibaIA.actor == "talibaIA") {
-            juego.camera.follow(talibaIA.jugador);
-        }
-        //juego.camera.follow(talibaIA.actor);
-    }
-
     if(ctrlT.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_Y)){
         nivel1.siguiendo = "tankabaIA";
     }
@@ -77,7 +44,54 @@ function update5() {
         nivel1.siguiendo = "talibaIA";
         //juego.camera.follow(talibaIA.actor);
     }
-    
+
+    if (nivel1.siguiendo == "tankabaIA") {
+        //console.log(tankabaIA.jugador.body.angle);
+        if (tankabaIA.actor == "chip") {
+            juego.camera.follow(chips.lista[2]);
+        }
+        else if (tankabaIA.actor == "tankabaIA") {
+            juego.camera.follow(tankabaIA.jugador);
+        }
+        else if (tankabaIA.actor == "talibaIA") {
+            juego.camera.follow(talibaIA.jugador);
+        }
+        else if (tankabaIA.actor == "acrobaIA") {
+            juego.camera.follow(acrobaIA.jugador);
+        }
+    }
+
+    if (nivel1.siguiendo == "acrobaIA") {
+        if (acrobaIA.actor == "chip") {
+            juego.camera.follow(chips.lista[0]);
+        }
+        else if (tankabaIA.actor == "tankabaIA") {
+            juego.camera.follow(tankabaIA.jugador);
+        }
+        else if (tankabaIA.actor == "talibaIA") {
+            juego.camera.follow(talibaIA.jugador);
+        }
+        else if (tankabaIA.actor == "acrobaIA") {
+            juego.camera.follow(acrobaIA.jugador);
+        }
+    }
+
+    if (nivel1.siguiendo == "talibaIA") {
+        //console.log(talibaIA.muerta);
+        if (talibaIA.actor == "chip"){
+            juego.camera.follow(chips.lista[1]);
+        }
+        else if (tankabaIA.actor == "tankabaIA") {
+            juego.camera.follow(tankabaIA.jugador);
+        }
+        else if (tankabaIA.actor == "talibaIA") {
+            juego.camera.follow(talibaIA.jugador);
+        }
+        else if (tankabaIA.actor == "acrobaIA") {
+            juego.camera.follow(acrobaIA.jugador);
+        }
+        //juego.camera.follow(talibaIA.actor);
+    }    
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////// COBAIAS MUERTAS  ////////////////////////////////////////////////////////////////////////////////////
@@ -111,7 +125,7 @@ function update5() {
 
         acrobaIA.jugador.body.x = -120;
         acrobaIA.jugador.body.y = 0;
-        acrobaIA.jugador.body.static = true;
+        //acrobaIA.jugador.body.static = true;
         acrobaIA.muerta = false;
         acrobaIA.canImove = false;
         acrobaIA.actor = "chip";
@@ -147,7 +161,7 @@ function update5() {
 
         talibaIA.jugador.body.x =  -120;
         talibaIA.jugador.body.y = 0;
-        talibaIA.jugador.body.static = true;
+        //talibaIA.jugador.body.static = true;
         talibaIA.muerta = false;
         talibaIA.canImove = false;
         talibaIA.actor = "chip";
@@ -183,7 +197,7 @@ function update5() {
 
         tankabaIA.jugador.body.x = -120;
         tankabaIA.jugador.body.y = 0;
-        tankabaIA.jugador.body.static = true;
+        //tankabaIA.jugador.body.static = true;
         tankabaIA.muerta = false;
         tankabaIA.canImove = false;
         tankabaIA.actor = "chip";

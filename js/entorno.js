@@ -1075,6 +1075,7 @@ function create5() {
                 chip.body.x = 0;
                 chip.body.y = -100;
                 chips.lista[0] = chip;
+                acrobaIA.actor = "tankabaIA";
 
             }else if(body.sprite.cobaIA === "talibaIA" && tankabaIA.chip === null){
 
@@ -1091,6 +1092,7 @@ function create5() {
                 chip.body.x = 0;
                 chip.body.y = -100;
                 chips.lista[1] = chip;
+                talibaIA.actor = "tankabaIA";
 
             }else{  //si ya tengo un chip de otra cobaIA no hago nada
                 ;
@@ -1107,6 +1109,7 @@ function create5() {
                     acrobaIA.jugador.body.y = tankabaIA.jugador.body.y + 50;
                     acrobaIA.jugador.body.static = false;
                     acrobaIA.canImove = true;
+                    acrobaIA.actor = "acrobaIA";
 
                     tankabaIA.chip = null;
 
@@ -1116,6 +1119,7 @@ function create5() {
                     talibaIA.jugador.body.y = tankabaIA.jugador.body.y + 50;
                     talibaIA.jugador.body.static = false;
                     talibaIA.canImove = true;
+                    talibaIA.actor = "talibaIA";
 
                     tankabaIA.chip = null;
 
@@ -1190,6 +1194,7 @@ function create5() {
                 chip.body.x = 0;
                 chip.body.y = -100;
                 chips.lista[2] = chip;
+                tankabaIA.actor = "acrobaIA";
 
             }else if(body.sprite.cobaIA === "talibaIA" && acrobaIA.chip === null){
 
@@ -1206,6 +1211,7 @@ function create5() {
                 chip.body.x = 0;
                 chip.body.y = -100;
                 chips.lista[1] = chip;
+                talibaIA.actor = "acrobaIA";
 
             }else{  //si ya tengo un chip de otra cobaIA no hago nada
                 ;
@@ -1222,6 +1228,7 @@ function create5() {
                     tankabaIA.jugador.body.y = acrobaIA.jugador.body.y + 50;
                     tankabaIA.jugador.body.static = false;
                     tankabaIA.canImove = true;
+                    tankabaIA.actor = "tankabaIA";
 
                     acrobaIA.chip = null;
 
@@ -1231,6 +1238,7 @@ function create5() {
                     talibaIA.jugador.body.y = acrobaIA.jugador.body.y + 50;
                     talibaIA.jugador.body.static = false;
                     talibaIA.canImove = true;
+                    talibaIA.actor = "talibaIA";
 
                     acrobaIA.chip = null;
 
@@ -1314,7 +1322,7 @@ function create5() {
                 chip.body.x = 0;
                 chip.body.y = -100;
                 chips.lista[2] = chip;
-                tankabaIA.actor = "talibaIA"
+                tankabaIA.actor = "talibaIA";
 
             }else if(body.sprite.cobaIA === "acrobaIA" && talibaIA.chip === null){
 
@@ -1331,6 +1339,7 @@ function create5() {
                 chip.body.x = 0;
                 chip.body.y = -100;
                 chips.lista[0] = chip;
+                acrobaIA.actor = "talibaIA";
 
             }else{  //si ya tengo un chip de otra cobaIA no hago nada
                 ;
@@ -1357,6 +1366,7 @@ function create5() {
                     acrobaIA.jugador.body.y = talibaIA.jugador.body.y + 50;
                     acrobaIA.jugador.body.static = false;
                     acrobaIA.canImove = true;
+                    acrobaIA.actor = "acrobaIA";
 
                     talibaIA.chip = null;
 

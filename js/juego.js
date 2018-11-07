@@ -3,7 +3,7 @@ function inicio() {
     
     
 
-    function render() { // Render
+    function render5() { // Render
         //juego.debug.cameraInfo(juego.camera, 32, 32);
         //juego.debug.spriteCoords(obj_jugador.jugador, 32, 500);
     }
