@@ -7,6 +7,7 @@ function preload() {
 
     game.load.spritesheet('button', 'assets/Menu/button_sprite_sheet.png', 193, 71);
     game.load.spritesheet('buttonSalir', 'assets/Menu/button_sprite_sheet salir.png', 193, 71);
+    game.load.spritesheet('buttonControles', 'assets/Menu/button_sprite_sheet controles.png', 193, 71);
     game.load.spritesheet('title', 'assets/Menu/TituloJuego.png');
     game.load.image('background','assets/Menu/Portada.png');
 
@@ -29,9 +30,9 @@ function create() {
 
     title = game.add.sprite(game.world.centerX - 769, 50, 'title');
 
-    button = game.add.button(game.world.centerX - 720, 550, 'button', actionOnClickGame, this, 2, 1, 0);
-    buttonControles = game.add.button(game.world.centerX - 620, 550, 'button', actionOnClickControl, this, 2, 1, 0);
-    buttonExit = game.add.button(game.world.centerX - 420, 550, 'buttonSalir', actionOnClickExit, this, 2, 1, 0); //game.world.centerX - 320, 550
+    button = game.add.button(game.world.centerX - 880, 550, 'button', actionOnClickGame, this, 2, 1, 0);
+    buttonControles = game.add.button(game.world.centerX - 620, 550, 'buttonControles', actionOnClickControl, this, 2, 1, 0);
+    buttonExit = game.add.button(game.world.centerX - 360, 550, 'buttonSalir', actionOnClickExit, this, 2, 1, 0); //game.world.centerX - 320, 550
 
     //buttonPruebas = game.add.button(game.world.centerX - 220, 550, 'buttonSalir', actionOnClickPruebas, this, 2, 1, 0); //game.world.centerX - 320, 550
 

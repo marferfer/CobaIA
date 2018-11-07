@@ -2,7 +2,7 @@
 function preload4() {
 
     //game.load.spritesheet('button', 'assets/Menu/button_sprite_sheet.png', 193, 71);
-    game.load.spritesheet('buttonVolver', 'assets/Menu/button_sprite_sheet salir.png', 193, 71);
+    game.load.spritesheet('buttonVolver', 'assets/Menu/button_sprite_sheet volver.png', 193, 71);
     game.load.image('background','assets/Menu/Controles.png');
 
 }
