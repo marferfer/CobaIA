@@ -49,11 +49,7 @@ function out() {
     //console.log('button out');
 }
 
-function actionOnClickGame () {
-    game.destroy();
-    inicio();
 
-}
 
 function actionOnClickOnline () {
     game.destroy();

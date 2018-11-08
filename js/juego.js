@@ -10,9 +10,23 @@ function inicio() {
 
     function reinicia_inmediato() {
         location.reload();
-    }
+    } 
 
     
+}
+
+
+function personajes() {
+     jugPersonajes = new Phaser.Game(1920, 800, Phaser.AUTO, '', {preload: preload6, create: create6});  
+
+     function render6() { // Render
+        //juego.debug.cameraInfo(juego.camera, 32, 32);
+        //juego.debug.spriteCoords(obj_jugador.jugador, 32, 500);
+    }              
+
+    function reinicia_inmediato() {
+        location.reload();
+    }   
 }
 
 function pruebas() {
@@ -74,7 +88,5 @@ function controles() {
 
     function reinicia_inmediato() {
         location.reload();
-    }
-
-    
+    }   
 }

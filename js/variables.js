@@ -1,4 +1,5 @@
 var juego;
+var jugPersonajes;
 
 var juegoPruebas;
 
