@@ -30,7 +30,7 @@ function create() {
 
     title = game.add.sprite(game.world.centerX - 769, 50, 'title');
 
-    button = game.add.button(game.world.centerX - 880, 550, 'button', actionOnClickGame, this, 2, 1, 0);
+    button = game.add.button(game.world.centerX - 880, 550, 'button', actionOnClickCharacter, this, 2, 1, 0);
     buttonControles = game.add.button(game.world.centerX - 620, 550, 'buttonControles', actionOnClickControl, this, 2, 1, 0);
     buttonExit = game.add.button(game.world.centerX - 360, 550, 'buttonSalir', actionOnClickExit, this, 2, 1, 0); //game.world.centerX - 320, 550
 
@@ -57,6 +57,12 @@ function out() {
 function actionOnClickGame () {
     game.destroy();
     inicio();
+
+}
+
+function actionOnClickCharacter () {
+    game.destroy();
+    personajes();
 
 }
 
