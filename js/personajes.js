@@ -4,6 +4,8 @@ function preload6() {
     jugPersonajes.load.spritesheet('buttonVolver', 'assets/Menu/button_sprite_sheet volver.png', 193, 71);
     jugPersonajes.load.image('background','assets/Menu/Personajes.png');
 
+    //jugPersonajes.load.video('liquid', 'assets/video/skull.mp4');
+
 }
 
 var button;
@@ -11,11 +13,17 @@ var buttonOnline;
 var buttonExit;
 var background;
 var title;
+var video2;
+
 
 function create6() {
 
     nivelJuego = 1;
     //console.log(nivelJuego);
+
+    /*video2 = game.add.video('liquid');
+    video2.play(true);
+    video2.addToWorld(780, 580, 1, 1, 0.5, 0.5);*/
 
     jugPersonajes.stage.backgroundColor = '#182d3b';
 
