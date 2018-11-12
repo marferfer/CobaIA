@@ -5,6 +5,8 @@ function menu(){
 }
 function preload() {
 
+    game.load.audio('baseCharles', 'assets/sounds/baseCharles.mp3');
+
     game.load.spritesheet('button', 'assets/Menu/button_sprite_sheet.png', 193, 71);
     game.load.spritesheet('buttonSalir', 'assets/Menu/button_sprite_sheet salir.png', 193, 71);
     game.load.spritesheet('buttonControles', 'assets/Menu/button_sprite_sheet controles.png', 193, 71);
@@ -18,11 +20,20 @@ var buttonOnline;
 var buttonExit;
 var background;
 var title;
+//var pers = false;
 
 function create() {
 
     nivelJuego = 0;
     console.log(nivelJuego);
+
+    baseCharles = new sound("assets/sounds/baseCharles.mp3");
+    musica[0] = baseCharles;
+
+    //baseCharles.play();
+    //loop();
+
+    //loop(baseCharles);
 
     game.stage.backgroundColor = '#182d3b';
 
@@ -41,6 +52,20 @@ function create() {
     button.onInputUp.add(up, this);
 
 }
+
+/*function loop(music) {
+    music.play();
+    //let timer = game.time.events.add(2000, function(){
+    setTimeout(function(){
+        if (pers) {
+            game.destroy();
+            personajes();
+        }
+        else {
+            loop(music);
+        }
+    }, 2000);
+}*/
 
 function up() {
     //console.log('button up', arguments);
@@ -63,6 +88,7 @@ function actionOnClickGame () {
 function actionOnClickCharacter () {
     game.destroy();
     personajes();
+    //pers = true;
 
 }
 

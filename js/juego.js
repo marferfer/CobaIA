@@ -15,6 +15,66 @@ function inicio() {
     
 }
 
+///////////////////////////////////////////////////////////////////////////////////
+//////////////////////////// SONIDO ///////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+
+var nivel0off = true;
+var nivel1off = true;
+
+var musica = [];
+
+var baseCharles;
+var metronomo;
+
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    this.isOn = false;
+    document.body.appendChild(this.sound);
+    this.play = function(){
+        this.sound.play();
+        this.isOn = true;
+    }
+    this.stop = function(){
+        this.sound.pause();
+        this.isOn = false;
+    }
+    this.getVolume = function(){
+        return this.sound.volume;
+    }
+    this.setVolume = function(v){
+        this.sound.volume = v;
+    }
+}
+
+loop();
+
+function loop() {
+    setTimeout(function(){
+        if (nivelJuego === 0 && nivel0off && !musica[0].isOn) {
+            musica[0].play();
+            for (var i = 1; i < musica.length; i++) {
+                musica[i].stop();
+            }
+            nivel0off = false;
+        }
+        else if (nivelJuego === 1 && nivel1off) {
+            musica[1].setVolume(0.65);
+            musica[1].play();
+            nivel1off = false;
+        }
+        //console.log(baseCharles.getVolume());
+        loop();
+    }, 2000);
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////////////
 
 function personajes() {
      jugPersonajes = new Phaser.Game(1920, 800, Phaser.AUTO, '', {preload: preload6, create: create6});  

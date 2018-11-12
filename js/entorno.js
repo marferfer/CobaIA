@@ -6,8 +6,8 @@ function preload5() {
     /////////////// SONIDO   //////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /*createjs.Sound.registerSound("assets/salto.mp3", salto);
-    createjs.Sound.registerSound("assets/risa.mp3", risa);
+    //createjs.Sound.registerSound("assets/sounds/baseCharles.mp3", baseCharles);
+    /*createjs.Sound.registerSound("assets/risa.mp3", risa);
     createjs.Sound.registerSound("assets/posion.mp3", posion);
     createjs.Sound.registerSound("assets/disparo.mp3", disparo);
     createjs.Sound.registerSound("assets/pierde_vida.mp3", pierde_vida);
