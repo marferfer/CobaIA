@@ -7,6 +7,8 @@ function preload6() {
     jugPersonajes.load.spritesheet('buttonVolver', 'assets/Menu/button_sprite_sheet volver.png', 193, 71);
     jugPersonajes.load.image('background','assets/Menu/Personajes.png');
 
+    //jugPersonajes.load.video('liquid', 'assets/video/skull.mp4');
+
 }
 
 var button;
@@ -16,6 +18,8 @@ var background;
 var title;
 /*var music2 = [];
 var back = false;*/
+var video2;
+
 
 function create6() {
 
@@ -32,6 +36,10 @@ function create6() {
 
     metronomo = new sound("assets/sounds/metronome120bpm.mp3");
     musica[1] = metronomo;
+
+    /*video2 = game.add.video('liquid');
+    video2.play(true);
+    video2.addToWorld(780, 580, 1, 1, 0.5, 0.5);*/
 
     jugPersonajes.stage.backgroundColor = '#182d3b';
 
