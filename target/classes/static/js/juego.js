@@ -237,7 +237,7 @@ function showItem(item) {
 
     $('#info').append(
         '<div id="item-' + item.id + '"><input type="checkbox" ' + checked + '><span ' + style + '>' + item.description +
-        '</span> <button class="btn btn-danger">Delete</button></div>')
+        '</span> </div>')
 }
 
 $(document).ready(function () {
