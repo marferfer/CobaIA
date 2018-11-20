@@ -159,11 +159,15 @@ function controles() {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-checkUsers();
+
 hereIam();
+//checkUsers();
+
 
 var usuario = '';
 var conectado = false;
+
+var t = 0;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ITEMS ///////////////////////////////////////////////////////////////////////////////////////
@@ -321,7 +325,7 @@ $(document).ready(function () {
 // VERSION ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var cobaIAversion = "1.1";
+var cobaIAversion = "1.2";
 
 //Load VERSIONS from server
 function loadVersions(callback) {
@@ -406,8 +410,14 @@ loadVersions(function (versions) {
 
 function hereIam() {
 	setTimeout(function(){
+		t++;
+		if (t > 100) {
+			t = 0;
+		}
     	loadItems(function (items) {
+    		document.getElementById("info").innerHTML = "";
             for (var i = 0; i < items.length; i++) {
+            	showItem(items[i]);
                 if (items[i].description == usuario) {
                 	items[i].checked = true;
                     updateItem(items[i]);
@@ -419,6 +429,20 @@ function hereIam() {
     			location.reload();
     		}
     	});
+    	if (t == 100) {
+    		loadItems(function (items) {
+                //When items are loaded from server
+        		//document.getElementById("info").innerHTML = "";
+                for (var i = 0; i < items.length; i++) {
+                    //showItem(items[i]);
+                    if (!items[i].checked) {
+                    	setTimeout(disconect(items[i]), 555);
+                    }
+                    items[i].checked = false;
+                    updateItem(items[i]);
+                }
+            });
+    	}
         hereIam();
     }, 10);
 }
@@ -431,7 +455,7 @@ function checkUsers() {
             for (var i = 0; i < items.length; i++) {
                 showItem(items[i]);
                 if (!items[i].checked) {
-                	setTimeout(disconect(items[i]), 1000);
+                	setTimeout(disconect(items[i]), 555);
                 }
                 items[i].checked = false;
                 updateItem(items[i]);
@@ -442,5 +466,6 @@ function checkUsers() {
 }
 
 function disconect (item) {
+	console.log("hola");
 	if (!item.checked) deleteItem(item.id);
 }
