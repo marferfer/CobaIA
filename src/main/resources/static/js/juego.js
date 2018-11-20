@@ -176,7 +176,7 @@ var t = 0;
 //Load items from server
 function loadItems(callback) {
     $.ajax({
-        url: 'http://10.0.41.72:8080/items'
+        url: 'http://localhost:8080/items'
     }).done(function (items) {
         //console.log('Items loaded: ' + JSON.stringify(items));
         callback(items);
@@ -187,7 +187,7 @@ function loadItems(callback) {
 function createItem(item, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://10.0.41.72:8080/items',
+        url: 'http://localhost:8080/items',
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -203,7 +203,7 @@ function createItem(item, callback) {
 function updateItem(item) {
     $.ajax({
         method: 'PUT',
-        url: 'http://10.0.41.72:8080/items/' + item.id,
+        url: 'http://localhost:8080/items/' + item.id,
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -218,7 +218,7 @@ function updateItem(item) {
 function deleteItem(itemId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://10.0.41.72:8080/items/' + itemId
+        url: 'http://localhost:8080/items/' + itemId
     }).done(function (item) {
         console.log("Deleted item " + itemId)
     })
@@ -296,28 +296,67 @@ $(document).ready(function () {
     $("#add-button").click(function () {
 
         var value = input.val();
-        input.val('');
-        
-        usuario = value;
-        conectado = true;
+        input.val(''); 
 
         var item = {
             description: value,
             checked: false
         }
-
-        createItem(item, function (itemWithId) {
-            //When item with id is returned from server
-            showItem(itemWithId);
-        });
-        var element = document.getElementById("exampleInputEmail1");
-        element.parentNode.removeChild(element);
-        var element1 = document.getElementById("add-button");
-        element1.parentNode.removeChild(element1);
-        var element2 = document.getElementById("title");
-        element2.parentNode.removeChild(element2);
-        var element3 = document.getElementById("pantallaInicio");
-        element3.parentNode.removeChild(element3);
+        
+        loadItems(function (items) {
+    		console.log("Entra en loadItems");
+    		console.log("value: " + value);
+    		
+    		if(items.length == 0){
+    			
+    			createItem(item, function (itemWithId) {
+                    //When item with id is returned from server
+                    showItem(itemWithId);
+                });
+            
+                var element = document.getElementById("exampleInputEmail1");
+                element.parentNode.removeChild(element);
+                var element1 = document.getElementById("add-button");
+                element1.parentNode.removeChild(element1);
+                var element2 = document.getElementById("title");
+                element2.parentNode.removeChild(element2);
+                var element3 = document.getElementById("pantallaInicio");
+                element3.parentNode.removeChild(element3);
+                
+                usuario = value;
+    		
+    		}else{
+    		
+	            for (var i = 0; i < items.length; i++) {
+	            	
+	            	if (items[i].description == value){
+	                	
+						document.getElementById("title").innerHTML = '<span style="color:red"> <b>Nombre de usuario ya en uso. Por favor, escoja un nuevo nombre.</b> </span>';
+								
+	                	console.log("usuario repetido");
+	                	
+	                	
+	                }else{
+	                	
+	                	createItem(item, function (itemWithId) {
+	                        //When item with id is returned from server
+	                        showItem(itemWithId);
+	                    });
+	                
+	                    var element = document.getElementById("exampleInputEmail1");
+	                    element.parentNode.removeChild(element);
+	                    var element1 = document.getElementById("add-button");
+	                    element1.parentNode.removeChild(element1);
+	                    var element2 = document.getElementById("title");
+	                    element2.parentNode.removeChild(element2);
+	                    var element3 = document.getElementById("pantallaInicio");
+	                    element3.parentNode.removeChild(element3);
+	                    
+	                    usuario = value;
+	                }
+	            }
+            }
+        })  
     })
 })
 
@@ -330,7 +369,7 @@ var cobaIAversion = "1.2";
 //Load VERSIONS from server
 function loadVersions(callback) {
     $.ajax({
-        url: 'http://10.0.41.72:8080/versions'
+        url: 'http://localhost:8080/versions'
     }).done(function (versions) {
         //console.log('Versions loaded: ' + JSON.stringify(versions));
         callback(versions);
@@ -341,7 +380,7 @@ function loadVersions(callback) {
 function createVersion(version, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://10.0.41.72:8080/versions',
+        url: 'http://localhost:8080/versions',
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -357,7 +396,7 @@ function createVersion(version, callback) {
 function updateVersion(version) {
     $.ajax({
         method: 'PUT',
-        url: 'http://10.0.41.72:8080/versions/' + version.id,
+        url: 'http://localhost:8080/versions/' + version.id,
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -372,7 +411,7 @@ function updateVersion(version) {
 function deleteVersion(versionId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://10.0.41.72:8080/versions/' + versionId
+        url: 'http://localhost:8080/versions/' + versionId
     }).done(function (version) {
         console.log("Deleted version " + versionId)
     })
@@ -392,7 +431,6 @@ function showVersion(version) {
     $('#info').append(
         '<div id="version-' + version.id + '</div>')
 }
-
 
 
 loadVersions(function (versions) {
