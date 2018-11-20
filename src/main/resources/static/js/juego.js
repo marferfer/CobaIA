@@ -152,7 +152,11 @@ function controles() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GESTIÓN DEL SERVIDOR ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 checkUsers();
@@ -161,10 +165,14 @@ hereIam();
 var usuario = '';
 var conectado = false;
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//ITEMS ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 //Load items from server
 function loadItems(callback) {
     $.ajax({
-        url: 'http://25.76.106.32:8080/items'
+        url: 'http://10.0.41.72:8080/items'
     }).done(function (items) {
         //console.log('Items loaded: ' + JSON.stringify(items));
         callback(items);
@@ -175,7 +183,7 @@ function loadItems(callback) {
 function createItem(item, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://25.76.106.32:8080/items',
+        url: 'http://10.0.41.72:8080/items',
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -191,7 +199,7 @@ function createItem(item, callback) {
 function updateItem(item) {
     $.ajax({
         method: 'PUT',
-        url: 'http://25.76.106.32:8080/items/' + item.id,
+        url: 'http://10.0.41.72:8080/items/' + item.id,
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -206,7 +214,7 @@ function updateItem(item) {
 function deleteItem(itemId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://25.76.106.32:8080/items/' + itemId
+        url: 'http://10.0.41.72:8080/items/' + itemId
     }).done(function (item) {
         console.log("Deleted item " + itemId)
     })
@@ -309,9 +317,114 @@ $(document).ready(function () {
     })
 })
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// VERSION ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+var cobaIAversion = "1.1";
+
+//Load VERSIONS from server
+function loadVersions(callback) {
+    $.ajax({
+        url: 'http://10.0.41.72:8080/versions'
+    }).done(function (versions) {
+        //console.log('Versions loaded: ' + JSON.stringify(versions));
+        callback(versions);
+    })
+}
+
+//Create version in server
+function createVersion(version, callback) {
+    $.ajax({
+        method: "POST",
+        url: 'http://10.0.41.72:8080/versions',
+        data: JSON.stringify(version),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (version) {
+        console.log("Version created: " + JSON.stringify(version));
+        callback(version);
+    })
+}
+
+//Update version in server
+function updateVersion(version) {
+    $.ajax({
+        method: 'PUT',
+        url: 'http://10.0.41.72:8080/versions/' + version.id,
+        data: JSON.stringify(version),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (version) {
+        console.log("Updated version: " + JSON.stringify(version))
+    })
+}
+
+//Delete version from server
+function deleteVersion(versionId) {
+    $.ajax({
+        method: 'DELETE',
+        url: 'http://10.0.41.72:8080/versions/' + versionId
+    }).done(function (version) {
+        console.log("Deleted version " + versionId)
+    })
+}
+
+//Show version in page
+function showVersion(version) {
+
+    var checked = '';
+    var style = '';
+
+    if (version.checked) {
+        checked = 'checked';
+        style = 'style="text-decoration:line-through"';
+    }
+
+    $('#info').append(
+        '<div id="version-' + version.id + '</div>')
+}
+
+
+
+loadVersions(function (versions) {
+	if (versions.length == 0) {
+		var myVersion = {
+            description: cobaIAversion
+        }	
+        createVersion(myVersion, function (versionWithId) { ; });
+	}
+	else  {
+		versions[0].description = cobaIAversion;
+		updateVersion(versions[0]);
+	}
+});
+
+function hereIam() {
+	setTimeout(function(){
+    	loadItems(function (items) {
+            for (var i = 0; i < items.length; i++) {
+                if (items[i].description == usuario) {
+                	items[i].checked = true;
+                    updateItem(items[i]);
+                }
+            }
+        });
+    	loadVersions(function (versions) {
+    		if (cobaIAversion != versions[0].description) {
+    			location.reload();
+    		}
+    	});
+        hereIam();
+    }, 10);
+}
+
 function checkUsers() {
     setTimeout(function(){
-        //console.log(baseCharles.getVolume());
     	loadItems(function (items) {
             //When items are loaded from server
     		document.getElementById("info").innerHTML = "";
@@ -330,18 +443,4 @@ function checkUsers() {
 
 function disconect (item) {
 	if (!item.checked) deleteItem(item.id);
-}
-
-function hereIam() {
-	setTimeout(function(){
-    	loadItems(function (items) {
-            for (var i = 0; i < items.length; i++) {
-                if (items[i].description == usuario) {
-                	items[i].checked = true;
-                    updateItem(items[i]);
-                }
-            }
-        });
-        hereIam();
-    }, 10);
 }
