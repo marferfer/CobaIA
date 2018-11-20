@@ -169,6 +169,8 @@ var conectado = false;
 
 var t = 0;
 
+var invitar = false;
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ITEMS ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -176,7 +178,7 @@ var t = 0;
 //Load items from server
 function loadItems(callback) {
     $.ajax({
-        url: 'http://localhost:8080/items'
+        url: 'http://25.76.106.32:8080/items'
     }).done(function (items) {
         //console.log('Items loaded: ' + JSON.stringify(items));
         callback(items);
@@ -187,7 +189,7 @@ function loadItems(callback) {
 function createItem(item, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://localhost:8080/items',
+        url: 'http://25.76.106.32:8080/items',
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -203,14 +205,14 @@ function createItem(item, callback) {
 function updateItem(item) {
     $.ajax({
         method: 'PUT',
-        url: 'http://localhost:8080/items/' + item.id,
+        url: 'http://25.76.106.32:8080/items/' + item.id,
         data: JSON.stringify(item),
         processData: false,
         headers: {
             "Content-Type": "application/json"
         }
     }).done(function (item) {
-        console.log("Updated item: " + JSON.stringify(item))
+        //console.log("Updated item: " + JSON.stringify(item))
     })
 }
 
@@ -218,7 +220,7 @@ function updateItem(item) {
 function deleteItem(itemId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://localhost:8080/items/' + itemId
+        url: 'http://25.76.106.32:8080/items/' + itemId
     }).done(function (item) {
         console.log("Deleted item " + itemId)
     })
@@ -236,8 +238,11 @@ function showItem(item) {
     }
 
     $('#info').append(
-        '<div id="item-' + item.id + '"><input type="checkbox" ' + checked + '><span ' + style + '>' + item.description +
-        '</span> </div>')
+        '<li onclick="llamarconsola()" id="item-"' + item.id + '" class="nav-item"><span>' + item.description + ' <i class="fa fa-send"></i></span></li>')
+}
+
+function llamarconsola(){
+	console.log('hola');
 }
 
 $(document).ready(function () {
@@ -253,14 +258,8 @@ $(document).ready(function () {
     var info = $('#info')
 
     //Handle delete buttons
-    info.click(function (event) {
-        var elem = $(event.target);
-        if (elem.is('button')) {
-            var itemDiv = elem.parent();
-            var itemId = itemDiv.attr('id').split('-')[1];
-            itemDiv.remove()
-            deleteItem(itemId);
-        }
+    $('li').click(function (event) {
+    	console.log('hola');
     })
 
     //Handle items checkboxs
@@ -311,7 +310,7 @@ $(document).ready(function () {
     			
     			createItem(item, function (itemWithId) {
                     //When item with id is returned from server
-                    showItem(itemWithId);
+                    if (invitar) showItem(itemWithId);
                 });
             
                 var element = document.getElementById("exampleInputEmail1");
@@ -340,7 +339,7 @@ $(document).ready(function () {
 	                	
 	                	createItem(item, function (itemWithId) {
 	                        //When item with id is returned from server
-	                        showItem(itemWithId);
+	                		if (invitar) showItem(itemWithId);
 	                    });
 	                
 	                    var element = document.getElementById("exampleInputEmail1");
@@ -364,12 +363,12 @@ $(document).ready(function () {
 // VERSION ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var cobaIAversion = "1.2";
+var cobaIAversion = "1.6";
 
 //Load VERSIONS from server
 function loadVersions(callback) {
     $.ajax({
-        url: 'http://localhost:8080/versions'
+        url: 'http://25.76.106.32:8080/versions'
     }).done(function (versions) {
         //console.log('Versions loaded: ' + JSON.stringify(versions));
         callback(versions);
@@ -380,7 +379,7 @@ function loadVersions(callback) {
 function createVersion(version, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://localhost:8080/versions',
+        url: 'http://25.76.106.32:8080/versions',
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -396,7 +395,7 @@ function createVersion(version, callback) {
 function updateVersion(version) {
     $.ajax({
         method: 'PUT',
-        url: 'http://localhost:8080/versions/' + version.id,
+        url: 'http://25.76.106.32:8080/versions/' + version.id,
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -411,7 +410,7 @@ function updateVersion(version) {
 function deleteVersion(versionId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://localhost:8080/versions/' + versionId
+        url: 'http://25.76.106.32:8080/versions/' + versionId
     }).done(function (version) {
         console.log("Deleted version " + versionId)
     })
@@ -446,6 +445,90 @@ loadVersions(function (versions) {
 	}
 });
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// GRUPOS	 ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//Load grupos from server
+function loadGrupos(callback) {
+ $.ajax({
+     url: 'http://25.76.106.32:8080/grupos'
+ }).done(function (versions) {
+     //console.log('Versions loaded: ' + JSON.stringify(grupos));
+     callback(grupos);
+ })
+}
+
+//Create grupo in server
+function createGrupo(grupo, callback) {
+ $.ajax({
+     method: "POST",
+     url: 'http://25.76.106.32:8080/grupos',
+     data: JSON.stringify(grupo),
+     processData: false,
+     headers: {
+         "Content-Type": "application/json"
+     }
+ }).done(function (grupo) {
+     console.log("Grupo created: " + JSON.stringify(grupo));
+     callback(grupo);
+ })
+}
+
+//Update grupo in server
+function updateGrupo(grupo) {
+ $.ajax({
+     method: 'PUT',
+     url: 'http://25.76.106.32:8080/grupos/' + grupo.id,
+     data: JSON.stringify(grupo),
+     processData: false,
+     headers: {
+         "Content-Type": "application/json"
+     }
+ }).done(function (grupo) {
+     console.log("Updated grupo: " + JSON.stringify(grupo))
+ })
+}
+
+//Delete grupo from server
+function deleteGrupo(grupoId) {
+ $.ajax({
+     method: 'DELETE',
+     url: 'http://25.76.106.32:8080/grupos/' + grupoId
+ }).done(function (grupo) {
+     console.log("Deleted grupo " + grupoId)
+ })
+}
+
+//Show grupo in page
+function showGrupo(grupo) {
+
+ $('#info').append(
+     '<div id="grupo-' + grupo.id + '</div>')
+}
+
+$(document).ready(function () {
+	$("#crearGrupo").click(function () {	
+		
+	
+	    var grupo = {
+	        usuario1: usuario,
+	        usuario2: '',
+	        usuario3: ''
+	    }
+	    
+	    console.log(grupo);
+	    
+	    invitar = true;
+	    document.getElementById("constant").innerHTML = "Usuarios Conectados";
+	
+	    createGrupo(grupo, function (grupoWithId) { });
+	})
+})
+
+
 function hereIam() {
 	setTimeout(function(){
 		t++;
@@ -453,9 +536,14 @@ function hereIam() {
 			t = 0;
 		}
     	loadItems(function (items) {
-    		document.getElementById("info").innerHTML = "";
-            for (var i = 0; i < items.length; i++) {
-            	showItem(items[i]);
+    		document.getElementById("info").innerHTML = '';
+    		
+        	//console.log("hola");
+    		for (var i = 0; i < items.length; i++) {
+            	//console.log(document.getElementById("item-" + items[i].id).innerHTML);
+            	
+            	//document.getElementById("item-" + items[i].id).innerHTML = '';
+            	if (invitar) showItem(items[i]);
                 if (items[i].description == usuario) {
                 	items[i].checked = true;
                     updateItem(items[i]);
@@ -474,7 +562,7 @@ function hereIam() {
                 for (var i = 0; i < items.length; i++) {
                     //showItem(items[i]);
                     if (!items[i].checked) {
-                    	setTimeout(disconect(items[i]), 555);
+                    	setTimeout(disconect(items[i]), 30555);
                     }
                     items[i].checked = false;
                     updateItem(items[i]);
@@ -489,7 +577,7 @@ function checkUsers() {
     setTimeout(function(){
     	loadItems(function (items) {
             //When items are loaded from server
-    		document.getElementById("info").innerHTML = "";
+    		//document.getElementById("info").innerHTML = '<li class="nav-item" style="margin-left: -205px"><button class="btn btn-link text-white" id="sidebarToggle"><i class="fa fa-user fa-lg"></i></button></li>	<li class="nav-item active"><a class="nav-link"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Usuarios Conectados</span></a></li>';
             for (var i = 0; i < items.length; i++) {
                 showItem(items[i]);
                 if (!items[i].checked) {
