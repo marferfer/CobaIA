@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CobaIA</title> 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+        <!-----------------------LIBRERIAS---------------------------->
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+        <script src="librerias/phaser.min.js"></script>
+        <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
+        <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+        
+
+
+        <!-----------------------ARCHIVOS JUEGO---------------------------->
+
+        
+       <script src="js/menu.js"></script>
+       <script src="js/controles.js"></script>
+       <script src="js/personajes.js"></script>
+
+        
+        <script src="js/final.js"></script>
+        <script src="js/variables.js"></script>
+        <script src="js/entidades.js"></script>
+        <script src="js/entorno.js"></script>
+        <script src="js/entornoP.js"></script>
+        <script src="js/entornoN2.js"></script>
+        <script src="js/interaccion.js"></script>
+        <script src="js/interaccionP.js"></script>
+        <script src="js/interaccionN2.js"></script>
+        <script src="js/juego.js"></script>
+
+                
+
+        <style>
+            .formulario {
+                margin: 370px 700px;
+                position: absolute;
+
+            }
+
+            label{
+                color: white;
+            }
+
+            button{
+                width: 500px;
+            }
+            input{
+                width: 600px;
+            }
+            h1 {
+            	color: #FFF;
+            }
+            #conectados{
+                margin: 670px 1700px;
+                color: white;
+                position: absolute;
+            }
+        </style>
+    </head>
+
+
+    <body> <!--onload="nivel2()"-->
+        <div id="pantallaInicio" style="background-color: #000; opacity: 0.9; width: 1920px; height: 800px; position:absolute; ">
+        </div>
+        <div id="conectados" class="col-lg-12 col-md-12">
+        	<b>Usuarios conectados</b><br /> 
+        	
+    	</div>
+        <form class="formulario" >
+		    <div id='info'>
+		    </div>
+          <div class="form-group" >
+            <label for="exampleInputEmail1"  id="title">Antes de continuar, añada su nombre de usuario.</label>
+            <input type="email" class="form-control " id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre de usuario">
+          </div>
+                <br/>
+               <div class="boton"> 
+                  <button type="button" id="add-button" class="btn btn-success">Aceptar</button>
+              </div>
+
+        </form>
+    
+    </body>
+</html>
