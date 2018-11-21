@@ -4,7 +4,7 @@ NOMBRE DEL JUEGO:
 <b>CobaIA</b>
 
 
-<img src="imgs/Cobaya2.png" align="right">
+<img src="src/main/resources/static/imgs/Cobaya2.png" align="right">
 
 <h2>DESCRIPCIÓN DEL JUEGO:</h2>
 <p>El juego se plantea como una aventura de puzzles y plataformas cooperativa. Los personajes principales son tres cobayas sometidas a un experimento en el que tres IA han tomado control de sus cerebros.
@@ -43,7 +43,33 @@ Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños
 <h2> TUTORIAL: </h2>
 <p>El tutorial se hará mediante un primer nivel que permita a las CobaIAs experimentar con los distintos elmentos del juego.</p>
 
-<img src="imgs/chip.jpg" align="center">
+<img src="src/main/resources/static/imgs/chip.jpg" align="center">
+
+<h2> DIAGRAMA DE CLASES: </h2>
+<p>Se puede destacar 2 Controladores que se encargan de manejar las dos clases que utilizaremos en un futuro, Version e Item.
+  También mostrar que <b> Versiones e Item heredan de los controladores</b>. No hemos utilizado templates ni tampoco 
+  repositorios, ya que utilizamos una <b>colección</b> para guardar permanentemente los datos en la ejecución. </p>
+
+<img src="src/main/resources/static/imgs/readme/diagramaclases.jpeg" align="center">
+
+<h2> DIAGRAMA DE CLASES: </h2>
+
+<p>Lo primero que encontraremos será el <b>Inicio de Sesión</b>. En él podremos guardar nuestro nombre de usuario y ver 
+los usuarios que hay conectados en la parte lateral izquierda</p>
+<img src="src/main/resources/static/imgs/readme/00.jpeg" align="center">
+Menu Principal
+<img src="src/main/resources/static/imgs/readme/01.png" align="center">
+Menú Controles
+<img src="src/main/resources/static/imgs/readme/02.jpeg" align="center">
+Elegir Cobaya
+<img src="src/main/resources/static/imgs/readme/03.jpeg" align="center">
+Gameplay
+<img src="src/main/resources/static/imgs/readme/04.jpeg" align="center">
+Gracias por Jugar
+<img src="src/main/resources/static/imgs/readme/05.jpeg" align="center">
+
+
+
 
 <h2>REFERENCIAS:</h2>
 <p>Hollow Knight, Inside, Ori Blind Forest.</p>
