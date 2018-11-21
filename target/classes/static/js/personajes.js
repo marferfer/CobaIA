@@ -39,7 +39,7 @@ function create6() {
 
     button = jugPersonajes.add.button(jugPersonajes.world.centerX - 110, 550, 'button', actionOnClickGame, this, 2, 1, 0);
 
-    buttonExit = jugPersonajes.add.button(jugPersonajes.world.centerX - 760, 130, 'buttonVolver', actionOnClickVolver, this, 2, 1, 0); //jugPersonajes.world.centerX - 320, 550
+    buttonExit = jugPersonajes.add.button(jugPersonajes.world.centerX - 760, 130, 'buttonVolver', actionOnClickVolverMenu, this, 2, 1, 0); //jugPersonajes.world.centerX - 320, 550
 
     button.onInputOver.add(over, this);
     button.onInputOut.add(out, this);
@@ -76,7 +76,7 @@ function out() {
 }
 
 
-function actionOnClickVolver () {
+function actionOnClickVolverMenu () {
     //background.visible = false;
     jugPersonajes.destroy();
     nivel0off = true;
