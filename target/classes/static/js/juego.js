@@ -178,7 +178,7 @@ var invitar = false;
 //Load items from server
 function loadItems(callback) {
     $.ajax({
-        url: 'http://10.10.144.145:8080/items'
+        url: 'http://localhost:8080/items'
     }).done(function (items) {
         //console.log('Items loaded: ' + JSON.stringify(items));
         callback(items);
@@ -189,7 +189,7 @@ function loadItems(callback) {
 function createItem(item, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://10.10.144.145:8080/items',
+        url: 'http://localhost:8080/items',
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -205,7 +205,7 @@ function createItem(item, callback) {
 function updateItem(item) {
     $.ajax({
         method: 'PUT',
-        url: 'http://10.10.144.145:8080/items/' + item.id,
+        url: 'http://localhost:8080/items/' + item.id,
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -220,7 +220,7 @@ function updateItem(item) {
 function deleteItem(itemId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://10.10.144.145:8080/items/' + itemId
+        url: 'http://localhost:8080/items/' + itemId
     }).done(function (item) {
         console.log("Deleted item " + itemId)
     })
@@ -368,7 +368,7 @@ var cobaIAversion = "1.6";
 //Load VERSIONS from server
 function loadVersions(callback) {
     $.ajax({
-        url: 'http://10.10.144.145:8080/versions'
+        url: 'http://localhost:8080/versions'
     }).done(function (versions) {
         //console.log('Versions loaded: ' + JSON.stringify(versions));
         callback(versions);
@@ -379,7 +379,7 @@ function loadVersions(callback) {
 function createVersion(version, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://10.10.144.145:8080/versions',
+        url: 'http://localhost:8080/versions',
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -395,7 +395,7 @@ function createVersion(version, callback) {
 function updateVersion(version) {
     $.ajax({
         method: 'PUT',
-        url: 'http://10.10.144.145:8080/versions/' + version.id,
+        url: 'http://localhost:8080/versions/' + version.id,
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -410,7 +410,7 @@ function updateVersion(version) {
 function deleteVersion(versionId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://10.10.144.145:8080/versions/' + versionId
+        url: 'http://localhost:8080/versions/' + versionId
     }).done(function (version) {
         console.log("Deleted version " + versionId)
     })
@@ -454,7 +454,7 @@ loadVersions(function (versions) {
 //Load grupos from server
 function loadGrupos(callback) {
  $.ajax({
-     url: 'http://10.10.144.145:8080/grupos'
+     url: 'http://localhost:8080/grupos'
  }).done(function (versions) {
      //console.log('Versions loaded: ' + JSON.stringify(grupos));
      callback(grupos);
@@ -465,7 +465,7 @@ function loadGrupos(callback) {
 function createGrupo(grupo, callback) {
  $.ajax({
      method: "POST",
-     url: 'http://10.10.144.145:8080/grupos',
+     url: 'http://localhost:8080/grupos',
      data: JSON.stringify(grupo),
      processData: false,
      headers: {
@@ -481,7 +481,7 @@ function createGrupo(grupo, callback) {
 function updateGrupo(grupo) {
  $.ajax({
      method: 'PUT',
-     url: 'http://10.10.144.145:8080/grupos/' + grupo.id,
+     url: 'http://localhost:8080/grupos/' + grupo.id,
      data: JSON.stringify(grupo),
      processData: false,
      headers: {
@@ -496,7 +496,7 @@ function updateGrupo(grupo) {
 function deleteGrupo(grupoId) {
  $.ajax({
      method: 'DELETE',
-     url: 'http://10.10.144.145:8080/grupos/' + grupoId
+     url: 'http://localhost:8080/grupos/' + grupoId
  }).done(function (grupo) {
      console.log("Deleted grupo " + grupoId)
  })

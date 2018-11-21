@@ -92,11 +92,123 @@ h1 {
 
 #wrapper {
 	position: absolute;
-	max-height: 800px;
+	height: 720px;
 }
 #info {
 	margin: 80px 0px;
 }
+
+#live-chat {
+    margin-top: 375px;
+    font-size: 12px;
+    margin-left: 1605px;
+    position: absolute;
+    width: 300px;
+}
+
+#live-chat header {
+    background: #293239;
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+    cursor: pointer;
+    padding: 16px 24px;
+}
+
+#live-chat h4:before {
+    background: #1a8a34;
+    border-radius: 50%;
+    content: "";
+    display: inline-block;
+    height: 8px;
+    margin: 0 8px 0 0;
+    width: 8px;
+}
+
+#live-chat h4 {
+    font-size: 12px;
+}
+
+#live-chat h5 {
+    font-size: 10px;
+}
+
+#live-chat form {
+    padding: 24px;
+}
+
+#live-chat input[type="text"] {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 8px;
+    outline: none;
+    width: 234px;
+}
+
+.chat-message-counter {
+    background: #e62727;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    display: none;
+    font-size: 12px;
+    font-weight: bold;
+    height: 28px;
+    left: 0;
+    line-height: 28px;
+    margin: -15px 0 0 -15px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 28px;
+}
+
+.chat-close {
+    background: #1b2126;
+    border-radius: 50%;
+    color: #fff;
+    display: block;
+    float: right;
+    font-size: 10px;
+    height: 16px;
+    line-height: 16px;
+    margin: 2px 0 0 0;
+    text-align: center;
+    width: 16px;
+}
+
+.chat {
+    background: #fff;
+}
+
+.chat-history {
+    height: 252px;
+    padding: 8px 24px;
+    overflow-y: scroll;
+}
+
+.chat-message {
+    margin: 16px 0;
+}
+
+.chat-message img {
+    border-radius: 50%;
+    float: left;
+}
+
+.chat-message-content {
+    margin-left: 56px;
+}
+
+.chat-time {
+    float: right;
+    font-size: 10px;
+}
+
+.chat-feedback {
+    font-style: italic;
+    margin: 0 0 0 80px;
+}
+
+
 </style>
 </head>
 
@@ -108,25 +220,27 @@ h1 {
 	</div>
 
 	<div id="wrapper">
-
+	<div style="background-color: #212529; position:absolute; max-width: 100px; margin-top: 30px;">
+            <button class="btn btn-link text-white"  id="sidebarToggle"> <!--<span class="col-lg-8">USUARIOS CONECTADOS</span>-->
+                <i class="fa fa-user fa-2x " style="margin-left: -405px;"></i>
+            </button>
+        </div>
 
 
 
 		<ul class="sidebar navbar-nav">
-			<li class="nav-item" style="margin-left: -205px">
-				<button class="btn btn-link text-white" id="sidebarToggle">
-					<i class="fa fa-user fa-lg"></i>
-				</button>
-			</li>
 			<li class="nav-item active"><a class="nav-link"> <i
 					class="fas fa-fw fa-tachometer-alt"></i> <span id="constant"></span>
 			</a></li>
-			<div class="grupo">
-			<button type="button" id="crearGrupo" class="btn btn-success">Crear
-					Grupo</button>
-			</div>
+			<li class="nav-item active"><a class="nav-link">
+                <div class="grupo">
+                <button type="button" id="crearGrupo" style="visibility: visible;" class="btn btn-success">Crear
+                        Grupo</button>
+                </div>
+                </a>
+            </li>
 		</ul>
-		<ul id="info" class="sidebar navbar-nav">
+		<ul id="info" style="margin-top:100px" class="sidebar navbar-nav">
 			
 		</ul>
 
@@ -148,7 +262,99 @@ h1 {
 
 	</form>
 
+	<div id="live-chat">
+
+        <header class="clearfix">
+
+            <a href="#" class="chat-close">x</a>
+
+            <h4>John Doe</h4>
+
+            <span class="chat-message-counter">3</span>
+
+        </header>
+
+	<div class="chat">
+
+            <div class="chat-history">
+
+                <div class="chat-message clearfix">
+
+                    <img src="http://lorempixum.com/32/32/people" alt="" width="32" height="32">
+
+                    <div class="chat-message-content clearfix">
+
+                        <span class="chat-time">13:35</span>
+
+                        <h5>John Doe</h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, explicabo quasi ratione odio dolorum harum.</p>
+
+                    </div> <!-- end chat-message-content -->
+
+                </div> <!-- end chat-message -->
+
+                <hr>
+
+                <div class="chat-message clearfix">
+
+                    <img src="http://gravatar.com/avatar/2c0ad52fc5943b78d6abe069cc08f320?s=32" alt="" width="32" height="32">
+
+                    <div class="chat-message-content clearfix">
+
+                        <span class="chat-time">13:37</span>
+
+                        <h5>Marco Biedermann</h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, nulla accusamus magni vel debitis numquam qui tempora rem voluptatem delectus!</p>
+
+                    </div> <!-- end chat-message-content -->
+
+                </div> <!-- end chat-message -->
+
+                <hr>
+                
+                <div class="chat-message clearfix">
+
+                    <img src="http://lorempixum.com/32/32/people" alt="" width="32" height="32">
+
+                    <div class="chat-message-content clearfix">
+
+                        <span class="chat-time">13:38</span>
+
+                        <h5>John Doe</h5>
+
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
+
+                    </div> <!-- end chat-message-content -->
+
+                </div> <!-- end chat-message -->
+
+                <hr>
+
+            </div> <!-- end chat-history -->
+
+            <p class="chat-feedback">Your partner is typing…</p>
+
+            <form action="#" method="post">
+
+                <fieldset>
+
+                    <input type="text" placeholder="Type your message…" autofocus>
+                    <input type="hidden">
+
+                </fieldset>
+
+            </form>
+
+        </div> <!-- end chat -->
+
+    </div> <!-- end live-chat -->
+
 	<script type="text/javascript">
+	
+			var visible;
+			
 	        (function($) {
 	          "use strict"; // Start of use strict
 	
@@ -157,7 +363,22 @@ h1 {
 	            e.preventDefault();
 	            $("body").toggleClass("sidebar-toggled");
 	            $(".sidebar").toggleClass("toggled");
+	            visible = document.getElementById("crearGrupo");
+                console.log(visible);
+                if(visible.style.visibility==="hidden"){
+                      document.getElementById("crearGrupo").style.visibility = "visible";
+                  }else{
+                      document.getElementById("crearGrupo").style.visibility = "hidden";
+                  }
 	          });
+	          
+	          $('.chat-close').on('click', function(e) {
+
+                  e.preventDefault();
+                  $('#live-chat').fadeOut(300);
+
+              });
+	          
 	        })(jQuery); // End of use strict
 	    </script>
 
