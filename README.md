@@ -56,7 +56,8 @@ Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños
 
 <p>Lo primero que encontraremos será el <b>Inicio de Sesión</b>. En él podremos guardar nuestro nombre de usuario y ver 
 los usuarios que hay conectados en la parte lateral izquierda. Se deberá hacer un grupo para poder jugar 3 personas, dandole
-al boton izquierdo inferior.</p>
+al boton izquierdo inferior. Si se pincha en el boton de arriba de usuario, el menu lateral se hará más pequeño y podremos
+acceder al botón jugar.</p>
 <img src="src/main/resources/static/imgs/readme/00.jpeg" align="center">
 <p>A continuación veremos el <b>Menu Principal</b>, donde se apreciará tres opciones a elegir, 1. Jugar, 2.Controles, 3.Salir.</p>
 <img src="src/main/resources/static/imgs/readme/01.png" align="center">
