@@ -60,7 +60,7 @@ al boton izquierdo inferior.</p>
 <img src="src/main/resources/static/imgs/readme/00.jpeg" align="center">
 <p>A continuación veremos el <b>Menu Principal</b>, donde se apreciará tres opciones a elegir, 1. Jugar, 2.Controles, 3.Salir.</p>
 <img src="src/main/resources/static/imgs/readme/01.png" align="center">
-<p>Si pinchamos en <b>Controles</b>podremos ver dos imagenes donde se mostrarán todos los controles necesarios para jugar, y los
+<p>Si pinchamos en <b>Controles </b>podremos ver dos imagenes donde se mostrarán todos los controles necesarios para jugar, y los
 perifericos que se pueden utilizar. Si se pincha en volver, retrocederemos al menu principal. </p>
 <img src="src/main/resources/static/imgs/readme/02.jpeg" align="center">
 <p>Una vez accedido a la opción Jugar, te saldrá un menu de <b>Elegir personaje</b> para que cada jugador pueda elegir su personaje favorito. </p>
