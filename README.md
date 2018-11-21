@@ -52,24 +52,27 @@ Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños
 
 <img src="src/main/resources/static/imgs/readme/diagramaclases.jpeg" align="center">
 
-<h2> DIAGRAMA DE CLASES: </h2>
+<h2> SISTEMA DE NAVEGACIÓN: </h2>
 
 <p>Lo primero que encontraremos será el <b>Inicio de Sesión</b>. En él podremos guardar nuestro nombre de usuario y ver 
-los usuarios que hay conectados en la parte lateral izquierda</p>
+los usuarios que hay conectados en la parte lateral izquierda. Se deberá hacer un grupo para poder jugar 3 personas, dandole
+al boton izquierdo inferior.</p>
 <img src="src/main/resources/static/imgs/readme/00.jpeg" align="center">
-Menu Principal
+<p>A continuación veremos el <b>Menu Principal</b>, donde se apreciará tres opciones a elegir, 1. Jugar, 2.Controles, 3.Salir.</p>
 <img src="src/main/resources/static/imgs/readme/01.png" align="center">
-Menú Controles
+<p>Si pinchamos en <b>Controles</b>podremos ver dos imagenes donde se mostrarán todos los controles necesarios para jugar, y los
+perifericos que se pueden utilizar. Si se pincha en volver, retrocederemos al menu principal. </p>
 <img src="src/main/resources/static/imgs/readme/02.jpeg" align="center">
-Elegir Cobaya
+<p>Una vez accedido a la opción Jugar, te saldrá un menu de <b>Elegir personaje</b> para que cada jugador pueda elegir su personaje favorito. </p>
 <img src="src/main/resources/static/imgs/readme/03.jpeg" align="center">
-Gameplay
+<p>Como ya se mostró en la fase anterior, el gameplay, donde se podrá jugar al videojuego.</p>
 <img src="src/main/resources/static/imgs/readme/04.jpeg" align="center">
-Gracias por Jugar
+<p>En caso de que se supere el videojuego, saldrá un mensaje de gracias por jugar, y se reiniciará el juego</p>
 <img src="src/main/resources/static/imgs/readme/05.jpeg" align="center">
 
-
-
+<h2>INSTRUCCIONES PRECISAS PARA EJECUTAR LA APLICACION:</h2>
+<p>Para ejecutar la aplicación basta sencillamente con ir a la consola de comandos de Windows y movernos a la carpeta contenedora del jar (CobaIA/target/) y ejecutar la línea de comando "java -jar items-backend-and-frontend-0.0.1-SNAPSHOT.jar".</p>
+<p>Para acceder a la aplicación basta con introducir en el navegador la url "localhost:8080" y ya podremos empezar a jugar.</p>
 
 <h2>REFERENCIAS:</h2>
 <p>Hollow Knight, Inside, Ori Blind Forest.</p>
@@ -78,11 +81,6 @@ Gracias por Jugar
 - Nombre: Mario Fernández Fernández	
 - E-mail: m.fernandezfer.2016@alumnos.urjc.es
 - Enlace GitHub: https://github.com/marferfer 
-
-
-- Nombre: Francisco José La Banda Vallés
-- E-mail: fj.labanda.2016@alumnos.urjc.es
-- Enlace GitHub: https://github.com/kikasolul 
 
 - Nombre: Luis Betancourt Ortega
 - E-mail: le.betancourt@alumnos.urjc.es
@@ -97,4 +95,4 @@ https://trello.com/b/ONtmcols/juegosenred
 
 <h3>Todos los derechos reservados</h3>
 
-<img src="imgs/H-MEN_logo.png"> 
+<img src="src/main/resources/static/imgs/H-MEN_logo.png"> 
