@@ -305,6 +305,9 @@ $(document).ready(function () {
         loadItems(function (items) {
     		console.log("Entra en loadItems");
     		console.log("value: " + value);
+    		//Usuario = nombre introducido
+    		
+    		document.getElementById("nombreChat").innerHTML = "<h4 >"+value+"</h4 >";
     		
     		if(items.length == 0){
     			
@@ -355,6 +358,8 @@ $(document).ready(function () {
 	                }
 	            }
             }
+    		
+    		
         })  
     })
 })
