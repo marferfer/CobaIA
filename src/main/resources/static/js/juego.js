@@ -166,6 +166,7 @@ hereIam();
 
 var usuario = '';
 var conectado = false;
+var userRepeated = false;
 
 var t = 0;
 
@@ -305,7 +306,6 @@ $(document).ready(function () {
         loadItems(function (items) {
     		console.log("Entra en loadItems");
     		console.log("value: " + value);
-    		//Usuario = nombre introducido
     		
     		document.getElementById("nombreChat").innerHTML = "<h4 >"+value+"</h4 >";
     		
@@ -326,8 +326,15 @@ $(document).ready(function () {
                 element3.parentNode.removeChild(element3);
                 
                 usuario = value;
+                if (usuario == "admin") {
+        			checkUsers();
+        		}
     		
-    		}else{
+    		}
+    		
+    		else {
+            	
+            	userRepeated = false;
     		
 	            for (var i = 0; i < items.length; i++) {
 	            	
@@ -337,30 +344,32 @@ $(document).ready(function () {
 								
 	                	console.log("usuario repetido");
 	                	
-	                	
-	                }else{
-	                	
-	                	createItem(item, function (itemWithId) {
-	                        //When item with id is returned from server
-	                		if (invitar) showItem(itemWithId);
-	                    });
-	                
-	                    var element = document.getElementById("exampleInputEmail1");
-	                    element.parentNode.removeChild(element);
-	                    var element1 = document.getElementById("add-button");
-	                    element1.parentNode.removeChild(element1);
-	                    var element2 = document.getElementById("title");
-	                    element2.parentNode.removeChild(element2);
-	                    var element3 = document.getElementById("pantallaInicio");
-	                    element3.parentNode.removeChild(element3);
-	                    
-	                    usuario = value;
+	                	userRepeated = true;	                	
 	                }
 	            }
+	            if (!userRepeated) {
+                	
+                	createItem(item, function (itemWithId) {
+                        //When item with id is returned from server
+                		if (invitar) showItem(itemWithId);
+                    });
+                
+                    var element = document.getElementById("exampleInputEmail1");
+                    element.parentNode.removeChild(element);
+                    var element1 = document.getElementById("add-button");
+                    element1.parentNode.removeChild(element1);
+                    var element2 = document.getElementById("title");
+                    element2.parentNode.removeChild(element2);
+                    var element3 = document.getElementById("pantallaInicio");
+                    element3.parentNode.removeChild(element3);
+                    
+                    usuario = value;
+                    if (usuario == "admin") {
+            			checkUsers();
+            		}
+                }
             }
-    		
-    		
-        })  
+        })
     })
 })
 
@@ -534,20 +543,34 @@ $(document).ready(function () {
 })
 
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ADMIN	 //////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function checkUsers() {
+	setTimeout(function(){
+		loadItems(function (items) {
+            for (var i = 0; i < items.length; i++) {
+            	if (items[i].checked === false) {
+            		//deleteItem(items[i].id);
+            		setTimeout(disconnect(items[i].description), 1000);
+            	}
+            	else {
+            		items[i].checked = false;
+            		updateItem(items[i]);
+            	}
+            }
+        });
+		console.log(usuario);
+        checkUsers();
+    }, 1000);
+}
+
 function hereIam() {
 	setTimeout(function(){
-		t++;
-		if (t > 100) {
-			t = 0;
-		}
     	loadItems(function (items) {
     		document.getElementById("info").innerHTML = '';
-    		
-        	//console.log("hola");
     		for (var i = 0; i < items.length; i++) {
-            	//console.log(document.getElementById("item-" + items[i].id).innerHTML);
-            	
-            	//document.getElementById("item-" + items[i].id).innerHTML = '';
             	if (invitar) showItem(items[i]);
                 if (items[i].description == usuario) {
                 	items[i].checked = true;
@@ -560,43 +583,16 @@ function hereIam() {
     			location.reload();
     		}
     	});
-    	if (t == 100) {
-    		loadItems(function (items) {
-                //When items are loaded from server
-        		//document.getElementById("info").innerHTML = "";
-                for (var i = 0; i < items.length; i++) {
-                    //showItem(items[i]);
-                    if (!items[i].checked) {
-                    	setTimeout(disconect(items[i]), 30555);
-                    }
-                    items[i].checked = false;
-                    updateItem(items[i]);
-                }
-            });
-    	}
         hereIam();
-    }, 10);
+    }, 750);
 }
 
-function checkUsers() {
-    setTimeout(function(){
-    	loadItems(function (items) {
-            //When items are loaded from server
-    		//document.getElementById("info").innerHTML = '<li class="nav-item" style="margin-left: -205px"><button class="btn btn-link text-white" id="sidebarToggle"><i class="fa fa-user fa-lg"></i></button></li>	<li class="nav-item active"><a class="nav-link"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>Usuarios Conectados</span></a></li>';
-            for (var i = 0; i < items.length; i++) {
-                showItem(items[i]);
-                if (!items[i].checked) {
-                	setTimeout(disconect(items[i]), 555);
-                }
-                items[i].checked = false;
-                updateItem(items[i]);
-            }
-        });
-        checkUsers();
-    }, 2000);
-}
-
-function disconect (item) {
-	console.log("hola");
-	if (!item.checked) deleteItem(item.id);
+function disconnect (description) {
+	loadItems(function (items) {
+		for (var i = 0; i < items.length; i++) {
+			if (items[i].description == description && !items[i].checked) {
+				deleteItem(items[i].id);
+			}
+		}
+	});
 }
