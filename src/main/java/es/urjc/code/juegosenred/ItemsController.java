@@ -18,12 +18,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.BufferedReader;
+
 @RestController
 @RequestMapping("/items")
 public class ItemsController {
 
 	Map<Long, Item> items = new ConcurrentHashMap<>(); 
 	AtomicLong nextId = new AtomicLong(0);
+	
+	
 	
 	@GetMapping
 	public Collection<Item> items() {
@@ -38,6 +45,41 @@ public class ItemsController {
 		item.setId(id);
 		items.put(id, item);
 
+		String ficheroUserAndPassword = "";
+		String lineaBR = "";
+		String usuarioNuevo = item.userAndPassword();
+		boolean listaVacia = false;
+		
+		try {
+			FileReader fr = new FileReader("usuarios.txt");
+			BufferedReader br = new BufferedReader(fr);
+			while( (lineaBR = br.readLine()) != null) {
+				ficheroUserAndPassword += lineaBR + "\r\n";
+			}
+			br.close();
+			
+		}catch(IOException ex) {
+			
+			System.out.println("No esta creado el fichero usuarios.txt");
+			listaVacia = true;
+		}
+		
+		try {
+			
+			FileWriter fw = new FileWriter("usuarios.txt");
+			if(listaVacia) {
+				
+				fw.write(usuarioNuevo);
+				listaVacia = false;
+				
+			}else {
+				
+				fw.write(ficheroUserAndPassword + usuarioNuevo);
+			}
+			fw.close();
+			
+		}catch(Exception ex) { ex.printStackTrace();}
+		
 		return item;
 	}
 

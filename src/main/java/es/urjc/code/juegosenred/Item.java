@@ -5,6 +5,7 @@ public class Item {
 	private long id;
 	private String description;
 	private boolean checked;
+	private String password;
 
 	public Item() {
 	}
@@ -32,7 +33,19 @@ public class Item {
 	public void setChecked(boolean checked) {
 		this.checked = checked;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
+	public String userAndPassword() {
+		return "User: " + description + " " + "Password: " + password;
+	}
+	
 	@Override
 	public String toString() {
 		return "Item [id=" + id + ", description=" + description + ", checked=" + checked + "]";
