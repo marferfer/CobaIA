@@ -53,15 +53,34 @@
 	margin: 370px 700px;
 	position: absolute;
 }
-
-#crearGrupo {
-	margin: 540px -5px;
-	position: absolute;
-	width: 110px;
-	text-align: left;
-	z-index: 20;
+.formularioSalas {
+    margin: 40px 300px;
+    position: absolute;
+    width: 1200px;
+    height: 500px;
 }
 
+.scrollTabla {
+    height: 500px;
+    overflow-y: scroll;
+}
+#cerrarTabla {
+	margin: -40px 0px;
+}
+#crearGrupo {
+	margin: 540px -25px;
+	position: absolute;
+	width: 110px;
+	text-align: center;
+	z-index: 20;
+}
+#entrarGrupo {
+	margin: 600px -25px;
+	position: absolute;
+	width: 110px;
+	text-align: center;
+	z-index: 20;
+}
 label {
 	color: white;
 }
@@ -95,9 +114,12 @@ h1 {
 	height: 720px;
 }
 #info {
-	margin: 80px 0px;
+	margin: 46px -56px;
 }
-
+#infoAux {
+	margin: 120px 0px;
+	position: absolute;
+}
 #live-chat {
     margin-top: 375px;
     font-size: 12px;
@@ -207,7 +229,30 @@ h1 {
     font-style: italic;
     margin: 0 0 0 80px;
 }
-
+#miCuenta {
+	color: #fff;
+	font-size: 20px;
+}
+#salas {
+	color: #fff;
+	font-size: 14px;
+	margin: 20px -37px;
+	position: absolute;
+	white-space: nowrap;
+	text-transform: capitalize;
+	font-weight: bold;
+}
+#miCuentaDiv {
+	z-index: 200;
+	margin: 40px 44px;
+	position: absolute;	
+}
+#btnEnter {
+	
+}
+body {
+    overflow:hidden;
+}
 
 </style>
 </head>
@@ -215,14 +260,24 @@ h1 {
 
 <body>
 	<!--onload="nivel2()"-->
+	<div id="miCuentaDiv" style="visibility: hidden;">
+		<p id="miCuenta"></p>
+		<p id="salas">Salas Disponibles</p>
+		<ul id="info">			
+		</ul>
+		<div class="grupo">
+	        <button type="button" id="crearGrupo" class="btn btn-success">Crear Sala</button>
+	        <button type="button" id="entrarGrupo" class="btn btn-success">Buscar Salas</button>
+	    </div>
+	</div>
 	<div id="pantallaInicio"
 		style="background-color: #000; opacity: 0.9; width: 1920px; height: 800px; position: absolute;">
 	</div>
-
+	
 	<div id="wrapper">
-	<div style="background-color: #212529; position:absolute; max-width: 100px; margin-top: 30px;">
+	<div style="background-color: #212529; position:absolute; max-width: 48px; margin-top: 30px;">
             <button class="btn btn-link text-white"  id="sidebarToggle"> <!--<span class="col-lg-8">USUARIOS CONECTADOS</span>-->
-                <i class="fa fa-user fa-2x " style="margin-left: -405px;"></i>
+                <i class="fa fa-user fa-2x " style="margin-left: -455px;"></i>
             </button>
         </div>
 
@@ -232,18 +287,10 @@ h1 {
 			<li class="nav-item active"><a class="nav-link"> <i
 					class="fas fa-fw fa-tachometer-alt"></i> <span id="constant"></span>
 			</a></li>
-			<li class="nav-item active"><a class="nav-link">
-                <div class="grupo">
-                <button type="button" id="crearGrupo" style="visibility: visible;" class="btn btn-success">Crear
-                        Grupo</button>
-                </div>
-                </a>
-            </li>
 		</ul>
-		<ul id="info" style="margin-top:100px" class="sidebar navbar-nav">
+		<ul id="infoAux" style="margin-top:80px" class="sidebar navbar-nav">
 			
 		</ul>
-
 	</div>
 
 	
@@ -251,19 +298,59 @@ h1 {
 		
 		<div class="form-group">
 			<label for="exampleInputEmail1" id="title">Antes de
-				continuar, añada su nombre de CobaIA.</label> <input type="email"
+				continuar, añada su nombre de usuario.</label> <input type="email"
 				class="form-control " id="exampleInputEmail1"
 				aria-describedby="emailHelp" placeholder="Nombre de usuario" >
-				<label for="passUser" id="contrasena">Añada una contraseña</label> <input type="password"
-                class="form-control " id="passUser"
-                placeholder="Contraseña">
 		</div>
 		<br />
 		<div class="boton">
 			<button type="button" id="add-button" class="btn btn-success">Aceptar</button>
 		</div>
-		
+
 	</form>
+	
+	<form id="formCreateGroup" class="formulario" style="visibility: hidden; width: 600px">
+
+        <div class="form-group col-lg-12" >
+            <label for="nombreSala" id="title">Añada el nombre de la Sala.</label> <input type="text"
+                class="form-control " id="nombreSala"
+                aria-describedby="emailHelp" placeholder="Nombre de Sala">
+
+        </div>
+          <div class="form-group">
+              <div class="col-lg-10" style="margin-left: 200px">
+                <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-success" id="publica">
+                    Pública
+                  </label>
+                  <label class="btn btn-success" id="privada">
+                    Privada
+                  </label>
+                </div>
+              </div>
+            </div>
+
+        <div class="form-group" id="password"></div>
+        <div class="botonCrearSala">
+            <button type="button" id="add-buttonCreateRoom" class="btn btn-success">Crear</button>
+        </div>
+        <div class="botonCrearSala">
+            <button onclick="volvermenuprincipal();" type="button" id="cancel" class="btn btn-danger">Cancelar</button>
+        </div>
+
+    </form>
+    
+    <form class="formularioSalas" style="visibility: hidden;" id="salasDisp">
+        <div class="jumbotron">
+        <div class="col-lg-12">
+              <button type="button" class="btn btn-danger btn-sm  float-right col-lg-1" id="cerrarTabla">X</button>
+            </div>
+          <h2 style="text-align: center">- Salas Disponibles -</h2>
+          <div id="tablaSalas" class="scrollTabla">
+          </div>
+        </div>
+
+    </form>
 
 	<div id="live-chat" style="visibility:'hidden'">
 
@@ -356,7 +443,8 @@ h1 {
 
 	<script type="text/javascript">
 	
-			var visible;
+			var btnvisible;
+			var miCuentaV;
 			
 	        (function($) {
 	          "use strict"; // Start of use strict
@@ -366,13 +454,13 @@ h1 {
 	            e.preventDefault();
 	            $("body").toggleClass("sidebar-toggled");
 	            $(".sidebar").toggleClass("toggled");
-	            visible = document.getElementById("crearGrupo");
-                console.log(visible);
-                if(visible.style.visibility==="hidden"){
-                      document.getElementById("crearGrupo").style.visibility = "visible";
-                  }else{
-                      document.getElementById("crearGrupo").style.visibility = "hidden";
-                  }
+	            miCuentaV = document.getElementById("miCuentaDiv");
+                if(miCuentaV.style.visibility==="visible"){
+                      document.getElementById("miCuentaDiv").style.visibility = "hidden";
+                }
+                else {
+                      document.getElementById("miCuentaDiv").style.visibility = "visible";
+                }              
 	          });
 	          
 	          $('.chat-close').on('click', function(e) {
@@ -382,7 +470,25 @@ h1 {
 
               });
 	          
+	          $("#privada").on('click',function(e) {
+                  e.preventDefault();
+                  document.getElementById("password").innerHTML = '<label for="passSala" id="title">Añada una contraseña para la Sala.</label> <input type="password" class="form-control " id="passSala" placeholder="Contraseña"> ';
+
+              });
+
+              $("#publica").on('click',function(e) {
+                  e.preventDefault();
+                  document.getElementById("password").innerHTML = '';
+              });
+	          
 	        })(jQuery); // End of use strict
+	        
+	        
+	        function volvermenuprincipal(){
+                document.getElementById("pantallaInicio").style.visibility = "hidden";
+                document.getElementById("formCreateGroup").style.visibility = "hidden";
+                //document.getElementById("crearGrupo").style.visibility = "visible";
+            }
 	    </script>
 
 

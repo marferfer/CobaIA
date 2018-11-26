@@ -6,6 +6,24 @@ public class Grupo {
 	private String usuario1;
 	private String usuario2;
 	private String usuario3;
+	private String nombre;
+	private String password;
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public Grupo() {
 	}

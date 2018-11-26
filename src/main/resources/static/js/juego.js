@@ -242,26 +242,33 @@ function showItem(item) {
         '<li onclick="llamarconsola()" id="item-"' + item.id + '" class="nav-item"><span>' + item.description + ' <i class="fa fa-send"></i></span></li>')
 }
 
+//Show user in page
+function showUser(item) {
+
+    var checked = '';
+    var style = '';
+
+    if (item.checked) {
+        checked = 'checked';
+        style = 'style="text-decoration:line-through"';
+    }
+
+    document.getElementById("miCuenta").innerHTML = "<span style='text-transform: capitalize'>" + item.description + "</span>";
+}
+
 function llamarconsola(){
 	console.log('hola');
 }
 
 $(document).ready(function () {
 
-    loadItems(function (items) {
-        //When items are loaded from server
-        for (var i = 0; i < items.length; i++) {
-            showItem(items[i]);
-        }
-    });
-
     var input = $('#exampleInputEmail1')
-    var input2 = $('#passUser')
     var info = $('#info')
 
     //Handle delete buttons
     $('li').click(function (event) {
     	console.log('hola');
+    	
     })
 
     //Handle items checkboxs
@@ -297,14 +304,11 @@ $(document).ready(function () {
     $("#add-button").click(function () {
 
         var value = input.val();
-        var value2 = input2.val();
         input.val(''); 
-        input2.val('');
 
         var item = {
             description: value,
-            checked: false,
-            password: value2
+            checked: false
         }
         
         loadItems(function (items) {
@@ -317,7 +321,7 @@ $(document).ready(function () {
     			
     			createItem(item, function (itemWithId) {
                     //When item with id is returned from server
-                    if (invitar) showItem(itemWithId);
+    				showUser(itemWithId);
                 });
             
                 var element = document.getElementById("exampleInputEmail1");
@@ -327,11 +331,7 @@ $(document).ready(function () {
                 var element2 = document.getElementById("title");
                 element2.parentNode.removeChild(element2);
                 var element3 = document.getElementById("pantallaInicio");
-                element3.parentNode.removeChild(element3);
-                var element4 = document.getElementById("contrasena");
-                element4.parentNode.removeChild(element4);
-                var element5 = document.getElementById("passUser");
-                element5.parentNode.removeChild(element5);
+                element3.style.visibility = "hidden";
                 
                 usuario = value;
                 if (usuario == "admin") {
@@ -359,7 +359,7 @@ $(document).ready(function () {
                 	
                 	createItem(item, function (itemWithId) {
                         //When item with id is returned from server
-                		if (invitar) showItem(itemWithId);
+                		showUser(itemWithId);
                     });
                 
                     var element = document.getElementById("exampleInputEmail1");
@@ -369,11 +369,7 @@ $(document).ready(function () {
                     var element2 = document.getElementById("title");
                     element2.parentNode.removeChild(element2);
                     var element3 = document.getElementById("pantallaInicio");
-                    element3.parentNode.removeChild(element3);
-                    var element4 = document.getElementById("contrasena");
-                    element4.parentNode.removeChild(element4);
-                    var element5 = document.getElementById("passUser");
-                    element5.parentNode.removeChild(element5);
+                    element3.style.visibility = "hidden";
                     
                     usuario = value;
                     if (usuario == "admin") {
@@ -481,7 +477,7 @@ loadVersions(function (versions) {
 function loadGrupos(callback) {
  $.ajax({
      url: 'http://localhost:8080/grupos'
- }).done(function (versions) {
+ }).done(function (grupos) {
      //console.log('Versions loaded: ' + JSON.stringify(grupos));
      callback(grupos);
  })
@@ -531,27 +527,160 @@ function deleteGrupo(grupoId) {
 //Show grupo in page
 function showGrupo(grupo) {
 
+document.getElementById("info").innerHTML = '';
+
+console.log(grupo);
+	
  $('#info').append(
-     '<div id="grupo-' + grupo.id + '</div>')
+		 '<li id="usuario1" class="nav-item"><span style="text-transform: capitalize">' + grupo.usuario1 + '</span></li>' +
+		 '<li id="usuario2" class="nav-item"><span style="text-transform: capitalize">' + grupo.usuario2 + '</span></li>' +
+		 '<li id="usuario2" class="nav-item"><span style="text-transform: capitalize">' + grupo.usuario3 + '</span></li>')
+}
+
+//Show grupos in page
+function showGrupos(grupos) {
+	var tabla = $("#tablaSalas");
+	tabla.empty();
+	for (var i = 0; i < grupos.length; i++) {
+		var size = 0;
+		if (grupos[i].usuario1 != '') size++;
+		if (grupos[i].usuario2 != '') size++;
+		if (grupos[i].usuario3 != '') size++;
+		tabla.append('<table class="table">' +
+			            '<thead class="thead-dark">' +
+				        '<tr>' +
+				          '<th scope="col" id="grupo-' + grupos[i].id + '">' + grupos[i].nombre + '</th>' +
+				          '<th scope="col" style="text-align: center;">' + size + '/3</th>' +
+				          '<th scope="col" style="text-align: right;"><button type="button" class="btn btn-success btn-sm col-lg-6" id="btnEnter">Entrar</button></th>' +
+				        '</tr>' +
+				      '</thead>' +
+				      '<hr/>' +
+				    '</table>'
+				);
+	}
 }
 
 $(document).ready(function () {
-	$("#crearGrupo").click(function () {	
+	var btn = document.getElementById("crearGrupo");
+	$("#crearGrupo").click(function () {     
 		
-	
-	    var grupo = {
-	        usuario1: usuario,
-	        usuario2: '',
-	        usuario3: ''
-	    }
-	    
-	    console.log(grupo);
-	    
-	    invitar = true;
-	    document.getElementById("constant").innerHTML = "Usuarios Conectados";
-	
-	    createGrupo(grupo, function (grupoWithId) { });
+        if (btn.innerHTML === "Crear Sala") {
+			document.getElementById("pantallaInicio").style.visibility = "visible";
+	        document.getElementById("formCreateGroup").style.visibility = "visible";
+	        document.getElementById("salasDisp").style.visibility = "hidden";
+        }        
+        else {
+        	
+        	loadGrupos(function (grupos) {
+        		for (var i = 0; i < grupos.length; i++) {
+        			if (grupos[i].usuario1 === usuario) {
+        				grupos[i].usuario1 = '';
+        				updateGrupo(grupos[i]);
+        			}
+        			else if (grupos[i].usuario2 === usuario) {
+        				grupos[i].usuario2 = '';
+        				updateGrupo(grupos[i]);
+        			}
+        			else if (grupos[i].usuario3 === usuario) {
+        				grupos[i].usuario3 = '';
+        				updateGrupo(grupos[i]);
+        			}
+        			document.getElementById("info").innerHTML = '';
+        			document.getElementById("salas").innerHTML = '';
+        			btn.className = "btn btn-success";
+                    btn.innerHTML = 'Crear Sala';
+        		}
+        	});
+        }
 	})
+	$("#add-buttonCreateRoom").click(function () {
+		var nameRepeated = false;
+		
+		var inputName = $('#nombreSala')
+		
+		loadGrupos(function (grupos) {
+			
+			var grupo;
+			
+			for (var i = 0; i < grupos.length; i++) {
+				if (grupos[i].nombre === inputName.val()) {
+					nameRepeated = true;
+				}
+			}
+		
+			if (nameRepeated) {
+				document.getElementById("title").innerHTML = '<span style="color:red"> <b>Nombre de sala ya en uso. Por favor, escoja un nuevo nombre.</b> </span>';
+			}
+			else {
+				if (document.getElementById("password").innerHTML != '') {
+					var inputPass = $('#passSala');
+					grupo = {
+					        usuario1: usuario,
+					        usuario2: '',
+					        usuario3: '',
+					        nombre: inputName.val(),
+					        password: inputPass.val()
+					}	
+				}
+				
+				else {
+					grupo = {
+				        usuario1: usuario,
+				        usuario2: '',
+				        usuario3: '',
+				        nombre: inputName.val(),
+				        password: ''
+				    }
+				}
+			    
+			    invitar = true;
+			    document.getElementById("salas").innerHTML = inputName.val();	
+			    createGrupo(grupo, function (grupoWithId) {
+			    	showGrupo(grupoWithId);
+			    });
+			    document.getElementById("pantallaInicio").style.visibility = "hidden";
+	            document.getElementById("formCreateGroup").style.visibility = "hidden";
+	            btn.className = "btn btn-danger";
+	            btn.innerHTML = 'Salir';
+			}	            
+		});
+	});
+	$("#entrarGrupo").click(function () {  
+		document.getElementById("pantallaInicio").style.visibility = "visible";
+        document.getElementById("salasDisp").style.visibility = "visible";
+        document.getElementById("formCreateGroup").style.visibility = "hidden";
+        loadGrupos(function (grupos) {
+        	showGrupos(grupos);
+        });
+	});
+	$("#cerrarTabla").click(function () {
+        var element6 = document.getElementById("pantallaInicio");
+        element6.style.visibility = "hidden";
+        var element5 = document.getElementById("salasDisp");
+        element5.style.visibility = "hidden";
+    });
+	$("#tablaSalas").click(function (event) {
+        var elem = $(event.target);
+        if (elem.is('button')) {
+            var itemDiv = elem.parent().parent().children();
+            var itemId = itemDiv[0].id.split('-')[1];
+            console.log(itemId);
+            loadGrupos(function (grupos) {
+            	for (var i = 0; i < grupos.length; i++) {
+            		if (grupos[i].id == itemId) {
+            			if (grupos[i].usuario2 === '') {
+	            			grupos[i].usuario2 = usuario;
+            			}
+            			else if (grupos[i].usuario3 === '') {
+            				grupos[i].usuario3 = usuario;
+            			}
+            			updateGrupo(grupos[i]);
+            			showGrupo(grupos[i]);
+            		}
+            	}
+            });
+        }
+    });
 })
 
 
@@ -581,9 +710,9 @@ function checkUsers() {
 function hereIam() {
 	setTimeout(function(){
     	loadItems(function (items) {
-    		document.getElementById("info").innerHTML = '';
+    		//document.getElementById("info").innerHTML = '';
     		for (var i = 0; i < items.length; i++) {
-            	if (invitar) showItem(items[i]);
+            	//if (invitar) showItem(items[i]);
                 if (items[i].description == usuario) {
                 	items[i].checked = true;
                     updateItem(items[i]);

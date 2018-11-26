@@ -3,10 +3,4 @@ User: B Password: null
 User: C Password: null
 User: D Password: null
 User: PruebaReinicioServidor Password: null
-User:  Password: null
-User: asdasd Password: null
-User: asdasdsa Password: null
-User: adsad Password: null
-User: wesrwerewr Password: null
-User: adasdasd Password: adasdasd
-User: asdsadsa Password: hjkhjkjhk
+User: hkd Password: null
