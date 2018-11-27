@@ -5,6 +5,8 @@ public class Chat {
 	private long id;
 	private String mensaje;
 	private String hora;
+	private String usuario;
+	private String sala;
 
 	public Chat() {
 	}
@@ -15,6 +17,22 @@ public class Chat {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+	
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}	
+
+	public String getSala() {
+		return sala;
+	}
+
+	public void setSala(String sala) {
+		this.sala = sala;
 	}
 
 	public String getmensaje() {

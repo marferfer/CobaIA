@@ -818,6 +818,67 @@ $(document).ready(function () {
 														'<hr>';
 })
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CHAT ///////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Load Chats from server
+function loadChats(callback) {
+    $.ajax({
+        url: 'http://localhost:8080/chats'
+    }).done(function (chats) {
+        //console.log('Chats loaded: ' + JSON.stringify(chats));
+        callback(chats);
+    })
+}
+
+//Create chat in server
+function createChat(chat, callback) {
+    $.ajax({
+        method: "POST",
+        url: 'http://localhost:8080/chats',
+        data: JSON.stringify(chat),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (chat) {
+        console.log("Chat created: " + JSON.stringify(chat));
+        callback(chat);
+    })
+}
+
+//Update chat in server
+function updateChat(chat) {
+    $.ajax({
+        method: 'PUT',
+        url: 'http://localhost:8080/chats/' + chat.id,
+        data: JSON.stringify(chat),
+        processData: false,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).done(function (chat) {
+        console.log("Updated chat: " + JSON.stringify(chat))
+    })
+}
+
+//Delete chat from server
+function deleteChat(chatId) {
+    $.ajax({
+        method: 'DELETE',
+        url: 'http://localhost:8080/chats/' + chatId
+    }).done(function (chat) {
+        console.log("Deleted chat " + chatId)
+    })
+}
+
+//Show chat in page
+function showChat(chat) {
+
+    $('#info').append(
+        '<div id="chat-' + chat.id + '</div>')
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // ADMIN	 //////////////////////////////////////////////////////////////////////////////////////////////////
