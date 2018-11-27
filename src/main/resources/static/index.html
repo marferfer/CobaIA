@@ -16,7 +16,6 @@
 <link href="librerias/css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
 <link rel="stylesheet" type="text/css" href="css/estilos.css">
 
 <script
@@ -50,6 +49,213 @@
 <script src="js/interaccionN2.js"></script>
 <script src="js/juego.js"></script>
 
+
+<style>
+.formulario {
+	margin: 370px 700px;
+	position: absolute;
+}
+.formularioSalas {
+    margin: 40px 300px;
+    position: absolute;
+    width: 1200px;
+    height: 500px;
+}
+
+.scrollTabla {
+    height: 500px;
+    overflow-y: scroll;
+}
+#cerrarTabla {
+	margin: -40px 0px;
+}
+#crearGrupo {
+	margin: 540px -25px;
+	position: absolute;
+	width: 110px;
+	text-align: center;
+	z-index: 20;
+}
+#entrarGrupo {
+	margin: 600px -25px;
+	position: absolute;
+	width: 110px;
+	text-align: center;
+	z-index: 20;
+}
+label {
+	color: white;
+}
+
+button {
+	width: 500px;
+}
+
+input {
+	width: 600px;
+}
+
+h1 {
+	color: #FFF;
+}
+
+#info {
+	margin: 320px 800px;
+	color: white;
+	position: absolute;
+}
+
+#conectados {
+	margin: 6px 1620px;
+	color: white;
+	position: absolute;
+}
+
+#wrapper {
+	position: absolute;
+	height: 720px;
+}
+#info {
+	margin: 46px -56px;
+}
+#infoAux {
+	margin: 120px 0px;
+	position: absolute;
+}
+#live-chat {
+    margin-top: 355px;
+    font-size: 12px;
+    margin-left: 1605px;
+    position: absolute;
+    width: 300px;
+}
+
+#live-chat header {
+    background: #293239;
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+    cursor: pointer;
+    padding: 16px 24px;
+}
+
+#live-chat h4:before {
+    background: #1a8a34;
+    border-radius: 50%;
+    content: "";
+    display: inline-block;
+    height: 8px;
+    margin: 0 8px 0 0;
+    width: 8px;
+}
+
+#live-chat h4 {
+    font-size: 12px;
+}
+
+#live-chat h5 {
+    font-size: 10px;
+}
+
+#live-chat form {
+    padding: 24px;
+}
+
+#live-chat input[type="text"] {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 8px;
+    outline: none;
+    width: 234px;
+}
+
+.chat-message-counter {
+    background: #e62727;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    display: none;
+    font-size: 12px;
+    font-weight: bold;
+    height: 28px;
+    left: 0;
+    line-height: 28px;
+    margin: -15px 0 0 -15px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 28px;
+}
+
+.chat-close {
+    background: #1b2126;
+    border-radius: 50%;
+    color: #fff;
+    display: block;
+    float: right;
+    font-size: 10px;
+    height: 16px;
+    line-height: 16px;
+    margin: 2px 0 0 0;
+    text-align: center;
+    width: 16px;
+}
+
+.chat {
+    background: #fff;
+}
+
+.chat-history {
+    height: 252px;
+    padding: 8px 24px;
+    overflow-y: scroll;
+}
+
+.chat-message {
+    margin: 16px 0;
+}
+
+.chat-message img {
+    border-radius: 50%;
+    float: left;
+}
+
+.chat-message-content {
+    margin-left: 56px;
+}
+
+.chat-time {
+    float: right;
+    font-size: 10px;
+}
+
+.chat-feedback {
+    font-style: italic;
+    margin: 0 0 0 80px;
+}
+#miCuenta {
+	color: #fff;
+	font-size: 20px;
+}
+#salas {
+	color: #fff;
+	font-size: 14px;
+	margin: 20px -37px;
+	position: absolute;
+	white-space: nowrap;
+	text-transform: capitalize;
+	font-weight: bold;
+}
+#miCuentaDiv {
+	z-index: 200;
+	margin: 40px 44px;
+	position: absolute;	
+}
+#btnEnter {
+	
+}
+body {
+    overflow:hidden;
+}
+</style>
 </head>
 
 
@@ -149,15 +355,6 @@
         </div>
 
     </form>
-    
-    <div id="passSalas" style="visibility: hidden;">
-    	<label for="passUser" id="contrasenaDeSala">Esta sala es privada, escribe la contraseña</label> <input type="password"
-                class="form-control " id="passSalaPriv"
-                placeholder="Contraseña">
-        <div class="boton" id="btnPassSalas">
-			<button type="button" class="btn btn-success">Aceptar</button>
-		</div>
-    </div>
 
 	<div id="live-chat">
         <header class="clearfix">
