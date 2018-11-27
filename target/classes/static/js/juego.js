@@ -263,6 +263,7 @@ function llamarconsola(){
 $(document).ready(function () {
 
     var input = $('#exampleInputEmail1')
+    var input2 = $('#passUser')
     var info = $('#info')
 
     //Handle delete buttons
@@ -304,10 +305,13 @@ $(document).ready(function () {
     $("#add-button").click(function () {
 
         var value = input.val();
+        var value2 = input2.val();
         input.val(''); 
+        input2.val('');
 
         var item = {
             description: value,
+            password: value2,
             checked: false
         }
         
@@ -332,6 +336,11 @@ $(document).ready(function () {
                 element2.parentNode.removeChild(element2);
                 var element3 = document.getElementById("pantallaInicio");
                 element3.style.visibility = "hidden";
+                var element4 = document.getElementById("contrasena");
+                element4.parentNode.removeChild(element4);
+                var element5 = document.getElementById("passUser");
+                element5.parentNode.removeChild(element5);
+
                 
                 usuario = value;
                 if (usuario == "admin") {
@@ -354,7 +363,7 @@ $(document).ready(function () {
 	                	
 	                	userRepeated = true;	                	
 	                }
-	            }
+	            } 
 	            if (!userRepeated) {
                 	
                 	createItem(item, function (itemWithId) {
@@ -370,6 +379,11 @@ $(document).ready(function () {
                     element2.parentNode.removeChild(element2);
                     var element3 = document.getElementById("pantallaInicio");
                     element3.style.visibility = "hidden";
+                    var element4 = document.getElementById("contrasena");
+                    element4.parentNode.removeChild(element4);
+                    var element5 = document.getElementById("passUser");
+                    element5.parentNode.removeChild(element5); 
+
                     
                     usuario = value;
                     if (usuario == "admin") {

@@ -5,7 +5,7 @@ public class Version {
 	private long id;
 	private String description;
 
-	public Version() {
+	public Version() { 
 	}
 
 	public long getId() {

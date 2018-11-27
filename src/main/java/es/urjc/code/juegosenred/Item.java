@@ -19,7 +19,7 @@ public class Item {
 	}
 
 	public String getDescription() {
-		return description;
+		return description; 
 	}
 
 	public void setDescription(String description) {
@@ -51,4 +51,5 @@ public class Item {
 		return "Item [id=" + id + ", description=" + description + ", checked=" + checked + "]";
 	}
 
+	
 }
