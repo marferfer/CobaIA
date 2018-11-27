@@ -303,6 +303,20 @@ $(document).ready(function () {
         textSpan.css('text-decoration', style);
 
     })
+    
+    $("#btnRegistrarse").click(function () {
+    	var btn = document.getElementById("btnRegistrarse");
+    	if (btn.innerHTML == "Crear Cuenta") {
+    		btn.innerHTML = "Iniciar Sesión";
+    		document.getElementById("confirmPass").style.visibility = "visible";
+    		document.getElementById("confirmPass").style.display = "block";
+    	}
+    	else {
+    		btn.innerHTML = "Crear Cuenta";
+    		document.getElementById("confirmPass").style.visibility = "hidden";
+    		document.getElementById("confirmPass").style.display = "none";
+    	}
+    });
 
     //Handle add button
     $("#add-button").click(function () {
@@ -339,10 +353,15 @@ $(document).ready(function () {
                 element2.parentNode.removeChild(element2);
                 var element3 = document.getElementById("pantallaInicio");
                 element3.style.visibility = "hidden";
+                element3.style.zIndex = "2";
                 var element4 = document.getElementById("contrasena");
                 element4.parentNode.removeChild(element4);
                 var element5 = document.getElementById("passUser");
                 element5.parentNode.removeChild(element5);
+                var element6 = document.getElementById("btnRegistrarse");
+                element6.parentNode.removeChild(element6);
+                var element7 = document.getElementById("confirmPass");
+                element7.parentNode.removeChild(element7);
                 
    
                 usuario = value;
@@ -381,10 +400,15 @@ $(document).ready(function () {
                     element2.parentNode.removeChild(element2);
                     var element3 = document.getElementById("pantallaInicio");
                     element3.style.visibility = "hidden";
+                    element3.style.zIndex = "2";
                     var element4 = document.getElementById("contrasena");
                     element4.parentNode.removeChild(element4);
                     var element5 = document.getElementById("passUser");
                     element5.parentNode.removeChild(element5); 
+                    var element6 = document.getElementById("btnRegistrarse");
+                    element6.parentNode.removeChild(element6);
+                    var element7 = document.getElementById("confirmPass");
+                    element7.parentNode.removeChild(element7);
 
                     
                     usuario = value;

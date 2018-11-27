@@ -114,6 +114,7 @@ User: mario Password:
 User: tomas Password: 
 User: elGuiri Password: 
 User: rodri Password: 
+<<<<<<< Updated upstream
 User: Juan Manuel de los carmenes Password: dsfasdfdasf
 User: Juan Password: dfasdfa
 User: asdfa Password: asdfa
@@ -125,3 +126,38 @@ User: lololo Password: asdsdf
 User: minimau Password: asdfasdf
 User: adsfsadfasdfasdfasd Password: heee
 User: dasfasdf Password: caca
+=======
+User: Clara Password: 
+User: MamaIA Password: 
+User: Mamaia Password: 
+User: bicho Password: 
+User: clara Password: 
+User: javi Password: 
+User: mario Password: 
+User: admin Password: 
+User: javi Password: 
+User: mario Password: 
+User: luis Password: 
+User: hamilton Password: 
+User: burr Password: 
+User: GW Password: 
+User: adams Password: 
+User: jefferson Password: 
+User: trump Password: 
+User: qw Password: 
+User: as Password: 
+User: fg Password: 
+User: th Password: 
+User: zsgh Password: 
+User: dhr Password: 
+User: arhs Password: 
+User: dahtr Password: 
+User: szdjh Password: 
+User: zdfj Password: 
+>>>>>>> Stashed changes
+User: xgjst Password: 
+User: xfj Password: 
+User: khvy Password: 
+User: lhv Password: 
+User: clhv Password: 
+User: AEgt Password: 

@@ -54,20 +54,24 @@
 .formulario {
 	margin: 370px 700px;
 	position: absolute;
+	z-index: 11;
 }
 .formularioSalas {
     margin: 40px 300px;
     position: absolute;
     width: 1200px;
     height: 500px;
+    z-index: 3;
 }
 
 .scrollTabla {
     height: 500px;
     overflow-y: scroll;
+    z-index: 3;
 }
 #cerrarTabla {
 	margin: -40px 0px;
+	z-index: 3;
 }
 #crearGrupo {
 	margin: 540px -25px;
@@ -81,7 +85,15 @@
 	position: absolute;
 	width: 110px;
 	text-align: center;
+}
+#passSalas {
+	margin: 370px 700px;
+	position: absolute;
 	z-index: 20;
+}
+#btnPassSalas {
+	margin: 15px 0px;
+	position: absolute;
 }
 label {
 	color: white;
@@ -104,7 +116,12 @@ h1 {
 	color: white;
 	position: absolute;
 }
-
+#btnRegistrarse {
+	margin: 50px 1750px;
+	position: absolute;
+	z-index: 30;
+	width: 120px;
+}
 #conectados {
 	margin: 6px 1620px;
 	color: white;
@@ -123,7 +140,7 @@ h1 {
 	position: absolute;
 }
 #live-chat {
-    margin-top: 355px;
+    margin-top: 375px;
     font-size: 12px;
     margin-left: 1605px;
     position: absolute;
@@ -245,7 +262,7 @@ h1 {
 	font-weight: bold;
 }
 #miCuentaDiv {
-	z-index: 200;
+	z-index: 1;
 	margin: 40px 44px;
 	position: absolute;	
 }
@@ -255,6 +272,7 @@ h1 {
 body {
     overflow:hidden;
 }
+
 </style>
 </head>
 
@@ -272,7 +290,7 @@ body {
 	    </div>
 	</div>
 	<div id="pantallaInicio"
-		style="background-color: #000; opacity: 0.9; width: 1920px; height: 800px; position: absolute;">
+		style="background-color: #000; opacity: 0.9; width: 1920px; height: 800px; position: absolute; z-index: 10;">
 	</div>
 	
 	<div id="wrapper">
@@ -293,6 +311,9 @@ body {
 		</ul>
 	</div>
 
+	<div>
+        <button type="button" id="btnRegistrarse" class="btn btn-success">Crear Cuenta</button>
+    </div>
 	
 	<form class="formulario">
 		
@@ -304,6 +325,11 @@ body {
 			<label for="passUser" id="contrasena">Añada una contraseña</label> <input type="password"
                 class="form-control " id="passUser"
                 placeholder="Contraseña">
+            <div id="confirmPass" style="visibility: hidden; display:none;">
+            	<label for="passUser" id="confirmContrasena">Por favor, repita la contraseña</label> <input type="password"
+                class="form-control " id="passUser2"
+                placeholder="Contraseña">
+            </div>
 		</div>
 		<br /> 
 		<div class="boton">
