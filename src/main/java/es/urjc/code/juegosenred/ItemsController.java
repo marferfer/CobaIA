@@ -36,6 +36,11 @@ public class ItemsController {
 	public Collection<Item> items() {
 		return items.values();
 	}
+	
+	@GetMapping(value = "/{password}")
+	public String pass() {
+		return "HolAAAAAAAA";
+	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -44,42 +49,6 @@ public class ItemsController {
 		long id = nextId.incrementAndGet();
 		item.setId(id);
 		items.put(id, item);
-
-		String ficheroUserAndPassword = "";
-		String lineaBR = "";
-		String usuarioNuevo = item.userAndPassword();
-		boolean listaVacia = false;
-		
-		try {
-			FileReader fr = new FileReader("usuarios.txt");
-			BufferedReader br = new BufferedReader(fr);
-			while( (lineaBR = br.readLine()) != null) {
-				ficheroUserAndPassword += lineaBR + "\r\n";
-			}
-			br.close();
-			
-		}catch(IOException ex) {
-			
-			System.out.println("No esta creado el fichero usuarios.txt");
-			listaVacia = true;
-		}
-		
-		
-		try {
-			
-			FileWriter fw = new FileWriter("usuarios.txt");
-			if(listaVacia) {
-				
-				fw.write(usuarioNuevo);
-				listaVacia = false;
-				
-			}else {
-				
-				fw.write(ficheroUserAndPassword + usuarioNuevo);
-			}
-			fw.close();
-			
-		}catch(Exception ex) { ex.printStackTrace();}
 		
 		return item;
 	}

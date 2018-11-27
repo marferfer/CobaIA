@@ -173,8 +173,58 @@ var t = 0;
 var invitar = false;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//FICHEROS ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//agregamos un nuevo usuario y password a los ficheros 
+function addUserToFile(item){
+	$.ajax({
+		method: "POST",
+		url:'http://localhost:8080/ficheros',
+		data: JSON.stringify(item),
+	    processData: false,
+	    headers: {
+	    	"Content-Type": "application/json"
+	    }
+	})
+}
+
+function getUsersAndPasswords(callback){
+	$.ajax({
+		url: 'http://localhost:8080/ficheros/{partes}'
+	}).done(function(items){
+		callback(items);
+	})
+}
+
+
+var b = null;
+getUsersAndPasswords(function (a){
+	b = a[0];
+	console.log(a);
+});
+
+
+setTimeout(function(){console.log(b)}, 1000);
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ITEMS ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//no borrar de momento, puede resultar util mas tarde
+/*function hola123(callback){
+	$.ajax({
+		url:'http://localhost:8080/items/{password}'
+	}).done(function(items){
+		callback(items);
+	})
+}
+
+hola123(function (pw) {
+    console.log(pw);
+});*/
 
 //Load items from server
 function loadItems(callback) {
@@ -326,6 +376,7 @@ $(document).ready(function () {
     			createItem(item, function (itemWithId) {
                     //When item with id is returned from server
     				showUser(itemWithId);
+    				addUserToFile(itemWithId);
                 });
             
                 var element = document.getElementById("exampleInputEmail1");
@@ -360,7 +411,6 @@ $(document).ready(function () {
 						document.getElementById("title").innerHTML = '<span style="color:red"> <b>Nombre de usuario ya en uso. Por favor, escoja un nuevo nombre.</b> </span>';
 								
 	                	console.log("usuario repetido");
-	                	
 	                	userRepeated = true;	                	
 	                }
 	            } 
@@ -369,6 +419,7 @@ $(document).ready(function () {
                 	createItem(item, function (itemWithId) {
                         //When item with id is returned from server
                 		showUser(itemWithId);
+                		addUserToFile(itemWithId);
                     });
                 
                     var element = document.getElementById("exampleInputEmail1");
