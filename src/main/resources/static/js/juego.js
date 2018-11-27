@@ -343,13 +343,12 @@ $(document).ready(function () {
                 element4.parentNode.removeChild(element4);
                 var element5 = document.getElementById("passUser");
                 element5.parentNode.removeChild(element5);
-
                 
+   
                 usuario = value;
                 if (usuario == "admin") {
         			checkUsers();
         		}
-    		
     		}
     		
     		else {
@@ -527,7 +526,7 @@ function updateGrupo(grupo) {
          "Content-Type": "application/json"
      }
  }).done(function (grupo) {
-     console.log("Updated grupo: " + JSON.stringify(grupo))
+     //console.log("Updated grupo: " + JSON.stringify(grupo))
  })
 }
 
@@ -548,7 +547,7 @@ document.getElementById("info").innerHTML = '';
 
 document.getElementById("salas").innerHTML = grupo.nombre;
 
-console.log(grupo);
+//console.log(grupo);
 	
  $('#info').append(
 		 '<li id="usuario1" class="nav-item"><span style="text-transform: capitalize">' + grupo.usuario1 + ' <i class="fas fa-star"></i></span></li>' +
@@ -746,6 +745,32 @@ $(document).ready(function () {
             });
         }
     });
+	
+	$("#sendMensaje").click(function () {
+		
+		if(document.getElementById("textoOwner").value != ""){
+			loadGrupos(function(grupos){
+				for (var i = 0; i < grupos.length; i++) {
+                    if (usuario == grupos[i].usuario1 || usuario == grupos[i].usuario2 || usuario == grupos[i].usuario3) {
+                    	//var cant = grupos[i].mensajes.length;
+                    	//grupos[i].mensajes[0]= document.getElementById("textoOwner").value;
+                    	//console.log(grupos[i].mensajes[0]);
+                    	//console.log(document.getElementById("textoOwner").value);
+                    	//cant++;
+                    	i = grupos.length;
+                    }
+                }
+			});
+		}
+	});
+	document.getElementById("mensajePersona").innerHTML = '<div class="chat-message clearfix">' +
+															    '<div class="chat-message-content clearfix">'+
+															        '<span class="chat-time">13:38</span><h5>John Doe</h5>'+
+															        
+															        '<p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>'+
+															    '</div>'+
+														    '</div>'+ 
+														'<hr>';
 })
 
 
