@@ -15,6 +15,9 @@
 	crossorigin="anonymous">
 <link href="librerias/css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="css/estilos.css">
+
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
 	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
@@ -47,25 +50,28 @@
 <script src="js/juego.js"></script>
 
 
-
 <style>
 .formulario {
 	margin: 370px 700px;
 	position: absolute;
+	z-index: 11;
 }
 .formularioSalas {
     margin: 40px 300px;
     position: absolute;
     width: 1200px;
     height: 500px;
+    z-index: 3;
 }
 
 .scrollTabla {
     height: 500px;
     overflow-y: scroll;
+    z-index: 3;
 }
 #cerrarTabla {
 	margin: -40px 0px;
+	z-index: 3;
 }
 #crearGrupo {
 	margin: 540px -25px;
@@ -79,7 +85,15 @@
 	position: absolute;
 	width: 110px;
 	text-align: center;
+}
+#passSalas {
+	margin: 370px 700px;
+	position: absolute;
 	z-index: 20;
+}
+#btnPassSalas {
+	margin: 15px 0px;
+	position: absolute;
 }
 label {
 	color: white;
@@ -102,7 +116,12 @@ h1 {
 	color: white;
 	position: absolute;
 }
-
+#btnRegistrarse {
+	margin: 50px 1750px;
+	position: absolute;
+	z-index: 30;
+	width: 120px;
+}
 #conectados {
 	margin: 6px 1620px;
 	color: white;
@@ -243,7 +262,7 @@ h1 {
 	font-weight: bold;
 }
 #miCuentaDiv {
-	z-index: 200;
+	z-index: 1;
 	margin: 40px 44px;
 	position: absolute;	
 }
@@ -262,7 +281,7 @@ body {
 	<!--onload="nivel2()"-->
 	<div id="miCuentaDiv" style="visibility: hidden;">
 		<p id="miCuenta"></p>
-		<p id="salas">Salas Disponibles</p>
+		<p id="salas"></p>
 		<ul id="info">			
 		</ul>
 		<div class="grupo">
@@ -271,7 +290,7 @@ body {
 	    </div>
 	</div>
 	<div id="pantallaInicio"
-		style="background-color: #000; opacity: 0.9; width: 1920px; height: 800px; position: absolute;">
+		style="background-color: #000; opacity: 0.9; width: 1920px; height: 800px; position: absolute; z-index: 10;">
 	</div>
 	
 	<div id="wrapper">
@@ -284,8 +303,7 @@ body {
 
 
 		<ul class="sidebar navbar-nav">
-			<li class="nav-item active"><a class="nav-link"> <i
-					class="fas fa-fw fa-tachometer-alt"></i> <span id="constant"></span>
+			<li class="nav-item active"><a class="nav-link"> <span id="constant"></span>
 			</a></li>
 		</ul>
 		<ul id="infoAux" style="margin-top:80px" class="sidebar navbar-nav">
@@ -293,6 +311,9 @@ body {
 		</ul>
 	</div>
 
+	<div>
+        <button type="button" id="btnRegistrarse" class="btn btn-success">Crear Cuenta</button>
+    </div>
 	
 	<form class="formulario">
 		
@@ -304,6 +325,11 @@ body {
 			<label for="passUser" id="contrasena">Añada una contraseña</label> <input type="password"
                 class="form-control " id="passUser"
                 placeholder="Contraseña">
+            <div id="confirmPass" style="visibility: hidden; display:none;">
+            	<label for="passUser" id="confirmContrasena">Por favor, repita la contraseña</label> <input type="password"
+                class="form-control " id="passUser2"
+                placeholder="Contraseña">
+            </div>
 		</div>
 		<br /> 
 		<div class="boton">
@@ -356,95 +382,29 @@ body {
 
     </form>
 
-	<div id="live-chat" style="visibility:'hidden'">
-
+	<div id="live-chat">
         <header class="clearfix">
-
             <a href="#" class="chat-close">x</a>
-
             <div id="nombreChat"></div>
-
             <span class="chat-message-counter">3</span>
-
         </header>
-
-	<div class="chat">
-
-            <div class="chat-history">
-
-                <div class="chat-message clearfix">
-
-                    <img src="http://lorempixum.com/32/32/people" alt="" width="32" height="32">
-
-                    <div class="chat-message-content clearfix">
-
-                        <span class="chat-time">13:35</span>
-
-                        <h5>John Doe</h5>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error, explicabo quasi ratione odio dolorum harum.</p>
-
-                    </div> <!-- end chat-message-content -->
-
-                </div> <!-- end chat-message -->
-
-                <hr>
-
-                <div class="chat-message clearfix">
-
-                    <img src="http://gravatar.com/avatar/2c0ad52fc5943b78d6abe069cc08f320?s=32" alt="" width="32" height="32">
-
-                    <div class="chat-message-content clearfix">
-
-                        <span class="chat-time">13:37</span>
-
-                        <h5>Marco Biedermann</h5>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, nulla accusamus magni vel debitis numquam qui tempora rem voluptatem delectus!</p>
-
-                    </div> <!-- end chat-message-content -->
-
-                </div> <!-- end chat-message -->
-
-                <hr>
-                
-                <div class="chat-message clearfix">
-
-                    <img src="http://lorempixum.com/32/32/people" alt="" width="32" height="32">
-
-                    <div class="chat-message-content clearfix">
-
-                        <span class="chat-time">13:38</span>
-
-                        <h5>John Doe</h5>
-
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-
-                    </div> <!-- end chat-message-content -->
-
-                </div> <!-- end chat-message -->
-
-                <hr>
-
+		<div class="chat">
+            <div class="chat-history">               
+                <div id="mensajePersona"></div>
             </div> <!-- end chat-history -->
-
-            <p class="chat-feedback">Your partner is typing…</p>
-
+            
             <form action="#" method="post">
-
-                <fieldset>
-
-                    <input type="text" placeholder="Type your message…" autofocus>
-                    <input type="hidden">
-
+               <fieldset>
+                    <input type="text" placeholder="Escribe tu mensaje…" id="textoOwner" autofocus>
+                    
                 </fieldset>
-
+                <br/>
+		            <button style="width:235px" type="button" id="sendMensaje" class="btn btn-sm btn-success">Enviar</button>
+		        
             </form>
-
         </div> <!-- end chat -->
-
     </div> <!-- end live-chat -->
-
+    
 	<script type="text/javascript">
 	
 			var btnvisible;

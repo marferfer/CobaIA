@@ -8,6 +8,15 @@ public class Grupo {
 	private String usuario3;
 	private String nombre;
 	private String password;
+	private String[] mensajes = new String[8];
+
+	public String[] getMensajes() {
+		return mensajes;
+	}
+
+	public void setMensajes(String[] mensajes) {
+		this.mensajes = mensajes;
+	}
 
 	public String getNombre() {
 		return nombre;

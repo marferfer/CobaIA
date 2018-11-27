@@ -178,20 +178,20 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
 }
 
 .sidebar.toggled {
-  width: 0 !important;
+  width: 150 !important;
   overflow: hidden;
 }
 
 @media (min-width: 768px) {
   .sidebar {
-    width: 150px !important;
+    width: 0px !important;
   }
   .sidebar .nav-item .nav-link {
     display: block;
     width: 100%;
     text-align: left;
     padding: 1rem;
-    width: 150px;
+    width: 0px;
   }
   .sidebar .nav-item .nav-link span {
     font-size: 1rem;
@@ -207,7 +207,7 @@ body.fixed-nav.sidebar-toggled #content-wrapper {
   }
   .sidebar.toggled {
     overflow: visible;
-    width: 00px !important;
+    width: 150px !important;
   }
   .sidebar.toggled .nav-item:last-child {
     margin-bottom: 1rem;
