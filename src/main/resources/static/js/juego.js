@@ -695,7 +695,7 @@ $(document).ready(function () {
             console.log(itemId);
             loadGrupos(function (grupos) {
             	for (var i = 0; i < grupos.length; i++) {
-            		if (grupos[i].id == itemId) {
+            		if (grupos[i].id == itemId && grupos[i].password === '') {
             			if (grupos[i].usuario2 === '') {
 	            			grupos[i].usuario2 = usuario;
             			}
@@ -704,16 +704,46 @@ $(document).ready(function () {
             			}
             			updateGrupo(grupos[i]);
             			showGrupo(grupos[i]);
+                        var element6 = document.getElementById("pantallaInicio");
+                        element6.style.visibility = "hidden";
+                        var element5 = document.getElementById("salasDisp");
+                        element5.style.visibility = "hidden";
+                        btn.className = "btn btn-danger";
+                        btn.innerHTML = 'Salir';
+                        enSala = true;
+            		}
+            		else if (grupos[i].id == itemId) {
+            			document.getElementById("pantallaInicio").style.zIndex = "10";
+            			document.getElementById("passSalas").style.visibility = "visible";
+            			var miGrupo = grupos[i];
+            			$("#btnPassSalas").click(function () {            				
+            				var inputPassSala = $('#passSalaPriv');
+	            			if (inputPassSala.val() == miGrupo.password) {
+	            				if (miGrupo.usuario2 === '') {
+	    	            			miGrupo.usuario2 = usuario;
+	                			}
+	                			else if (miGrupo.usuario3 === '') {
+	                				miGrupo.usuario3 = usuario;
+	                			}
+	                			updateGrupo(miGrupo);
+	                			showGrupo(miGrupo);
+	                            var element6 = document.getElementById("pantallaInicio");
+	                            element6.style.zIndex = "2";
+	                            element6.style.visibility = "hidden";
+	                            var element5 = document.getElementById("salasDisp");
+	                            element5.style.visibility = "hidden";
+	                            document.getElementById("passSalas").style.visibility = "hidden";
+	                            btn.className = "btn btn-danger";
+	                            btn.innerHTML = 'Salir';
+	                            enSala = true;
+	            			}
+	            			else {
+	            				document.getElementById("contrasenaDeSala").innerHTML = '<span style="color:red"> <b>La contraseña no es correcta, por favor vuelve a intentarlo</b> </span>';
+	            			}
+            			});
             		}
             	}
             });
-            var element6 = document.getElementById("pantallaInicio");
-            element6.style.visibility = "hidden";
-            var element5 = document.getElementById("salasDisp");
-            element5.style.visibility = "hidden";
-            btn.className = "btn btn-danger";
-            btn.innerHTML = 'Salir';
-            enSala = true;
         }
     });
 })
