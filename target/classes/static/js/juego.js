@@ -167,6 +167,9 @@ hereIam();
 var usuario = '';
 var conectado = false;
 var userRepeated = false;
+var enSala = false;
+var miSala = null;
+var miSala2 = null;
 
 var t = 0;
 
@@ -312,7 +315,7 @@ $(document).ready(function () {
         var item = {
             description: value,
             password: value2,
-            checked: false
+            checked: true
         }
         
         loadItems(function (items) {
@@ -543,10 +546,12 @@ function showGrupo(grupo) {
 
 document.getElementById("info").innerHTML = '';
 
+document.getElementById("salas").innerHTML = grupo.nombre;
+
 console.log(grupo);
 	
  $('#info').append(
-		 '<li id="usuario1" class="nav-item"><span style="text-transform: capitalize">' + grupo.usuario1 + '</span></li>' +
+		 '<li id="usuario1" class="nav-item"><span style="text-transform: capitalize">' + grupo.usuario1 + ' <i class="fas fa-star"></i></span></li>' +
 		 '<li id="usuario2" class="nav-item"><span style="text-transform: capitalize">' + grupo.usuario2 + '</span></li>' +
 		 '<li id="usuario2" class="nav-item"><span style="text-transform: capitalize">' + grupo.usuario3 + '</span></li>')
 }
@@ -560,17 +565,20 @@ function showGrupos(grupos) {
 		if (grupos[i].usuario1 != '') size++;
 		if (grupos[i].usuario2 != '') size++;
 		if (grupos[i].usuario3 != '') size++;
-		tabla.append('<table class="table">' +
-			            '<thead class="thead-dark">' +
-				        '<tr>' +
-				          '<th scope="col" id="grupo-' + grupos[i].id + '">' + grupos[i].nombre + '</th>' +
-				          '<th scope="col" style="text-align: center;">' + size + '/3</th>' +
-				          '<th scope="col" style="text-align: right;"><button type="button" class="btn btn-success btn-sm col-lg-6" id="btnEnter">Entrar</button></th>' +
-				        '</tr>' +
-				      '</thead>' +
-				      '<hr/>' +
-				    '</table>'
-				);
+		
+		if (size > 0 && size < 3) {
+			tabla.append('<table class="table">' +
+				            '<thead class="thead-dark">' +
+					        '<tr>' +
+					          '<th scope="col" id="grupo-' + grupos[i].id + '">' + grupos[i].nombre + '</th>' +
+					          '<th scope="col" style="text-align: center;">' + size + '/3</th>' +
+					          '<th scope="col" style="text-align: right;"><button type="button" class="btn btn-success btn-sm col-lg-6" id="btnEnter">Entrar</button></th>' +
+					        '</tr>' +
+					      '</thead>' +
+					      '<hr/>' +
+					    '</table>'
+			);
+		}
 	}
 }
 
@@ -582,20 +590,23 @@ $(document).ready(function () {
 			document.getElementById("pantallaInicio").style.visibility = "visible";
 	        document.getElementById("formCreateGroup").style.visibility = "visible";
 	        document.getElementById("salasDisp").style.visibility = "hidden";
-        }        
+        }       
+        //Salir de la sala
         else {
-        	
+        	enSala = false;
+        	miSala = null;
+        	miSala2 = null;
         	loadGrupos(function (grupos) {
         		for (var i = 0; i < grupos.length; i++) {
-        			if (grupos[i].usuario1 === usuario) {
+        			if (grupos[i].usuario1 == usuario) {
         				grupos[i].usuario1 = '';
         				updateGrupo(grupos[i]);
         			}
-        			else if (grupos[i].usuario2 === usuario) {
+        			else if (grupos[i].usuario2 == usuario) {
         				grupos[i].usuario2 = '';
         				updateGrupo(grupos[i]);
         			}
-        			else if (grupos[i].usuario3 === usuario) {
+        			else if (grupos[i].usuario3 == usuario) {
         				grupos[i].usuario3 = '';
         				updateGrupo(grupos[i]);
         			}
@@ -607,6 +618,7 @@ $(document).ready(function () {
         	});
         }
 	})
+	//Crear Sala
 	$("#add-buttonCreateRoom").click(function () {
 		var nameRepeated = false;
 		
@@ -648,7 +660,7 @@ $(document).ready(function () {
 				}
 			    
 			    invitar = true;
-			    document.getElementById("salas").innerHTML = inputName.val();	
+			    //document.getElementById("salas").innerHTML = inputName.val();	
 			    createGrupo(grupo, function (grupoWithId) {
 			    	showGrupo(grupoWithId);
 			    });
@@ -656,6 +668,7 @@ $(document).ready(function () {
 	            document.getElementById("formCreateGroup").style.visibility = "hidden";
 	            btn.className = "btn btn-danger";
 	            btn.innerHTML = 'Salir';
+	            enSala = true;
 			}	            
 		});
 	});
@@ -673,6 +686,7 @@ $(document).ready(function () {
         var element5 = document.getElementById("salasDisp");
         element5.style.visibility = "hidden";
     });
+	//Entrar en sala
 	$("#tablaSalas").click(function (event) {
         var elem = $(event.target);
         if (elem.is('button')) {
@@ -693,6 +707,13 @@ $(document).ready(function () {
             		}
             	}
             });
+            var element6 = document.getElementById("pantallaInicio");
+            element6.style.visibility = "hidden";
+            var element5 = document.getElementById("salasDisp");
+            element5.style.visibility = "hidden";
+            btn.className = "btn btn-danger";
+            btn.innerHTML = 'Salir';
+            enSala = true;
         }
     });
 })
@@ -718,13 +739,49 @@ function checkUsers() {
         });
 		console.log(usuario);
         checkUsers();
-    }, 1000);
+        loadGrupos(function (grupos) {
+        	for (var i = 0; i < grupos.length; i++) {
+        		if (grupos[i].usuario1 === '' && grupos[i].usuario2 === '' && grupos[i].usuario3 === '') {
+        			deleteGrupo(grupos[i].id);
+        		}
+        	}
+        });
+    }, 2000);
 }
 
 function hereIam() {
 	setTimeout(function(){
-    	loadItems(function (items) {
-    		//document.getElementById("info").innerHTML = '';
+    	if (enSala) {
+    		loadGrupos(function (grupos) {
+    			for (var i = 0; i < grupos.length; i++) {
+    				if (usuario == grupos[i].usuario1) {
+    					miSala = grupos[i];    	
+    					showGrupo(grupos[i]);
+    					i = grupos.length;				
+    				}
+    				else if (usuario == grupos[i].usuario2) {
+    					if (grupos[i].usuario1 === '') {
+    						grupos[i].usuario1 = usuario;
+    						grupos[i].usuario2 = '';
+    						updateGrupo(grupos[i]);
+    					}
+    					miSala2 = grupos[i]; 
+    					showGrupo(grupos[i]);
+    					i = grupos.length;
+    				}
+    				else if (usuario == grupos[i].usuario3) {
+    					if (grupos[i].usuario2 === '') {
+    						grupos[i].usuario2 = usuario;
+    						grupos[i].usuario3 = '';
+    						updateGrupo(grupos[i]);
+    					}
+    					showGrupo(grupos[i]);
+    					i = grupos.length;
+    				}
+    			}
+    		});
+    	}
+    	loadItems(function (items) {    		
     		for (var i = 0; i < items.length; i++) {
             	//if (invitar) showItem(items[i]);
                 if (items[i].description == usuario) {
@@ -732,6 +789,38 @@ function hereIam() {
                     updateItem(items[i]);
                 }
             }
+    		if (miSala != null && enSala) {
+    			var user2 = false;
+    			var user3 = false;
+                for (var j = 0; j < items.length; j++) {
+                	if (items[j].description == miSala.usuario2 && !user2) {    			            		
+                		user2 = true;
+                	}
+                	if (items[j].description == miSala.usuario3 && !user3){    			            		
+                		user3 = true;
+                	}
+                }
+                if (!user2) {
+                	miSala.usuario2 = '';
+            		updateGrupo(miSala);
+                }
+                if (!user3) {
+                	miSala.usuario3 = '';
+            		updateGrupo(miSala);
+                }
+    		}
+    		if (miSala2 != null && enSala) {
+    			var user1 = false;
+                for (var j = 0; j < items.length; j++) {
+                	if (items[j].description == miSala2.usuario1 && !user1) {    			            		
+                		user1 = true;
+                	}
+                }
+                if (!user1) {
+                	miSala2.usuario1 = '';
+            		updateGrupo(miSala2);
+                }
+    		}
         });
     	loadVersions(function (versions) {
     		if (cobaIAversion != versions[0].description) {
