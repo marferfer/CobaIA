@@ -1,5 +1,2 @@
-User: mario Password: contrasena
-User: mario Password: contrasena
-User: mario2 Password: 22222222222222222
-User: gg Password: gg
-User: javi Password: 
+User: Javi98 Password: 1111
+User: Javi98 Password: 
