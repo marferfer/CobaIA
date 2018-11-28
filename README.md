@@ -54,7 +54,7 @@ Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños
 
 <h2> SISTEMA DE NAVEGACIÓN: </h2>
 
-<p>Lo primero que encontraremos será el <b>Inicio de Sesión</b>. En él podremos loguearnos con nuestro nombre de usuario y contraseña. En caso de no tener cuenta, arriba a la derecha aparece un boton de registro. Si te registras, automaticamente te iniciará sesión. Se deberá hacer un grupo para poder jugar 3 personas, dándole
+<p>Lo primero que encontraremos será el <b>Inicio de Sesión</b>. En él podremos loguearnos con nuestro nombre de usuario y contraseña. <b> Para que funcione correctamente, iniciar sesión como admin (contraseña: hmen10) </b> En caso de no tener cuenta, arriba a la derecha aparece un boton de registro. Si te registras, automaticamente te iniciará sesión. Se deberá hacer un grupo para poder jugar 3 personas, dándole
 al boton izquierdo inferior. Si se pincha en el botón de arriba de usuario, el menu lateral se hará más pequeño y podremos
 acceder al botón jugar.</p>
 <img src="src/main/resources/static/imgs/readme/00.jpg" align="center">
@@ -86,7 +86,7 @@ perifericos que se pueden utilizar. Si se pincha en volver, retrocederemos al me
 <p>Si es sala privada, se agregará una contraseña</p>
   <img src="src/main/resources/static/imgs/readme/09.jpg" align="center">
 
-<p> A continuación, si nos fijamos en la parte de la derecha, veremos un chat. Si estás dentro de una sala, la cual se ve reflejado en la parte de la izquierda, el chat estará activado y puedes enviar mensajes que se verán dentro de ese chat. Verás la persona que lo ha escrito, la hora que lo ha enviado y el mensaje. Nota: Si se da a Enter no funciona, se debe dar a Enviar</p>
+<p> A continuación, si nos fijamos en la parte de la derecha, veremos un chat. Si estás dentro de una sala, la cual se ve reflejado en la parte de la izquierda, el chat estará activado y puedes enviar mensajes que se verán dentro de ese chat. Verás la persona que lo ha escrito, la hora que lo ha enviado y el mensaje. <i>Nota</i>: <b>Si se da a Enter no funciona, se debe dar a Enviar</b></p>
 <img src="src/main/resources/static/imgs/readme/10.jpg" align="center">
   
 
@@ -105,6 +105,7 @@ perifericos que se pueden utilizar. Si se pincha en volver, retrocederemos al me
 <h2>INSTRUCCIONES PRECISAS PARA EJECUTAR LA APLICACION:</h2>
 <p>Para ejecutar la aplicación basta sencillamente con ir a la consola de comandos de Windows y movernos a la carpeta contenedora del jar (CobaIA/target/) y ejecutar la línea de comando "java -jar items-backend-and-frontend-0.0.1-SNAPSHOT.jar".</p>
 <p>Para acceder a la aplicación basta con introducir en el navegador la url "localhost:8080" y ya podremos empezar a jugar.</p>
+<p><b> Esta por defecto la IP 10.6.33.11:8080, cámbiala por tu IP </b></p>
 
 <h2>REFERENCIAS:</h2>
 <p>Hollow Knight, Inside, Ori Blind Forest.</p>
