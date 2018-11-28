@@ -54,22 +54,33 @@ Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños
 
 <h2> SISTEMA DE NAVEGACIÓN: </h2>
 
-<p>Lo primero que encontraremos será el <b>Inicio de Sesión</b>. En él podremos guardar nuestro nombre de usuario y ver 
-los usuarios que hay conectados en la parte lateral izquierda. Se deberá hacer un grupo para poder jugar 3 personas, dandole
-al boton izquierdo inferior. Si se pincha en el boton de arriba de usuario, el menu lateral se hará más pequeño y podremos
+<p>Lo primero que encontraremos será el <b>Inicio de Sesión</b>. En él podremos loguearnos con nuestro nombre de usuario y contraseña. En caso de no tener cuenta, arriba a la derecha aparece un boton de registro. Si te registras, automaticamente te iniciará sesión. Se deberá hacer un grupo para poder jugar 3 personas, dandole
+al boton izquierdo inferior. Si se pincha en el botón de arriba de usuario, el menu lateral se hará más pequeño y podremos
 acceder al botón jugar.</p>
 <img src="src/main/resources/static/imgs/readme/00.jpeg" align="center">
-<p>A continuación veremos el <b>Menu Principal</b>, donde se apreciará tres opciones a elegir, 1. Jugar, 2.Controles, 3.Salir.</p>
-<img src="src/main/resources/static/imgs/readme/01.png" align="center">
+<p>Como ya hemos comentado, una vez se pincha en Crear Sala, saldrá una pantalla donde podrás crear una sala publica o privada. Si se elige privada, aparecerá un campo para agregar una contraseña. También puede clicarse en Cancelar para retroceder al menu principal. Una vez se crea la Sala, aparecerá en el menú lateral. Serás el administrador de la Sala.</p>
+
+<img src="src/main/resources/static/imgs/readme/01.jpeg" align="center">
+
+<p> En caso de que un amigo/otro usuario ya haya creado la sala, le daremos a Unirse a Sala. Mostrará una tabla para poder unirte a la sala que quieras. Una vez pinchas en Entrar, te unirás a la sala.
+
+<img src="src/main/resources/static/imgs/readme/02.jpeg" align="center">
+
+<p> A continuación, si nos fijamos en la parte de la derecha, veremos un chat. Si estás dentro de una sala, el chat estará activado y puedes enviar mensajes que se verán dentro de ese chat. Verás la persona que lo ha escrito, la hora que lo ha enviado y el mensaje
+  
+<img src="src/main/resources/static/imgs/readme/03.jpeg" align="center">
+
+<p>A continuación veremos el <b>Menu Principal</b>, donde se apreciará tres opciones a elegir, 1. Jugar, 2.Controles.</p>
+<img src="src/main/resources/static/imgs/readme/04.png" align="center">
 <p>Si pinchamos en <b>Controles </b>podremos ver dos imagenes donde se mostrarán todos los controles necesarios para jugar, y los
 perifericos que se pueden utilizar. Si se pincha en volver, retrocederemos al menu principal. </p>
-<img src="src/main/resources/static/imgs/readme/02.jpeg" align="center">
-<p>Una vez accedido a la opción Jugar, te saldrá un menu de <b>Elegir personaje</b> para que cada jugador pueda elegir su personaje favorito. </p>
-<img src="src/main/resources/static/imgs/readme/03.jpeg" align="center">
-<p>Como ya se mostró en la fase anterior, el gameplay, donde se podrá jugar al videojuego.</p>
-<img src="src/main/resources/static/imgs/readme/04.jpeg" align="center">
-<p>En caso de que se supere el videojuego, saldrá un mensaje de gracias por jugar, y se reiniciará el juego</p>
 <img src="src/main/resources/static/imgs/readme/05.jpeg" align="center">
+<p>Una vez accedido a la opción Jugar, te saldrá un menu de <b>Elegir personaje</b> para que cada jugador pueda elegir su personaje favorito. </p>
+<img src="src/main/resources/static/imgs/readme/06.jpeg" align="center">
+<p>Como ya se mostró en la fase anterior, el gameplay, donde se podrá jugar al videojuego.</p>
+<img src="src/main/resources/static/imgs/readme/07.jpeg" align="center">
+<p>En caso de que se supere el videojuego, saldrá un mensaje de gracias por jugar, y se reiniciará el juego</p>
+<img src="src/main/resources/static/imgs/readme/08.jpeg" align="center">
 
 <h2>INSTRUCCIONES PRECISAS PARA EJECUTAR LA APLICACION:</h2>
 <p>Para ejecutar la aplicación basta sencillamente con ir a la consola de comandos de Windows y movernos a la carpeta contenedora del jar (CobaIA/target/) y ejecutar la línea de comando "java -jar items-backend-and-frontend-0.0.1-SNAPSHOT.jar".</p>
