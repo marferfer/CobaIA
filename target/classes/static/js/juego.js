@@ -170,6 +170,7 @@ var userRepeated = false;
 var enSala = false;
 var miSala = null;
 var miSala2 = null;
+var miGrupo = '';
 
 var t = 0;
 
@@ -440,7 +441,7 @@ $(document).ready(function () {
     					i = items.length;
     					document.getElementById("title").innerHTML = '<span style="color:red"> <b>Usuario ya existente</b> </span>';
     				}
-    				else if (value.length < 6 || value.length > 11) {
+    				else if (value.length < 5 || value.length > 10) {
     					i = items.length;
     					document.getElementById("title").innerHTML = '<span style="color:red"> <b>El nombre de usuario debe tener entre 5 y 10 caracteres</b> </span>';
     				}    				
@@ -1005,20 +1006,21 @@ function deleteChat(chatId) {
 
 //Show chat in page
 function showChat(chats) {
-	 console.log(chats);
-	//$('#mensajePersona').empty();
+	 //console.log(chats);
+	$('#mensajePersona').empty();
 	 var message = $('#mensajePersona');
-	 console.log("Por aqui entra" + chats.length);
+	 console.log(chats[0]);
    for(var i = 0; i < chats.length; i++){
-	    
-		message.append(
-	    		'<div class="chat-message clearfix">' +
-			    '<div class="chat-message-content clearfix">'+
-			        '<span class="chat-time"><b>'+ chats[i].hora + '</b></span><h5>'+ chats[i].usuario + '</h5>' +
-			        '<p>'+ chats[i].mensaje +'</p>'+
-			    '</div>'+
-		    '</div>'+ 
-		'<hr>')
+	    if (chats[i].sala == miGrupo) {
+			message.append(
+		    		'<div class="chat-message clearfix">' +
+				    '<div class="chat-message-content clearfix">'+
+				        '<span class="chat-time"><b>'+ chats[i].hora + '</b></span><h5>'+ chats[i].usuario + '</h5>' +
+				        '<p>'+ chats[i].mensaje +'</p>'+
+				    '</div>'+
+			    '</div>'+ 
+			'<hr>')
+	    }
    }
 }
 
@@ -1052,7 +1054,7 @@ function checkUsers() {
     }, 2000);
 }
 
-var miGrupo = '';
+
 
 function hereIam() {
 	setTimeout(function(){
@@ -1093,16 +1095,20 @@ function hereIam() {
                 }
             });
             if (miGrupo != '') {
-            	var misChats = [,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,];
+            	/*var misChats = {};
+            	var chatSize = 0;;*/
                 loadChats(function (chats) {
-                    for (var i = 0; i < chats.length; i++) {
+                    /*for (var i = 0; i < chats.length; i++) {
                         if (chats[i].sala == miGrupo) {
-                        	misChats[misChats.length-1] = chats[i];
+                        	misChats[chatSize] = chats[i];
+                        	chatSize++;
                         }
-                    }
+                    }*/
+                	showChat(chats);
+                    //console.log(misChats);
                 });
                
-                showChat(misChats);
+                //showChat(misChats);
             }
         }
     	loadItems(function (items) {    		

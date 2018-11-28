@@ -1,2 +1,4 @@
 User: Javi98 Password: 1111
-User: Javi98 Password: 
+User: admin Password: hmen10
+User: hamilton Password: 51
+User: hamilton Password: 51
