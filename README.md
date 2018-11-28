@@ -65,32 +65,41 @@ acceder al botón jugar.</p>
 <p> En el menu de registro, debes meter un usuario, la contraseña y validar la contraseña</p>
 <img src="src/main/resources/static/imgs/readme/02.jpg" align="center">
 
-<p>Como ya hemos comentado, una vez se pincha en Crear Sala, saldrá una pantalla donde podrás crear una sala publica o privada. Si se elige privada, aparecerá un campo para agregar una contraseña. También puede clicarse en Cancelar para retroceder al menu principal. Una vez se crea la Sala, aparecerá en el menú lateral. Serás el administrador de la Sala.</p>
-
-<p> En caso de que un amigo/otro usuario ya haya creado la sala, le daremos a Unirse a Sala. Mostrará una tabla para poder unirte a la sala que quieras. Una vez pinchas en Entrar, te unirás a la sala.
-<p> A continuación, si nos fijamos en la parte de la derecha, veremos un chat. Si estás dentro de una sala, el chat estará activado y puedes enviar mensajes que se verán dentro de ese chat. Verás la persona que lo ha escrito, la hora que lo ha enviado y el mensaje
-  
-
-
 <p>A continuación veremos el <b>Menu Principal</b>, donde se apreciará dos opciones a elegir, 1. Jugar, 2.Controles.</p>
 <img src="src/main/resources/static/imgs/readme/03.jpg" align="center">
 
 <p>Si pinchamos en <b>Controles </b>podremos ver dos imagenes donde se mostrarán todos los controles necesarios para jugar, y los
 perifericos que se pueden utilizar. Si se pincha en volver, retrocederemos al menu principal. </p>
 <img src="src/main/resources/static/imgs/readme/04.jpg" align="center">
-<p>Una vez accedido a la opción Jugar, te saldrá un menu de <b>Elegir personaje</b> para que cada jugador pueda elegir su personaje favorito. </p>
+
+<p>Si pinchas en el logotipo de la izquierda arriba, el menu lateral se cierra</p>
+<img src="src/main/resources/static/imgs/readme/05.jpg" align="center">
+
+
+<p>Como ya hemos comentado, una vez se pincha en Crear Sala, saldrá una pantalla donde podrás crear una sala publica o privada. Si se elige privada, aparecerá un campo para agregar una contraseña. También puede clicarse en Cancelar para retroceder al menu principal. Una vez se crea la Sala, aparecerá en el menú lateral. Serás el administrador de la Sala.</p>
 <img src="src/main/resources/static/imgs/readme/06.jpg" align="center">
-<p>Como ya se mostró en la fase anterior, el gameplay, donde se podrá jugar al videojuego.</p>
+<p>Sala Privada</p>
 <img src="src/main/resources/static/imgs/readme/07.jpg" align="center">
-<p>En caso de que se supere el videojuego, saldrá un mensaje de gracias por jugar, y se reiniciará el juego</p>
-<img src="src/main/resources/static/imgs/readme/08.jpg" align="center">
 
-<img src="src/main/resources/static/imgs/readme/09.jpg" align="center">
+<p> En caso de que un amigo/otro usuario ya haya creado la sala, le daremos a Unirse a Sala. Mostrará una tabla para poder unirte a la sala que quieras. Una vez pinchas en Entrar, te unirás a la sala. 
+  <img src="src/main/resources/static/imgs/readme/08.jpg" align="center">
+<p>Si es sala privada, se agregará una contraseña</p>
+  <img src="src/main/resources/static/imgs/readme/09.jpg" align="center">
 
+<p> A continuación, si nos fijamos en la parte de la derecha, veremos un chat. Si estás dentro de una sala, la cual se ve reflejado en la parte de la izquierda, el chat estará activado y puedes enviar mensajes que se verán dentro de ese chat. Verás la persona que lo ha escrito, la hora que lo ha enviado y el mensaje. Nota: Si se da a Enter no funciona, se debe dar a Enviar</p>
 <img src="src/main/resources/static/imgs/readme/10.jpg" align="center">
-<img src="src/main/resources/static/imgs/readme/11.jpg" align="center">
+  
+
+<p>Una vez accedido a la opción Jugar, te saldrá un menu de <b>Elegir personaje</b> para que cada jugador pueda elegir su personaje favorito. </p>
+  <img src="src/main/resources/static/imgs/readme/11.jpg" align="center">
+
+<p>Como ya se mostró en la fase anterior, el gameplay, donde se podrá jugar al videojuego.</p>
 <img src="src/main/resources/static/imgs/readme/12.jpg" align="center">
+
+<p>En el juego también puede desplegarse el menu lateral.</p>
 <img src="src/main/resources/static/imgs/readme/13.jpg" align="center">
+
+<p>En caso de que se supere el videojuego, saldrá un mensaje de gracias por jugar, y se reiniciará el juego</p>
 <img src="src/main/resources/static/imgs/readme/14.jpeg" align="center">
 
 <h2>INSTRUCCIONES PRECISAS PARA EJECUTAR LA APLICACION:</h2>
