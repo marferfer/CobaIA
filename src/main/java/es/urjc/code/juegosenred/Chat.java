@@ -42,14 +42,6 @@ public class Chat {
 	public void setmensaje(String mensaje) {
 		this.mensaje = mensaje;
 	}
-	
-	public String getMensaje() {
-		return mensaje;
-	}
-
-	public void setMensaje(String mensaje) {
-		this.mensaje = mensaje;
-	}
 
 	public String getHora() {
 		return hora;
