@@ -72,7 +72,7 @@ acceder al botón jugar.</p>
 perifericos que se pueden utilizar. Si se pincha en volver, retrocederemos al menu principal. </p>
 <img src="src/main/resources/static/imgs/readme/04.jpg" align="center">
 
-<p>Si pinchas en el logotipo de la izquierda arriba, el menu lateral se cierra</p>
+<p>Si pinchas en el logotipo de la izquierda arriba, el menu lateral se abre</p>
 <img src="src/main/resources/static/imgs/readme/05.jpg" align="center">
 
 
