@@ -317,7 +317,6 @@ $(document).ready(function () {
 
     var input = $('#exampleInputEmail1')
     var input2 = $('#passUser')
-    var input3 = $('#passUser2')
     var info = $('#info')
 
     //Handle delete buttons
@@ -372,15 +371,10 @@ $(document).ready(function () {
     //Handle add button
     $("#add-button").click(function () {
 
-    	var btnReg = document.getElementById("btnRegistrarse");
-    	  	
-    	
-    	var value = input.val(); //User
-        var value2 = input2.val(); //Pass
-        var value3 = input3.val(); //PassConfirm
+        var value = input.val();
+        var value2 = input2.val();
         input.val(''); 
         input2.val('');
-        input3.val('');
 
         var item = {
             description: value,
@@ -388,106 +382,7 @@ $(document).ready(function () {
             checked: true
         }
         
-
-    	//Ficheros
-    	if (btnReg.innerHTML == "Crear Cuenta") {
-    		var userMatches = false;
-			getUsersAndPasswords(function (items) {
-    			for (var i = 0; i < items.length; i += 2) {
-    				if (value == items[i] && value2 == items[i+1]) {
-    					userMatches = true;
-    					i = items.length;
-    					createItem(item, function (itemWithId) {
-    	                    //When item with id is returned from server
-    	    				showUser(itemWithId);
-    	                });
-    	            
-    	                var element = document.getElementById("exampleInputEmail1");
-    	                element.parentNode.removeChild(element);
-    	                var element1 = document.getElementById("add-button");
-    	                element1.parentNode.removeChild(element1);
-    	                var element2 = document.getElementById("title");
-    	                element2.parentNode.removeChild(element2);
-    	                var element3 = document.getElementById("pantallaInicio");
-    	                element3.style.visibility = "hidden";
-    	                element3.style.zIndex = "2";
-    	                var element4 = document.getElementById("contrasena");
-    	                element4.parentNode.removeChild(element4);
-    	                var element5 = document.getElementById("passUser");
-    	                element5.parentNode.removeChild(element5);
-    	                var element6 = document.getElementById("btnRegistrarse");
-    	                element6.parentNode.removeChild(element6);
-    	                var element7 = document.getElementById("confirmPass");
-    	                element7.parentNode.removeChild(element7);
-    	                
-    	   
-    	                usuario = value;
-    	                if (usuario == "admin") {
-    	        			checkUsers();
-    	        		}
-    				}
-    			}
-    			if (!userMatches) {
-    				document.getElementById("title").innerHTML = '<span style="color:red"> <b>Los datos introducidos no concuerdan</b> </span>';
-    			}
-    		});			
-    	}
-    	else {
-    		getUsersAndPasswords(function (items) {
-    			var x = value.split(' ');
-    			for (var i = 0; i < items.length; i += 2) {
-    				if (value == items[i]) {
-    					i = items.length;
-    					document.getElementById("title").innerHTML = '<span style="color:red"> <b>Usuario ya existente</b> </span>';
-    				}
-    				else if (value.length < 6 || value.length > 11) {
-    					i = items.length;
-    					document.getElementById("title").innerHTML = '<span style="color:red"> <b>El nombre de usuario debe tener entre 5 y 10 caracteres</b> </span>';
-    				}    				
-    				else if (x.length > 1) {
-    					i = items.length;
-    					document.getElementById("title").innerHTML = '<span style="color:red"> <b>No están permitidos los espacios</b> </span>';
-    				}
-    				else if (value2 != value3) {
-    					i = items.length;
-    					document.getElementById("confirmContrasena").innerHTML = '<span style="color:red"> <b>Las contraseñas no concuerdan</b> </span>';
-    				}
-    				else {
-    					createItem(item, function (itemWithId) {
-    	                    //When item with id is returned from server
-    	    				showUser(itemWithId);
-    	    				addUserToFile(itemWithId);
-    	                });
-    	            
-    	                var element = document.getElementById("exampleInputEmail1");
-    	                element.parentNode.removeChild(element);
-    	                var element1 = document.getElementById("add-button");
-    	                element1.parentNode.removeChild(element1);
-    	                var element2 = document.getElementById("title");
-    	                element2.parentNode.removeChild(element2);
-    	                var element3 = document.getElementById("pantallaInicio");
-    	                element3.style.visibility = "hidden";
-    	                element3.style.zIndex = "2";
-    	                var element4 = document.getElementById("contrasena");
-    	                element4.parentNode.removeChild(element4);
-    	                var element5 = document.getElementById("passUser");
-    	                element5.parentNode.removeChild(element5);
-    	                var element6 = document.getElementById("btnRegistrarse");
-    	                element6.parentNode.removeChild(element6);
-    	                var element7 = document.getElementById("confirmPass");
-    	                element7.parentNode.removeChild(element7);
-    	                
-    	   
-    	                usuario = value;
-    	                if (usuario == "admin") {
-    	        			checkUsers();
-    	        		}
-    				}
-    			}
-    		});
-    	}
-        
-        /*loadItems(function (items) {
+        loadItems(function (items) {
     		console.log("Entra en loadItems");
     		console.log("value: " + value);
     		
@@ -573,7 +468,7 @@ $(document).ready(function () {
             		}
                 }
             }
-        })*/
+        })
     })
 })
 
@@ -899,28 +794,53 @@ $(document).ready(function () {
 	$("#sendMensaje").click(function () {
 		
 		if(document.getElementById("textoOwner").value != ""){
+			
+			//Sacar hora
+			var d = new Date();
+			var hour = d.getHours();
+			var min  =  d.getMinutes();
+			var fecha = hour + ":" + min;
+			
+			
+			
+	        
 			loadGrupos(function(grupos){
 				for (var i = 0; i < grupos.length; i++) {
-                    if (usuario == grupos[i].usuario1 || usuario == grupos[i].usuario2 || usuario == grupos[i].usuario3) {
-                    	//var cant = grupos[i].mensajes.length;
-                    	//grupos[i].mensajes[0]= document.getElementById("textoOwner").value;
-                    	//console.log(grupos[i].mensajes[0]);
-                    	//console.log(document.getElementById("textoOwner").value);
-                    	//cant++;
-                    	i = grupos.length;
+					if (usuario == grupos[i].usuario1 || usuario == grupos[i].usuario2 || usuario == grupos[i].usuario3) {
+						var habitacion = grupos[i].nombre;
+						loadChats(function (chats) {
+							
+							var mensaje = document.getElementById("textoOwner").value; 
+					        var hora = fecha;
+					        var sala = habitacion;
+					        
+					        console.log(mensaje + "," + hora + "," + sala + ","  + usuario);
+
+					        var chat = {
+					        	mensaje,
+					            hora,
+					            usuario,
+					            sala
+					        }
+					        
+							createChat(chat, function (chatWithId) {
+			                    //When item with id is returned from server
+			    				showChat(chatWithId);
+			    				console.log("todo correcto");
+			                });
+					        
+	                    	//var cant = grupos[i].mensajes.length;
+	                    	//grupos[i].mensajes[0]= document.getElementById("textoOwner").value;
+	                    	//console.log(grupos[i].mensajes[0]);
+	                    	//console.log(document.getElementById("textoOwner").value);
+	                    	//cant++;
+	                    	i = grupos.length;
+						});
                     }
                 }
 			});
 		}
 	});
-	document.getElementById("mensajePersona").innerHTML = '<div class="chat-message clearfix">' +
-															    '<div class="chat-message-content clearfix">'+
-															        '<span class="chat-time">13:38</span><h5>John Doe</h5>'+
-															        
-															        '<p>Lorem ipsum dolor sit amet, consectetur adipisicing.</p>'+
-															    '</div>'+
-														    '</div>'+ 
-														'<hr>';
 })
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -979,10 +899,22 @@ function deleteChat(chatId) {
 }
 
 //Show chat in page
-function showChat(chat) {
-
-    $('#info').append(
-        '<div id="chat-' + chat.id + '</div>')
+function showChat(chats) {
+	 console.log(chats);
+	//$('#mensajePersona').empty();
+	 var message = $('#mensajePersona');
+	 console.log("Por aqui entra" + chats.length);
+   for(var i = 0; i < chats.length; i++){
+	    
+		message.append(
+	    		'<div class="chat-message clearfix">' +
+			    '<div class="chat-message-content clearfix">'+
+			        '<span class="chat-time"><b>'+ chats[i].hora + '</b></span><h5>'+ chats[i].usuario + '</h5>' +
+			        '<p>'+ chats[i].mensaje +'</p>'+
+			    '</div>'+
+		    '</div>'+ 
+		'<hr>')
+   }
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1015,53 +947,59 @@ function checkUsers() {
     }, 2000);
 }
 
+var miGrupo = '';
+
 function hereIam() {
 	setTimeout(function(){
-    	if (enSala) {
-    		var miGrupo = '';
-    		loadGrupos(function (grupos) {
-    			for (var i = 0; i < grupos.length; i++) {
-    				var esteEsMiGrupo = false;
-    				if (usuario == grupos[i].usuario1) {
-    					miSala = grupos[i];    	
-    					showGrupo(grupos[i]);
-    					i = grupos.length;		
-    					esteEsMiGrupo = true;
-    				}
-    				else if (usuario == grupos[i].usuario2) {
-    					if (grupos[i].usuario1 === '') {
-    						grupos[i].usuario1 = usuario;
-    						grupos[i].usuario2 = '';
-    						updateGrupo(grupos[i]);
-    					}
-    					miSala2 = grupos[i]; 
-    					showGrupo(grupos[i]);
-    					i = grupos.length;
-    					esteEsMiGrupo = true;
-    				}
-    				else if (usuario == grupos[i].usuario3) {
-    					if (grupos[i].usuario2 === '') {
-    						grupos[i].usuario2 = usuario;
-    						grupos[i].usuario3 = '';
-    						updateGrupo(grupos[i]);
-    					}
-    					showGrupo(grupos[i]);
-    					i = grupos.length;
-    					esteEsMiGrupo = true;
-    				}
-    				if (esteEsMiGrupo) {
-    					miGrupo = grupos[i].nombre;
-    				}
-    			}
-    		});
-    		loadChats(function (chats) {
-    			for (var i = 0; i < chats.length; i++) {
-    				if (chats[i].sala == miGrupo) {
-    					showChat(chats[i]);
-    				}
-    			}
-    		});
-    	}
+		if (enSala) {
+            
+            loadGrupos(function (grupos) {
+                for (var i = 0; i < grupos.length; i++) {
+                    if (usuario == grupos[i].usuario1) {
+                        miSala = grupos[i];
+                        showGrupo(grupos[i]);
+                        miGrupo = grupos[i].nombre;
+                        i = grupos.length;
+                    }
+                    else if (usuario == grupos[i].usuario2) {
+                        if (grupos[i].usuario1 === '') {
+                            grupos[i].usuario1 = usuario;
+                            grupos[i].usuario2 = '';
+                            updateGrupo(grupos[i]);
+                        }
+                        miSala2 = grupos[i]; 
+                        showGrupo(grupos[i]);
+                        miGrupo = grupos[i].nombre;
+                        i = grupos.length;
+                        
+                    }
+                    else if (usuario == grupos[i].usuario3) {
+                        if (grupos[i].usuario2 === '') {
+                            grupos[i].usuario2 = usuario;
+                            grupos[i].usuario3 = '';
+                            updateGrupo(grupos[i]);
+                        }
+                        showGrupo(grupos[i]);
+                        miGrupo = grupos[i].nombre;
+                        i = grupos.length;
+                        
+                        
+                    }
+                }
+            });
+            if (miGrupo != '') {
+            	var misChats = [,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,];
+                loadChats(function (chats) {
+                    for (var i = 0; i < chats.length; i++) {
+                        if (chats[i].sala == miGrupo) {
+                        	misChats[misChats.length-1] = chats[i];
+                        }
+                    }
+                });
+               
+                showChat(misChats);
+            }
+        }
     	loadItems(function (items) {    		
     		for (var i = 0; i < items.length; i++) {
             	//if (invitar) showItem(items[i]);
