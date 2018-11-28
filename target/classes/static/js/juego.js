@@ -184,7 +184,7 @@ var invitar = false;
 function addUserToFile(item){
 	$.ajax({
 		method: "POST",
-		url:'http://localhost:8080/ficheros',
+		url:'http://10.6.33.11:8080/ficheros',
 		data: JSON.stringify(item),
 	    processData: false,
 	    headers: {
@@ -195,7 +195,7 @@ function addUserToFile(item){
 
 function getUsersAndPasswords(callback){
 	$.ajax({
-		url: 'http://localhost:8080/ficheros/{partes}'
+		url: 'http://10.6.33.11:8080/ficheros/{partes}'
 	}).done(function(items){
 		callback(items);
 	})
@@ -220,7 +220,7 @@ setTimeout(function(){console.log(b)}, 1000);
 //no borrar de momento, puede resultar util mas tarde
 /*function hola123(callback){
 	$.ajax({
-		url:'http://localhost:8080/items/{password}'
+		url:'http://10.6.33.11:8080/items/{password}'
 	}).done(function(items){
 		callback(items);
 	})
@@ -233,7 +233,7 @@ hola123(function (pw) {
 //Load items from server
 function loadItems(callback) {
     $.ajax({
-        url: 'http://localhost:8080/items'
+        url: 'http://10.6.33.11:8080/items'
     }).done(function (items) {
         //console.log('Items loaded: ' + JSON.stringify(items));
         callback(items);
@@ -244,7 +244,7 @@ function loadItems(callback) {
 function createItem(item, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://localhost:8080/items',
+        url: 'http://10.6.33.11:8080/items',
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -260,7 +260,7 @@ function createItem(item, callback) {
 function updateItem(item) {
     $.ajax({
         method: 'PUT',
-        url: 'http://localhost:8080/items/' + item.id,
+        url: 'http://10.6.33.11:8080/items/' + item.id,
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -275,7 +275,7 @@ function updateItem(item) {
 function deleteItem(itemId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://localhost:8080/items/' + itemId
+        url: 'http://10.6.33.11:8080/items/' + itemId
     }).done(function (item) {
         console.log("Deleted item " + itemId)
     })
@@ -483,7 +483,9 @@ $(document).ready(function () {
     	                if (usuario == "admin") {
     	        			checkUsers();
     	        		}
+    	                
     				}
+    				i = items.length;
     			}
     		});
     	}
@@ -587,7 +589,7 @@ var cobaIAversion = "1.6";
 //Load VERSIONS from server
 function loadVersions(callback) {
     $.ajax({
-        url: 'http://localhost:8080/versions'
+        url: 'http://10.6.33.11:8080/versions'
     }).done(function (versions) {
         //console.log('Versions loaded: ' + JSON.stringify(versions));
         callback(versions);
@@ -598,7 +600,7 @@ function loadVersions(callback) {
 function createVersion(version, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://localhost:8080/versions',
+        url: 'http://10.6.33.11:8080/versions',
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -614,7 +616,7 @@ function createVersion(version, callback) {
 function updateVersion(version) {
     $.ajax({
         method: 'PUT',
-        url: 'http://localhost:8080/versions/' + version.id,
+        url: 'http://10.6.33.11:8080/versions/' + version.id,
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -629,7 +631,7 @@ function updateVersion(version) {
 function deleteVersion(versionId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://localhost:8080/versions/' + versionId
+        url: 'http://10.6.33.11:8080/versions/' + versionId
     }).done(function (version) {
         console.log("Deleted version " + versionId)
     })
@@ -673,7 +675,7 @@ loadVersions(function (versions) {
 //Load grupos from server
 function loadGrupos(callback) {
  $.ajax({
-     url: 'http://localhost:8080/grupos'
+     url: 'http://10.6.33.11:8080/grupos'
  }).done(function (grupos) {
      //console.log('Versions loaded: ' + JSON.stringify(grupos));
      callback(grupos);
@@ -684,7 +686,7 @@ function loadGrupos(callback) {
 function createGrupo(grupo, callback) {
  $.ajax({
      method: "POST",
-     url: 'http://localhost:8080/grupos',
+     url: 'http://10.6.33.11:8080/grupos',
      data: JSON.stringify(grupo),
      processData: false,
      headers: {
@@ -700,7 +702,7 @@ function createGrupo(grupo, callback) {
 function updateGrupo(grupo) {
  $.ajax({
      method: 'PUT',
-     url: 'http://localhost:8080/grupos/' + grupo.id,
+     url: 'http://10.6.33.11:8080/grupos/' + grupo.id,
      data: JSON.stringify(grupo),
      processData: false,
      headers: {
@@ -715,7 +717,7 @@ function updateGrupo(grupo) {
 function deleteGrupo(grupoId) {
  $.ajax({
      method: 'DELETE',
-     url: 'http://localhost:8080/grupos/' + grupoId
+     url: 'http://10.6.33.11:8080/grupos/' + grupoId
  }).done(function (grupo) {
      console.log("Deleted grupo " + grupoId)
  })
@@ -875,7 +877,7 @@ $(document).ready(function () {
             console.log(itemId);
             loadGrupos(function (grupos) {
             	for (var i = 0; i < grupos.length; i++) {
-            		if (grupos[i].id == itemId) {
+            		if (grupos[i].id == itemId && grupos[i].password === '') {
             			if (grupos[i].usuario2 === '') {
 	            			grupos[i].usuario2 = usuario;
             			}
@@ -884,16 +886,46 @@ $(document).ready(function () {
             			}
             			updateGrupo(grupos[i]);
             			showGrupo(grupos[i]);
+                        var element6 = document.getElementById("pantallaInicio");
+                        element6.style.visibility = "hidden";
+                        var element5 = document.getElementById("salasDisp");
+                        element5.style.visibility = "hidden";
+                        btn.className = "btn btn-danger";
+                        btn.innerHTML = 'Salir';
+                        enSala = true;
+            		}
+            		else if (grupos[i].id == itemId) {
+            			document.getElementById("pantallaInicio").style.zIndex = "10";
+            			document.getElementById("passSalas").style.visibility = "visible";
+            			var miGrupo = grupos[i];
+            			$("#btnPassSalas").click(function () {            				
+            				var inputPassSala = $('#passSalaPriv');
+	            			if (inputPassSala.val() == miGrupo.password) {
+	            				if (miGrupo.usuario2 === '') {
+	    	            			miGrupo.usuario2 = usuario;
+	                			}
+	                			else if (miGrupo.usuario3 === '') {
+	                				miGrupo.usuario3 = usuario;
+	                			}
+	                			updateGrupo(miGrupo);
+	                			showGrupo(miGrupo);
+	                            var element6 = document.getElementById("pantallaInicio");
+	                            element6.style.zIndex = "2";
+	                            element6.style.visibility = "hidden";
+	                            var element5 = document.getElementById("salasDisp");
+	                            element5.style.visibility = "hidden";
+	                            document.getElementById("passSalas").style.visibility = "hidden";
+	                            btn.className = "btn btn-danger";
+	                            btn.innerHTML = 'Salir';
+	                            enSala = true;
+	            			}
+	            			else {
+	            				document.getElementById("contrasenaDeSala").innerHTML = '<span style="color:red"> <b>La contraseña no es correcta, por favor vuelve a intentarlo</b> </span>';
+	            			}
+            			});
             		}
             	}
             });
-            var element6 = document.getElementById("pantallaInicio");
-            element6.style.visibility = "hidden";
-            var element5 = document.getElementById("salasDisp");
-            element5.style.visibility = "hidden";
-            btn.className = "btn btn-danger";
-            btn.innerHTML = 'Salir';
-            enSala = true;
         }
     });
 	
@@ -956,7 +988,7 @@ $(document).ready(function () {
 //Load Chats from server
 function loadChats(callback) {
     $.ajax({
-        url: 'http://localhost:8080/chats'
+        url: 'http://10.6.33.11:8080/chats'
     }).done(function (chats) {
         //console.log('Chats loaded: ' + JSON.stringify(chats));
         callback(chats);
@@ -967,7 +999,7 @@ function loadChats(callback) {
 function createChat(chat, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://localhost:8080/chats',
+        url: 'http://10.6.33.11:8080/chats',
         data: JSON.stringify(chat),
         processData: false,
         headers: {
@@ -983,7 +1015,7 @@ function createChat(chat, callback) {
 function updateChat(chat) {
     $.ajax({
         method: 'PUT',
-        url: 'http://localhost:8080/chats/' + chat.id,
+        url: 'http://10.6.33.11:8080/chats/' + chat.id,
         data: JSON.stringify(chat),
         processData: false,
         headers: {
@@ -998,7 +1030,7 @@ function updateChat(chat) {
 function deleteChat(chatId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://localhost:8080/chats/' + chatId
+        url: 'http://10.6.33.11:8080/chats/' + chatId
     }).done(function (chat) {
         console.log("Deleted chat " + chatId)
     })
@@ -1009,7 +1041,6 @@ function showChat(chats) {
 	 //console.log(chats);
 	$('#mensajePersona').empty();
 	 var message = $('#mensajePersona');
-	 console.log(chats[0]);
    for(var i = 0; i < chats.length; i++){
 	    if (chats[i].sala == miGrupo) {
 			message.append(
