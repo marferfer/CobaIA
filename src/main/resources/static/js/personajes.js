@@ -3,7 +3,7 @@ WebFontConfig = {
     //  'active' means all requested fonts have finished loading
     //  We set a 1 second delay before calling 'createText'.
     //  For some reason if we don't the browser cannot render the text the first time it's created.
-    active: function() { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
+    //active: function() { jugPersonajes.time.events.add(Phaser.Timer.SECOND, createText, this); },
 
     //  The Google Fonts we want to load (specify as many as you like in the array)
     google: {
@@ -11,6 +11,41 @@ WebFontConfig = {
     }
 
 };
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//GRUPOS	 ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+var tankaUser2 = '';
+var taliUser2 = '';
+var acroUser2 = '';
+
+//Load grupos from server
+function loadSala(id, callback) {
+$.ajax({
+  url: 'http://localhost:8080/grupos/' + id
+}).done(function (grupo) {
+  //console.log('Versions loaded: ' + JSON.stringify(grupos));
+  callback(grupo);
+})
+}
+
+//Update grupo in server
+function updateSala(grupo) {
+$.ajax({
+  method: 'PUT',
+  url: 'http://localhost:8080/grupos/' + grupo.id,
+  data: JSON.stringify(grupo),
+  processData: false,
+  headers: {
+      "Content-Type": "application/json"
+  }
+}).done(function (grupo) {
+  //console.log("Updated grupo: " + JSON.stringify(grupo))
+})
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function preload6() {
 
@@ -76,7 +111,25 @@ function create6() {
     
     tankaUser.font = 'Bungee';
     taliUser.font = 'Bungee';
-    acroUser.font = 'Bungee';
+    acroUser.font = 'Bungee';  
+    
+    if (myGroupId != '') {
+    	loadSala(myGroupId, function (grupo) {
+    		if (grupo.tanka != '') {
+    			tankaUser2 = grupo.tanka;
+    		}
+    		if (grupo.tali != '') {
+    			taliUser2 = grupo.tali;
+    		}
+    		if (grupo.acro != '') {
+    			acroUser2 = grupo.acro;
+    		}
+    		checkSala();
+    	});
+    }
+    
+    
+    
 
     buttonExit = jugPersonajes.add.button(jugPersonajes.world.centerX - 760, 130, 'buttonVolver', actionOnClickVolverMenu, this, 2, 1, 0); //jugPersonajes.world.centerX - 320, 550
 
@@ -93,6 +146,21 @@ function create6() {
     acro.onInputOut.add(out, this);
     acro.onInputUp.add(up, this);
 
+}
+
+function checkSala() {
+	if (tankaUser2 != '') {    
+		tanka.alpha = 0.5;
+		tankaUser.text = tankaUser2;
+	}
+	if (taliUser2 != '') {
+		tali.alpha = 0.5;
+		taliUser.text = taliUser2;
+	}
+	if (acroUser2 != '') {
+		acro.alpha = 0.5;
+		acroUser.text = acroUser2;
+	}
 }
 
 /*function loop2() {
@@ -143,22 +211,48 @@ function actionOnClickTanka () {
 		miCobaIA = '';
 	    tanka.alpha = 1;
 	    tankaUser.text = '';
+	    if (myGroupId != '') {
+	    	loadSala(myGroupId, function (grupo) {
+	    		grupo.tanka = '';
+	    		updateSala(grupo);
+	    	});
+	    }
 		break;
 	case 'talibaIA':
 		miCobaIA = 'tankabaIA';
 	    tanka.alpha = 0.5;
 	    tali.alpha = 1;
 	    taliUser.text = '';
+	    if (myGroupId != '') {
+	    	loadSala(myGroupId, function (grupo) {
+	    		grupo.tanka = usuario;
+	    		grupo.tali = '';
+	    		updateSala(grupo);
+	    	});
+	    }
 		break;
 	case 'acrobaIA':
 		miCobaIA = 'tankabaIA';
 	    tanka.alpha = 0.5;
 	    acro.alpha = 1;
 	    acroUser.text = '';
+	    if (myGroupId != '') {
+	    	loadSala(myGroupId, function (grupo) {
+	    		grupo.tanka = usuario;
+	    		grupo.acro = '';
+	    		updateSala(grupo);
+	    	});
+	    }
 		break;
 	default:
 		miCobaIA = 'tankabaIA';
 		tanka.alpha = 0.5;
+		if (myGroupId != '') {
+	    	loadSala(myGroupId, function (grupo) {
+	    		grupo.tanka = usuario;
+	    		updateSala(grupo);
+	    	});
+	    }
 		break;
 	}
 	var msg = {
@@ -176,21 +270,47 @@ function actionOnClickTali () {
 	    tali.alpha = 0.5;
 	    tanka.alpha = 1;
 	    tankaUser.text = '';
+	    if (myGroupId != '') {
+	    	loadSala(myGroupId, function (grupo) {
+	    		grupo.tali = usuario;
+	    		grupo.tanka = '';
+	    		updateSala(grupo);
+	    	});
+	    }
 		break;
 	case 'talibaIA':
 		miCobaIA = '';
 	    tali.alpha = 1;
 	    taliUser.text = '';
+	    if (myGroupId != '') {
+	    	loadSala(myGroupId, function (grupo) {
+	    		grupo.tali = '';
+	    		updateSala(grupo);
+	    	});
+	    }
 		break;
 	case 'acrobaIA':
 		miCobaIA = 'talibaIA';
 	    tali.alpha = 0.5;
 	    acro.alpha = 1;
 	    acroUser.text = '';
+	    if (myGroupId != '') {
+	    	loadSala(myGroupId, function (grupo) {
+	    		grupo.tali = usuario;
+	    		grupo.acro = '';
+	    		updateSala(grupo);
+	    	});
+	    }
 		break;
 	default:
 		miCobaIA = 'talibaIA';
 		tali.alpha = 0.5;
+		if (myGroupId != '') {
+	    	loadSala(myGroupId, function (grupo) {
+	    		grupo.tali = usuario;
+	    		updateSala(grupo);
+	    	});
+	    }
 		break;
 	}
 	var msg = {
@@ -207,21 +327,47 @@ function actionOnClickAcro () {
 	    acro.alpha = 0.5;
 	    tanka.alpha = 1;
 	    tankaUser.text = '';
+	    if (myGroupId != '') {
+	    	loadSala(myGroupId, function (grupo) {
+	    		grupo.acro = usuario;
+	    		grupo.tanka = '';
+	    		updateSala(grupo);
+	    	});
+	    }
 		break;
 	case 'talibaIA':
 		miCobaIA = 'acrobaIA';
 	    acro.alpha = 0.5;
 	    tali.alpha = 1;
 	    taliUser.text = '';
+	    if (myGroupId != '') {
+	    	loadSala(myGroupId, function (grupo) {
+	    		grupo.acro = usuario;
+	    		grupo.tali = '';
+	    		updateSala(grupo);
+	    	});
+	    }
 		break;
 	case 'acrobaIA':
 		miCobaIA = '';
 	    acro.alpha = 1;
 	    acroUser.text = '';
+	    if (myGroupId != '') {
+	    	loadSala(myGroupId, function (grupo) {
+	    		grupo.acro = '';
+	    		updateSala(grupo);
+	    	});
+	    }
 		break;
 	default:
 		miCobaIA = 'acrobaIA';
     	acro.alpha = 0.5;
+    	if (myGroupId != '') {
+	    	loadSala(myGroupId, function (grupo) {
+	    		grupo.acro = usuario;
+	    		updateSala(grupo);
+	    	});
+	    }
 		break;
 	}
     var msg = {
@@ -252,6 +398,9 @@ $(document).ready(function() {
 		    	acroUser.text = '';
 		    	acro.alpha = 1;
 		    }
+		    if (miCobaIA === 'tankabaIA') {
+		    	miCobaIA = '';
+		    }
 			break;
 		case 'talibaIA':
 		    tali.alpha = 0.5;
@@ -264,6 +413,9 @@ $(document).ready(function() {
 		    	acroUser.text = '';
 		    	acro.alpha = 1;
 		    }
+		    if (miCobaIA === 'talibaIA') {
+		    	miCobaIA = '';
+		    }
 			break;
 		case 'acrobaIA':
 		    acro.alpha = 0.5;
@@ -275,6 +427,9 @@ $(document).ready(function() {
 		    else if (message.name === tankaUser.text) {
 		    	tankaUser.text = '';
 		    	tanka.alpha = 1;
+		    }
+		    if (miCobaIA === 'acrobaIA') {
+		    	miCobaIA = '';
 		    }
 			break;
 		default:

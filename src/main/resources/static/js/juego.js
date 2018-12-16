@@ -603,7 +603,7 @@ loadVersions(function (versions) {
 // GRUPOS	 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+var myGroupId = '';
 
 //Load grupos from server
 function loadGrupos(callback) {
@@ -708,6 +708,7 @@ $(document).ready(function () {
         }       
         //Salir de la sala
         else {
+        	myGroupId = '';
         	enSala = false;
         	miSala = null;
         	miSala2 = null;
@@ -778,6 +779,7 @@ $(document).ready(function () {
 			    //document.getElementById("salas").innerHTML = inputName.val();	
 			    createGrupo(grupo, function (grupoWithId) {
 			    	showGrupo(grupoWithId);
+			    	myGroupId = grupoWithId.id;
 			    });
 			    document.getElementById("pantallaInicio").style.visibility = "hidden";
 	            document.getElementById("formCreateGroup").style.visibility = "hidden";
@@ -826,6 +828,7 @@ $(document).ready(function () {
                         btn.className = "btn btn-danger";
                         btn.innerHTML = 'Salir';
                         enSala = true;
+                        myGroupId = itemId;
             		}
             		else if (grupos[i].id == itemId) {
             			document.getElementById("pantallaInicio").style.zIndex = "10";
@@ -851,6 +854,7 @@ $(document).ready(function () {
 	                            btn.className = "btn btn-danger";
 	                            btn.innerHTML = 'Salir';
 	                            enSala = true;
+	                            myGroupId = itemId;
 	            			}
 	            			else {
 	            				document.getElementById("contrasenaDeSala").innerHTML = '<span style="color:red"> <b>La contraseña no es correcta, por favor vuelve a intentarlo</b> </span>';

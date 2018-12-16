@@ -8,6 +8,9 @@ public class Grupo {
 	private String usuario3;
 	private String nombre;
 	private String password;
+	private String tanka = "";
+	private String tali = "";
+	private String acro = "";
 	
 
 	public String getNombre() {
@@ -59,6 +62,30 @@ public class Grupo {
 
 	public void setUsuario3(String usuario3) {
 		this.usuario3 = usuario3;
+	}
+
+	public String getTanka() {
+		return tanka;
+	}
+
+	public void setTanka(String tanka) {
+		this.tanka = tanka;
+	}
+
+	public String getTali() {
+		return tali;
+	}
+
+	public void setTali(String tali) {
+		this.tali = tali;
+	}
+
+	public String getAcro() {
+		return acro;
+	}
+
+	public void setAcro(String acro) {
+		this.acro = acro;
 	}
 
 	@Override
