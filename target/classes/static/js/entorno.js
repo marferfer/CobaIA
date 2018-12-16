@@ -118,6 +118,8 @@ function create5() {
     nivel1.grupo = juego.add.group();
     nivel1.grupo.enableBody = true;
     nivel1.grupo.physicsBodyType = Phaser.Physics.P2JS;
+    
+    nivel1.siguiendo = miCobaIA;
 
     let sueloN1 = nivel1.grupo.create(0, juego.world.height -300, 'sueloN1Parte1');
     juego.physics.p2.enableBody(sueloN1);

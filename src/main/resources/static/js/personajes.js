@@ -1,11 +1,30 @@
+WebFontConfig = {
+
+    //  'active' means all requested fonts have finished loading
+    //  We set a 1 second delay before calling 'createText'.
+    //  For some reason if we don't the browser cannot render the text the first time it's created.
+    active: function() { game.time.events.add(Phaser.Timer.SECOND, createText, this); },
+
+    //  The Google Fonts we want to load (specify as many as you like in the array)
+    google: {
+      families: ['Bungee']
+    }
+
+};
+
 function preload6() {
 
-    jugPersonajes.load.audio('baseCharles', 'assets/sounds/baseCharles.mp3');
+	jugPersonajes.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
+	
+	jugPersonajes.load.audio('baseCharles', 'assets/sounds/baseCharles.mp3');
     jugPersonajes.load.audio('metronomo', 'assets/sounds/metronome120bpm.mp3');
 
     jugPersonajes.load.spritesheet('button', 'assets/Menu/button_sprite_sheet.png', 193, 71);
     jugPersonajes.load.spritesheet('buttonVolver', 'assets/Menu/button_sprite_sheet volver.png', 193, 71);
     jugPersonajes.load.image('background','assets/Menu/Personajes.png');
+    jugPersonajes.load.image('tanka','assets/Images/TankabaIA.png');
+    jugPersonajes.load.image('tali','assets/Images/TalibaIA.png');
+    jugPersonajes.load.image('acro','assets/Images/AcrobaIA.png');
 
 }
 
@@ -14,6 +33,10 @@ var buttonOnline;
 var buttonExit;
 var background;
 var title;
+var tanka;
+var tali;
+var acro;
+var connection;
 /*var music2 = [];
 var back = false;*/
 
@@ -38,12 +61,37 @@ function create6() {
     background = jugPersonajes.add.tileSprite(0, 0, 1920, 800, 'background');
 
     button = jugPersonajes.add.button(jugPersonajes.world.centerX - 110, 550, 'button', actionOnClickGame, this, 2, 1, 0);
+    
+    tanka = jugPersonajes.add.button(310, 420, 'tanka', actionOnClickTanka, this, 2, 1, 0);
+    tali = jugPersonajes.add.button(1370, 420, 'tali', actionOnClickTali, this, 2, 1, 0);
+    acro = jugPersonajes.add.button(830, 420, 'acro', actionOnClickAcro, this, 2, 1, 0);
+    
+    tankaUser = jugPersonajes.add.text(310, 420, '');
+    taliUser = jugPersonajes.add.text(1370, 420, '');
+    acroUser = jugPersonajes.add.text(830, 420, '');
+    
+    tankaUser.fill = 'white';
+    taliUser.fill = 'white';
+    acroUser.fill = 'white';
+    
+    tankaUser.font = 'Bungee';
+    taliUser.font = 'Bungee';
+    acroUser.font = 'Bungee';
 
     buttonExit = jugPersonajes.add.button(jugPersonajes.world.centerX - 760, 130, 'buttonVolver', actionOnClickVolverMenu, this, 2, 1, 0); //jugPersonajes.world.centerX - 320, 550
 
     button.onInputOver.add(over, this);
     button.onInputOut.add(out, this);
     button.onInputUp.add(up, this);
+    tanka.onInputOver.add(over, this);
+    tanka.onInputOut.add(out, this);
+    tanka.onInputUp.add(up, this);
+    tali.onInputOver.add(over, this);
+    tali.onInputOut.add(out, this);
+    tali.onInputUp.add(up, this);
+    acro.onInputOver.add(over, this);
+    acro.onInputOut.add(out, this);
+    acro.onInputUp.add(up, this);
 
 }
 
@@ -87,5 +135,169 @@ function actionOnClickVolverMenu () {
 function actionOnClickGame () {
     jugPersonajes.destroy();
     inicio();
-
 }
+function actionOnClickTanka () {
+	tankaUser.text = usuario;
+	switch (miCobaIA) {
+	case 'tankabaIA':
+		miCobaIA = '';
+	    tanka.alpha = 1;
+	    tankaUser.text = '';
+		break;
+	case 'talibaIA':
+		miCobaIA = 'tankabaIA';
+	    tanka.alpha = 0.5;
+	    tali.alpha = 1;
+	    taliUser.text = '';
+		break;
+	case 'acrobaIA':
+		miCobaIA = 'tankabaIA';
+	    tanka.alpha = 0.5;
+	    acro.alpha = 1;
+	    acroUser.text = '';
+		break;
+	default:
+		miCobaIA = 'tankabaIA';
+		tanka.alpha = 0.5;
+		break;
+	}
+	var msg = {
+		name : usuario,
+		message : miCobaIA
+	}
+	connection.send(JSON.stringify(msg));
+	console.log(msg);
+}
+function actionOnClickTali () {
+	taliUser.text = usuario;
+	switch (miCobaIA) {
+	case 'tankabaIA':
+		miCobaIA = 'talibaIA';
+	    tali.alpha = 0.5;
+	    tanka.alpha = 1;
+	    tankaUser.text = '';
+		break;
+	case 'talibaIA':
+		miCobaIA = '';
+	    tali.alpha = 1;
+	    taliUser.text = '';
+		break;
+	case 'acrobaIA':
+		miCobaIA = 'talibaIA';
+	    tali.alpha = 0.5;
+	    acro.alpha = 1;
+	    acroUser.text = '';
+		break;
+	default:
+		miCobaIA = 'talibaIA';
+		tali.alpha = 0.5;
+		break;
+	}
+	var msg = {
+		name : usuario,
+		message : miCobaIA
+	}
+	connection.send(JSON.stringify(msg));
+}
+function actionOnClickAcro () {
+	acroUser.text = usuario;
+    switch (miCobaIA) {
+	case 'tankabaIA':
+		miCobaIA = 'acrobaIA';
+	    acro.alpha = 0.5;
+	    tanka.alpha = 1;
+	    tankaUser.text = '';
+		break;
+	case 'talibaIA':
+		miCobaIA = 'acrobaIA';
+	    acro.alpha = 0.5;
+	    tali.alpha = 1;
+	    taliUser.text = '';
+		break;
+	case 'acrobaIA':
+		miCobaIA = '';
+	    acro.alpha = 1;
+	    acroUser.text = '';
+		break;
+	default:
+		miCobaIA = 'acrobaIA';
+    	acro.alpha = 0.5;
+		break;
+	}
+    var msg = {
+		name : usuario,
+		message : miCobaIA
+	}
+	connection.send(JSON.stringify(msg));
+}
+
+$(document).ready(function() {
+
+	connection = new WebSocket('ws://localhost:8080/personajes');
+	connection.onerror = function(e) {
+		console.log("WS error: " + e);
+	}
+	connection.onmessage = function(msg) {
+		console.log("WS message: " + msg.data);
+		var message = JSON.parse(msg.data)
+		switch (message.message) {
+		case 'tankabaIA':
+		    tanka.alpha = 0.5;
+		    tankaUser.text = message.name;
+		    if (message.name === taliUser.text) {
+		    	taliUser.text = '';
+		    	tali.alpha = 1;
+		    }
+		    else if (message.name === acroUser.text) {
+		    	acroUser.text = '';
+		    	acro.alpha = 1;
+		    }
+			break;
+		case 'talibaIA':
+		    tali.alpha = 0.5;
+		    taliUser.text = message.name;
+		    if (message.name === tankaUser.text) {
+		    	tankaUser.text = '';
+		    	tanka.alpha = 1;
+		    }
+		    else if (message.name === acroUser.text) {
+		    	acroUser.text = '';
+		    	acro.alpha = 1;
+		    }
+			break;
+		case 'acrobaIA':
+		    acro.alpha = 0.5;
+		    acroUser.text = message.name;
+		    if (message.name === taliUser.text) {
+		    	taliUser.text = '';
+		    	tali.alpha = 1;
+		    }
+		    else if (message.name === tankaUser.text) {
+		    	tankaUser.text = '';
+		    	tanka.alpha = 1;
+		    }
+			break;
+		default:
+			switch (message.name) {
+			case tankaUser.text:
+				tanka.alpha = 1;
+			    tankaUser.text = '';
+				break;
+			case taliUser.text:
+				tali.alpha = 1;
+			    taliUser.text = '';
+				break;
+			case acroUser.text:
+				acro.alpha = 1;
+			    acroUser.text = '';
+				break;
+			default:
+				break;
+			}
+			break;
+		}
+	}
+	connection.onclose = function() {
+		console.log("Closing socket");
+	}
+})

@@ -76,6 +76,8 @@ function loop() {
 
 ///////////////////////////////////////////////////////////////////////////////////
 
+var miCobaIA;
+
 function personajes() {
      jugPersonajes = new Phaser.Game(1920, 800, Phaser.AUTO, '', {preload: preload6, create: create6});  
 
@@ -184,7 +186,7 @@ var invitar = false;
 function addUserToFile(item){
 	$.ajax({
 		method: "POST",
-		url:'http://10.6.33.11:8080/ficheros',
+		url:'http://localhost:8080/ficheros',
 		data: JSON.stringify(item),
 	    processData: false,
 	    headers: {
@@ -195,7 +197,7 @@ function addUserToFile(item){
 
 function getUsersAndPasswords(callback){
 	$.ajax({
-		url: 'http://10.6.33.11:8080/ficheros/{partes}'
+		url: 'http://localhost:8080/ficheros/{partes}'
 	}).done(function(items){
 		callback(items);
 	})
@@ -220,7 +222,7 @@ setTimeout(function(){console.log(b)}, 1000);
 //no borrar de momento, puede resultar util mas tarde
 /*function hola123(callback){
 	$.ajax({
-		url:'http://10.6.33.11:8080/items/{password}'
+		url:'http://localhost:8080/items/{password}'
 	}).done(function(items){
 		callback(items);
 	})
@@ -233,7 +235,7 @@ hola123(function (pw) {
 //Load items from server
 function loadItems(callback) {
     $.ajax({
-        url: 'http://10.6.33.11:8080/items'
+        url: 'http://localhost:8080/items'
     }).done(function (items) {
         //console.log('Items loaded: ' + JSON.stringify(items));
         callback(items);
@@ -244,7 +246,7 @@ function loadItems(callback) {
 function createItem(item, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://10.6.33.11:8080/items',
+        url: 'http://localhost:8080/items',
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -260,7 +262,7 @@ function createItem(item, callback) {
 function updateItem(item) {
     $.ajax({
         method: 'PUT',
-        url: 'http://10.6.33.11:8080/items/' + item.id,
+        url: 'http://localhost:8080/items/' + item.id,
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -275,7 +277,7 @@ function updateItem(item) {
 function deleteItem(itemId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://10.6.33.11:8080/items/' + itemId
+        url: 'http://localhost:8080/items/' + itemId
     }).done(function (item) {
         console.log("Deleted item " + itemId)
     })
@@ -316,10 +318,29 @@ function llamarconsola(){
 
 $(document).ready(function () {
 
+	document.getElementById('exampleInputEmail1').focus();
     var input = $('#exampleInputEmail1')
     var input2 = $('#passUser')
     var input3 = $('#passUser2')
     var info = $('#info')
+	document.getElementById('exampleInputEmail1').addEventListener("keyup", function(event) {
+	  event.preventDefault();
+	  if (event.keyCode === 13) {
+	    document.getElementById("add-button").click();
+	  }
+	});
+    document.getElementById('passUser').addEventListener("keyup", function(event) {
+  	  event.preventDefault();
+  	  if (event.keyCode === 13) {
+  	    document.getElementById("add-button").click();
+  	  }
+  	});
+    document.getElementById('passUser2').addEventListener("keyup", function(event) {
+  	  event.preventDefault();
+  	  if (event.keyCode === 13) {
+  	    document.getElementById("add-button").click();
+  	  }
+  	});
 
     //Handle delete buttons
     $('li').click(function (event) {
@@ -489,94 +510,6 @@ $(document).ready(function () {
     			}
     		});
     	}
-        
-        /*loadItems(function (items) {
-    		console.log("Entra en loadItems");
-    		console.log("value: " + value);
-    		
-    		document.getElementById("nombreChat").innerHTML = "<h4 >"+value+"</h4 >";
-    		
-    		if(items.length == 0){
-    			
-    			createItem(item, function (itemWithId) {
-                    //When item with id is returned from server
-    				showUser(itemWithId);
-    				addUserToFile(itemWithId);
-                });
-            
-                var element = document.getElementById("exampleInputEmail1");
-                element.parentNode.removeChild(element);
-                var element1 = document.getElementById("add-button");
-                element1.parentNode.removeChild(element1);
-                var element2 = document.getElementById("title");
-                element2.parentNode.removeChild(element2);
-                var element3 = document.getElementById("pantallaInicio");
-                element3.style.visibility = "hidden";
-                element3.style.zIndex = "2";
-                var element4 = document.getElementById("contrasena");
-                element4.parentNode.removeChild(element4);
-                var element5 = document.getElementById("passUser");
-                element5.parentNode.removeChild(element5);
-                var element6 = document.getElementById("btnRegistrarse");
-                element6.parentNode.removeChild(element6);
-                var element7 = document.getElementById("confirmPass");
-                element7.parentNode.removeChild(element7);
-                
-   
-                usuario = value;
-                if (usuario == "admin") {
-        			checkUsers();
-        		}
-    		}
-    		
-    		else {
-            	
-            	userRepeated = false;
-    		
-	            for (var i = 0; i < items.length; i++) {
-	            	
-	            	if (items[i].description == value){
-	                	
-						document.getElementById("title").innerHTML = '<span style="color:red"> <b>Nombre de usuario ya en uso. Por favor, escoja un nuevo nombre.</b> </span>';
-								
-	                	console.log("usuario repetido");
-	                	userRepeated = true;	                	
-	                }
-	            } 
-	            if (!userRepeated) {
-                	
-                	createItem(item, function (itemWithId) {
-                        //When item with id is returned from server
-                		showUser(itemWithId);
-                		addUserToFile(itemWithId);
-                    });
-                
-                    var element = document.getElementById("exampleInputEmail1");
-                    element.parentNode.removeChild(element);
-                    var element1 = document.getElementById("add-button");
-                    element1.parentNode.removeChild(element1);
-                    var element2 = document.getElementById("title");
-                    element2.parentNode.removeChild(element2);
-                    var element3 = document.getElementById("pantallaInicio");
-                    element3.style.visibility = "hidden";
-                    element3.style.zIndex = "2";
-                    var element4 = document.getElementById("contrasena");
-                    element4.parentNode.removeChild(element4);
-                    var element5 = document.getElementById("passUser");
-                    element5.parentNode.removeChild(element5); 
-                    var element6 = document.getElementById("btnRegistrarse");
-                    element6.parentNode.removeChild(element6);
-                    var element7 = document.getElementById("confirmPass");
-                    element7.parentNode.removeChild(element7);
-
-                    
-                    usuario = value;
-                    if (usuario == "admin") {
-            			checkUsers();
-            		}
-                }
-            }
-        })*/
     })
 })
 
@@ -589,7 +522,7 @@ var cobaIAversion = "1.6";
 //Load VERSIONS from server
 function loadVersions(callback) {
     $.ajax({
-        url: 'http://10.6.33.11:8080/versions'
+        url: 'http://localhost:8080/versions'
     }).done(function (versions) {
         //console.log('Versions loaded: ' + JSON.stringify(versions));
         callback(versions);
@@ -600,7 +533,7 @@ function loadVersions(callback) {
 function createVersion(version, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://10.6.33.11:8080/versions',
+        url: 'http://localhost:8080/versions',
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -616,7 +549,7 @@ function createVersion(version, callback) {
 function updateVersion(version) {
     $.ajax({
         method: 'PUT',
-        url: 'http://10.6.33.11:8080/versions/' + version.id,
+        url: 'http://localhost:8080/versions/' + version.id,
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -631,7 +564,7 @@ function updateVersion(version) {
 function deleteVersion(versionId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://10.6.33.11:8080/versions/' + versionId
+        url: 'http://localhost:8080/versions/' + versionId
     }).done(function (version) {
         console.log("Deleted version " + versionId)
     })
@@ -675,7 +608,7 @@ loadVersions(function (versions) {
 //Load grupos from server
 function loadGrupos(callback) {
  $.ajax({
-     url: 'http://10.6.33.11:8080/grupos'
+     url: 'http://localhost:8080/grupos'
  }).done(function (grupos) {
      //console.log('Versions loaded: ' + JSON.stringify(grupos));
      callback(grupos);
@@ -686,7 +619,7 @@ function loadGrupos(callback) {
 function createGrupo(grupo, callback) {
  $.ajax({
      method: "POST",
-     url: 'http://10.6.33.11:8080/grupos',
+     url: 'http://localhost:8080/grupos',
      data: JSON.stringify(grupo),
      processData: false,
      headers: {
@@ -702,7 +635,7 @@ function createGrupo(grupo, callback) {
 function updateGrupo(grupo) {
  $.ajax({
      method: 'PUT',
-     url: 'http://10.6.33.11:8080/grupos/' + grupo.id,
+     url: 'http://localhost:8080/grupos/' + grupo.id,
      data: JSON.stringify(grupo),
      processData: false,
      headers: {
@@ -717,7 +650,7 @@ function updateGrupo(grupo) {
 function deleteGrupo(grupoId) {
  $.ajax({
      method: 'DELETE',
-     url: 'http://10.6.33.11:8080/grupos/' + grupoId
+     url: 'http://localhost:8080/grupos/' + grupoId
  }).done(function (grupo) {
      console.log("Deleted grupo " + grupoId)
  })
@@ -988,7 +921,7 @@ $(document).ready(function () {
 //Load Chats from server
 function loadChats(callback) {
     $.ajax({
-        url: 'http://10.6.33.11:8080/chats'
+        url: 'http://localhost:8080/chats'
     }).done(function (chats) {
         //console.log('Chats loaded: ' + JSON.stringify(chats));
         callback(chats);
@@ -999,7 +932,7 @@ function loadChats(callback) {
 function createChat(chat, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://10.6.33.11:8080/chats',
+        url: 'http://localhost:8080/chats',
         data: JSON.stringify(chat),
         processData: false,
         headers: {
@@ -1015,7 +948,7 @@ function createChat(chat, callback) {
 function updateChat(chat) {
     $.ajax({
         method: 'PUT',
-        url: 'http://10.6.33.11:8080/chats/' + chat.id,
+        url: 'http://localhost:8080/chats/' + chat.id,
         data: JSON.stringify(chat),
         processData: false,
         headers: {
@@ -1030,7 +963,7 @@ function updateChat(chat) {
 function deleteChat(chatId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://10.6.33.11:8080/chats/' + chatId
+        url: 'http://localhost:8080/chats/' + chatId
     }).done(function (chat) {
         console.log("Deleted chat " + chatId)
     })
