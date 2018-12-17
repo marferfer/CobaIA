@@ -783,6 +783,30 @@ $(document).ready(function () {
 			    createGrupo(grupo, function (grupoWithId) {
 			    	showGrupo(grupoWithId);
 			    	myGroupId = grupoWithId.id;
+			    	if (nivelJuego === 0.5) {
+			    		switch (miCobaIA) {
+			    		case 'tankabaIA':
+			    			loadSala(myGroupId, function(grupo) {
+			    				grupo.tanka = usuario;
+			    				updateGrupo(grupo);
+			    			});
+			    			break;
+			    		case 'talibaIA':
+			    			loadSala(myGroupId, function(grupo) {
+			    				grupo.tali = usuario;
+			    				updateGrupo(grupo);
+			    			});
+			    			break;
+			    		case 'acrobaIA':
+			    			loadSala(myGroupId, function(grupo) {
+			    				grupo.acro = usuario;
+			    				updateGrupo(grupo);
+			    			});
+			    			break;
+			    		default:
+			    			break;
+			    		}
+			    	}
 			    });
 			    document.getElementById("pantallaInicio").style.visibility = "hidden";
 	            document.getElementById("formCreateGroup").style.visibility = "hidden";
@@ -844,6 +868,7 @@ $(document).ready(function () {
                     		}
                     		checkSala();
                     	});
+                        miCobaIA = '';
             		}
             		else if (grupos[i].id == itemId) {
             			document.getElementById("pantallaInicio").style.zIndex = "10";
@@ -870,18 +895,21 @@ $(document).ready(function () {
 	                            btn.innerHTML = 'Salir';
 	                            enSala = true;
 	                            myGroupId = itemId;
-	                            loadSala(myGroupId, function (grupo) {
-	                        		if (grupo.tanka != '') {
-	                        			tankaUser2 = grupo.tanka;
-	                        		}
-	                        		if (grupo.tali != '') {
-	                        			taliUser2 = grupo.tali;
-	                        		}
-	                        		if (grupo.acro != '') {
-	                        			acroUser2 = grupo.acro;
-	                        		}
-	                        		checkSala();
-	                        	});
+	                            if (nivelJuego === 0.5) {
+	                            	loadSala(myGroupId, function (grupo) {
+		                        		if (grupo.tanka != '') {
+		                        			tankaUser2 = grupo.tanka;
+		                        		}
+		                        		if (grupo.tali != '') {
+		                        			taliUser2 = grupo.tali;
+		                        		}
+		                        		if (grupo.acro != '') {
+		                        			acroUser2 = grupo.acro;
+		                        		}
+		                        		checkSala();
+		                        	});
+	                            }
+	                            miCobaIA = '';
 	            			}
 	            			else {
 	            				document.getElementById("contrasenaDeSala").innerHTML = '<span style="color:red"> <b>La contraseña no es correcta, por favor vuelve a intentarlo</b> </span>';
@@ -1171,12 +1199,24 @@ function checkSala() {
 		tanka.alpha = 0.5;
 		tankaUser.text = tankaUser2;
 	}
+	else {
+		tanka.alpha = 1;
+		tankaUser.text = '';
+	}
 	if (taliUser2 != '') {
 		tali.alpha = 0.5;
 		taliUser.text = taliUser2;
 	}
+	else {
+		tali.alpha = 1;
+		taliUser.text = '';
+	}
 	if (acroUser2 != '') {
 		acro.alpha = 0.5;
 		acroUser.text = acroUser2;
+	}
+	else {
+		acro.alpha = 1;
+		acroUser.text = '';
 	}
 }

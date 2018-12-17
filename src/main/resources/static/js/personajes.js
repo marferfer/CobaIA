@@ -77,7 +77,7 @@ var back = false;*/
 
 function create6() {
 
-    nivelJuego = 1;
+    nivelJuego = 0.5;
     //console.log(nivelJuego);
 
     /*var baseCharles = jugPersonajes.add.audio('baseCharles');
