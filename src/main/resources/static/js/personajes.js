@@ -16,9 +16,9 @@ WebFontConfig = {
 //GRUPOS	 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-var tankaUser2 = '';
+/*var tankaUser2 = '';
 var taliUser2 = '';
-var acroUser2 = '';
+var acroUser2 = '';*/
 
 //Load grupos from server
 function loadSala(id, callback) {
@@ -257,9 +257,10 @@ function actionOnClickTanka () {
 	}
 	var msg = {
 		name : usuario,
-		message : miCobaIA
+		message : miCobaIA,
+		groupId : myGroupId
 	}
-	connection.send(JSON.stringify(msg));
+	if (myGroupId != '') connection.send(JSON.stringify(msg));
 	console.log(msg);
 }
 function actionOnClickTali () {
@@ -315,9 +316,10 @@ function actionOnClickTali () {
 	}
 	var msg = {
 		name : usuario,
-		message : miCobaIA
+		message : miCobaIA,
+		groupId : myGroupId
 	}
-	connection.send(JSON.stringify(msg));
+	if (myGroupId != '') connection.send(JSON.stringify(msg));
 }
 function actionOnClickAcro () {
 	acroUser.text = usuario;
@@ -372,9 +374,10 @@ function actionOnClickAcro () {
 	}
     var msg = {
 		name : usuario,
-		message : miCobaIA
+		message : miCobaIA,
+		groupId : myGroupId
 	}
-	connection.send(JSON.stringify(msg));
+    if (myGroupId != '') connection.send(JSON.stringify(msg));
 }
 
 $(document).ready(function() {
@@ -384,72 +387,74 @@ $(document).ready(function() {
 		console.log("WS error: " + e);
 	}
 	connection.onmessage = function(msg) {
-		console.log("WS message: " + msg.data);
+		console.log("WS message: " + msg.data + myGroupId);
 		var message = JSON.parse(msg.data)
-		switch (message.message) {
-		case 'tankabaIA':
-		    tanka.alpha = 0.5;
-		    tankaUser.text = message.name;
-		    if (message.name === taliUser.text) {
-		    	taliUser.text = '';
-		    	tali.alpha = 1;
-		    }
-		    else if (message.name === acroUser.text) {
-		    	acroUser.text = '';
-		    	acro.alpha = 1;
-		    }
-		    if (miCobaIA === 'tankabaIA') {
-		    	miCobaIA = '';
-		    }
-			break;
-		case 'talibaIA':
-		    tali.alpha = 0.5;
-		    taliUser.text = message.name;
-		    if (message.name === tankaUser.text) {
-		    	tankaUser.text = '';
-		    	tanka.alpha = 1;
-		    }
-		    else if (message.name === acroUser.text) {
-		    	acroUser.text = '';
-		    	acro.alpha = 1;
-		    }
-		    if (miCobaIA === 'talibaIA') {
-		    	miCobaIA = '';
-		    }
-			break;
-		case 'acrobaIA':
-		    acro.alpha = 0.5;
-		    acroUser.text = message.name;
-		    if (message.name === taliUser.text) {
-		    	taliUser.text = '';
-		    	tali.alpha = 1;
-		    }
-		    else if (message.name === tankaUser.text) {
-		    	tankaUser.text = '';
-		    	tanka.alpha = 1;
-		    }
-		    if (miCobaIA === 'acrobaIA') {
-		    	miCobaIA = '';
-		    }
-			break;
-		default:
-			switch (message.name) {
-			case tankaUser.text:
-				tanka.alpha = 1;
-			    tankaUser.text = '';
+		if (message.groupId == myGroupId) {
+			switch (message.message) {
+			case 'tankabaIA':
+			    tanka.alpha = 0.5;
+			    tankaUser.text = message.name;
+			    if (message.name === taliUser.text) {
+			    	taliUser.text = '';
+			    	tali.alpha = 1;
+			    }
+			    else if (message.name === acroUser.text) {
+			    	acroUser.text = '';
+			    	acro.alpha = 1;
+			    }
+			    if (miCobaIA === 'tankabaIA') {
+			    	miCobaIA = '';
+			    }
 				break;
-			case taliUser.text:
-				tali.alpha = 1;
-			    taliUser.text = '';
+			case 'talibaIA':
+			    tali.alpha = 0.5;
+			    taliUser.text = message.name;
+			    if (message.name === tankaUser.text) {
+			    	tankaUser.text = '';
+			    	tanka.alpha = 1;
+			    }
+			    else if (message.name === acroUser.text) {
+			    	acroUser.text = '';
+			    	acro.alpha = 1;
+			    }
+			    if (miCobaIA === 'talibaIA') {
+			    	miCobaIA = '';
+			    }
 				break;
-			case acroUser.text:
-				acro.alpha = 1;
-			    acroUser.text = '';
+			case 'acrobaIA':
+			    acro.alpha = 0.5;
+			    acroUser.text = message.name;
+			    if (message.name === taliUser.text) {
+			    	taliUser.text = '';
+			    	tali.alpha = 1;
+			    }
+			    else if (message.name === tankaUser.text) {
+			    	tankaUser.text = '';
+			    	tanka.alpha = 1;
+			    }
+			    if (miCobaIA === 'acrobaIA') {
+			    	miCobaIA = '';
+			    }
 				break;
 			default:
+				switch (message.name) {
+				case tankaUser.text:
+					tanka.alpha = 1;
+				    tankaUser.text = '';
+					break;
+				case taliUser.text:
+					tali.alpha = 1;
+				    taliUser.text = '';
+					break;
+				case acroUser.text:
+					acro.alpha = 1;
+				    acroUser.text = '';
+					break;
+				default:
+					break;
+				}
 				break;
 			}
-			break;
 		}
 	}
 	connection.onclose = function() {

@@ -45,6 +45,7 @@ public class PersonajeHandler extends TextWebSocketHandler {
 		ObjectNode newNode = mapper.createObjectNode();
 		newNode.put("name", node.get("name").asText());
 		newNode.put("message", node.get("message").asText());
+		newNode.put("groupId", node.get("groupId").asText());
 		
 		
 		for(WebSocketSession participant : sessions.values()) {

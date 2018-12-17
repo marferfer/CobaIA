@@ -604,6 +604,9 @@ loadVersions(function (versions) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var myGroupId = '';
+var tankaUser2 = '';
+var taliUser2 = '';
+var acroUser2 = '';
 
 //Load grupos from server
 function loadGrupos(callback) {
@@ -805,7 +808,7 @@ $(document).ready(function () {
     });
 	//Entrar en sala
 	$("#tablaSalas").click(function (event) {
-        var elem = $(event.target);
+		var elem = $(event.target);
         if (elem.is('button')) {
             var itemDiv = elem.parent().parent().children();
             var itemId = itemDiv[0].id.split('-')[1];
@@ -829,6 +832,18 @@ $(document).ready(function () {
                         btn.innerHTML = 'Salir';
                         enSala = true;
                         myGroupId = itemId;
+                        loadSala(myGroupId, function (grupo) {
+                    		if (grupo.tanka != '') {
+                    			tankaUser2 = grupo.tanka;
+                    		}
+                    		if (grupo.tali != '') {
+                    			taliUser2 = grupo.tali;
+                    		}
+                    		if (grupo.acro != '') {
+                    			acroUser2 = grupo.acro;
+                    		}
+                    		checkSala();
+                    	});
             		}
             		else if (grupos[i].id == itemId) {
             			document.getElementById("pantallaInicio").style.zIndex = "10";
@@ -855,6 +870,18 @@ $(document).ready(function () {
 	                            btn.innerHTML = 'Salir';
 	                            enSala = true;
 	                            myGroupId = itemId;
+	                            loadSala(myGroupId, function (grupo) {
+	                        		if (grupo.tanka != '') {
+	                        			tankaUser2 = grupo.tanka;
+	                        		}
+	                        		if (grupo.tali != '') {
+	                        			taliUser2 = grupo.tali;
+	                        		}
+	                        		if (grupo.acro != '') {
+	                        			acroUser2 = grupo.acro;
+	                        		}
+	                        		checkSala();
+	                        	});
 	            			}
 	            			else {
 	            				document.getElementById("contrasenaDeSala").innerHTML = '<span style="color:red"> <b>La contraseña no es correcta, por favor vuelve a intentarlo</b> </span>';
@@ -1137,4 +1164,19 @@ function disconnect (description) {
 			}
 		}
 	});
+}
+
+function checkSala() {
+	if (tankaUser2 != '') {    
+		tanka.alpha = 0.5;
+		tankaUser.text = tankaUser2;
+	}
+	if (taliUser2 != '') {
+		tali.alpha = 0.5;
+		taliUser.text = taliUser2;
+	}
+	if (acroUser2 != '') {
+		acro.alpha = 0.5;
+		acroUser.text = acroUser2;
+	}
 }
