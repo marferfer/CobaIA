@@ -91,7 +91,142 @@ function preload5() {
 
 function create5() {
 
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////// WEBSOCKETS   //////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	playerConnection = new WebSocket('ws://192.168.1.53:8080/players');
+	
+	playerConnection.onopen = function() {
+		canConnect = true;
+	}
+	
+	playerConnection.onerror = function(e) {
+		console.log("WS error: " + e);
+	}
+	playerConnection.onmessage = function(msg) {
+		console.log("WS message: " + msg.data + myGroupId);
+		var message = JSON.parse(msg.data)
+		if (message.groupId == myGroupId) {
+			switch (message.cobaIA) {
+			case 'tankabaIA':
+				switch (message.keyEvent) {
+				case 'wUp':
+					wTankaDown = false;
+					break;
+				case 'wDown':
+					wTankaDown = true;
+					break;
+				case 'aUp':
+					aTankaDown = false;
+					break;
+				case 'aDown':
+					aTankaDown = true;
+					break;
+				case 'sUp':
+					sTankaDown = false;
+					break;
+				case 'sDown':
+					sTankaDown = true;
+					break;
+				case 'dUp':
+					dTankaDown = false;
+					break;
+				case 'dDown':
+					dTankaDown = true;
+					break;
+				case 'shiftUp':
+					shiftTankaDown = false;
+					break;
+				case 'shiftDown':
+					shiftTankaDown = true;
+					break;
+				default:
+					break;
+				}
+				break;
+			case 'talibaIA':
+				switch (message.keyEvent) {
+				case 'wUp':
+					wTaliDown = false;
+					break;
+				case 'wDown':
+					wTaliDown = true;
+					break;
+				case 'aUp':
+					aTaliDown = false;
+					break;
+				case 'aDown':
+					aTaliDown = true;
+					break;
+				case 'sUp':
+					sTaliDown = false;
+					break;
+				case 'sDown':
+					sTaliDown = true;
+					break;
+				case 'dUp':
+					dTaliDown = false;
+					break;
+				case 'dDown':
+					dTaliDown = true;
+					break;
+				case 'shiftUp':
+					shiftTaliDown = false;
+					break;
+				case 'shiftDown':
+					shiftTaliDown = true;
+					break;
+				default:
+					break;
+				}
+				break;
+			case 'acrobaIA':
+				switch (message.keyEvent) {
+				case 'wUp':
+					wAcroDown = false;
+					break;
+				case 'wDown':
+					wAcroDown = true;
+					break;
+				case 'aUp':
+					aAcroDown = false;
+					break;
+				case 'aDown':
+					aAcroDown = true;
+					break;
+				case 'sUp':
+					sAcroDown = false;
+					break;
+				case 'sDown':
+					sAcroDown = true;
+					break;
+				case 'dUp':
+					dAcroDown = false;
+					break;
+				case 'dDown':
+					dAcroDown = true;
+					break;
+				case 'shiftUp':
+					shiftAcroDown = false;
+					break;
+				case 'shiftDown':
+					shiftAcroDown = true;
+					break;
+				default:
+					break;
+				}
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	playerConnection.onclose = function() {
+		console.log("Closing socket");
+	}
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// FISICAS DEL MUNDO   ///////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -164,6 +299,8 @@ function create5() {
     ctrlT = juego.input.keyboard.addKey(Phaser.Keyboard.T);
     ctrlY = juego.input.keyboard.addKey(Phaser.Keyboard.Y);
     ctrlU = juego.input.keyboard.addKey(Phaser.Keyboard.U);
+    
+    ctrlShift = juego.input.keyboard.addKey(Phaser.Keyboard.SHIFT);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// INDICADORES   /////////////////////////////////////////////////////////////////////////////////////////

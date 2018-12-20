@@ -95,6 +95,85 @@ function update5() {
         nivel1.siguiendo = "talibaIA";
         //juego.camera.follow(talibaIA.actor);
     }
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CONTROLES ONLINE ////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    if (canConnect) {
+	    var myKeyEvent = '';
+	    var canIsend = false;
+	    
+	    if (ctrlW.isDown) {
+	    	if(!currentWDown){
+	    		myKeyEvent = 'wDown';
+	    		currentWDown = true;
+	    		canIsend = true;
+	    	}
+	    } 
+	    else {
+	    	if(currentWDown){
+		    	myKeyEvent = 'wUp';
+	    		canIsend = true;
+	    		currentWDown = false;
+	    	}
+	    }
+	    if (ctrlA.isDown) {
+	    	if(!currentADown){
+		    	myKeyEvent = 'aDown';
+	    		canIsend = true;
+	    		currentADown = true;
+	    	}
+	    } 
+	    else {
+	    	if(currentADown){
+		    	myKeyEvent = 'aUp';
+	    		canIsend = true;
+	    		currentADown = false;
+	    	}
+	    }
+	    if (ctrlS.isDown) {
+	    	if(!currentSDown){
+		    	myKeyEvent = 'sDown';
+	    		canIsend = true;
+	    		currentSDown = true;
+	    	}
+	    } 
+	    else {
+	    	if(currentSDown){
+		    	myKeyEvent = 'sUp';
+	    		canIsend = true;
+	    		currentSDown = false;
+	    	}
+	    }
+	    if (ctrlD.isDown) {
+	    	if(!currentDDown){
+		    	myKeyEvent = 'dDown';
+	    		canIsend = true;
+	    		currentDDown = true;
+	    	}
+	    } 
+	    else {
+	    	if(currentDDown){
+		    	myKeyEvent = 'dUp';
+	    		canIsend = true;
+	    		currentDDown = false;
+	    	}
+	    }
+	//    if (ctrlShift.isDown) {
+	//    	myKeyEvent = 'ShiftDown';
+	//    } 
+	//    else {
+	//    	myKeyEvent = 'ShiftUp';
+	//    }
+	    
+	    var msg = {
+			cobaIA : miCobaIA,
+			keyEvent : myKeyEvent,
+			groupId : myGroupId
+		}
+	    if (myGroupId != '' && canIsend) playerConnection.send(JSON.stringify(msg));
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////// COBAIAS MUERTAS  ////////////////////////////////////////////////////////////////////////////////////
@@ -526,18 +605,18 @@ function update5() {
         baseTrepar.body.x = 0;
         baseTrepar.body.y = 0;
     }
-    if(((pad2.justPressed(Phaser.Gamepad.XBOX360_A)) || ctrlW.isDown) && checkIfCanJump(acrobaIA) && acrobaIA.canImove){
+    if(((pad2.justPressed(Phaser.Gamepad.XBOX360_A)) || ctrlW.isDown || wAcroDown) && checkIfCanJump(acrobaIA) && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveUp(300);
 
-    }else if(((pad2.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad2.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || ctrlA.isDown) && acrobaIA.canImove){
+    }else if(((pad2.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad2.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1 || ctrlA.isDown) && acrobaIA.canImove) || aAcroDown){
 
         acrobaIA.jugador.body.x -= 5 * Math.cos(acrobaIA.jugador.body.angle * (Math.PI/180));
         acrobaIA.jugador.body.y -= 5 * Math.sin(acrobaIA.jugador.body.angle * (Math.PI/180));
         acrobaIA.jugador.animations.play('movimientoIzquierda');
         acrobaIA.ultimo_sentido = "izquierda";
 
-    }else if(((pad2.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad2.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || ctrlD.isDown) && acrobaIA.canImove){
+    }else if(((pad2.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad2.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || ctrlD.isDown || dAcroDown) && acrobaIA.canImove){
 
         acrobaIA.jugador.body.x += 5 * Math.cos(acrobaIA.jugador.body.angle * (Math.PI/180));
         acrobaIA.jugador.body.y += 5 * Math.sin(acrobaIA.jugador.body.angle * (Math.PI/180));

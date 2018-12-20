@@ -21,10 +21,17 @@ public class RestEjer1ConUiApplication implements WebSocketConfigurer {
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry.addHandler(createPersonajeHandler(), "/personajes")
 			.setAllowedOrigins("*");
+		registry.addHandler(createPlayerHandler(), "/players")
+			.setAllowedOrigins("*");
 	}
 	
 	@Bean
 	public PersonajeHandler createPersonajeHandler() {
 		return new PersonajeHandler();
+	}
+	
+	@Bean
+	public PlayerHandler createPlayerHandler() {
+		return new PlayerHandler();
 	}
 }
