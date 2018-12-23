@@ -391,6 +391,12 @@ body {
         <div class="boton" id="btnPassSalas">
 			<button type="button" class="btn btn-success">Aceptar</button>
 		</div>
+		<br/>
+		<br/>
+		<br/>
+		<div class="botonCrearSala">
+            <button onclick="volvermenuprincipal();" type="button" id="cancel" class="btn btn-danger">Cancelar</button>
+        </div>
     </div>
 
 	<div id="live-chat">
@@ -461,6 +467,7 @@ body {
 	        
 	        function volvermenuprincipal(){
                 document.getElementById("pantallaInicio").style.visibility = "hidden";
+                document.getElementById("passSalas").style.visibility = "hidden";
                 document.getElementById("formCreateGroup").style.visibility = "hidden";
                 //document.getElementById("crearGrupo").style.visibility = "visible";
             }
