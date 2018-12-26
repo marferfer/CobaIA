@@ -74,14 +74,21 @@
 	z-index: 3;
 }
 #crearGrupo {
-	margin: 540px -25px;
+	margin: 520px -25px;
 	position: absolute;
 	width: 110px;
 	text-align: center;
 	z-index: 20;
 }
 #entrarGrupo {
-	margin: 600px -25px;
+	margin: 580px -25px;
+	position: absolute;
+	width: 110px;
+	text-align: center;
+}
+
+#abrir-chat {
+	margin: 640px -25px;
 	position: absolute;
 	width: 110px;
 	text-align: center;
@@ -287,6 +294,7 @@ body {
 		<div class="grupo">
 	        <button type="button" id="crearGrupo" class="btn btn-success">Crear Sala</button>
 	        <button type="button" id="entrarGrupo" class="btn btn-success">Buscar Salas</button>
+	        <button type="button" id="abrir-chat" class="btn btn-success" style="visibility:hidden;">Abrir Chat</button>
 	    </div>
 	</div>
 	<div id="pantallaInicio"
@@ -391,9 +399,15 @@ body {
         <div class="boton" id="btnPassSalas">
 			<button type="button" class="btn btn-success">Aceptar</button>
 		</div>
+		<br/>
+		<br/>
+		<br/>
+		<div class="botonCrearSala">
+            <button onclick="volvermenuprincipal();" type="button" id="cancel" class="btn btn-danger">Cancelar</button>
+        </div>
     </div>
 
-	<div id="live-chat">
+	<div id="live-chat"  style="visibility: hidden;">
         <header class="clearfix">
             <a href="#" class="chat-close">x</a>
             <div id="nombreChat"></div>
@@ -441,7 +455,9 @@ body {
 	          $('.chat-close').on('click', function(e) {
 
                   e.preventDefault();
-                  $('#live-chat').fadeOut(300);
+                  document.getElementById("live-chat").style.visibility = "hidden";
+                  document.getElementById("abrir-chat").style.visibility = "visible";
+                  //$('#live-chat').fadeOut(300);
 
               });
 	          
@@ -449,6 +465,12 @@ body {
                   e.preventDefault();
                   document.getElementById("password").innerHTML = '<label for="passSala" id="title">Añada una contraseña para la Sala.</label> <input type="password" class="form-control " id="passSala" placeholder="Contraseña"> ';
 
+              });
+	          
+	          $("#abrir-chat").on('click',function(e) {
+                  e.preventDefault();
+                  document.getElementById("live-chat").style.visibility = "visible";
+                  document.getElementById("abrir-chat").style.visibility = "hidden";
               });
 
               $("#publica").on('click',function(e) {
@@ -461,6 +483,7 @@ body {
 	        
 	        function volvermenuprincipal(){
                 document.getElementById("pantallaInicio").style.visibility = "hidden";
+                document.getElementById("passSalas").style.visibility = "hidden";
                 document.getElementById("formCreateGroup").style.visibility = "hidden";
                 //document.getElementById("crearGrupo").style.visibility = "visible";
             }

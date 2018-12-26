@@ -735,6 +735,7 @@ $(document).ready(function () {
         			document.getElementById("salas").innerHTML = '';
         			btn.className = "btn btn-success";
                     btn.innerHTML = 'Crear Sala';
+                    document.getElementById("live-chat").style.visibility = "hidden";
         		}
         	});
         }
@@ -821,8 +822,10 @@ $(document).ready(function () {
 	            btn.className = "btn btn-danger";
 	            btn.innerHTML = 'Salir';
 	            enSala = true;
+	            document.getElementById("live-chat").style.visibility = "visible";
 			}	            
 		});
+		
 	});
 	$("#entrarGrupo").click(function () {  
 		document.getElementById("pantallaInicio").style.visibility = "visible";
@@ -845,6 +848,7 @@ $(document).ready(function () {
             var itemDiv = elem.parent().parent().children();
             var itemId = itemDiv[0].id.split('-')[1];
             console.log(itemId);
+            document.getElementById("live-chat").style.visibility = "visible";
             loadGrupos(function (grupos) {
             	for (var i = 0; i < grupos.length; i++) {
             		if (grupos[i].id == itemId && grupos[i].password === '') {
@@ -881,6 +885,7 @@ $(document).ready(function () {
             		}
             		else if (grupos[i].id == itemId) {
             			document.getElementById("pantallaInicio").style.zIndex = "10";
+            			document.getElementById("pantallaInicio").style.visibility = "visible";
             			document.getElementById("passSalas").style.visibility = "visible";
             			var miGrupo = grupos[i];
             			$("#btnPassSalas").click(function () {            				
@@ -927,6 +932,7 @@ $(document).ready(function () {
             			});
             		}
             	}
+            	
             });
         }
     });
