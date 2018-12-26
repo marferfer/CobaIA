@@ -49,9 +49,7 @@ public class PlayerHandler extends TextWebSocketHandler {
 		
 		
 		for(WebSocketSession participant : sessions.values()) {
-			if(!participant.getId().equals(session.getId())) {
-				participant.sendMessage(new TextMessage(newNode.toString()));
-			}
+			participant.sendMessage(new TextMessage(newNode.toString()));
 		}
 	}
 

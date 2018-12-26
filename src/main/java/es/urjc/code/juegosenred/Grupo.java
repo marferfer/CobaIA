@@ -11,6 +11,7 @@ public class Grupo {
 	private String tanka = "";
 	private String tali = "";
 	private String acro = "";
+	private long gameId;
 	
 
 	public String getNombre() {
@@ -86,6 +87,14 @@ public class Grupo {
 
 	public void setAcro(String acro) {
 		this.acro = acro;
+	}
+
+	public long getGameId() {
+		return gameId;
+	}
+
+	public void setGameId(long gameId) {
+		this.gameId = gameId;
 	}
 
 	@Override

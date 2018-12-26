@@ -97,82 +97,304 @@ function update5() {
     }
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // CONTROLES ONLINE ////////////////////////////////////////////////////////////////////////////////////////////
+    // CONTROLES ///////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    if (canConnect) {
+    if (myGroupId != '') { //Online
 	    var myKeyEvent = '';
-	    var canIsend = false;
 	    
 	    if (ctrlW.isDown) {
-	    	if(!currentWDown){
+//	    	switch (miCobaIA) {
+//	    	case 'tankabaIA':
+//	    		wTankaDown = true;
+//	    		break;
+//	    	case 'talibaIA':
+//	    		wTaliDown = true;
+//	    		break;
+//	    	case 'acrobaIA':
+//	    		wAcroDown = true;
+//	    		break;
+//	    	default:
+//	    		break;
+//	    	}
+	    	if(!currentWDown && canConnect){
 	    		myKeyEvent = 'wDown';
 	    		currentWDown = true;
-	    		canIsend = true;
+	    		 var msg = {
+					cobaIA : miCobaIA,
+					keyEvent : myKeyEvent,
+					groupId : myGroupId
+				}
+			    playerConnection.send(JSON.stringify(msg));
 	    	}
 	    } 
 	    else {
-	    	if(currentWDown){
+//	    	switch (miCobaIA) {
+//	    	case 'tankabaIA':
+//	    		wTankaDown = false;
+//	    		break;
+//	    	case 'talibaIA':
+//	    		wTaliDown = false;
+//	    		break;
+//	    	case 'acrobaIA':
+//	    		wAcroDown = false;
+//	    		break;
+//	    	default:
+//	    		break;
+//	    	}
+	    	if(currentWDown && canConnect){
 		    	myKeyEvent = 'wUp';
-	    		canIsend = true;
 	    		currentWDown = false;
+	    		 var msg = {
+ 					cobaIA : miCobaIA,
+ 					keyEvent : myKeyEvent,
+ 					groupId : myGroupId
+ 				}
+ 			    playerConnection.send(JSON.stringify(msg));
 	    	}
 	    }
 	    if (ctrlA.isDown) {
-	    	if(!currentADown){
+//	    	switch (miCobaIA) {
+//	    	case 'tankabaIA':
+//	    		aTankaDown = true;
+//	    		break;
+//	    	case 'talibaIA':
+//	    		aTaliDown = true;
+//	    		break;
+//	    	case 'acrobaIA':
+//	    		aAcroDown = true;
+//	    		break;
+//	    	default:
+//	    		break;
+//	    	}
+	    	if(!currentADown && canConnect){
 		    	myKeyEvent = 'aDown';
-	    		canIsend = true;
 	    		currentADown = true;
+	    		 var msg = {
+  					cobaIA : miCobaIA,
+  					keyEvent : myKeyEvent,
+  					groupId : myGroupId
+  				}
+  			    playerConnection.send(JSON.stringify(msg));
 	    	}
 	    } 
 	    else {
-	    	if(currentADown){
+//	    	switch (miCobaIA) {
+//	    	case 'tankabaIA':
+//	    		aTankaDown = false;
+//	    		break;
+//	    	case 'talibaIA':
+//	    		aTaliDown = false;
+//	    		break;
+//	    	case 'acrobaIA':
+//	    		aAcroDown = false;
+//	    		break;
+//	    	default:
+//	    		break;
+//	    	}
+	    	if(currentADown && canConnect){
 		    	myKeyEvent = 'aUp';
-	    		canIsend = true;
 	    		currentADown = false;
+	    		 var msg = {
+  					cobaIA : miCobaIA,
+  					keyEvent : myKeyEvent,
+  					groupId : myGroupId
+  				}
+  			    playerConnection.send(JSON.stringify(msg));
 	    	}
 	    }
 	    if (ctrlS.isDown) {
-	    	if(!currentSDown){
+//	    	switch (miCobaIA) {
+//	    	case 'tankabaIA':
+//	    		sTankaDown = true;
+//	    		break;
+//	    	case 'talibaIA':
+//	    		sTaliDown = true;
+//	    		break;
+//	    	case 'acrobaIA':
+//	    		sAcroDown = true;
+//	    		break;
+//	    	default:
+//	    		break;
+//	    	}
+	    	if(!currentSDown && canConnect){
 		    	myKeyEvent = 'sDown';
-	    		canIsend = true;
 	    		currentSDown = true;
+	    		 var msg = {
+  					cobaIA : miCobaIA,
+  					keyEvent : myKeyEvent,
+  					groupId : myGroupId
+  				}
+  			    playerConnection.send(JSON.stringify(msg));
 	    	}
 	    } 
 	    else {
-	    	if(currentSDown){
+//	    	switch (miCobaIA) {
+//	    	case 'tankabaIA':
+//	    		sTankaDown = false;
+//	    		break;
+//	    	case 'talibaIA':
+//	    		sTaliDown = false;
+//	    		break;
+//	    	case 'acrobaIA':
+//	    		sAcroDown = false;
+//	    		break;
+//	    	default:
+//	    		break;
+//	    	}
+	    	if(currentSDown && canConnect){
 		    	myKeyEvent = 'sUp';
-	    		canIsend = true;
 	    		currentSDown = false;
+	    		 var msg = {
+  					cobaIA : miCobaIA,
+  					keyEvent : myKeyEvent,
+  					groupId : myGroupId
+  				}
+  			    playerConnection.send(JSON.stringify(msg));
 	    	}
 	    }
 	    if (ctrlD.isDown) {
-	    	if(!currentDDown){
+//	    	switch (miCobaIA) {
+//	    	case 'tankabaIA':
+//	    		dTankaDown = true;
+//	    		break;
+//	    	case 'talibaIA':
+//	    		dTaliDown = true;
+//	    		break;
+//	    	case 'acrobaIA':
+//	    		dAcroDown = true;
+//	    		break;
+//	    	default:
+//	    		break;
+//	    	}
+	    	if(!currentDDown && canConnect){
 		    	myKeyEvent = 'dDown';
-	    		canIsend = true;
 	    		currentDDown = true;
+	    		 var msg = {
+  					cobaIA : miCobaIA,
+  					keyEvent : myKeyEvent,
+  					groupId : myGroupId
+  				}
+  			    playerConnection.send(JSON.stringify(msg));
 	    	}
 	    } 
 	    else {
-	    	if(currentDDown){
+//	    	switch (miCobaIA) {
+//	    	case 'tankabaIA':
+//	    		dTankaDown = false;
+//	    		break;
+//	    	case 'talibaIA':
+//	    		dTaliDown = false;
+//	    		break;
+//	    	case 'acrobaIA':
+//	    		dAcroDown = false;
+//	    		break;
+//	    	default:
+//	    		break;
+//	    	}
+	    	if(currentDDown && canConnect){
 		    	myKeyEvent = 'dUp';
-	    		canIsend = true;
 	    		currentDDown = false;
+	    		 var msg = {
+  					cobaIA : miCobaIA,
+  					keyEvent : myKeyEvent,
+  					groupId : myGroupId
+  				}
+  			    playerConnection.send(JSON.stringify(msg));
 	    	}
 	    }
-	//    if (ctrlShift.isDown) {
-	//    	myKeyEvent = 'ShiftDown';
-	//    } 
-	//    else {
-	//    	myKeyEvent = 'ShiftUp';
-	//    }
-	    
-	    var msg = {
-			cobaIA : miCobaIA,
-			keyEvent : myKeyEvent,
-			groupId : myGroupId
-		}
-	    if (myGroupId != '' && canIsend) playerConnection.send(JSON.stringify(msg));
+	    if (ctrlShift.isDown) {
+	    	if(!currentShiftDown && canConnect){
+		    	myKeyEvent = 'shiftDown';
+	    		currentShiftDown = true;
+	    		 var msg = {
+  					cobaIA : miCobaIA,
+  					keyEvent : myKeyEvent,
+  					groupId : myGroupId
+  				}
+  			    playerConnection.send(JSON.stringify(msg));
+	    	}
+	    } 
+	    else {
+	    	if(currentShiftDown && canConnect){
+		    	myKeyEvent = 'shiftUp';
+	    		currentShiftDown = false;
+	    		 var msg = {
+  					cobaIA : miCobaIA,
+  					keyEvent : myKeyEvent,
+  					groupId : myGroupId
+  				}
+  			    playerConnection.send(JSON.stringify(msg));
+	    	}
+	    }
+    }
+    else { //Offline
+    	if ((pad1.justPressed(Phaser.Gamepad.XBOX360_A)) || cursores.up.isDown) {
+    		wTankaDown = true;
+    	}
+    	else {
+    		wTankaDown = false;
+    	}
+    	if ((pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || cursores.left.isDown) {
+    		aTankaDown = true;
+    	}
+    	else {
+    		aTankaDown = false;
+    	}
+    	if ((pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || cursores.right.isDown) {
+    		dTankaDown = true;
+    	}
+    	else {
+    		dTankaDown = false;
+    	}
+    	if((pad2.justPressed(Phaser.Gamepad.XBOX360_A)) || ctrlW.isDown) {
+    		wAcroDown = true;
+    	}
+    	else {
+    		wAcroDown = false;
+    	}
+    	if((pad2.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad2.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || ctrlA.isDown) {
+    		aAcroDown = true;
+    	}
+    	else {
+    		aAcroDown = false;
+    	}
+    	if((pad2.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad2.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || ctrlD.isDown) {
+    		dAcroDown = true;
+    	}
+    	else {
+    		dAcroDown = false;
+    	}
+    	if ((pad2.isDown(Phaser.Gamepad.XBOX360_X)) || ctrlShift.isDown) {
+    		shiftAcroDown = true;
+    	}
+    	else {
+    		shiftAcroDown = false;
+    	}
+    	if((pad3.justPressed(Phaser.Gamepad.XBOX360_A)) || ctrlH.isDown) {
+    		wTaliDown = true;
+    	}
+    	else {
+    		wTaliDown = false;
+    	}
+    	if((pad3.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad3.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || ctrlB.isDown) {
+    		aTaliDown = true;
+    	}
+    	else {
+    		aTaliDown = false;
+    	}
+    	if((pad3.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad3.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || ctrlM.isDown) {
+    		dTaliDown = true;
+    	}
+    	else {
+    		dTaliDown = false;
+    	}
+    	if (tecla_accion.isDown || juego.input.gamepad.pad3.isDown(Phaser.Gamepad.XBOX360_X)) {
+    		shiftTaliDown = true;
+    	}
+    	else {
+    		shiftTaliDown = false;
+    	}
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -536,7 +758,7 @@ function update5() {
         talibaIA.jugador.body.fixedRotation = false;
     }
     
-    if (((pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || cursores.left.isDown) && tankabaIA.canImove)// Si presionamos LEFT
+    if (aTankaDown && tankabaIA.canImove)// Si presionamos LEFT
     {
         
         //createjs.Sound.play(paso);
@@ -546,7 +768,7 @@ function update5() {
         tankabaIA.jugador.animations.play('movimientoIzquierda');
         tankabaIA.ultimo_sentido = 'izquierda';
     }
-     else if (((pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || cursores.right.isDown) && tankabaIA.canImove)
+     else if (dTankaDown && tankabaIA.canImove)
     {
         
         //createjs.Sound.play(paso);
@@ -577,7 +799,7 @@ function update5() {
 
     
 
-    if (((pad1.justPressed(Phaser.Gamepad.XBOX360_A)) || cursores.up.isDown) && checkIfCanJump(tankabaIA) && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
+    if (wTankaDown && checkIfCanJump(tankabaIA) && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
         
 
         tankabaIA.jugador.body.moveUp(300);
@@ -587,7 +809,7 @@ function update5() {
 
     ///////////////////////////////////////////////////////controles AcrobaIA
 
-    if ((pad2.isDown(Phaser.Gamepad.XBOX360_X)) || ctrlQ.isDown) {
+    if (shiftAcroDown) {
         //acrobaIA.jugador.body.gravity = 0;
         if(!acrobaIA.trepando && acrobaIA.puedoTrepar) {
             baseTrepar.body.x = acrobaIA.jugador.body.x;
@@ -605,18 +827,18 @@ function update5() {
         baseTrepar.body.x = 0;
         baseTrepar.body.y = 0;
     }
-    if(((pad2.justPressed(Phaser.Gamepad.XBOX360_A)) || ctrlW.isDown || wAcroDown) && checkIfCanJump(acrobaIA) && acrobaIA.canImove){
+    if(wAcroDown && checkIfCanJump(acrobaIA) && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveUp(300);
 
-    }else if(((pad2.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad2.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1 || ctrlA.isDown) && acrobaIA.canImove) || aAcroDown){
+    }else if(aAcroDown && acrobaIA.canImove){
 
         acrobaIA.jugador.body.x -= 5 * Math.cos(acrobaIA.jugador.body.angle * (Math.PI/180));
         acrobaIA.jugador.body.y -= 5 * Math.sin(acrobaIA.jugador.body.angle * (Math.PI/180));
         acrobaIA.jugador.animations.play('movimientoIzquierda');
         acrobaIA.ultimo_sentido = "izquierda";
 
-    }else if(((pad2.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad2.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || ctrlD.isDown || dAcroDown) && acrobaIA.canImove){
+    }else if(dAcroDown && acrobaIA.canImove){
 
         acrobaIA.jugador.body.x += 5 * Math.cos(acrobaIA.jugador.body.angle * (Math.PI/180));
         acrobaIA.jugador.body.y += 5 * Math.sin(acrobaIA.jugador.body.angle * (Math.PI/180));
@@ -639,18 +861,18 @@ function update5() {
 
     ///////////////////////////////////////////////////////controles talibaIA
 
-    if(((pad3.justPressed(Phaser.Gamepad.XBOX360_A)) || ctrlH.isDown) && checkIfCanJump(talibaIA) && talibaIA.canImove){
+    if(wTaliDown && checkIfCanJump(talibaIA) && talibaIA.canImove){
 
         talibaIA.jugador.body.moveUp(300);
 
-    }else if(((pad3.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad3.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || ctrlB.isDown) && talibaIA.canImove){
+    }else if(aTaliDown && talibaIA.canImove){
 
         talibaIA.jugador.body.x -= 5 * Math.cos(talibaIA.jugador.body.angle * (Math.PI/180));
         talibaIA.jugador.body.y -= 5 * Math.sin(talibaIA.jugador.body.angle * (Math.PI/180));
         talibaIA.jugador.animations.play('movimientoIzquierda');
         talibaIA.ultimo_sentido = "izquierda";
 
-    }else if(((pad3.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad3.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || ctrlM.isDown) && talibaIA.canImove){
+    }else if(dTaliDown && talibaIA.canImove){
 
         talibaIA.jugador.body.x += 5 * Math.cos(talibaIA.jugador.body.angle * (Math.PI/180));
         talibaIA.jugador.body.y += 5 * Math.sin(talibaIA.jugador.body.angle * (Math.PI/180));

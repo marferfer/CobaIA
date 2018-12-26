@@ -19,10 +19,8 @@ public class RestEjer1ConUiApplication implements WebSocketConfigurer {
 	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(createPersonajeHandler(), "/personajes")
-			.setAllowedOrigins("*");
-		registry.addHandler(createPlayerHandler(), "/players")
-			.setAllowedOrigins("*");
+		registry.addHandler(createPersonajeHandler(), "/personajes").setAllowedOrigins("*");
+		registry.addHandler(createPlayerHandler(), "/players").setAllowedOrigins("*");
 	}
 	
 	@Bean

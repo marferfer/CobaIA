@@ -1,5 +1,4 @@
 
-
 function preload5() {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,7 +24,9 @@ function preload5() {
         instance.volume = 0.15;
     }, 3000);*/
 
-
+	
+	connection.close();
+	
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// IMAGENES Y FISICAS  ///////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -95,136 +96,7 @@ function create5() {
     /////////////// WEBSOCKETS   //////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	playerConnection = new WebSocket('ws://192.168.1.53:8080/players');
-	
-	playerConnection.onopen = function() {
-		canConnect = true;
-	}
-	
-	playerConnection.onerror = function(e) {
-		console.log("WS error: " + e);
-	}
-	playerConnection.onmessage = function(msg) {
-		console.log("WS message: " + msg.data + myGroupId);
-		var message = JSON.parse(msg.data)
-		if (message.groupId == myGroupId) {
-			switch (message.cobaIA) {
-			case 'tankabaIA':
-				switch (message.keyEvent) {
-				case 'wUp':
-					wTankaDown = false;
-					break;
-				case 'wDown':
-					wTankaDown = true;
-					break;
-				case 'aUp':
-					aTankaDown = false;
-					break;
-				case 'aDown':
-					aTankaDown = true;
-					break;
-				case 'sUp':
-					sTankaDown = false;
-					break;
-				case 'sDown':
-					sTankaDown = true;
-					break;
-				case 'dUp':
-					dTankaDown = false;
-					break;
-				case 'dDown':
-					dTankaDown = true;
-					break;
-				case 'shiftUp':
-					shiftTankaDown = false;
-					break;
-				case 'shiftDown':
-					shiftTankaDown = true;
-					break;
-				default:
-					break;
-				}
-				break;
-			case 'talibaIA':
-				switch (message.keyEvent) {
-				case 'wUp':
-					wTaliDown = false;
-					break;
-				case 'wDown':
-					wTaliDown = true;
-					break;
-				case 'aUp':
-					aTaliDown = false;
-					break;
-				case 'aDown':
-					aTaliDown = true;
-					break;
-				case 'sUp':
-					sTaliDown = false;
-					break;
-				case 'sDown':
-					sTaliDown = true;
-					break;
-				case 'dUp':
-					dTaliDown = false;
-					break;
-				case 'dDown':
-					dTaliDown = true;
-					break;
-				case 'shiftUp':
-					shiftTaliDown = false;
-					break;
-				case 'shiftDown':
-					shiftTaliDown = true;
-					break;
-				default:
-					break;
-				}
-				break;
-			case 'acrobaIA':
-				switch (message.keyEvent) {
-				case 'wUp':
-					wAcroDown = false;
-					break;
-				case 'wDown':
-					wAcroDown = true;
-					break;
-				case 'aUp':
-					aAcroDown = false;
-					break;
-				case 'aDown':
-					aAcroDown = true;
-					break;
-				case 'sUp':
-					sAcroDown = false;
-					break;
-				case 'sDown':
-					sAcroDown = true;
-					break;
-				case 'dUp':
-					dAcroDown = false;
-					break;
-				case 'dDown':
-					dAcroDown = true;
-					break;
-				case 'shiftUp':
-					shiftAcroDown = false;
-					break;
-				case 'shiftDown':
-					shiftAcroDown = true;
-					break;
-				default:
-					break;
-				}
-				break;
-			default:
-				break;
-			}
-		}
-	}
-	playerConnection.onclose = function() {
-		console.log("Closing socket");
-	}
+	connect();
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// FISICAS DEL MUNDO   ///////////////////////////////////////////////////////////////////////////////////
@@ -1027,7 +899,7 @@ function create5() {
     //tankabaIA.jugador = juego.add.sprite(11200, juego.world.height - 225, 'tankabaIAmovimiento');
 
     //Cambiar 340, juego.world.height - 225
-    tankabaIA.jugador = juego.add.sprite(7300, juego.world.height - 425, 'tankabaIAmovimiento');
+    tankabaIA.jugador = juego.add.sprite(340, juego.world.height - 425, 'tankabaIAmovimiento');
 
     tankabaIA.jugador.scale.setTo(1.3, 1.3);
     juego.physics.p2.enableBody(tankabaIA.jugador);
@@ -1081,7 +953,7 @@ function create5() {
 /////////////// TALIBAIA   ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    talibaIA.jugador = juego.add.sprite(7300, juego.world.height - 300, 'talibaIAmovimiento');
+    talibaIA.jugador = juego.add.sprite(100, juego.world.height - 300, 'talibaIAmovimiento');
     juego.physics.p2.enableBody(talibaIA.jugador);
     talibaIA.jugador.body.setRectangle(80, 40);
     
@@ -1407,7 +1279,7 @@ function create5() {
     function colisionInicialTalibaIA(body, bodyB, shapeA, shapeB, equation){
 
 
-        if(body.sprite.key === 'cajaCableado' && (tecla_accion.isDown || juego.input.gamepad.pad3.isDown(Phaser.Gamepad.XBOX360_X))) {  
+        if(body.sprite.key === 'cajaCableado' && shiftTaliDown) {  
 
             if(body.id === 13){
                 compuertas.lista[0].frame = 1;
@@ -1553,4 +1425,202 @@ function create5() {
     juego.physics.p2.updateBoundsCollisionGroup();
 
     juego.camera.follow(tankabaIA.jugador);
+}
+
+function updateMyGameState() {
+	setTimeout(function() {
+		var myKeyEvent;
+		switch (miCobaIA) {
+		case 'tankabaIA':
+			myKeyEvent = 'x:' + tankabaIA.jugador.body.x + '#y:' + tankabaIA.jugador.body.y + 
+			'#xCaja1:' + cajas.lista[0].body.x + '#yCaja1:' + cajas.lista[0].body.y + 
+			'#xCaja2:' + cajas.lista[1].body.x + '#yCaja2:' + cajas.lista[1].body.y + 
+			'#xCaja3:' + cajas.lista[2].body.x + '#yCaja3:' + cajas.lista[2].body.y;
+			break;
+		case 'talibaIA':
+			myKeyEvent = 'x:' + talibaIA.jugador.body.x + '#y:' + talibaIA.jugador.body.y;
+			break;
+		case 'acrobaIA':
+			myKeyEvent = 'x:' + acrobaIA.jugador.body.x + '#y:' + acrobaIA.jugador.body.y;
+			break;
+		default:
+			break;
+		}
+		 var msg = {
+			cobaIA : miCobaIA,
+			keyEvent : myKeyEvent,
+			groupId : myGroupId
+		}
+	    playerConnection.send(JSON.stringify(msg));
+//		var myGameState;
+//		loadGameState(myGameId, function(gameState) {
+//			myGameState = gameState;			
+//		});
+		updateMyGameState();
+	}, 4000);
+}
+
+function connect() {	
+	playerConnection = new WebSocket('ws://25.76.106.32:8080/players');
+	
+	playerConnection.onopen = function() {
+		canConnect = true;
+		console.log('eeeeeeeeeo');
+		if (readyToUpdate) {
+			readyToUpdate = false;
+			updateMyGameState();
+		}
+	}
+	
+	playerConnection.onerror = function(e) {
+		console.log("WS error: " + e);
+	}
+	playerConnection.onmessage = function(msg) {
+		console.log("WS message: " + msg.data + myGroupId);
+		var message = JSON.parse(msg.data)
+		if (message.groupId == myGroupId) {
+			switch (message.cobaIA) {
+			case 'tankabaIA':
+				switch (message.keyEvent) {
+				case 'wUp':
+					wTankaDown = false;
+					break;
+				case 'wDown':
+					wTankaDown = true;
+					break;
+				case 'aUp':
+					aTankaDown = false;
+					break;
+				case 'aDown':
+					aTankaDown = true;
+					break;
+				case 'sUp':
+					sTankaDown = false;
+					break;
+				case 'sDown':
+					sTankaDown = true;
+					break;
+				case 'dUp':
+					dTankaDown = false;
+					break;
+				case 'dDown':
+					dTankaDown = true;
+					break;
+				case 'shiftUp':
+					shiftTankaDown = false;
+					break;
+				case 'shiftDown':
+					shiftTankaDown = true;
+					break;
+				default:
+					var str = message.keyEvent;
+					if (str.charAt(0) === 'x') {
+						var pos = str.split('#');
+						tankabaIA.jugador.body.x = pos[0].split(':')[1];
+						tankabaIA.jugador.body.y = pos[1].split(':')[1];
+						cajas.lista[0].body.x = pos[2].split(':')[1];
+						cajas.lista[0].body.y = pos[3].split(':')[1];
+						cajas.lista[1].body.x = pos[4].split(':')[1];
+						cajas.lista[1].body.y = pos[5].split(':')[1];
+						cajas.lista[2].body.x = pos[6].split(':')[1];
+						cajas.lista[2].body.y = pos[7].split(':')[1];
+					}
+					break;
+				}
+				break;
+			case 'talibaIA':
+				switch (message.keyEvent) {
+				case 'wUp':
+					wTaliDown = false;
+					break;
+				case 'wDown':
+					wTaliDown = true;
+					break;
+				case 'aUp':
+					aTaliDown = false;
+					break;
+				case 'aDown':
+					aTaliDown = true;
+					break;
+				case 'sUp':
+					sTaliDown = false;
+					break;
+				case 'sDown':
+					sTaliDown = true;
+					break;
+				case 'dUp':
+					dTaliDown = false;
+					break;
+				case 'dDown':
+					dTaliDown = true;
+					break;
+				case 'shiftUp':
+					shiftTaliDown = false;
+					break;
+				case 'shiftDown':
+					shiftTaliDown = true;
+					break;
+				default:
+					var str = message.keyEvent;
+					if (str.charAt(0) === 'x') {
+						var pos = str.split('#');
+						talibaIA.jugador.body.x = pos[0].split(':')[1];
+						talibaIA.jugador.body.y = pos[1].split(':')[1];
+					}
+					break;
+				}
+				break;
+			case 'acrobaIA':
+				switch (message.keyEvent) {
+				case 'wUp':
+					wAcroDown = false;
+					break;
+				case 'wDown':
+					wAcroDown = true;
+					break;
+				case 'aUp':
+					aAcroDown = false;
+					break;
+				case 'aDown':
+					aAcroDown = true;
+					break;
+				case 'sUp':
+					sAcroDown = false;
+					break;
+				case 'sDown':
+					sAcroDown = true;
+					break;
+				case 'dUp':
+					dAcroDown = false;
+					break;
+				case 'dDown':
+					dAcroDown = true;
+					break;
+				case 'shiftUp':
+					shiftAcroDown = false;
+					break;
+				case 'shiftDown':
+					shiftAcroDown = true;
+					break;
+				default:
+					var str = message.keyEvent;
+					if (str.charAt(0) === 'x') {
+						var pos = str.split('#');
+						acrobaIA.jugador.body.x = pos[0].split(':')[1];
+						acrobaIA.jugador.body.y = pos[1].split(':')[1];
+					}
+					break;
+				}
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	playerConnection.onclose = function() {
+		console.log("Closing socket");
+		setTimeout(function() {
+			connect();
+		}, 1000);
+	}
 }
