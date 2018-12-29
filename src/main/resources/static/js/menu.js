@@ -1,7 +1,7 @@
-var game = new Phaser.Game(1920, 800, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
+var game = new Phaser.Game(1920, 800, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
 
 function menu(){
-    game = new Phaser.Game(1920, 800, Phaser.AUTO, 'phaser-example', { preload: preload, create: create });
+    game = new Phaser.Game(1920, 800, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
 }
 function preload() {
 
@@ -108,4 +108,16 @@ function actionOnClickPruebas () {
     game.destroy();
     pruebas();
 
+}
+
+function update(){
+	
+	if (button.input.pointerOver())
+    {
+    	button.alpha = 1;
+    }
+    else
+    {
+    	button.alpha = 0.5;
+    }
 }

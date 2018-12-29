@@ -446,9 +446,14 @@ body {
 	            miCuentaV = document.getElementById("miCuentaDiv");
                 if(miCuentaV.style.visibility==="visible"){
                       document.getElementById("miCuentaDiv").style.visibility = "hidden";
+                      document.getElementById("abrir-chat").style.visibility = "hidden";
                 }
                 else {
                       document.getElementById("miCuentaDiv").style.visibility = "visible";
+                      if(document.getElementById("live-chat").style.visibility == "hidden"){
+                    	  if(document.getElementById("info").style.visibility != '')
+                    	  	document.getElementById("abrir-chat").style.visibility = "visible";
+                      }
                 }              
 	          });
 	          
