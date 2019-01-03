@@ -450,10 +450,11 @@ body {
                 }
                 else {
                       document.getElementById("miCuentaDiv").style.visibility = "visible";
-                      if(document.getElementById("live-chat").style.visibility == "hidden"){
-                    	  if(document.getElementById("info").style.visibility != '')
-                    	  	document.getElementById("abrir-chat").style.visibility = "visible";
-                      }
+                      if(myGroupId != '' && document.getElementById("live-chat").style.visibility === "hidden"){
+	                 	  //if(document.getElementById("info").innerHTML != '')
+	                 	  	document.getElementById("abrir-chat").style.visibility = "visible";
+	                   }
+                      
                 }              
 	          });
 	          
@@ -461,7 +462,8 @@ body {
 
                   e.preventDefault();
                   document.getElementById("live-chat").style.visibility = "hidden";
-                  document.getElementById("abrir-chat").style.visibility = "visible";
+                  if(document.getElementById("miCuentaDiv").style.visibility === "visible")
+                  	document.getElementById("abrir-chat").style.visibility = "visible";
                   //$('#live-chat').fadeOut(300);
 
               });

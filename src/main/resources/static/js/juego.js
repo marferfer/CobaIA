@@ -764,6 +764,7 @@ $(document).ready(function () {
                     document.getElementById("live-chat").style.visibility = "hidden";
         		}
         	});
+        	document.getElementById("abrir-chat").style.visibility = "hidden";
         }
 	})
 	//Crear Sala
@@ -848,7 +849,7 @@ $(document).ready(function () {
 	            btn.className = "btn btn-danger";
 	            btn.innerHTML = 'Salir';
 	            enSala = true;
-	            document.getElementById("live-chat").style.visibility = "visible";
+	            document.getElementById("abrir-chat").style.visibility = "visible";
 			}	            
 		});
 		
