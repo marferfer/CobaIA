@@ -327,6 +327,7 @@ function update5() {
   			    playerConnection.send(JSON.stringify(msg));
 	    	}
 	    }
+	    
     }
     else { //Offline
     	if ((pad1.justPressed(Phaser.Gamepad.XBOX360_A)) || cursores.up.isDown) {
@@ -890,6 +891,17 @@ function update5() {
         }
         
     }
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////CONTROL DE MENU LATERAL////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    $("#crearGrupo").click(function () {  
+    	juego.destroy();
+    	menu();
+    	
+    });
+    
 }
 
 function reinicia() {

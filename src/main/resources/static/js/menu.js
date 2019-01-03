@@ -7,7 +7,8 @@ function preload() {
 
     game.load.audio('baseCharles', 'assets/sounds/baseCharles.mp3');
 
-    game.load.spritesheet('button', 'assets/Menu/button_sprite_sheet.png', 193, 71);
+    game.load.spritesheet('buttonOnline', 'assets/Menu/button_sprite_sheet online.png', 193, 71);
+    game.load.spritesheet('buttonLocal', 'assets/Menu/button_sprite_sheet local.png', 193, 71);
     //game.load.spritesheet('buttonSalir', 'assets/Menu/button_sprite_sheet salir.png', 193, 71);
     game.load.spritesheet('buttonControles', 'assets/Menu/button_sprite_sheet controles.png', 193, 71);
     game.load.spritesheet('title', 'assets/Menu/TituloJuego.png');
@@ -15,8 +16,8 @@ function preload() {
 
 }
 
-var button;
 var buttonOnline;
+var buttonLocal;
 //var buttonExit;
 var background;
 var title;
@@ -41,15 +42,16 @@ function create() {
 
     title = game.add.sprite(game.world.centerX - 769, 50, 'title');
 
-    button = game.add.button(game.world.centerX - 880, 550, 'button', actionOnClickCharacter, this, 2, 1, 0);
-    buttonControles = game.add.button(game.world.centerX - 620, 550, 'buttonControles', actionOnClickControl, this, 2, 1, 0);
+    buttonOnline = game.add.button(game.world.centerX - 840, 550, 'buttonOnline', actionOnClickCharacter, this, 2, 1, 0);
+    buttonLocal = game.add.button(game.world.centerX - 580, 550, 'buttonLocal', actionOnClickLocal, this, 2, 1, 0);
+    buttonControles = game.add.button(game.world.centerX - 320, 550, 'buttonControles', actionOnClickControl, this, 2, 1, 0);
     //buttonExit = game.add.button(game.world.centerX - 360, 550, 'buttonSalir', actionOnClickExit, this, 2, 1, 0); //game.world.centerX - 320, 550
 
     //buttonPruebas = game.add.button(game.world.centerX - 220, 550, 'buttonSalir', actionOnClickPruebas, this, 2, 1, 0); //game.world.centerX - 320, 550
 
-    button.onInputOver.add(over, this);
-    button.onInputOut.add(out, this);
-    button.onInputUp.add(up, this);
+    buttonOnline.onInputOver.add(over, this);
+    buttonOnline.onInputOut.add(out, this);
+    buttonOnline.onInputUp.add(up, this);
 
 }
 
@@ -79,9 +81,13 @@ function out() {
     //console.log('button out');
 }
 
-function actionOnClickGame () {
+function actionOnClickLocal () {
     game.destroy();
     inicio();
+    document.getElementById("crearGrupo").innerHTML = "Salir al Menú";
+    document.getElementById("crearGrupo").className = "btn btn-danger";
+    
+    document.getElementById("entrarGrupo").innerHTML = "Controles";
 
 }
 
@@ -112,12 +118,12 @@ function actionOnClickPruebas () {
 
 function update(){
 	
-	if (button.input.pointerOver())
+	/*if (buttonOnline.input.pointerOver())
     {
     	button.alpha = 1;
     }
     else
     {
     	button.alpha = 0.5;
-    }
+    }*/
 }
