@@ -128,7 +128,7 @@ function create2() {
 
     indicator = juego2.add.sprite(0, 0, 'controller-indicator');
     indicator.fixedToCamera = true;
-    indicator.cameraOffset.x = 10; // Ubicamos el sprite contenedor de la cámara en las coordenadas 10, 10
+    indicator.cameraOffset.x = 1870; // Ubicamos el sprite contenedor de la cámara en las coordenadas 10, 10
     indicator.cameraOffset.y = 10;
     indicator.scale.x = indicator.scale.y = 2;
     indicator.animations.frame = 1; 

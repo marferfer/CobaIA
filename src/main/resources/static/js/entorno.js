@@ -178,9 +178,9 @@ function create5() {
     /////////////// INDICADORES   /////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    indicator = juego.add.sprite(0, 0, 'controller-indicator');
+    indicator = juego.add.sprite(600, 0, 'controller-indicator');
     indicator.fixedToCamera = true;
-    indicator.cameraOffset.x = 10; // Ubicamos el sprite contenedor de la cámara en las coordenadas 10, 10
+    indicator.cameraOffset.x = 1870; // Ubicamos el sprite contenedor de la cámara en las coordenadas 10, 10
     indicator.cameraOffset.y = 10;
     indicator.scale.x = indicator.scale.y = 2;
     indicator.animations.frame = 1; 
@@ -899,7 +899,7 @@ function create5() {
     //tankabaIA.jugador = juego.add.sprite(11200, juego.world.height - 225, 'tankabaIAmovimiento');
 
     //Cambiar 340, juego.world.height - 225
-    tankabaIA.jugador = juego.add.sprite(340, juego.world.height - 425, 'tankabaIAmovimiento');
+    tankabaIA.jugador = juego.add.sprite(7640, juego.world.height - 425, 'tankabaIAmovimiento');
 
     tankabaIA.jugador.scale.setTo(1.3, 1.3);
     juego.physics.p2.enableBody(tankabaIA.jugador);

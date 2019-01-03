@@ -537,7 +537,7 @@ function update5() {
     plataformasBasic.lista[1].body.y = plataformasBasic.lista[1].pos;
     //console.log(plataformasBasic.lista[1].pos);
 
-    if (plataformasBasic.lista[2].pos < 700 || plataformasBasic.lista[2].pos > 1310) {
+    if (plataformasBasic.lista[2].pos < 700 || plataformasBasic.lista[2].pos > 1390) {
         plataformasBasic.lista[2].incremento *= -1;
     }
     plataformasBasic.lista[2].pos -= plataformasBasic.lista[2].incremento;
@@ -794,7 +794,7 @@ function update5() {
 
     if(tankabaIA.jugador.body.x > 11000){
         juego.destroy();
-        nivel3();
+        nivel2();
     }
 
     

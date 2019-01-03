@@ -8,6 +8,7 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
 import es.urjc.code.juegosenred.PersonajeHandler;
+import es.urjc.code.juegosenred.ChatHandler;
 
 @SpringBootApplication
 @EnableWebSocket
@@ -21,6 +22,7 @@ public class RestEjer1ConUiApplication implements WebSocketConfigurer {
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry.addHandler(createPersonajeHandler(), "/personajes").setAllowedOrigins("*");
 		registry.addHandler(createPlayerHandler(), "/players").setAllowedOrigins("*");
+		registry.addHandler(createChatHandler(), "/chat").setAllowedOrigins("*");
 	}
 	
 	@Bean
@@ -31,5 +33,10 @@ public class RestEjer1ConUiApplication implements WebSocketConfigurer {
 	@Bean
 	public PlayerHandler createPlayerHandler() {
 		return new PlayerHandler();
+	}
+	
+	@Bean
+	public ChatHandler createChatHandler() {
+		return new ChatHandler();
 	}
 }

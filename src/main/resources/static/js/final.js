@@ -59,7 +59,7 @@ function actionOnClickOnline () {
 
 function actionOnClickExit () {
     game.destroy();
-
+    menu();
 }
 
 

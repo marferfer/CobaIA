@@ -51,6 +51,31 @@ function sound(src) {
     }
 }
 
+function connectChat(){
+	chatConnection = new WebSocket('ws://localhost:8080/chat');
+	chatConnection.onerror = function(e) {
+		console.log("WS error: " + e);
+	}
+	chatConnection.onmessage = function(msg) {
+		console.log("WS message: " + msg.data);
+		var message = JSON.parse(msg.data)
+		$('#chat').val($('#chat').val() + "\n" + message.name + ": " + message.message);
+	}
+	chatConnection.onclose = function() {
+		console.log("Closing socket");
+	}
+
+
+	$('#send-btn').click(function() {
+		var msg = {
+			name : $('#name').val(),
+			message : $('#message').val()
+		}
+	    $('#chat').val($('#chat').val() + "\n" + msg.name + ": " + msg.message);
+		chatConnection.send(JSON.stringify(msg));
+	});
+}
+
 loop();
 
 function loop() {
@@ -174,6 +199,7 @@ var miSala = null;
 var miSala2 = null;
 var miGrupo = '';
 var playerConnection;
+var chatConnection; 
 var myGameId = '';
 
 var t = 0;
