@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -498,4 +499,512 @@ body {
 
 
 </body>
+=======
+<!DOCTYPE html>
+<html>
+<head>
+<title>CobaIA</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<!-----------------------LIBRERIAS---------------------------->
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link href="librerias/css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="css/estilos.css">
+
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	crossorigin="anonymous"></script>
+
+<script src="librerias/phaser.min.js"></script>
+<script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+<!-----------------------ARCHIVOS JUEGO---------------------------->
+
+
+<script src="js/menu.js"></script>
+<script src="js/controles.js"></script>
+<script src="js/personajes.js"></script>
+
+
+<script src="js/final.js"></script>
+<script src="js/variables.js"></script>
+<script src="js/entidades.js"></script>
+<script src="js/entorno.js"></script>
+<script src="js/entornoP.js"></script>
+<script src="js/entornoN2.js"></script>
+<script src="js/interaccion.js"></script>
+<script src="js/interaccionP.js"></script>
+<script src="js/interaccionN2.js"></script>
+<script src="js/juego.js"></script>
+
+
+<style>
+.formulario {
+	margin: 370px 700px;
+	position: absolute;
+	z-index: 11;
+}
+.formularioSalas {
+    margin: 40px 300px;
+    position: absolute;
+    width: 1200px;
+    height: 500px;
+    z-index: 3;
+}
+
+.scrollTabla {
+    height: 500px;
+    overflow-y: scroll;
+    z-index: 3;
+}
+#cerrarTabla {
+	margin: -40px 0px;
+	z-index: 3;
+}
+#crearGrupo {
+	margin: 520px -25px;
+	position: absolute;
+	width: 110px;
+	text-align: center;
+	z-index: 20;
+}
+#entrarGrupo {
+	margin: 580px -25px;
+	position: absolute;
+	width: 110px;
+	text-align: center;
+}
+
+#abrir-chat {
+	margin: 640px -25px;
+	position: absolute;
+	width: 110px;
+	text-align: center;
+}
+#passSalas {
+	margin: 370px 700px;
+	position: absolute;
+	z-index: 20;
+}
+#btnPassSalas {
+	margin: 15px 0px;
+	position: absolute;
+}
+label {
+	color: white;
+}
+
+button {
+	width: 500px;
+}
+
+input {
+	width: 600px;
+}
+
+h1 {
+	color: #FFF;
+}
+
+#info {
+	margin: 320px 800px;
+	color: white;
+	position: absolute;
+}
+#btnRegistrarse {
+	margin: 50px 1750px;
+	position: absolute;
+	z-index: 30;
+	width: 120px;
+}
+#conectados {
+	margin: 6px 1620px;
+	color: white;
+	position: absolute;
+}
+
+#wrapper {
+	position: absolute;
+	height: 720px;
+}
+#info {
+	margin: 46px -56px;
+}
+#infoAux {
+	margin: 120px 0px;
+	position: absolute;
+}
+#live-chat {
+    margin-top: 375px;
+    font-size: 12px;
+    margin-left: 1605px;
+    position: absolute;
+    width: 300px;
+}
+
+#live-chat header {
+    background: #293239;
+    border-radius: 5px 5px 0 0;
+    color: #fff;
+    cursor: pointer;
+    padding: 16px 24px;
+}
+
+#live-chat h4:before {
+    background: #1a8a34;
+    border-radius: 50%;
+    content: "";
+    display: inline-block;
+    height: 8px;
+    margin: 0 8px 0 0;
+    width: 8px;
+}
+
+#live-chat h4 {
+    font-size: 12px;
+}
+
+#live-chat h5 {
+    font-size: 10px;
+}
+
+#live-chat form {
+    padding: 24px;
+}
+
+#live-chat input[type="text"] {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 8px;
+    outline: none;
+    width: 234px;
+}
+
+.chat-message-counter {
+    background: #e62727;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    display: none;
+    font-size: 12px;
+    font-weight: bold;
+    height: 28px;
+    left: 0;
+    line-height: 28px;
+    margin: -15px 0 0 -15px;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 28px;
+}
+
+.chat-close {
+    background: #1b2126;
+    border-radius: 50%;
+    color: #fff;
+    display: block;
+    float: right;
+    font-size: 10px;
+    height: 16px;
+    line-height: 16px;
+    margin: 2px 0 0 0;
+    text-align: center;
+    width: 16px;
+}
+
+.chat {
+    background: #fff;
+}
+
+.chat-history {
+    height: 252px;
+    padding: 8px 24px;
+    overflow-y: scroll;
+}
+
+.chat-message {
+    margin: 16px 0;
+}
+
+.chat-message img {
+    border-radius: 50%;
+    float: left;
+}
+
+.chat-message-content {
+    margin-left: 56px;
+}
+
+.chat-time {
+    float: right;
+    font-size: 10px;
+}
+
+.chat-feedback {
+    font-style: italic;
+    margin: 0 0 0 80px;
+}
+#miCuenta {
+	color: #fff;
+	font-size: 20px;
+}
+#salas {
+	color: #fff;
+	font-size: 14px;
+	margin: 20px -37px;
+	position: absolute;
+	white-space: nowrap;
+	text-transform: capitalize;
+	font-weight: bold;
+}
+#miCuentaDiv {
+	z-index: 1;
+	margin: 40px 44px;
+	position: absolute;	
+}
+#btnEnter {
+	
+}
+body {
+    overflow:hidden;
+}
+
+</style>
+</head>
+
+
+<body>
+	<!--onload="nivel2()"-->
+	<div id="miCuentaDiv" style="visibility: hidden;">
+		<p id="miCuenta"></p>
+		<p id="salas"></p>
+		<ul id="info">			
+		</ul>
+		<div class="grupo">
+	        <button type="button" id="crearGrupo" class="btn btn-success">Crear Sala</button>
+	        <button type="button" id="entrarGrupo" class="btn btn-success">Buscar Salas</button>
+	        <button type="button" id="abrir-chat" class="btn btn-success" style="visibility:hidden;">Abrir Chat</button>
+	    </div>
+	</div>
+	<div id="pantallaInicio"
+		style="background-color: #000; opacity: 0.9; width: 1920px; height: 800px; position: absolute; z-index: 10;">
+	</div>
+	
+	<div id="wrapper">
+	<div style="background-color: #212529; position:absolute; max-width: 48px; margin-top: 30px;">
+            <button class="btn btn-link text-white"  id="sidebarToggle"> <!--<span class="col-lg-8">USUARIOS CONECTADOS</span>-->
+                <i class="fa fa-user fa-2x " style="margin-left: -455px;"></i>
+            </button>
+        </div>
+
+
+
+		<ul class="sidebar navbar-nav">
+			<li class="nav-item active"><a class="nav-link"> <span id="constant"></span>
+			</a></li>
+		</ul>
+		<ul id="infoAux" style="margin-top:80px" class="sidebar navbar-nav">
+			
+		</ul>
+	</div>
+
+	<div>
+        <button type="button" id="btnRegistrarse" class="btn btn-success">Crear Cuenta</button>
+    </div>
+	
+	<form class="formulario">
+		
+		<div class="form-group">
+			<label for="exampleInputEmail1" id="title">Antes de
+				continuar, añada su nombre de usuario.</label> <input type="email"
+				class="form-control " id="exampleInputEmail1"
+				aria-describedby="emailHelp" placeholder="Nombre de usuario" >
+			<label for="passUser" id="contrasena">Añada una contraseña</label> <input type="password"
+                class="form-control " id="passUser"
+                placeholder="Contraseña">
+            <div id="confirmPass" style="visibility: hidden; display:none;">
+            	<label for="passUser" id="confirmContrasena">Por favor, repita la contraseña</label> <input type="password"
+                class="form-control " id="passUser2"
+                placeholder="Contraseña">
+            </div>
+		</div>
+		<br /> 
+		<div class="boton">
+			<button type="button" id="add-button" class="btn btn-success">Aceptar</button>
+		</div>
+		
+
+	</form>
+	
+	<div id="controlesM" style="visibility:hidden; position:absolute; z-index:3000000000">
+		<img src="assets/images/ControlesMenuLateral.png" style="width:1920px;height:800px">
+	</div>
+	
+	<div id="botV" style="visibility:hidden; position:absolute; z-index:3000000010">
+		<img src="assets/images/botonVolver.png" style="margin-top:100px;margin-left:300px;">
+	</div>
+	
+	<form id="formCreateGroup" class="formulario" style="visibility: hidden; width: 600px">
+
+        <div class="form-group col-lg-12" >
+            <label for="nombreSala" id="title">Añada el nombre de la Sala.</label> <input type="text"
+                class="form-control " id="nombreSala"
+                aria-describedby="emailHelp" placeholder="Nombre de Sala">
+
+        </div>
+        <div class="form-group col-lg-12">
+          <div class="col-lg-10" style="margin-left: 200px">
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-success" id="publica">
+                Pública
+              </label>
+              <label class="btn btn-success" id="privada">
+                Privada
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-lg-12" id="password"></div>
+        <div class="form-group">
+	        <div class="botonCrearSala" style="margin-left:30px;">
+	            <button type="button" id="add-buttonCreateRoom" class="btn btn-success col-lg-4 offset-lg-1 col-md-12">Crear</button>
+	            <button onclick="volvermenuprincipal();" type="button" id="cancel" class="btn btn-danger col-lg-4 offset-lg-1 col-md-12">Cancelar</button>
+	        </div>
+        </div>
+
+    </form>
+    
+    <form class="formularioSalas" style="visibility: hidden;" id="salasDisp">
+        <div class="jumbotron">
+        <div class="col-lg-12">
+              <button type="button" class="btn btn-danger btn-sm  float-right col-lg-1" id="cerrarTabla">X</button>
+            </div>
+          <h2 style="text-align: center">- Salas Disponibles -</h2>
+          <div id="tablaSalas" class="scrollTabla">
+          </div>
+        </div>
+
+    </form>
+    
+    <div id="passSalas" style="visibility: hidden;">
+    	<label for="passUser" id="contrasenaDeSala">Esta sala es privada, escribe la contraseña</label> <input type="password"
+                class="form-control " id="passSalaPriv"
+                placeholder="Contraseña">
+        <div class="boton" id="btnPassSalas">
+			<button type="button" class="btn btn-success">Aceptar</button>
+		</div>
+		<br/>
+		<br/>
+		<br/>
+		<div class="botonCrearSala">
+            <button onclick="volvermenuprincipal();" type="button" id="cancel" class="btn btn-danger">Cancelar</button>
+        </div>
+    </div>
+
+	<div id="live-chat"  style="visibility: hidden;">
+        <header class="clearfix">
+            <a href="#" class="chat-close">x</a>
+            <div id="nombreChat"></div>
+            <span class="chat-message-counter">3</span>
+        </header>
+		<div class="chat">
+            <div class="chat-history">               
+                <div id="mensajePersona"></div>
+            </div> <!-- end chat-history -->
+            
+            <form method="post">
+               <fieldset>
+                    <input type="text" placeholder="Escribe tu mensaje…" id="textoOwner" autofocus>
+                    
+                </fieldset>
+                <br/>
+		            <button style="width:235px" type="button" id="sendMensaje" class="btn btn-sm btn-success">Enviar</button>
+		        
+            </form>
+        </div> <!-- end chat -->
+    </div> <!-- end live-chat -->
+    
+	<script type="text/javascript">
+	
+			var btnvisible;
+			var miCuentaV;
+			
+	        (function($) {
+	          "use strict"; // Start of use strict
+	
+	          // Toggle the side navigation
+	          $("#sidebarToggle").on('click',function(e) {
+	            e.preventDefault();
+	            $("body").toggleClass("sidebar-toggled");
+	            $(".sidebar").toggleClass("toggled");
+	            miCuentaV = document.getElementById("miCuentaDiv");
+                if(miCuentaV.style.visibility==="visible"){
+                      document.getElementById("miCuentaDiv").style.visibility = "hidden";
+                      document.getElementById("abrir-chat").style.visibility = "hidden";
+                }
+                else {
+                      document.getElementById("miCuentaDiv").style.visibility = "visible";
+                      if(myGroupId != '' && document.getElementById("live-chat").style.visibility === "hidden"){
+	                 	  //if(document.getElementById("info").innerHTML != '')
+	                 	  	document.getElementById("abrir-chat").style.visibility = "visible";
+	                   }
+                      
+                }              
+	          });
+	          
+	          $('.chat-close').on('click', function(e) {
+
+                  e.preventDefault();
+                  document.getElementById("live-chat").style.visibility = "hidden";
+                  if(document.getElementById("miCuentaDiv").style.visibility === "visible")
+                  	document.getElementById("abrir-chat").style.visibility = "visible";
+                  //$('#live-chat').fadeOut(300);
+
+              });
+	          
+	          $("#privada").on('click',function(e) {
+                  e.preventDefault();
+                  document.getElementById("password").innerHTML = '<label for="passSala" id="title">Añada una contraseña para la Sala.</label> <input type="password" class="form-control " id="passSala" placeholder="Contraseña"> ';
+
+              });
+	          
+	          $("#abrir-chat").on('click',function(e) {
+                  e.preventDefault();
+                  document.getElementById("live-chat").style.visibility = "visible";
+                  document.getElementById("abrir-chat").style.visibility = "hidden";
+              });
+
+              $("#publica").on('click',function(e) {
+                  e.preventDefault();
+                  document.getElementById("password").innerHTML = '';
+              });
+	          
+	        })(jQuery); // End of use strict
+	        
+	        
+	        function volvermenuprincipal(){
+                document.getElementById("pantallaInicio").style.visibility = "hidden";
+                document.getElementById("passSalas").style.visibility = "hidden";
+                document.getElementById("formCreateGroup").style.visibility = "hidden";
+                //document.getElementById("crearGrupo").style.visibility = "visible";
+            }
+	    </script>
+
+
+</body>
+>>>>>>> master
 </html>
