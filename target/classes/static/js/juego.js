@@ -731,6 +731,7 @@ function showGrupos(grupos) {
 
 $(document).ready(function () {
 	var btn = document.getElementById("crearGrupo");
+	
 	$("#crearGrupo").click(function () {     
 		
         if (btn.innerHTML === "Crear Sala") {
@@ -873,13 +874,19 @@ $(document).ready(function () {
 		});
 		
 	});
-	$("#entrarGrupo").click(function () {  
-		document.getElementById("pantallaInicio").style.visibility = "visible";
-        document.getElementById("salasDisp").style.visibility = "visible";
-        document.getElementById("formCreateGroup").style.visibility = "hidden";
-        loadGrupos(function (grupos) {
-        	showGrupos(grupos);
-        });
+	$("#entrarGrupo").click(function () {
+		if(document.getElementById("entrarGrupo").innerHTML === "Buscar Salas"){
+			document.getElementById("pantallaInicio").style.visibility = "visible";
+	        document.getElementById("salasDisp").style.visibility = "visible";
+	        document.getElementById("formCreateGroup").style.visibility = "hidden";
+	        loadGrupos(function (grupos) {
+	        	showGrupos(grupos);
+	        });
+		}
+		if(document.getElementById("entrarGrupo").innerHTML === "Controles"){
+			document.getElementById("pantallaInicio").style.visibility = "visible";
+			document.getElementById("controlesM").style.visibility = "visible";
+		}
 	});
 	$("#cerrarTabla").click(function () {
         var element6 = document.getElementById("pantallaInicio");
