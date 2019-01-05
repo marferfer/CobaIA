@@ -27,7 +27,7 @@ WebFontConfig = {
 // Load grupos from server
 function loadSala(id, callback) {
 	$.ajax({
-		url : 'http://25.76.106.32:8080/grupos/' + id
+		url : 'http://localhost:8080/grupos/' + id
 	}).done(function(grupo) {
 		// console.log('Versions loaded: ' + JSON.stringify(grupos));
 		callback(grupo);
@@ -38,7 +38,7 @@ function loadSala(id, callback) {
 function updateSala(grupo) {
 	$.ajax({
 		method : 'PUT',
-		url : 'http://25.76.106.32:8080/grupos/' + grupo.id,
+		url : 'http://localhost:8080/grupos/' + grupo.id,
 		data : JSON.stringify(grupo),
 		processData : false,
 		headers : {
@@ -565,7 +565,7 @@ function actionOnClickAcro() {
 
 $(document).ready(function() {
 
-	connection = new WebSocket('ws://25.76.106.32:8080/personajes');
+	connection = new WebSocket('ws://localhost:8080/personajes');
 	connection.onerror = function(e) {
 		console.log("WS error: " + e);
 	}
@@ -627,6 +627,12 @@ $(document).ready(function() {
 					setTimeout(function() {
 						jugPersonajes.destroy();
 						inicio();
+						
+				    	document.getElementById("crearGrupo").innerHTML = 'Volver al Menú';
+				    	document.getElementById("crearGrupo").className = 'btn btn-danger';
+				    	document.getElementById("entrarGrupo").innerHTML = 'Controles';
+				    	
+					    
 					}, 5000);
 					break;
 				default:

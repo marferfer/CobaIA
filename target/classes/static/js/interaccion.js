@@ -899,6 +899,12 @@ function update5() {
     $("#crearGrupo").click(function () {  
     	juego.destroy();
     	menu();
+    	document.getElementById("crearGrupo").innerHTML = 'Crear Sala';
+    	document.getElementById("crearGrupo").className = 'btn btn-success';
+    	document.getElementById("entrarGrupo").innerHTML = 'Buscar Salas';
+    	if(document.getElementById("live-chat").style.visibility == 'hidden'){
+    		document.getElementById("abrir-chat").style.visibility = 'visible';
+    	}
     	
     });
     

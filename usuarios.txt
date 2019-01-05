@@ -8,3 +8,5 @@ User: prueba2 Password: 11
 User: walrus Password: medebes5euros
 User: Clara Password: yanomedebes5euros
 User: MALLOLO Password: 1111
+User: Luis1 Password: 1111
+User: Pepa1 Password: 1111
