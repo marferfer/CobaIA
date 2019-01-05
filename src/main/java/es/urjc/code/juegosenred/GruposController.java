@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/grupos")
 public class GruposController {
 
-	Map<Long, Grupo> grupos = new ConcurrentHashMap<>(); 
+	static Map<Long, Grupo> grupos = new ConcurrentHashMap<>(); 
 	AtomicLong nextId = new AtomicLong(0);
 	
 	@GetMapping
-	public Collection<Grupo> grupos() {
+	public static Collection<Grupo> grupos() {
 		return grupos.values();
 	}
 
@@ -42,7 +42,7 @@ public class GruposController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Grupo> actulizaGrupo(@PathVariable long id, @RequestBody Grupo grupoActualizado) {
+	public ResponseEntity<Grupo> actualizaGrupo(@PathVariable long id, @RequestBody Grupo grupoActualizado) {
 
 		Grupo savedGrupo = grupos.get(grupoActualizado.getId());
 
@@ -69,7 +69,7 @@ public class GruposController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Grupo> borraGrupo(@PathVariable long id) {
+	public static ResponseEntity<Grupo> borraGrupo(@PathVariable long id) {
 
 		Grupo savedGrupo = grupos.get(id);
 

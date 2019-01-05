@@ -11,6 +11,9 @@ public class Grupo {
 	private String tanka = "";
 	private String tali = "";
 	private String acro = "";
+	private boolean tankaReady = false;
+	private boolean taliReady = false;
+	private boolean acroReady = false;
 	private long gameId;
 	
 
@@ -87,6 +90,30 @@ public class Grupo {
 
 	public void setAcro(String acro) {
 		this.acro = acro;
+	}
+
+	public boolean isTankaReady() {
+		return tankaReady;
+	}
+
+	public void setTankaReady(boolean tankaReady) {
+		this.tankaReady = tankaReady;
+	}
+
+	public boolean isTaliReady() {
+		return taliReady;
+	}
+
+	public void setTaliReady(boolean taliReady) {
+		this.taliReady = taliReady;
+	}
+
+	public boolean isAcroReady() {
+		return acroReady;
+	}
+
+	public void setAcroReady(boolean acroReady) {
+		this.acroReady = acroReady;
 	}
 
 	public long getGameId() {

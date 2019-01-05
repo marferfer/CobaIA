@@ -52,7 +52,7 @@ function sound(src) {
 }
 
 function connectChat(){
-	chatConnection = new WebSocket('ws://localhost:8080/chat');
+	chatConnection = new WebSocket('ws://25.76.106.32:8080/chat');
 	chatConnection.onerror = function(e) {
 		console.log("WS error: " + e);
 	}
@@ -101,7 +101,7 @@ function loop() {
 
 ///////////////////////////////////////////////////////////////////////////////////
 
-var miCobaIA;
+var miCobaIA = '';
 
 function personajes() {
      jugPersonajes = new Phaser.Game(1920, 800, Phaser.AUTO, '', {preload: preload6, create: create6});  
@@ -214,7 +214,7 @@ var invitar = false;
 function addUserToFile(item){
 	$.ajax({
 		method: "POST",
-		url:'http://localhost:8080/ficheros',
+		url:'http://25.76.106.32:8080/ficheros',
 		data: JSON.stringify(item),
 	    processData: false,
 	    headers: {
@@ -225,7 +225,7 @@ function addUserToFile(item){
 
 function getUsersAndPasswords(callback){
 	$.ajax({
-		url: 'http://localhost:8080/ficheros/{partes}'
+		url: 'http://25.76.106.32:8080/ficheros/{partes}'
 	}).done(function(items){
 		callback(items);
 	})
@@ -250,7 +250,7 @@ setTimeout(function(){console.log(b)}, 1000);
 //no borrar de momento, puede resultar util mas tarde
 /*function hola123(callback){
 	$.ajax({
-		url:'http://localhost:8080/items/{password}'
+		url:'http://25.76.106.32:8080/items/{password}'
 	}).done(function(items){
 		callback(items);
 	})
@@ -263,7 +263,7 @@ hola123(function (pw) {
 //Load items from server
 function loadItems(callback) {
     $.ajax({
-        url: 'http://localhost:8080/items'
+        url: 'http://25.76.106.32:8080/items'
     }).done(function (items) {
         //console.log('Items loaded: ' + JSON.stringify(items));
         callback(items);
@@ -274,7 +274,7 @@ function loadItems(callback) {
 function createItem(item, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://localhost:8080/items',
+        url: 'http://25.76.106.32:8080/items',
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -290,7 +290,7 @@ function createItem(item, callback) {
 function updateItem(item) {
     $.ajax({
         method: 'PUT',
-        url: 'http://localhost:8080/items/' + item.id,
+        url: 'http://25.76.106.32:8080/items/' + item.id,
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -305,7 +305,7 @@ function updateItem(item) {
 function deleteItem(itemId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://localhost:8080/items/' + itemId
+        url: 'http://25.76.106.32:8080/items/' + itemId
     }).done(function (item) {
         console.log("Deleted item " + itemId)
     })
@@ -550,7 +550,7 @@ var cobaIAversion = "1.6";
 //Load VERSIONS from server
 function loadVersions(callback) {
     $.ajax({
-        url: 'http://localhost:8080/versions'
+        url: 'http://25.76.106.32:8080/versions'
     }).done(function (versions) {
         //console.log('Versions loaded: ' + JSON.stringify(versions));
         callback(versions);
@@ -561,7 +561,7 @@ function loadVersions(callback) {
 function createVersion(version, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://localhost:8080/versions',
+        url: 'http://25.76.106.32:8080/versions',
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -577,7 +577,7 @@ function createVersion(version, callback) {
 function updateVersion(version) {
     $.ajax({
         method: 'PUT',
-        url: 'http://localhost:8080/versions/' + version.id,
+        url: 'http://25.76.106.32:8080/versions/' + version.id,
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -592,7 +592,7 @@ function updateVersion(version) {
 function deleteVersion(versionId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://localhost:8080/versions/' + versionId
+        url: 'http://25.76.106.32:8080/versions/' + versionId
     }).done(function (version) {
         console.log("Deleted version " + versionId)
     })
@@ -635,11 +635,12 @@ var myGroupId = '';
 var tankaUser2 = '';
 var taliUser2 = '';
 var acroUser2 = '';
+var groupConnection;
 
 //Load grupos from server
 function loadGrupos(callback) {
  $.ajax({
-     url: 'http://localhost:8080/grupos'
+     url: 'http://25.76.106.32:8080/grupos'
  }).done(function (grupos) {
      //console.log('Versions loaded: ' + JSON.stringify(grupos));
      callback(grupos);
@@ -650,7 +651,7 @@ function loadGrupos(callback) {
 function createGrupo(grupo, callback) {
  $.ajax({
      method: "POST",
-     url: 'http://localhost:8080/grupos',
+     url: 'http://25.76.106.32:8080/grupos',
      data: JSON.stringify(grupo),
      processData: false,
      headers: {
@@ -666,7 +667,7 @@ function createGrupo(grupo, callback) {
 function updateGrupo(grupo) {
  $.ajax({
      method: 'PUT',
-     url: 'http://localhost:8080/grupos/' + grupo.id,
+     url: 'http://25.76.106.32:8080/grupos/' + grupo.id,
      data: JSON.stringify(grupo),
      processData: false,
      headers: {
@@ -681,7 +682,7 @@ function updateGrupo(grupo) {
 function deleteGrupo(grupoId) {
  $.ajax({
      method: 'DELETE',
-     url: 'http://localhost:8080/grupos/' + grupoId
+     url: 'http://25.76.106.32:8080/grupos/' + grupoId
  }).done(function (grupo) {
      console.log("Deleted grupo " + grupoId)
  })
@@ -765,6 +766,20 @@ $(document).ready(function () {
         		}
         	});
         	document.getElementById("abrir-chat").style.visibility = "hidden";
+        	if (nivelJuego === 0.5) {
+        		tankaUser2 = '';
+        		taliUser2 = '';
+        		acroUser2 = '';
+        		tanka.alpha = 1;
+        		tali.alpha = 1;
+        		acro.alpha = 1;
+        		miCobaIA = '';
+        		tankaCheck.alpha = 0;
+        		taliCheck.alpha = 0;
+        		acroCheck.alpha = 0;
+        		checkSala();
+        	}
+        	groupConnection.close();
         }
 	})
 	//Crear Sala
@@ -820,6 +835,9 @@ $(document).ready(function () {
 			    	showGrupo(grupoWithId);
 			    	myGroupId = grupoWithId.id;
 			    	if (nivelJuego === 0.5) {
+			    		tankaCheck.alpha = 0;
+		        		taliCheck.alpha = 0;
+		        		acroCheck.alpha = 0;
 			    		switch (miCobaIA) {
 			    		case 'tankabaIA':
 			    			loadSala(myGroupId, function(grupo) {
@@ -844,6 +862,7 @@ $(document).ready(function () {
 			    		}
 			    	}
 			    });
+			    connectToGrupos();
 			    document.getElementById("pantallaInicio").style.visibility = "hidden";
 	            document.getElementById("formCreateGroup").style.visibility = "hidden";
 	            btn.className = "btn btn-danger";
@@ -897,18 +916,27 @@ $(document).ready(function () {
                         myGroupId = itemId;
                         myGameId = grupos[i].gameId;
                         loadSala(myGroupId, function (grupo) {
-                    		if (grupo.tanka != '') {
-                    			tankaUser2 = grupo.tanka;
-                    		}
-                    		if (grupo.tali != '') {
-                    			taliUser2 = grupo.tali;
-                    		}
-                    		if (grupo.acro != '') {
-                    			acroUser2 = grupo.acro;
-                    		}
-                    		checkSala();
+                        	if (nivelJuego === 0.5) {
+	                    		if (grupo.tanka != '') {
+	                    			tankaUser2 = grupo.tanka;
+	                    		}
+	                    		if (grupo.tali != '') {
+	                    			taliUser2 = grupo.tali;
+	                    		}
+	                    		if (grupo.acro != '') {
+	                    			acroUser2 = grupo.acro;
+	                    		}
+	                    		checkSala();
+	                    		if (grupo.tankaReady) tankaCheck.alpha = 1;
+	                    		else tankaCheck.alpha = 0;
+	                    		if (grupo.taliReady) taliCheck.alpha = 1;
+	                    		else taliCheck.alpha = 0;
+	                    		if (grupo.acroReady) acroCheck.alpha = 1;
+	                    		else acroCheck.alpha = 0;
+                        	}
                     	});
                         miCobaIA = '';
+                        connectToGrupos();
             		}
             		else if (grupos[i].id == itemId) {
             			document.getElementById("pantallaInicio").style.zIndex = "10";
@@ -952,6 +980,7 @@ $(document).ready(function () {
 		                        	});
 	                            }
 	                            miCobaIA = '';
+	                            connectToGrupos();
 	            			}
 	            			else {
 	            				document.getElementById("contrasenaDeSala").innerHTML = '<span style="color:red"> <b>La contraseña no es correcta, por favor vuelve a intentarlo</b> </span>';
@@ -1023,7 +1052,7 @@ $(document).ready(function () {
 //Load Chats from server
 function loadChats(callback) {
     $.ajax({
-        url: 'http://localhost:8080/chats'
+        url: 'http://25.76.106.32:8080/chats'
     }).done(function (chats) {
         //console.log('Chats loaded: ' + JSON.stringify(chats));
         callback(chats);
@@ -1034,7 +1063,7 @@ function loadChats(callback) {
 function createChat(chat, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://localhost:8080/chats',
+        url: 'http://25.76.106.32:8080/chats',
         data: JSON.stringify(chat),
         processData: false,
         headers: {
@@ -1050,7 +1079,7 @@ function createChat(chat, callback) {
 function updateChat(chat) {
     $.ajax({
         method: 'PUT',
-        url: 'http://localhost:8080/chats/' + chat.id,
+        url: 'http://25.76.106.32:8080/chats/' + chat.id,
         data: JSON.stringify(chat),
         processData: false,
         headers: {
@@ -1065,7 +1094,7 @@ function updateChat(chat) {
 function deleteChat(chatId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://localhost:8080/chats/' + chatId
+        url: 'http://25.76.106.32:8080/chats/' + chatId
     }).done(function (chat) {
         console.log("Deleted chat " + chatId)
     })
@@ -1097,7 +1126,7 @@ function showChat(chats) {
 //Load Chats from server
 function loadGameState(gameId, callback) {
 	 $.ajax({
-	     url: 'http://localhost:8080/gameStates' + gameId
+	     url: 'http://25.76.106.32:8080/gameStates' + gameId
 	 }).done(function (gameState) {
 	     //console.log('Chats loaded: ' + JSON.stringify(chats));
 	     callback(gameState);
@@ -1108,7 +1137,7 @@ function loadGameState(gameId, callback) {
 function createGameState(gameState, callback) {
 	 $.ajax({
 	     method: "POST",
-	     url: 'http://localhost:8080/gameStates',
+	     url: 'http://25.76.106.32:8080/gameStates',
 	     data: JSON.stringify(gameState),
 	     processData: false,
 	     headers: {
@@ -1124,7 +1153,7 @@ function createGameState(gameState, callback) {
 function updateGameState(gameState) {
 	 $.ajax({
 	     method: 'PUT',
-	     url: 'http://localhost:8080/gameStates/' + gameState.id,
+	     url: 'http://25.76.106.32:8080/gameStates/' + gameState.id,
 	     data: JSON.stringify(gameState),
 	     processData: false,
 	     headers: {
@@ -1139,7 +1168,7 @@ function updateGameState(gameState) {
 function deleteGameState(gameId) {
 	 $.ajax({
 	     method: 'DELETE',
-	     url: 'http://localhost:8080/gameStates/' + gameId
+	     url: 'http://25.76.106.32:8080/gameStates/' + gameId
 	 }).done(function (gameState) {
 	     console.log("Deleted GameState " + gameId)
 	 })
@@ -1181,7 +1210,7 @@ function hereIam() {
 	setTimeout(function(){
 		if (enSala) {
             
-            loadGrupos(function (grupos) {
+            /*loadGrupos(function (grupos) {
                 for (var i = 0; i < grupos.length; i++) {
                     if (usuario == grupos[i].usuario1) {
                         miSala = grupos[i];
@@ -1214,7 +1243,7 @@ function hereIam() {
                         
                     }
                 }
-            });
+            });*/
             if (miGrupo != '') {
             	/*var misChats = {};
             	var chatSize = 0;;*/
@@ -1316,6 +1345,56 @@ function checkSala() {
 	else {
 		acro.alpha = 1;
 		acroUser.text = '';
+	}
+}
+
+function connectToGrupos() {
+groupConnection = new WebSocket('ws://25.76.106.32:8080/salas');
+	
+	groupConnection.onopen = function() {
+		var msg = {
+			name : usuario,
+			message : 'hi',
+			groupId : myGroupId
+		}
+		groupConnection.send(JSON.stringify(msg));
+	}
+	
+	groupConnection.onerror = function(e) {
+		console.log("WS error: " + e);
+	}
+	groupConnection.onmessage = function(msg) {
+		console.log("WS message: " + msg.data + myGroupId);
+		var message = JSON.parse(msg.data);
+		if (message.groupId == myGroupId) {
+			if (message.message == "bye" && nivelJuego == 0.5) {
+				switch (message.name) {
+				case tankaUser.text:
+					tankaUser.text = '';
+					tanka.alpha = 1;
+					tankaCheck.alpha = 0;
+					break;
+				case taliUser.text:
+					taliUser.text = '';
+					tali.alpha = 1;
+					taliCheck.alpha = 0;
+					break;
+				case acroUser.text:
+					acroUser.text = '';
+					acro.alpha = 1;
+					acroCheck.alpha = 0;
+					break;
+				default:
+					break;
+				}
+			}
+			loadSala(myGroupId, function (grupo) {
+				showGrupo(grupo);
+			});
+		}
+	}
+	groupConnection.onclose = function() {
+		console.log("Closing socket");
 	}
 }
 

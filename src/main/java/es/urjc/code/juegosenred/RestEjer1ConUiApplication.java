@@ -23,6 +23,7 @@ public class RestEjer1ConUiApplication implements WebSocketConfigurer {
 		registry.addHandler(createPersonajeHandler(), "/personajes").setAllowedOrigins("*");
 		registry.addHandler(createPlayerHandler(), "/players").setAllowedOrigins("*");
 		registry.addHandler(createChatHandler(), "/chat").setAllowedOrigins("*");
+		registry.addHandler(createSalasHandler(), "/salas").setAllowedOrigins("*");
 	}
 	
 	@Bean
@@ -38,5 +39,10 @@ public class RestEjer1ConUiApplication implements WebSocketConfigurer {
 	@Bean
 	public ChatHandler createChatHandler() {
 		return new ChatHandler();
+	}
+	
+	@Bean
+	public SalasHandler createSalasHandler() {
+		return new SalasHandler();
 	}
 }
