@@ -885,8 +885,15 @@ $(document).ready(function () {
 		}
 		if(document.getElementById("entrarGrupo").innerHTML === "Controles"){
 			document.getElementById("pantallaInicio").style.visibility = "visible";
+			document.getElementById("botV").style.visibility = "visible";
 			document.getElementById("controlesM").style.visibility = "visible";
 		}
+	});
+	
+	$("#botV").click(function () {
+		document.getElementById("pantallaInicio").style.visibility = "hidden";
+		document.getElementById("botV").style.visibility = "hidden";
+		document.getElementById("controlesM").style.visibility = "hidden";
 	});
 	$("#cerrarTabla").click(function () {
         var element6 = document.getElementById("pantallaInicio");
