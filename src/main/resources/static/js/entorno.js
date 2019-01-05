@@ -33,7 +33,7 @@ function preload5() {
 
     juego.state.add("recarga", Phaser.Preload);
 
-    juego.load.image('fondoN1', 'assets/images/fondoN1.png');
+    juego.load.image('fondoN1', 'assets/Nivel0/fondoN1.png');
     juego.load.image('sueloN1Parte1', 'assets/images/sueloN1Parte1.png');
     //juego.load.image('sueloN1Parte2', 'assets/images/sueloN1Parte2.png');
     //juego.load.image('sueloN1Parte3', 'assets/images/sueloN1Parte3.png');
@@ -46,10 +46,8 @@ function preload5() {
     juego.load.image('tuboN1Completo', 'assets/images/tuboN1Completo.png');
     juego.load.image('cable', 'assets/images/cable.png');
     juego.load.image('frasco', 'assets/images/frasco.png');
-
     juego.load.image('mesaOrdenador', 'assets/Nivel0/mesaLab.png');
     juego.load.image('urna', 'assets/Nivel0/urnaLaboratorio.png');
-
     juego.load.image('plataformaMovil', 'assets/images/plataformaMovil.png');
     juego.load.image('plataformaBasic', 'assets/images/plataformaBasic.png');
     //juego.load.image('boton', 'assets/images/boton.png');
@@ -61,12 +59,11 @@ function preload5() {
     juego.load.image('pilaCadaveres', 'assets/images/pilaCadaveres.png');
     juego.load.image('baseTrepar', 'assets/images/baseParaTrepar.png');
     juego.load.image('compuertaParteSuperior', 'assets/images/compuertaParteSuperior.png');
-
     juego.load.image('ventilador', 'assets/images/ventilador.png');
     juego.load.image('bobina2', 'assets/images/bobina2.png');
-    
-
     juego.load.image('ascensor','assets/nivel1/ascensor.png');
+    juego.load.image('ventanas', 'assets/Nivel0/ventanas.png');
+    juego.load.image('cientificos', 'assets/Nivel0/cientificos.png');
 
     juego.load.spritesheet('compuerta', 'assets/images/compuerta.png', 125, 547);
     //juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
@@ -112,15 +109,19 @@ function create5() {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// NIVEL 1   /////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    nivel1.decorados[0] = juego.add.image(-200, juego.world.height - 1680, 'cientificos');
+    nivel1.decorados[0].scale.setTo(1.2, 1.2);
+    
     niveljuego = 1;
     nivel1.fondo = juego.add.sprite(0, 0, 'fondoN1');
-
+  
     //Decorados que se ven detras del jugador
-    nivel1.decorados[0] = juego.add.image(1135, juego.world.height - 650, 'frasco');
-    nivel1.decorados[1] = juego.add.image(820, juego.world.height - 650, 'cable');
+    nivel1.decorados[1] = juego.add.image(1135, juego.world.height - 650, 'frasco');
+    nivel1.decorados[2] = juego.add.image(2720, juego.world.height - 650, 'cable');
 
-    nivel1.decorados[7] = juego.add.image(1835, juego.world.height - 534, 'urna');
-    nivel1.decorados[8] = juego.add.image(2935, juego.world.height - 225, 'mesaOrdenador');
+    nivel1.decorados[3] = juego.add.image(1835, juego.world.height - 534, 'urna');
+    nivel1.decorados[4] = juego.add.image(2935, juego.world.height - 225, 'mesaOrdenador');
 
     nivel1.grupo = juego.add.group();
     nivel1.grupo.enableBody = true;
@@ -1001,12 +1002,12 @@ function create5() {
 /////////DECORADOS POR DELANTE DEL JUGADOR  ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    nivel1.decorados[2] = juego.add.image(1000, juego.world.height - 490, 'conexionTuboArriba');
-    nivel1.decorados[3] = juego.add.image(1035, juego.world.height - 1043, 'conexionTuboDerecha');
+    nivel1.decorados[5] = juego.add.image(1000, juego.world.height - 490, 'conexionTuboArriba');
+    nivel1.decorados[6] = juego.add.image(1035, juego.world.height - 1043, 'conexionTuboDerecha');
 
-    nivel1.decorados[4] = juego.add.image(2800, 420, 'compuertaParteSuperior');
-    nivel1.decorados[5] = juego.add.image(6750, 800, 'compuertaParteSuperior');
-    nivel1.decorados[6] = juego.add.image(10430, 475, 'compuertaParteSuperior');
+    nivel1.decorados[7] = juego.add.image(2800, 420, 'compuertaParteSuperior');
+    nivel1.decorados[8] = juego.add.image(6750, 800, 'compuertaParteSuperior');
+    nivel1.decorados[9] = juego.add.image(10430, 475, 'compuertaParteSuperior');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
