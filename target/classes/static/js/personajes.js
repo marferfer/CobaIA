@@ -27,9 +27,9 @@ WebFontConfig = {
 // Load grupos from server
 function loadSala(id, callback) {
 	$.ajax({
-		url : 'http://localhost:8080/grupos/' + id
+		url : 'http://25.76.106.32:8080/grupos/' + id
 	}).done(function(grupo) {
-		// console.log('Versions loaded: ' + JSON.stringify(grupos));
+		console.log('Sala loaded: ' + JSON.stringify(grupo));
 		callback(grupo);
 	})
 }
@@ -38,7 +38,7 @@ function loadSala(id, callback) {
 function updateSala(grupo) {
 	$.ajax({
 		method : 'PUT',
-		url : 'http://localhost:8080/grupos/' + grupo.id,
+		url : 'http://25.76.106.32:8080/grupos/' + grupo.id,
 		data : JSON.stringify(grupo),
 		processData : false,
 		headers : {
@@ -565,7 +565,7 @@ function actionOnClickAcro() {
 
 $(document).ready(function() {
 
-	connection = new WebSocket('ws://localhost:8080/personajes');
+	connection = new WebSocket('ws://25.76.106.32:8080/personajes');
 	connection.onerror = function(e) {
 		console.log("WS error: " + e);
 	}

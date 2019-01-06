@@ -528,7 +528,8 @@ body {
 <script src="librerias/phaser.min.js"></script>
 <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
 <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 
 
@@ -554,6 +555,11 @@ body {
 
 <style>
 .formulario {
+	margin: 370px 700px;
+	position: absolute;
+	z-index: 11;
+}
+.formulario2 {
 	margin: 370px 700px;
 	position: absolute;
 	z-index: 11;
@@ -590,7 +596,7 @@ body {
 }
 
 #abrir-chat {
-	margin: 640px -25px;
+	margin: 580px -25px;
 	position: absolute;
 	width: 110px;
 	text-align: center;
@@ -778,8 +784,47 @@ h1 {
 #btnEnter {
 	
 }
+#infoError {
+	z-index: 51;
+	margin: 370px 700px;
+	position: absolute;
+}
+#error {
+	color: white;
+	font-size: 16px;
+}
+#imgTali {
+	visibility: hidden;
+	margin: 340px 510px;
+	position: absolute;	
+	z-index: 51;
+}
 body {
     overflow:hidden;
+}
+.loader{
+  margin: 0 0 2em;
+  height: 100px;
+  width: 20%;
+  text-align: center;
+  padding: 1em;
+  margin: 0 auto 1em;
+  display: inline-block;
+  vertical-align: top;
+}
+svg path,
+svg rect{
+  fill: #7EFF5F;
+}
+#loader {
+	visibility: hidden;
+	z-index: 51;
+	margin: 370px 700px;
+	position: absolute;	
+}
+#logIn {
+	color: white;
+	font-size: 16px;
 }
 
 </style>
@@ -827,7 +872,7 @@ body {
 	
 	<form class="formulario">
 		
-		<div class="form-group">
+		<div id="formInicial" class="form-group">
 			<label for="exampleInputEmail1" id="title">Antes de
 				continuar, añada su nombre de usuario.</label> <input type="email"
 				class="form-control " id="exampleInputEmail1"
@@ -857,7 +902,7 @@ body {
 		<img src="assets/images/botonVolver.png" style="margin-top:100px;margin-left:300px;">
 	</div>
 	
-	<form id="formCreateGroup" class="formulario" style="visibility: hidden; width: 600px">
+	<form id="formCreateGroup" class="formulario2" style="visibility: hidden; width: 600px">
 
         <div class="form-group col-lg-12" >
             <label for="nombreSala" id="title">Añada el nombre de la Sala.</label> <input type="text"
@@ -914,6 +959,32 @@ body {
             <button onclick="volvermenuprincipal();" type="button" id="cancel" class="btn btn-danger">Cancelar</button>
         </div>
     </div>
+    
+    <div class="loader loader--style1"  id="loader" title="0">
+	  <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	   width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+	  <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
+	    s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
+	    c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"/>
+	  <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0
+	    C22.32,8.481,24.301,9.057,26.013,10.047z">
+	    <animateTransform attributeType="xml"
+	      attributeName="transform"
+	      type="rotate"
+	      from="0 20 20"
+	      to="360 20 20"
+	      dur="0.5s"
+	      repeatCount="indefinite"/>
+	    </path>
+	  </svg>
+	  <p id="logIn">Iniciando Sesión</p>
+	</div>
+    
+    <img id="imgTali" src="assets/Images/TalibaIA.png" alt="TalibaIA attacks again">
+    
+    <div id="infoError">
+    	<p id="error"></p>
+    </div>
 
 	<div id="live-chat"  style="visibility: hidden;">
         <header class="clearfix">
@@ -932,7 +1003,7 @@ body {
                     
                 </fieldset>
                 <br/>
-		            <button style="width:235px" type="button" id="sendMensaje" class="btn btn-sm btn-success">Enviar</button>
+		            <button style="width:235px" type="button" id="send-btn" class="btn btn-sm btn-success">Enviar</button>
 		        
             </form>
         </div> <!-- end chat -->

@@ -51,6 +51,10 @@ public class Grupo {
 	public void setUsuario1(String usuario1) {
 		this.usuario1 = usuario1;
 	}
+	
+	public void removeUser1() {
+		usuario1 = null;
+	}
 
 	public String getUsuario2() {
 		return usuario2;
@@ -59,6 +63,10 @@ public class Grupo {
 	public void setUsuario2(String usuario2) {
 		this.usuario2 = usuario2;
 	}
+	
+	public void removeUser2() {
+		usuario2 = null;
+	}
 
 	public String getUsuario3() {
 		return usuario3;
@@ -66,6 +74,10 @@ public class Grupo {
 
 	public void setUsuario3(String usuario3) {
 		this.usuario3 = usuario3;
+	}
+	
+	public void removeUser3() {
+		usuario3 = null;
 	}
 
 	public String getTanka() {

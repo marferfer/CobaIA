@@ -52,28 +52,19 @@ function sound(src) {
 }
 
 function connectChat(){
-	chatConnection = new WebSocket('ws://localhost:8080/chat');
+	//console.log('gola');
+	chatConnection = new WebSocket('ws://25.76.106.32:8080/chat');
 	chatConnection.onerror = function(e) {
 		console.log("WS error: " + e);
 	}
 	chatConnection.onmessage = function(msg) {
 		console.log("WS message: " + msg.data);
 		var message = JSON.parse(msg.data)
-		$('#chat').val($('#chat').val() + "\n" + message.name + ": " + message.message);
+		$('#mensajePersona').append( message.name + ": " + message.message + "<br>");
 	}
 	chatConnection.onclose = function() {
 		console.log("Closing socket");
 	}
-
-
-	$('#send-btn').click(function() {
-		var msg = {
-			name : $('#name').val(),
-			message : $('#message').val()
-		}
-	    $('#chat').val($('#chat').val() + "\n" + msg.name + ": " + msg.message);
-		chatConnection.send(JSON.stringify(msg));
-	});
 }
 
 loop();
@@ -214,7 +205,7 @@ var invitar = false;
 function addUserToFile(item){
 	$.ajax({
 		method: "POST",
-		url:'http://localhost:8080/ficheros',
+		url:'http://25.76.106.32:8080/ficheros',
 		data: JSON.stringify(item),
 	    processData: false,
 	    headers: {
@@ -225,7 +216,7 @@ function addUserToFile(item){
 
 function getUsersAndPasswords(callback){
 	$.ajax({
-		url: 'http://localhost:8080/ficheros/{partes}'
+		url: 'http://25.76.106.32:8080/ficheros/{partes}'
 	}).done(function(items){
 		callback(items);
 	})
@@ -246,11 +237,12 @@ setTimeout(function(){console.log(b)}, 1000);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ITEMS ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var usersConnection;
 
 //no borrar de momento, puede resultar util mas tarde
 /*function hola123(callback){
 	$.ajax({
-		url:'http://localhost:8080/items/{password}'
+		url:'http://25.76.106.32:8080/items/{password}'
 	}).done(function(items){
 		callback(items);
 	})
@@ -263,7 +255,7 @@ hola123(function (pw) {
 //Load items from server
 function loadItems(callback) {
     $.ajax({
-        url: 'http://localhost:8080/items'
+        url: 'http://25.76.106.32:8080/items'
     }).done(function (items) {
         //console.log('Items loaded: ' + JSON.stringify(items));
         callback(items);
@@ -274,7 +266,7 @@ function loadItems(callback) {
 function createItem(item, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://localhost:8080/items',
+        url: 'http://25.76.106.32:8080/items',
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -290,7 +282,7 @@ function createItem(item, callback) {
 function updateItem(item) {
     $.ajax({
         method: 'PUT',
-        url: 'http://localhost:8080/items/' + item.id,
+        url: 'http://25.76.106.32:8080/items/' + item.id,
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -305,7 +297,7 @@ function updateItem(item) {
 function deleteItem(itemId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://localhost:8080/items/' + itemId
+        url: 'http://25.76.106.32:8080/items/' + itemId
     }).done(function (item) {
         console.log("Deleted item " + itemId)
     })
@@ -344,8 +336,7 @@ function llamarconsola(){
 	console.log('hola');
 }
 
-$(document).ready(function () {
-
+function logInSignIn() {
 	document.getElementById('exampleInputEmail1').focus();
     var input = $('#exampleInputEmail1')
     var input2 = $('#passUser')
@@ -418,6 +409,18 @@ $(document).ready(function () {
     		document.getElementById("confirmPass").style.display = "none";
     	}
     });
+    
+    $('#send-btn').click(function() {
+		var msg = {
+			name : usuario,//$('#name').val(),
+			message : $('#textoOwner').val()
+		}
+		$('#mensajePersona').append(msg.name + ": " + msg.message + "<br>");
+	    //$('#mensajePersona').val($('#mensajePersona').val() + "\n" + msg.name + ": " + msg.message);
+		chatConnection.send(JSON.stringify(msg));
+		
+		console.log($('#mensajePersona').val($('#mensajePersona').val() + "\n" + msg.name + ": " + msg.message));
+	});
 
     //Handle add button
     $("#add-button").click(function () {
@@ -442,104 +445,126 @@ $(document).ready(function () {
     	//Ficheros
     	if (btnReg.innerHTML == "Crear Cuenta") {
     		var userMatches = false;
-			getUsersAndPasswords(function (items) {
-    			for (var i = 0; i < items.length; i += 2) {
-    				if (value == items[i] && value2 == items[i+1]) {
-    					userMatches = true;
-    					i = items.length;
-    					createItem(item, function (itemWithId) {
-    	                    //When item with id is returned from server
-    	    				showUser(itemWithId);
-    	                });
-    	            
-    	                var element = document.getElementById("exampleInputEmail1");
-    	                element.parentNode.removeChild(element);
-    	                var element1 = document.getElementById("add-button");
-    	                element1.parentNode.removeChild(element1);
-    	                var element2 = document.getElementById("title");
-    	                element2.parentNode.removeChild(element2);
-    	                var element3 = document.getElementById("pantallaInicio");
-    	                element3.style.visibility = "hidden";
-    	                element3.style.zIndex = "2";
-    	                var element4 = document.getElementById("contrasena");
-    	                element4.parentNode.removeChild(element4);
-    	                var element5 = document.getElementById("passUser");
-    	                element5.parentNode.removeChild(element5);
-    	                var element6 = document.getElementById("btnRegistrarse");
-    	                element6.parentNode.removeChild(element6);
-    	                var element7 = document.getElementById("confirmPass");
-    	                element7.parentNode.removeChild(element7);
-    	                
-    	   
-    	                usuario = value;
-    	                if (usuario == "admin") {
-    	        			checkUsers();
-    	        		}
-    				}
-    			}
-    			if (!userMatches) {
-    				document.getElementById("title").innerHTML = '<span style="color:red"> <b>Los datos introducidos no concuerdan</b> </span>';
-    			}
-    		});			
+    		var repeatedUser = false;
+    		loadItems(function(items) {
+				for (var j = 0; j < items.length; j++) {
+					if (value == items[i]) {
+						repeatedUser = true;
+					}
+				}
+			});
+			if (!repeatedUser) {
+				getUsersAndPasswords(function (items) {
+	    			for (var i = 0; i < items.length; i += 2) {
+	    				if (value == items[i] && value2 == items[i+1]) {
+	    					userMatches = true;
+	    					i = items.length;    					
+	    					/*createItem(item, function (itemWithId) {
+	    	                    //When item with id is returned from server
+	    	    				showUser(itemWithId);
+	    	                });*/    					
+	    					showUser(item);
+	    					connectToUsers();
+	    	                var element = document.getElementById("exampleInputEmail1");
+	    	                element.parentNode.removeChild(element);
+	    	                var element1 = document.getElementById("add-button");
+	    	                element1.parentNode.removeChild(element1);
+	    	                var element2 = document.getElementById("title");
+	    	                element2.parentNode.removeChild(element2);
+	    	                document.getElementById("loader").style.visibility = "visible";
+	    	                /*var element3 = document.getElementById("pantallaInicio");
+	    	                element3.style.visibility = "hidden";
+	    	                element3.style.zIndex = "2";*/
+	    	                var element4 = document.getElementById("contrasena");
+	    	                element4.parentNode.removeChild(element4);
+	    	                var element5 = document.getElementById("passUser");
+	    	                element5.parentNode.removeChild(element5);
+	    	                var element6 = document.getElementById("btnRegistrarse");
+	    	                element6.parentNode.removeChild(element6);
+	    	                var element7 = document.getElementById("confirmPass");
+	    	                element7.parentNode.removeChild(element7);
+	    	                
+	    	   
+	    	                usuario = value;
+	    	                /*if (usuario == "admin") {
+	    	        			checkUsers();
+	    	        		}*/
+	    				}
+	    			}
+	    		});
+			}
+			else {
+				document.getElementById("title").innerHTML = '<span style="color:red"> <b>Usuario ya conectado</b> </span>';
+			}
+			if (!userMatches) {
+				document.getElementById("title").innerHTML = '<span style="color:red"> <b>Los datos introducidos no concuerdan</b> </span>';
+			}
     	}
     	else {
     		getUsersAndPasswords(function (items) {
     			var x = value.split(' ');
+    			var repeatedUser = false;
     			for (var i = 0; i < items.length; i += 2) {
     				if (value == items[i]) {
     					i = items.length;
     					document.getElementById("title").innerHTML = '<span style="color:red"> <b>Usuario ya existente</b> </span>';
+    					repeatedUser = true;
     				}
-    				else if (value.length < 5 || value.length > 10) {
-    					i = items.length;
-    					document.getElementById("title").innerHTML = '<span style="color:red"> <b>El nombre de usuario debe tener entre 5 y 10 caracteres</b> </span>';
-    				}    				
-    				else if (x.length > 1) {
-    					i = items.length;
-    					document.getElementById("title").innerHTML = '<span style="color:red"> <b>No están permitidos los espacios</b> </span>';
-    				}
-    				else if (value2 != value3) {
-    					i = items.length;
-    					document.getElementById("confirmContrasena").innerHTML = '<span style="color:red"> <b>Las contraseñas no concuerdan</b> </span>';
-    				}
-    				else {
-    					createItem(item, function (itemWithId) {
-    	                    //When item with id is returned from server
-    	    				showUser(itemWithId);
-    	    				addUserToFile(itemWithId);
-    	                });
-    	            
-    	                var element = document.getElementById("exampleInputEmail1");
-    	                element.parentNode.removeChild(element);
-    	                var element1 = document.getElementById("add-button");
-    	                element1.parentNode.removeChild(element1);
-    	                var element2 = document.getElementById("title");
-    	                element2.parentNode.removeChild(element2);
-    	                var element3 = document.getElementById("pantallaInicio");
-    	                element3.style.visibility = "hidden";
-    	                element3.style.zIndex = "2";
-    	                var element4 = document.getElementById("contrasena");
-    	                element4.parentNode.removeChild(element4);
-    	                var element5 = document.getElementById("passUser");
-    	                element5.parentNode.removeChild(element5);
-    	                var element6 = document.getElementById("btnRegistrarse");
-    	                element6.parentNode.removeChild(element6);
-    	                var element7 = document.getElementById("confirmPass");
-    	                element7.parentNode.removeChild(element7);
-    	                
-    	   
-    	                usuario = value;
-    	                if (usuario == "admin") {
-    	        			checkUsers();
-    	        		}
-    	                
-    				}
-    				i = items.length;
     			}
+    			if (value.length < 5 || value.length > 10) {
+					document.getElementById("title").innerHTML = '<span style="color:red"> <b>El nombre de usuario debe tener entre 5 y 10 caracteres</b> </span>';
+				}    				
+				else if (x.length > 1) {
+					document.getElementById("title").innerHTML = '<span style="color:red"> <b>No están permitidos los espacios</b> </span>';
+				}
+				else if (value2 != value3) {
+					document.getElementById("confirmContrasena").innerHTML = '<span style="color:red"> <b>Las contraseñas no concuerdan</b> </span>';
+				}
+				else if (!repeatedUser){
+					/*createItem(item, function (itemWithId) {
+	                    //When item with id is returned from server
+	    				showUser(itemWithId);
+	    				addUserToFile(itemWithId);
+	                });*/
+					
+					showUser(item);
+					addUserToFile(item);
+					connectToUsers();
+	            
+	                var element = document.getElementById("exampleInputEmail1");
+	                element.parentNode.removeChild(element);
+	                var element1 = document.getElementById("add-button");
+	                element1.parentNode.removeChild(element1);
+	                var element2 = document.getElementById("title");
+	                element2.parentNode.removeChild(element2);
+	                /*var element3 = document.getElementById("pantallaInicio");
+	                element3.style.visibility = "hidden";
+	                element3.style.zIndex = "2";*/
+	                document.getElementById("loader").style.visibility = "visible";
+	                var element4 = document.getElementById("contrasena");
+	                element4.parentNode.removeChild(element4);
+	                var element5 = document.getElementById("passUser");
+	                element5.parentNode.removeChild(element5);
+	                var element6 = document.getElementById("btnRegistrarse");
+	                element6.parentNode.removeChild(element6);
+	                var element7 = document.getElementById("confirmPass");
+	                element7.parentNode.removeChild(element7);
+	                
+	   
+	                usuario = value;
+	                if (usuario == "admin") {
+	        			checkUsers();
+	        		}
+	                
+				}
     		});
     	}
-    })
-})
+    });
+}
+
+$(document).ready(function() {
+	logInSignIn();
+});
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // VERSION ///////////////////////////////////////////////////////////////////////////////////////
@@ -550,7 +575,7 @@ var cobaIAversion = "1.6";
 //Load VERSIONS from server
 function loadVersions(callback) {
     $.ajax({
-        url: 'http://localhost:8080/versions'
+        url: 'http://25.76.106.32:8080/versions'
     }).done(function (versions) {
         //console.log('Versions loaded: ' + JSON.stringify(versions));
         callback(versions);
@@ -561,7 +586,7 @@ function loadVersions(callback) {
 function createVersion(version, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://localhost:8080/versions',
+        url: 'http://25.76.106.32:8080/versions',
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -577,7 +602,7 @@ function createVersion(version, callback) {
 function updateVersion(version) {
     $.ajax({
         method: 'PUT',
-        url: 'http://localhost:8080/versions/' + version.id,
+        url: 'http://25.76.106.32:8080/versions/' + version.id,
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -592,7 +617,7 @@ function updateVersion(version) {
 function deleteVersion(versionId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://localhost:8080/versions/' + versionId
+        url: 'http://25.76.106.32:8080/versions/' + versionId
     }).done(function (version) {
         console.log("Deleted version " + versionId)
     })
@@ -632,15 +657,19 @@ loadVersions(function (versions) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var myGroupId = '';
+var myGroupName = '';
 var tankaUser2 = '';
 var taliUser2 = '';
 var acroUser2 = '';
 var groupConnection;
+var canDisconnect;
+var creator = false;
+var grupoNew;
 
 //Load grupos from server
 function loadGrupos(callback) {
  $.ajax({
-     url: 'http://localhost:8080/grupos'
+     url: 'http://25.76.106.32:8080/grupos'
  }).done(function (grupos) {
      //console.log('Versions loaded: ' + JSON.stringify(grupos));
      callback(grupos);
@@ -651,7 +680,7 @@ function loadGrupos(callback) {
 function createGrupo(grupo, callback) {
  $.ajax({
      method: "POST",
-     url: 'http://localhost:8080/grupos',
+     url: 'http://25.76.106.32:8080/grupos',
      data: JSON.stringify(grupo),
      processData: false,
      headers: {
@@ -667,7 +696,7 @@ function createGrupo(grupo, callback) {
 function updateGrupo(grupo) {
  $.ajax({
      method: 'PUT',
-     url: 'http://localhost:8080/grupos/' + grupo.id,
+     url: 'http://25.76.106.32:8080/grupos/' + grupo.id,
      data: JSON.stringify(grupo),
      processData: false,
      headers: {
@@ -682,7 +711,7 @@ function updateGrupo(grupo) {
 function deleteGrupo(grupoId) {
  $.ajax({
      method: 'DELETE',
-     url: 'http://localhost:8080/grupos/' + grupoId
+     url: 'http://25.76.106.32:8080/grupos/' + grupoId
  }).done(function (grupo) {
      console.log("Deleted grupo " + grupoId)
  })
@@ -691,16 +720,37 @@ function deleteGrupo(grupoId) {
 //Show grupo in page
 function showGrupo(grupo) {
 
-document.getElementById("info").innerHTML = '';
-
-document.getElementById("salas").innerHTML = grupo.nombre;
-
-//console.log(grupo);
+	document.getElementById("info").innerHTML = '';
 	
- $('#info').append(
-		 '<li id="usuario1" class="nav-item"><span style="text-transform: capitalize">' + grupo.usuario1 + ' <i class="fas fa-star"></i></span></li>' +
-		 '<li id="usuario2" class="nav-item"><span style="text-transform: capitalize">' + grupo.usuario2 + '</span></li>' +
-		 '<li id="usuario2" class="nav-item"><span style="text-transform: capitalize">' + grupo.usuario3 + '</span></li>')
+	document.getElementById("salas").innerHTML = grupo.nombre;
+	
+	//console.log(grupo);
+	var usuario1;
+	if (grupo.usuario1 == null) {
+		usuario1 = "";
+	}
+	else {
+		usuario1 = grupo.usuario1;
+	}
+	var usuario2;
+	if (grupo.usuario2 == null) {
+		usuario2 = "";
+	}
+	else {
+		usuario2 = grupo.usuario2;
+	}
+	var usuario3;
+	if (grupo.usuario3 == null) {
+		usuario3 = "";
+	}
+	else {
+		usuario3 = grupo.usuario3;
+	}	
+		
+	 $('#info').append(
+			 '<li id="usuario1" class="nav-item"><span style="text-transform: capitalize">' + usuario1 + ' <i class="fas fa-star"></i></span></li>' +
+			 '<li id="usuario2" class="nav-item"><span style="text-transform: capitalize">' + usuario2 + '</span></li>' +
+			 '<li id="usuario2" class="nav-item"><span style="text-transform: capitalize">' + usuario3 + '</span></li>')
 }
 
 //Show grupos in page
@@ -709,9 +759,9 @@ function showGrupos(grupos) {
 	tabla.empty();
 	for (var i = 0; i < grupos.length; i++) {
 		var size = 0;
-		if (grupos[i].usuario1 != '') size++;
-		if (grupos[i].usuario2 != '') size++;
-		if (grupos[i].usuario3 != '') size++;
+		if (grupos[i].usuario1 != '' && grupos[i].usuario1 != null) size++;
+		if (grupos[i].usuario2 != '' && grupos[i].usuario2 != null) size++;
+		if (grupos[i].usuario3 != '' && grupos[i].usuario3 != null) size++;
 		
 		if (size > 0 && size < 3) {
 			tabla.append('<table class="table">' +
@@ -740,12 +790,12 @@ $(document).ready(function () {
 	        document.getElementById("salasDisp").style.visibility = "hidden";
         }       
         //Salir de la sala
-        else {
+        else if (canDisconnect) {
         	myGroupId = '';
         	enSala = false;
         	miSala = null;
         	miSala2 = null;
-        	loadGrupos(function (grupos) {
+        	/*loadGrupos(function (grupos) {
         		for (var i = 0; i < grupos.length; i++) {
         			if (grupos[i].usuario1 == usuario) {
         				grupos[i].usuario1 = '';
@@ -759,14 +809,15 @@ $(document).ready(function () {
         				grupos[i].usuario3 = '';
         				updateGrupo(grupos[i]);
         			}
-        			document.getElementById("info").innerHTML = '';
-        			document.getElementById("salas").innerHTML = '';
-        			btn.className = "btn btn-success";
-                    btn.innerHTML = 'Crear Sala';
-                    document.getElementById("live-chat").style.visibility = "hidden";
         		}
-        	});
+        	});*/
+        	document.getElementById("info").innerHTML = '';
+			document.getElementById("salas").innerHTML = '';
+			btn.className = "btn btn-success";
+            btn.innerHTML = 'Crear Sala';
+            document.getElementById("live-chat").style.visibility = "hidden";
         	document.getElementById("abrir-chat").style.visibility = "hidden";
+        	document.getElementById("entrarGrupo").style.visibility = "visible";
         	if (nivelJuego === 0.5) {
         		tankaUser2 = '';
         		taliUser2 = '';
@@ -781,6 +832,7 @@ $(document).ready(function () {
         		checkSala();
         	}
         	groupConnection.close();
+        	creator = false;
         }
 	})
 	//Crear Sala
@@ -809,7 +861,7 @@ $(document).ready(function () {
 			    });
 				if (document.getElementById("password").innerHTML != '') {
 					var inputPass = $('#passSala');
-					grupo = {
+					grupoNew = {
 					        usuario1: usuario,
 					        usuario2: '',
 					        usuario3: '',
@@ -820,7 +872,7 @@ $(document).ready(function () {
 				}
 				
 				else {
-					grupo = {
+					grupoNew = {
 				        usuario1: usuario,
 				        usuario2: '',
 				        usuario3: '',
@@ -829,45 +881,33 @@ $(document).ready(function () {
 				        gameId: myGameId
 				    }
 				}
+				
+				myGroupName = inputName.val();
 			    
 			    invitar = true;
+			    creator = true;
 			    //document.getElementById("salas").innerHTML = inputName.val();	
-			    createGrupo(grupo, function (grupoWithId) {
-			    	showGrupo(grupoWithId);
-			    	myGroupId = grupoWithId.id;
-			    	if (nivelJuego === 0.5) {
-			    		tankaCheck.alpha = 0;
-		        		taliCheck.alpha = 0;
-		        		acroCheck.alpha = 0;
-			    		switch (miCobaIA) {
-			    		case 'tankabaIA':
-			    			loadSala(myGroupId, function(grupo) {
-			    				grupo.tanka = usuario;
-			    				updateGrupo(grupo);
-			    			});
-			    			break;
-			    		case 'talibaIA':
-			    			loadSala(myGroupId, function(grupo) {
-			    				grupo.tali = usuario;
-			    				updateGrupo(grupo);
-			    			});
-			    			break;
-			    		case 'acrobaIA':
-			    			loadSala(myGroupId, function(grupo) {
-			    				grupo.acro = usuario;
-			    				updateGrupo(grupo);
-			    			});
-			    			break;
-			    		default:
-			    			break;
-			    		}
-			    	}
-			    });
+			    
+			    document.getElementById("info").innerHTML = '';
+
+			    document.getElementById("salas").innerHTML = inputName.val();
+
+			    //console.log(grupo);
+			    	
+			     $('#info').append(
+			    		 '<li id="usuario1" class="nav-item"><span style="text-transform: capitalize">' + usuario + ' <i class="fas fa-star"></i></span></li>' +
+			    		 '<li id="usuario2" class="nav-item"><span style="text-transform: capitalize"></span></li>' +
+			    		 '<li id="usuario2" class="nav-item"><span style="text-transform: capitalize"></span></li>')
+			    
 			    connectToGrupos();
+			    connectChat();
 			    document.getElementById("pantallaInicio").style.visibility = "hidden";
 	            document.getElementById("formCreateGroup").style.visibility = "hidden";
+	            document.getElementById("entrarGrupo").style.visibility = "hidden";
 	            btn.className = "btn btn-danger";
 	            btn.innerHTML = 'Salir';
+	            btn.style.opacity = 0.5;
+	            btn.disabled = true;
 	            enSala = true;
 	            document.getElementById("abrir-chat").style.visibility = "visible";
 			}	            
@@ -912,13 +952,13 @@ $(document).ready(function () {
             loadGrupos(function (grupos) {
             	for (var i = 0; i < grupos.length; i++) {
             		if (grupos[i].id == itemId && grupos[i].password === '') {
-            			if (grupos[i].usuario2 === '') {
+            			if (grupos[i].usuario2 === ''  || grupos[i].usuario2 == null) {
 	            			grupos[i].usuario2 = usuario;
             			}
-            			else if (grupos[i].usuario3 === '') {
+            			else if (grupos[i].usuario3 === '' || grupos[i].usuario3 == null) {
             				grupos[i].usuario3 = usuario;
             			}
-            			updateGrupo(grupos[i]);
+            			//updateGrupo(grupos[i]);
             			showGrupo(grupos[i]);
                         var element6 = document.getElementById("pantallaInicio");
                         element6.style.visibility = "hidden";
@@ -926,8 +966,12 @@ $(document).ready(function () {
                         element5.style.visibility = "hidden";
                         btn.className = "btn btn-danger";
                         btn.innerHTML = 'Salir';
+                        btn.style.opacity = 0.5;
+                        btn.disabled = true;
+                        document.getElementById("entrarGrupo").style.visibility = "hidden";
                         enSala = true;
                         myGroupId = itemId;
+                        myGroupName = grupos[i].nombre;
                         myGameId = grupos[i].gameId;
                         loadSala(myGroupId, function (grupo) {
                         	if (nivelJuego === 0.5) {
@@ -951,6 +995,7 @@ $(document).ready(function () {
                     	});
                         miCobaIA = '';
                         connectToGrupos();
+                        connectChat();
             		}
             		else if (grupos[i].id == itemId) {
             			document.getElementById("pantallaInicio").style.zIndex = "10";
@@ -960,13 +1005,13 @@ $(document).ready(function () {
             			$("#btnPassSalas").click(function () {            				
             				var inputPassSala = $('#passSalaPriv');
 	            			if (inputPassSala.val() == miGrupo.password) {
-	            				if (miGrupo.usuario2 === '') {
+	            				if (miGrupo.usuario2 === '' || grupos[i].usuario2 == null) {
 	    	            			miGrupo.usuario2 = usuario;
 	                			}
-	                			else if (miGrupo.usuario3 === '') {
+	                			else if (miGrupo.usuario3 === '' || grupos[i].usuario3 == null) {
 	                				miGrupo.usuario3 = usuario;
 	                			}
-	                			updateGrupo(miGrupo);
+	                			//updateGrupo(miGrupo);
 	                			showGrupo(miGrupo);
 	                            var element6 = document.getElementById("pantallaInicio");
 	                            element6.style.zIndex = "2";
@@ -976,8 +1021,12 @@ $(document).ready(function () {
 	                            document.getElementById("passSalas").style.visibility = "hidden";
 	                            btn.className = "btn btn-danger";
 	                            btn.innerHTML = 'Salir';
+	                            btn.style.opacity = 0.5;
+	                            btn.disabled = true;
+	                            document.getElementById("entrarGrupo").style.visibility = "hidden";
 	                            enSala = true;
 	                            myGroupId = itemId;
+	                            myGroupName = grupos[i].nombre;
 	                            myGameId = grupos[i].gameId;
 	                            if (nivelJuego === 0.5) {
 	                            	loadSala(myGroupId, function (grupo) {
@@ -995,6 +1044,7 @@ $(document).ready(function () {
 	                            }
 	                            miCobaIA = '';
 	                            connectToGrupos();
+	                            connectChat();
 	            			}
 	            			else {
 	            				document.getElementById("contrasenaDeSala").innerHTML = '<span style="color:red"> <b>La contraseña no es correcta, por favor vuelve a intentarlo</b> </span>';
@@ -1007,7 +1057,7 @@ $(document).ready(function () {
         }
     });
 	
-	$("#sendMensaje").click(function () {
+	$("#send-btn").click(function () {
 		
 		if(document.getElementById("textoOwner").value != ""){
 			
@@ -1039,11 +1089,15 @@ $(document).ready(function () {
 					            sala
 					        }
 					        
-							createChat(chat, function (chatWithId) {
+							/*createChat(chat, function (chatWithId) {
 			                    //When item with id is returned from server
 			    				showChat(chatWithId);
 			    				console.log("todo correcto");
-			                });
+			                });*/
+					        
+					        
+					        
+					        
 					        
 	                    	//var cant = grupos[i].mensajes.length;
 	                    	//grupos[i].mensajes[0]= document.getElementById("textoOwner").value;
@@ -1066,7 +1120,7 @@ $(document).ready(function () {
 //Load Chats from server
 function loadChats(callback) {
     $.ajax({
-        url: 'http://localhost:8080/chats'
+        url: 'http://25.76.106.32:8080/chats'
     }).done(function (chats) {
         //console.log('Chats loaded: ' + JSON.stringify(chats));
         callback(chats);
@@ -1077,7 +1131,7 @@ function loadChats(callback) {
 function createChat(chat, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://localhost:8080/chats',
+        url: 'http://25.76.106.32:8080/chats',
         data: JSON.stringify(chat),
         processData: false,
         headers: {
@@ -1093,7 +1147,7 @@ function createChat(chat, callback) {
 function updateChat(chat) {
     $.ajax({
         method: 'PUT',
-        url: 'http://localhost:8080/chats/' + chat.id,
+        url: 'http://25.76.106.32:8080/chats/' + chat.id,
         data: JSON.stringify(chat),
         processData: false,
         headers: {
@@ -1108,7 +1162,7 @@ function updateChat(chat) {
 function deleteChat(chatId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://localhost:8080/chats/' + chatId
+        url: 'http://25.76.106.32:8080/chats/' + chatId
     }).done(function (chat) {
         console.log("Deleted chat " + chatId)
     })
@@ -1140,7 +1194,7 @@ function showChat(chats) {
 //Load Chats from server
 function loadGameState(gameId, callback) {
 	 $.ajax({
-	     url: 'http://localhost:8080/gameStates' + gameId
+	     url: 'http://25.76.106.32:8080/gameStates' + gameId
 	 }).done(function (gameState) {
 	     //console.log('Chats loaded: ' + JSON.stringify(chats));
 	     callback(gameState);
@@ -1151,7 +1205,7 @@ function loadGameState(gameId, callback) {
 function createGameState(gameState, callback) {
 	 $.ajax({
 	     method: "POST",
-	     url: 'http://localhost:8080/gameStates',
+	     url: 'http://25.76.106.32:8080/gameStates',
 	     data: JSON.stringify(gameState),
 	     processData: false,
 	     headers: {
@@ -1167,7 +1221,7 @@ function createGameState(gameState, callback) {
 function updateGameState(gameState) {
 	 $.ajax({
 	     method: 'PUT',
-	     url: 'http://localhost:8080/gameStates/' + gameState.id,
+	     url: 'http://25.76.106.32:8080/gameStates/' + gameState.id,
 	     data: JSON.stringify(gameState),
 	     processData: false,
 	     headers: {
@@ -1182,7 +1236,7 @@ function updateGameState(gameState) {
 function deleteGameState(gameId) {
 	 $.ajax({
 	     method: 'DELETE',
-	     url: 'http://localhost:8080/gameStates/' + gameId
+	     url: 'http://25.76.106.32:8080/gameStates/' + gameId
 	 }).done(function (gameState) {
 	     console.log("Deleted GameState " + gameId)
 	 })
@@ -1223,41 +1277,6 @@ function checkUsers() {
 function hereIam() {
 	setTimeout(function(){
 		if (enSala) {
-            
-            /*loadGrupos(function (grupos) {
-                for (var i = 0; i < grupos.length; i++) {
-                    if (usuario == grupos[i].usuario1) {
-                        miSala = grupos[i];
-                        showGrupo(grupos[i]);
-                        miGrupo = grupos[i].nombre;
-                        i = grupos.length;
-                    }
-                    else if (usuario == grupos[i].usuario2) {
-                        if (grupos[i].usuario1 === '') {
-                            grupos[i].usuario1 = usuario;
-                            grupos[i].usuario2 = '';
-                            updateGrupo(grupos[i]);
-                        }
-                        miSala2 = grupos[i]; 
-                        showGrupo(grupos[i]);
-                        miGrupo = grupos[i].nombre;
-                        i = grupos.length;
-                        
-                    }
-                    else if (usuario == grupos[i].usuario3) {
-                        if (grupos[i].usuario2 === '') {
-                            grupos[i].usuario2 = usuario;
-                            grupos[i].usuario3 = '';
-                            updateGrupo(grupos[i]);
-                        }
-                        showGrupo(grupos[i]);
-                        miGrupo = grupos[i].nombre;
-                        i = grupos.length;
-                        
-                        
-                    }
-                }
-            });*/
             if (miGrupo != '') {
             	/*var misChats = {};
             	var chatSize = 0;;*/
@@ -1363,13 +1382,13 @@ function checkSala() {
 }
 
 function connectToGrupos() {
-groupConnection = new WebSocket('ws://localhost:8080/salas');
+groupConnection = new WebSocket('ws://25.76.106.32:8080/salas');
 	
 	groupConnection.onopen = function() {
 		var msg = {
 			name : usuario,
 			message : 'hi',
-			groupId : myGroupId
+			groupId : myGroupName
 		}
 		groupConnection.send(JSON.stringify(msg));
 	}
@@ -1380,37 +1399,152 @@ groupConnection = new WebSocket('ws://localhost:8080/salas');
 	groupConnection.onmessage = function(msg) {
 		console.log("WS message: " + msg.data + myGroupId);
 		var message = JSON.parse(msg.data);
-		if (message.groupId == myGroupId) {
-			if (message.message == "bye" && nivelJuego == 0.5) {
-				switch (message.name) {
-				case tankaUser.text:
-					tankaUser.text = '';
-					tanka.alpha = 1;
-					tankaCheck.alpha = 0;
-					break;
-				case taliUser.text:
-					taliUser.text = '';
-					tali.alpha = 1;
-					taliCheck.alpha = 0;
-					break;
-				case acroUser.text:
-					acroUser.text = '';
-					acro.alpha = 1;
-					acroCheck.alpha = 0;
-					break;
-				default:
-					break;
+		if (message.groupId == myGroupName) {
+			if (message.message == "bye") {
+				if (nivelJuego == 0.5) {
+					switch (message.name) {
+					case tankaUser.text:
+						tankaUser.text = '';
+						tanka.alpha = 1;
+						tankaCheck.alpha = 0;
+						break;
+					case taliUser.text:
+						taliUser.text = '';
+						tali.alpha = 1;
+						taliCheck.alpha = 0;
+						break;
+					case acroUser.text:
+						acroUser.text = '';
+						acro.alpha = 1;
+						acroCheck.alpha = 0;
+						break;
+					default:
+						break;
+					}
+				}
+				setTimeout(function() {
+					loadSala(myGroupId, function (grupo) {
+						if (grupo.usuario1 == message.name) {
+							grupo.usuario1 = grupo.usuario2;
+							grupo.usuario2 = grupo.usuario3;
+							grupo.usuario3 = "";
+						}
+						else if (grupo.usuario2 == message.name) {
+							grupo.usuario2 = grupo.usuario3;
+							grupo.usuario3 = "";
+						}
+						else if (grupo.usuario2 == message.name) {
+							grupo.usuario3 = "";						
+						}
+						showGrupo(grupo);
+					});
+				}, 2000);
+			}
+			else if (message.message == "hi" && message.name == usuario) {
+				canDisconnect = true;
+				var btn = document.getElementById("crearGrupo");
+				btn.style.opacity = 1;
+				btn.disabled = false;
+				if (creator) {
+					createGrupo(grupoNew, function (grupoWithId) {
+				    	myGroupId = grupoWithId.id;
+				    	if (nivelJuego === 0.5) {
+				    		tankaCheck.alpha = 0;
+			        		taliCheck.alpha = 0;
+			        		acroCheck.alpha = 0;
+				    		switch (miCobaIA) {
+				    		case 'tankabaIA':
+				    			loadSala(myGroupId, function(grupo) {
+				    				grupo.tanka = usuario;
+				    				updateGrupo(grupo);
+				    			});
+				    			break;
+				    		case 'talibaIA':
+				    			loadSala(myGroupId, function(grupo) {
+				    				grupo.tali = usuario;
+				    				updateGrupo(grupo);
+				    			});
+				    			break;
+				    		case 'acrobaIA':
+				    			loadSala(myGroupId, function(grupo) {
+				    				grupo.acro = usuario;
+				    				updateGrupo(grupo);
+				    			});
+				    			break;
+				    		default:
+				    			break;
+				    		}
+				    	}
+				    });
 				}
 			}
-			loadSala(myGroupId, function (grupo) {
-				showGrupo(grupo);
-			});
+			else {
+				loadSala(myGroupId, function (grupo) {
+					showGrupo(grupo);
+				});
+			}
 		}
 	}
 	groupConnection.onclose = function() {
 		console.log("Closing socket");
 	}
 }
+
+function connectToUsers() {
+	usersConnection = new WebSocket('ws://25.76.106.32:8080/users');
+		
+	usersConnection.onopen = function() {
+			var msg = {
+				name : usuario,
+				message : 'hi'
+			}
+			usersConnection.send(JSON.stringify(msg));
+		}
+		
+		usersConnection.onerror = function(e) {
+			console.log("WS error: " + e);
+		}
+		usersConnection.onmessage = function(msg) {
+			console.log("WS message: " + msg.data);
+			var message = JSON.parse(msg.data);
+			if (message.message == "User Repeated") {
+				document.getElementById("loader").style.visibility = "hidden";
+				$("body").prepend("<div>" +
+							        '<button type="button" id="btnRegistrarse" style="margin: 50px 1750px; position: absolute;	z-index: 30; width: 120px;"class="btn btn-success">Crear Cuenta</button>' +
+							    "</div>");
+				$("#formInicial").append('<label for="exampleInputEmail1" id="title">Antes de ' +
+										'continuar, añada su nombre de usuario.</label> <input type="email" ' +
+											'class="form-control " id="exampleInputEmail1" ' +
+											'aria-describedby="emailHelp" placeholder="Nombre de usuario" >' +
+										'<label for="passUser" id="contrasena">Añada una contraseña</label> <input type="password" ' +
+							                'class="form-control " id="passUser" ' +
+							                'placeholder="Contraseña">' +
+							            '<div id="confirmPass" style="visibility: hidden; display:none;">' +
+							            	'<label for="passUser" id="confirmContrasena">Por favor, repita la contraseña</label> <input type="password" ' +
+							                'class="form-control " id="passUser2" ' +
+							                'placeholder="Contraseña">' +
+							            '</div>');
+				$(".formulario").append('<div class="boton">' +
+											'<button type="button" id="add-button" class="btn btn-success">Aceptar</button>' +
+										'</div>');
+				document.getElementById("title").innerHTML = '<span style="color:red"> <b>Usuario ya conectado</b> </span>';
+				logInSignIn();
+			}
+			else {
+				var element3 = document.getElementById("pantallaInicio");
+	            element3.style.visibility = "hidden";
+	            element3.style.zIndex = "2";
+	            document.getElementById("loader").style.visibility = "hidden";
+			}
+		}
+		usersConnection.onclose = function() {
+			console.log("Closing socket");
+			document.getElementById("pantallaInicio").style.visibility = "visible";
+			document.getElementById("pantallaInicio").style.zIndex = "50";
+			document.getElementById("error").innerHTML = "Parece que TalibaIA ha mordido algunos cables de más y nuestros servidores han caido.<br>Vuelve a intentarlo más tarde.";
+			document.getElementById("imgTali").style.visibility = "visible";
+		}
+	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CONTROLES COBAIAS /////////////////////////////////////////////////////////////////////////////////////
