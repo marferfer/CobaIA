@@ -443,105 +443,118 @@ $(document).ready(function () {
     	//Ficheros
     	if (btnReg.innerHTML == "Crear Cuenta") {
     		var userMatches = false;
-			getUsersAndPasswords(function (items) {
-    			for (var i = 0; i < items.length; i += 2) {
-    				if (value == items[i] && value2 == items[i+1]) {
-    					userMatches = true;
-    					i = items.length;
-    					/*createItem(item, function (itemWithId) {
-    	                    //When item with id is returned from server
-    	    				showUser(itemWithId);
-    	                });*/
-    					showUser(item);
-    					connectToUsers();
-    	                var element = document.getElementById("exampleInputEmail1");
-    	                element.parentNode.removeChild(element);
-    	                var element1 = document.getElementById("add-button");
-    	                element1.parentNode.removeChild(element1);
-    	                var element2 = document.getElementById("title");
-    	                element2.parentNode.removeChild(element2);
-    	                var element3 = document.getElementById("pantallaInicio");
-    	                element3.style.visibility = "hidden";
-    	                element3.style.zIndex = "2";
-    	                var element4 = document.getElementById("contrasena");
-    	                element4.parentNode.removeChild(element4);
-    	                var element5 = document.getElementById("passUser");
-    	                element5.parentNode.removeChild(element5);
-    	                var element6 = document.getElementById("btnRegistrarse");
-    	                element6.parentNode.removeChild(element6);
-    	                var element7 = document.getElementById("confirmPass");
-    	                element7.parentNode.removeChild(element7);
-    	                
-    	   
-    	                usuario = value;
-    	                /*if (usuario == "admin") {
-    	        			checkUsers();
-    	        		}*/
-    				}
-    			}
-    			if (!userMatches) {
-    				document.getElementById("title").innerHTML = '<span style="color:red"> <b>Los datos introducidos no concuerdan</b> </span>';
-    			}
-    		});			
+    		var repeatedUser = false;
+    		loadItems(function(items) {
+				for (var j = 0; j < items.length; j++) {
+					if (value == items[i]) {
+						repeatedUser = true;
+					}
+				}
+			});
+			if (!repeatedUser) {
+				getUsersAndPasswords(function (items) {
+	    			for (var i = 0; i < items.length; i += 2) {
+	    				if (value == items[i] && value2 == items[i+1]) {
+	    					userMatches = true;
+	    					i = items.length;    					
+	    					/*createItem(item, function (itemWithId) {
+	    	                    //When item with id is returned from server
+	    	    				showUser(itemWithId);
+	    	                });*/    					
+	    					showUser(item);
+	    					connectToUsers();
+	    	                var element = document.getElementById("exampleInputEmail1");
+	    	                element.parentNode.removeChild(element);
+	    	                var element1 = document.getElementById("add-button");
+	    	                element1.parentNode.removeChild(element1);
+	    	                var element2 = document.getElementById("title");
+	    	                element2.parentNode.removeChild(element2);
+	    	                document.getElementById("loader").style.visibility = "visible";
+	    	                /*var element3 = document.getElementById("pantallaInicio");
+	    	                element3.style.visibility = "hidden";
+	    	                element3.style.zIndex = "2";*/
+	    	                var element4 = document.getElementById("contrasena");
+	    	                element4.parentNode.removeChild(element4);
+	    	                var element5 = document.getElementById("passUser");
+	    	                element5.parentNode.removeChild(element5);
+	    	                var element6 = document.getElementById("btnRegistrarse");
+	    	                element6.parentNode.removeChild(element6);
+	    	                var element7 = document.getElementById("confirmPass");
+	    	                element7.parentNode.removeChild(element7);
+	    	                
+	    	   
+	    	                usuario = value;
+	    	                /*if (usuario == "admin") {
+	    	        			checkUsers();
+	    	        		}*/
+	    				}
+	    			}
+	    		});
+			}
+			else {
+				document.getElementById("title").innerHTML = '<span style="color:red"> <b>Usuario ya conectado</b> </span>';
+			}
+			if (!userMatches) {
+				document.getElementById("title").innerHTML = '<span style="color:red"> <b>Los datos introducidos no concuerdan</b> </span>';
+			}
     	}
     	else {
     		getUsersAndPasswords(function (items) {
     			var x = value.split(' ');
+    			var repeatedUser = false;
     			for (var i = 0; i < items.length; i += 2) {
     				if (value == items[i]) {
     					i = items.length;
     					document.getElementById("title").innerHTML = '<span style="color:red"> <b>Usuario ya existente</b> </span>';
+    					repeatedUser = true;
     				}
-    				else if (value.length < 5 || value.length > 10) {
-    					i = items.length;
-    					document.getElementById("title").innerHTML = '<span style="color:red"> <b>El nombre de usuario debe tener entre 5 y 10 caracteres</b> </span>';
-    				}    				
-    				else if (x.length > 1) {
-    					i = items.length;
-    					document.getElementById("title").innerHTML = '<span style="color:red"> <b>No están permitidos los espacios</b> </span>';
-    				}
-    				else if (value2 != value3) {
-    					i = items.length;
-    					document.getElementById("confirmContrasena").innerHTML = '<span style="color:red"> <b>Las contraseñas no concuerdan</b> </span>';
-    				}
-    				else {
-    					/*createItem(item, function (itemWithId) {
-    	                    //When item with id is returned from server
-    	    				showUser(itemWithId);
-    	    				addUserToFile(itemWithId);
-    	                });*/
-    					
-    					showUser(item);
-    					addUserToFile(item);
-    					connectToUsers();
-    	            
-    	                var element = document.getElementById("exampleInputEmail1");
-    	                element.parentNode.removeChild(element);
-    	                var element1 = document.getElementById("add-button");
-    	                element1.parentNode.removeChild(element1);
-    	                var element2 = document.getElementById("title");
-    	                element2.parentNode.removeChild(element2);
-    	                var element3 = document.getElementById("pantallaInicio");
-    	                element3.style.visibility = "hidden";
-    	                element3.style.zIndex = "2";
-    	                var element4 = document.getElementById("contrasena");
-    	                element4.parentNode.removeChild(element4);
-    	                var element5 = document.getElementById("passUser");
-    	                element5.parentNode.removeChild(element5);
-    	                var element6 = document.getElementById("btnRegistrarse");
-    	                element6.parentNode.removeChild(element6);
-    	                var element7 = document.getElementById("confirmPass");
-    	                element7.parentNode.removeChild(element7);
-    	                
-    	   
-    	                usuario = value;
-    	                if (usuario == "admin") {
-    	        			checkUsers();
-    	        		}
-    	                
-    				}
-    				i = items.length;
     			}
+    			if (value.length < 5 || value.length > 10) {
+					document.getElementById("title").innerHTML = '<span style="color:red"> <b>El nombre de usuario debe tener entre 5 y 10 caracteres</b> </span>';
+				}    				
+				else if (x.length > 1) {
+					document.getElementById("title").innerHTML = '<span style="color:red"> <b>No están permitidos los espacios</b> </span>';
+				}
+				else if (value2 != value3) {
+					document.getElementById("confirmContrasena").innerHTML = '<span style="color:red"> <b>Las contraseñas no concuerdan</b> </span>';
+				}
+				else if (!repeatedUser){
+					/*createItem(item, function (itemWithId) {
+	                    //When item with id is returned from server
+	    				showUser(itemWithId);
+	    				addUserToFile(itemWithId);
+	                });*/
+					
+					showUser(item);
+					addUserToFile(item);
+					connectToUsers();
+	            
+	                var element = document.getElementById("exampleInputEmail1");
+	                element.parentNode.removeChild(element);
+	                var element1 = document.getElementById("add-button");
+	                element1.parentNode.removeChild(element1);
+	                var element2 = document.getElementById("title");
+	                element2.parentNode.removeChild(element2);
+	                /*var element3 = document.getElementById("pantallaInicio");
+	                element3.style.visibility = "hidden";
+	                element3.style.zIndex = "2";*/
+	                document.getElementById("loader").style.visibility = "visible";
+	                var element4 = document.getElementById("contrasena");
+	                element4.parentNode.removeChild(element4);
+	                var element5 = document.getElementById("passUser");
+	                element5.parentNode.removeChild(element5);
+	                var element6 = document.getElementById("btnRegistrarse");
+	                element6.parentNode.removeChild(element6);
+	                var element7 = document.getElementById("confirmPass");
+	                element7.parentNode.removeChild(element7);
+	                
+	   
+	                usuario = value;
+	                if (usuario == "admin") {
+	        			checkUsers();
+	        		}
+	                
+				}
     		});
     	}
     })
@@ -1481,6 +1494,34 @@ function connectToUsers() {
 		usersConnection.onmessage = function(msg) {
 			console.log("WS message: " + msg.data);
 			var message = JSON.parse(msg.data);
+			if (message.message == "User Repeated") {
+				document.getElementById("loader").style.visibility = "hidden";
+				$("body").append("<div>" +
+							        '<button type="button" id="btnRegistrarse" class="btn btn-success">Crear Cuenta</button>' +
+							    "</div>");
+				$(".form-group").append('<label for="exampleInputEmail1" id="title">Antes de ' +
+										'continuar, añada su nombre de usuario.</label> <input type="email" ' +
+											'class="form-control " id="exampleInputEmail1" ' +
+											'aria-describedby="emailHelp" placeholder="Nombre de usuario" >' +
+										'<label for="passUser" id="contrasena">Añada una contraseña</label> <input type="password" ' +
+							                'class="form-control " id="passUser" ' +
+							                'placeholder="Contraseña">' +
+							            '<div id="confirmPass" style="visibility: hidden; display:none;">' +
+							            	'<label for="passUser" id="confirmContrasena">Por favor, repita la contraseña</label> <input type="password" ' +
+							                'class="form-control " id="passUser2" ' +
+							                'placeholder="Contraseña">' +
+							            '</div>');
+				$(".formulario").append('<div class="boton">' +
+											'<button type="button" id="add-button" class="btn btn-success">Aceptar</button>' +
+										'</div>');
+				document.getElementById("title").innerHTML = '<span style="color:red"> <b>Usuario ya conectado</b> </span>';
+			}
+			else {
+				var element3 = document.getElementById("pantallaInicio");
+	            element3.style.visibility = "hidden";
+	            element3.style.zIndex = "2";
+	            document.getElementById("loader").style.visibility = "hidden";
+			}
 		}
 		usersConnection.onclose = function() {
 			console.log("Closing socket");
