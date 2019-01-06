@@ -1462,7 +1462,7 @@ function updateMyGameState() {
 }
 
 function connect() {	
-	playerConnection = new WebSocket('ws://25.76.106.32:8080/players');
+	playerConnection = new WebSocket('ws://localhost:8080/players');
 	
 	playerConnection.onopen = function() {
 		canConnect = true;
