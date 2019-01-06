@@ -1484,6 +1484,10 @@ function connectToUsers() {
 		}
 		usersConnection.onclose = function() {
 			console.log("Closing socket");
+			document.getElementById("pantallaInicio").style.visibility = "visible";
+			document.getElementById("pantallaInicio").style.zIndex = "50";
+			document.getElementById("error").innerHTML = "Parece que TalibaIA ha mordido algunos cables de más y nuestros servidores han caido.<br>Vuelve a intentarlo más tarde.";
+			document.getElementById("imgTali").style.visibility = "visible";
 		}
 	}
 

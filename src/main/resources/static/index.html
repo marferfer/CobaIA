@@ -276,6 +276,21 @@ h1 {
 #btnEnter {
 	
 }
+#infoError {
+	z-index: 51;
+	margin: 370px 700px;
+	position: absolute;
+}
+#error {
+	color: white;
+	font-size: 16px;
+}
+#imgTali {
+	visibility: hidden;
+	margin: 340px 510px;
+	position: absolute;	
+	z-index: 51;
+}
 body {
     overflow:hidden;
 }
@@ -411,6 +426,12 @@ body {
 		<div class="botonCrearSala">
             <button onclick="volvermenuprincipal();" type="button" id="cancel" class="btn btn-danger">Cancelar</button>
         </div>
+    </div>
+    
+    <img id="imgTali" src="assets/Images/TalibaIA.png" alt="TalibaIA attacks again">
+    
+    <div id="infoError">
+    	<p id="error"></p>
     </div>
 
 	<div id="live-chat"  style="visibility: hidden;">
