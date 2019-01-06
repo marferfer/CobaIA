@@ -27,13 +27,13 @@ import java.io.BufferedReader;
 @RequestMapping("/items")
 public class ItemsController {
 
-	Map<Long, Item> items = new ConcurrentHashMap<>(); 
-	AtomicLong nextId = new AtomicLong(0);
+	static Map<Long, Item> items = new ConcurrentHashMap<>(); 
+	static AtomicLong nextId = new AtomicLong(0);
 	
 	
 	
 	@GetMapping
-	public Collection<Item> items() {
+	public static Collection<Item> items() {
 		return items.values();
 	}
 	
@@ -44,7 +44,7 @@ public class ItemsController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Item nuevoItem(@RequestBody Item item) {
+	public static Item nuevoItem(@RequestBody Item item) {
 
 		long id = nextId.incrementAndGet();
 		item.setId(id);
@@ -54,7 +54,7 @@ public class ItemsController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Item> actulizaItem(@PathVariable long id, @RequestBody Item itemActualizado) {
+	public ResponseEntity<Item> actualizaItem(@PathVariable long id, @RequestBody Item itemActualizado) {
 
 		Item savedItem = items.get(itemActualizado.getId());
 
@@ -81,7 +81,7 @@ public class ItemsController {
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Item> borraItem(@PathVariable long id) {
+	public static ResponseEntity<Item> borraItem(@PathVariable long id) {
 
 		Item savedItem = items.get(id);
 

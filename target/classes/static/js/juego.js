@@ -52,7 +52,7 @@ function sound(src) {
 }
 
 function connectChat(){
-	chatConnection = new WebSocket('ws://localhost:8080/chat');
+	chatConnection = new WebSocket('ws://25.76.106.32:8080/chat');
 	chatConnection.onerror = function(e) {
 		console.log("WS error: " + e);
 	}
@@ -214,7 +214,7 @@ var invitar = false;
 function addUserToFile(item){
 	$.ajax({
 		method: "POST",
-		url:'http://localhost:8080/ficheros',
+		url:'http://25.76.106.32:8080/ficheros',
 		data: JSON.stringify(item),
 	    processData: false,
 	    headers: {
@@ -225,7 +225,7 @@ function addUserToFile(item){
 
 function getUsersAndPasswords(callback){
 	$.ajax({
-		url: 'http://localhost:8080/ficheros/{partes}'
+		url: 'http://25.76.106.32:8080/ficheros/{partes}'
 	}).done(function(items){
 		callback(items);
 	})
@@ -246,11 +246,12 @@ setTimeout(function(){console.log(b)}, 1000);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //ITEMS ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+var usersConnection;
 
 //no borrar de momento, puede resultar util mas tarde
 /*function hola123(callback){
 	$.ajax({
-		url:'http://localhost:8080/items/{password}'
+		url:'http://25.76.106.32:8080/items/{password}'
 	}).done(function(items){
 		callback(items);
 	})
@@ -263,7 +264,7 @@ hola123(function (pw) {
 //Load items from server
 function loadItems(callback) {
     $.ajax({
-        url: 'http://localhost:8080/items'
+        url: 'http://25.76.106.32:8080/items'
     }).done(function (items) {
         //console.log('Items loaded: ' + JSON.stringify(items));
         callback(items);
@@ -274,7 +275,7 @@ function loadItems(callback) {
 function createItem(item, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://localhost:8080/items',
+        url: 'http://25.76.106.32:8080/items',
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -290,7 +291,7 @@ function createItem(item, callback) {
 function updateItem(item) {
     $.ajax({
         method: 'PUT',
-        url: 'http://localhost:8080/items/' + item.id,
+        url: 'http://25.76.106.32:8080/items/' + item.id,
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -305,7 +306,7 @@ function updateItem(item) {
 function deleteItem(itemId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://localhost:8080/items/' + itemId
+        url: 'http://25.76.106.32:8080/items/' + itemId
     }).done(function (item) {
         console.log("Deleted item " + itemId)
     })
@@ -447,11 +448,12 @@ $(document).ready(function () {
     				if (value == items[i] && value2 == items[i+1]) {
     					userMatches = true;
     					i = items.length;
-    					createItem(item, function (itemWithId) {
+    					/*createItem(item, function (itemWithId) {
     	                    //When item with id is returned from server
     	    				showUser(itemWithId);
-    	                });
-    	            
+    	                });*/
+    					showUser(item);
+    					connectToUsers();
     	                var element = document.getElementById("exampleInputEmail1");
     	                element.parentNode.removeChild(element);
     	                var element1 = document.getElementById("add-button");
@@ -472,9 +474,9 @@ $(document).ready(function () {
     	                
     	   
     	                usuario = value;
-    	                if (usuario == "admin") {
+    	                /*if (usuario == "admin") {
     	        			checkUsers();
-    	        		}
+    	        		}*/
     				}
     			}
     			if (!userMatches) {
@@ -503,11 +505,15 @@ $(document).ready(function () {
     					document.getElementById("confirmContrasena").innerHTML = '<span style="color:red"> <b>Las contraseñas no concuerdan</b> </span>';
     				}
     				else {
-    					createItem(item, function (itemWithId) {
+    					/*createItem(item, function (itemWithId) {
     	                    //When item with id is returned from server
     	    				showUser(itemWithId);
     	    				addUserToFile(itemWithId);
-    	                });
+    	                });*/
+    					
+    					showUser(item);
+    					addUserToFile(item);
+    					connectToUsers();
     	            
     	                var element = document.getElementById("exampleInputEmail1");
     	                element.parentNode.removeChild(element);
@@ -550,7 +556,7 @@ var cobaIAversion = "1.6";
 //Load VERSIONS from server
 function loadVersions(callback) {
     $.ajax({
-        url: 'http://localhost:8080/versions'
+        url: 'http://25.76.106.32:8080/versions'
     }).done(function (versions) {
         //console.log('Versions loaded: ' + JSON.stringify(versions));
         callback(versions);
@@ -561,7 +567,7 @@ function loadVersions(callback) {
 function createVersion(version, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://localhost:8080/versions',
+        url: 'http://25.76.106.32:8080/versions',
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -577,7 +583,7 @@ function createVersion(version, callback) {
 function updateVersion(version) {
     $.ajax({
         method: 'PUT',
-        url: 'http://localhost:8080/versions/' + version.id,
+        url: 'http://25.76.106.32:8080/versions/' + version.id,
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -592,7 +598,7 @@ function updateVersion(version) {
 function deleteVersion(versionId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://localhost:8080/versions/' + versionId
+        url: 'http://25.76.106.32:8080/versions/' + versionId
     }).done(function (version) {
         console.log("Deleted version " + versionId)
     })
@@ -644,7 +650,7 @@ var grupoNew;
 //Load grupos from server
 function loadGrupos(callback) {
  $.ajax({
-     url: 'http://localhost:8080/grupos'
+     url: 'http://25.76.106.32:8080/grupos'
  }).done(function (grupos) {
      //console.log('Versions loaded: ' + JSON.stringify(grupos));
      callback(grupos);
@@ -655,7 +661,7 @@ function loadGrupos(callback) {
 function createGrupo(grupo, callback) {
  $.ajax({
      method: "POST",
-     url: 'http://localhost:8080/grupos',
+     url: 'http://25.76.106.32:8080/grupos',
      data: JSON.stringify(grupo),
      processData: false,
      headers: {
@@ -671,7 +677,7 @@ function createGrupo(grupo, callback) {
 function updateGrupo(grupo) {
  $.ajax({
      method: 'PUT',
-     url: 'http://localhost:8080/grupos/' + grupo.id,
+     url: 'http://25.76.106.32:8080/grupos/' + grupo.id,
      data: JSON.stringify(grupo),
      processData: false,
      headers: {
@@ -686,7 +692,7 @@ function updateGrupo(grupo) {
 function deleteGrupo(grupoId) {
  $.ajax({
      method: 'DELETE',
-     url: 'http://localhost:8080/grupos/' + grupoId
+     url: 'http://25.76.106.32:8080/grupos/' + grupoId
  }).done(function (grupo) {
      console.log("Deleted grupo " + grupoId)
  })
@@ -1088,7 +1094,7 @@ $(document).ready(function () {
 //Load Chats from server
 function loadChats(callback) {
     $.ajax({
-        url: 'http://localhost:8080/chats'
+        url: 'http://25.76.106.32:8080/chats'
     }).done(function (chats) {
         //console.log('Chats loaded: ' + JSON.stringify(chats));
         callback(chats);
@@ -1099,7 +1105,7 @@ function loadChats(callback) {
 function createChat(chat, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://localhost:8080/chats',
+        url: 'http://25.76.106.32:8080/chats',
         data: JSON.stringify(chat),
         processData: false,
         headers: {
@@ -1115,7 +1121,7 @@ function createChat(chat, callback) {
 function updateChat(chat) {
     $.ajax({
         method: 'PUT',
-        url: 'http://localhost:8080/chats/' + chat.id,
+        url: 'http://25.76.106.32:8080/chats/' + chat.id,
         data: JSON.stringify(chat),
         processData: false,
         headers: {
@@ -1130,7 +1136,7 @@ function updateChat(chat) {
 function deleteChat(chatId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://localhost:8080/chats/' + chatId
+        url: 'http://25.76.106.32:8080/chats/' + chatId
     }).done(function (chat) {
         console.log("Deleted chat " + chatId)
     })
@@ -1162,7 +1168,7 @@ function showChat(chats) {
 //Load Chats from server
 function loadGameState(gameId, callback) {
 	 $.ajax({
-	     url: 'http://localhost:8080/gameStates' + gameId
+	     url: 'http://25.76.106.32:8080/gameStates' + gameId
 	 }).done(function (gameState) {
 	     //console.log('Chats loaded: ' + JSON.stringify(chats));
 	     callback(gameState);
@@ -1173,7 +1179,7 @@ function loadGameState(gameId, callback) {
 function createGameState(gameState, callback) {
 	 $.ajax({
 	     method: "POST",
-	     url: 'http://localhost:8080/gameStates',
+	     url: 'http://25.76.106.32:8080/gameStates',
 	     data: JSON.stringify(gameState),
 	     processData: false,
 	     headers: {
@@ -1189,7 +1195,7 @@ function createGameState(gameState, callback) {
 function updateGameState(gameState) {
 	 $.ajax({
 	     method: 'PUT',
-	     url: 'http://localhost:8080/gameStates/' + gameState.id,
+	     url: 'http://25.76.106.32:8080/gameStates/' + gameState.id,
 	     data: JSON.stringify(gameState),
 	     processData: false,
 	     headers: {
@@ -1204,7 +1210,7 @@ function updateGameState(gameState) {
 function deleteGameState(gameId) {
 	 $.ajax({
 	     method: 'DELETE',
-	     url: 'http://localhost:8080/gameStates/' + gameId
+	     url: 'http://25.76.106.32:8080/gameStates/' + gameId
 	 }).done(function (gameState) {
 	     console.log("Deleted GameState " + gameId)
 	 })
@@ -1350,7 +1356,7 @@ function checkSala() {
 }
 
 function connectToGrupos() {
-groupConnection = new WebSocket('ws://localhost:8080/salas');
+groupConnection = new WebSocket('ws://25.76.106.32:8080/salas');
 	
 	groupConnection.onopen = function() {
 		var msg = {
@@ -1457,6 +1463,29 @@ groupConnection = new WebSocket('ws://localhost:8080/salas');
 		console.log("Closing socket");
 	}
 }
+
+function connectToUsers() {
+	usersConnection = new WebSocket('ws://25.76.106.32:8080/users');
+		
+	usersConnection.onopen = function() {
+			var msg = {
+				name : usuario,
+				message : 'hi'
+			}
+			usersConnection.send(JSON.stringify(msg));
+		}
+		
+		usersConnection.onerror = function(e) {
+			console.log("WS error: " + e);
+		}
+		usersConnection.onmessage = function(msg) {
+			console.log("WS message: " + msg.data);
+			var message = JSON.parse(msg.data);
+		}
+		usersConnection.onclose = function() {
+			console.log("Closing socket");
+		}
+	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CONTROLES COBAIAS /////////////////////////////////////////////////////////////////////////////////////
