@@ -53,7 +53,7 @@ function sound(src) {
 
 function connectChat(){
 	//console.log('gola');
-	chatConnection = new WebSocket('ws://25.76.106.32:8080/chat');
+	chatConnection = new WebSocket('ws://localhost:8080/chat');
 	chatConnection.onerror = function(e) {
 		console.log("WS error: " + e);
 	}
@@ -205,7 +205,7 @@ var invitar = false;
 function addUserToFile(item){
 	$.ajax({
 		method: "POST",
-		url:'http://25.76.106.32:8080/ficheros',
+		url:'http://localhost:8080/ficheros',
 		data: JSON.stringify(item),
 	    processData: false,
 	    headers: {
@@ -216,7 +216,7 @@ function addUserToFile(item){
 
 function getUsersAndPasswords(callback){
 	$.ajax({
-		url: 'http://25.76.106.32:8080/ficheros/{partes}'
+		url: 'http://localhost:8080/ficheros/{partes}'
 	}).done(function(items){
 		callback(items);
 	})
@@ -242,7 +242,7 @@ var usersConnection;
 //no borrar de momento, puede resultar util mas tarde
 /*function hola123(callback){
 	$.ajax({
-		url:'http://25.76.106.32:8080/items/{password}'
+		url:'http://localhost:8080/items/{password}'
 	}).done(function(items){
 		callback(items);
 	})
@@ -255,7 +255,7 @@ hola123(function (pw) {
 //Load items from server
 function loadItems(callback) {
     $.ajax({
-        url: 'http://25.76.106.32:8080/items'
+        url: 'http://localhost:8080/items'
     }).done(function (items) {
         //console.log('Items loaded: ' + JSON.stringify(items));
         callback(items);
@@ -266,7 +266,7 @@ function loadItems(callback) {
 function createItem(item, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://25.76.106.32:8080/items',
+        url: 'http://localhost:8080/items',
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -282,7 +282,7 @@ function createItem(item, callback) {
 function updateItem(item) {
     $.ajax({
         method: 'PUT',
-        url: 'http://25.76.106.32:8080/items/' + item.id,
+        url: 'http://localhost:8080/items/' + item.id,
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -297,7 +297,7 @@ function updateItem(item) {
 function deleteItem(itemId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://25.76.106.32:8080/items/' + itemId
+        url: 'http://localhost:8080/items/' + itemId
     }).done(function (item) {
         console.log("Deleted item " + itemId)
     })
@@ -575,7 +575,7 @@ var cobaIAversion = "1.6";
 //Load VERSIONS from server
 function loadVersions(callback) {
     $.ajax({
-        url: 'http://25.76.106.32:8080/versions'
+        url: 'http://localhost:8080/versions'
     }).done(function (versions) {
         //console.log('Versions loaded: ' + JSON.stringify(versions));
         callback(versions);
@@ -586,7 +586,7 @@ function loadVersions(callback) {
 function createVersion(version, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://25.76.106.32:8080/versions',
+        url: 'http://localhost:8080/versions',
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -602,7 +602,7 @@ function createVersion(version, callback) {
 function updateVersion(version) {
     $.ajax({
         method: 'PUT',
-        url: 'http://25.76.106.32:8080/versions/' + version.id,
+        url: 'http://localhost:8080/versions/' + version.id,
         data: JSON.stringify(version),
         processData: false,
         headers: {
@@ -617,7 +617,7 @@ function updateVersion(version) {
 function deleteVersion(versionId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://25.76.106.32:8080/versions/' + versionId
+        url: 'http://localhost:8080/versions/' + versionId
     }).done(function (version) {
         console.log("Deleted version " + versionId)
     })
@@ -669,7 +669,7 @@ var grupoNew;
 //Load grupos from server
 function loadGrupos(callback) {
  $.ajax({
-     url: 'http://25.76.106.32:8080/grupos'
+     url: 'http://localhost:8080/grupos'
  }).done(function (grupos) {
      //console.log('Versions loaded: ' + JSON.stringify(grupos));
      callback(grupos);
@@ -680,7 +680,7 @@ function loadGrupos(callback) {
 function createGrupo(grupo, callback) {
  $.ajax({
      method: "POST",
-     url: 'http://25.76.106.32:8080/grupos',
+     url: 'http://localhost:8080/grupos',
      data: JSON.stringify(grupo),
      processData: false,
      headers: {
@@ -696,7 +696,7 @@ function createGrupo(grupo, callback) {
 function updateGrupo(grupo) {
  $.ajax({
      method: 'PUT',
-     url: 'http://25.76.106.32:8080/grupos/' + grupo.id,
+     url: 'http://localhost:8080/grupos/' + grupo.id,
      data: JSON.stringify(grupo),
      processData: false,
      headers: {
@@ -711,7 +711,7 @@ function updateGrupo(grupo) {
 function deleteGrupo(grupoId) {
  $.ajax({
      method: 'DELETE',
-     url: 'http://25.76.106.32:8080/grupos/' + grupoId
+     url: 'http://localhost:8080/grupos/' + grupoId
  }).done(function (grupo) {
      console.log("Deleted grupo " + grupoId)
  })
@@ -1120,7 +1120,7 @@ $(document).ready(function () {
 //Load Chats from server
 function loadChats(callback) {
     $.ajax({
-        url: 'http://25.76.106.32:8080/chats'
+        url: 'http://localhost:8080/chats'
     }).done(function (chats) {
         //console.log('Chats loaded: ' + JSON.stringify(chats));
         callback(chats);
@@ -1131,7 +1131,7 @@ function loadChats(callback) {
 function createChat(chat, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://25.76.106.32:8080/chats',
+        url: 'http://localhost:8080/chats',
         data: JSON.stringify(chat),
         processData: false,
         headers: {
@@ -1147,7 +1147,7 @@ function createChat(chat, callback) {
 function updateChat(chat) {
     $.ajax({
         method: 'PUT',
-        url: 'http://25.76.106.32:8080/chats/' + chat.id,
+        url: 'http://localhost:8080/chats/' + chat.id,
         data: JSON.stringify(chat),
         processData: false,
         headers: {
@@ -1162,7 +1162,7 @@ function updateChat(chat) {
 function deleteChat(chatId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://25.76.106.32:8080/chats/' + chatId
+        url: 'http://localhost:8080/chats/' + chatId
     }).done(function (chat) {
         console.log("Deleted chat " + chatId)
     })
@@ -1194,7 +1194,7 @@ function showChat(chats) {
 //Load Chats from server
 function loadGameState(gameId, callback) {
 	 $.ajax({
-	     url: 'http://25.76.106.32:8080/gameStates' + gameId
+	     url: 'http://localhost:8080/gameStates' + gameId
 	 }).done(function (gameState) {
 	     //console.log('Chats loaded: ' + JSON.stringify(chats));
 	     callback(gameState);
@@ -1205,7 +1205,7 @@ function loadGameState(gameId, callback) {
 function createGameState(gameState, callback) {
 	 $.ajax({
 	     method: "POST",
-	     url: 'http://25.76.106.32:8080/gameStates',
+	     url: 'http://localhost:8080/gameStates',
 	     data: JSON.stringify(gameState),
 	     processData: false,
 	     headers: {
@@ -1221,7 +1221,7 @@ function createGameState(gameState, callback) {
 function updateGameState(gameState) {
 	 $.ajax({
 	     method: 'PUT',
-	     url: 'http://25.76.106.32:8080/gameStates/' + gameState.id,
+	     url: 'http://localhost:8080/gameStates/' + gameState.id,
 	     data: JSON.stringify(gameState),
 	     processData: false,
 	     headers: {
@@ -1236,7 +1236,7 @@ function updateGameState(gameState) {
 function deleteGameState(gameId) {
 	 $.ajax({
 	     method: 'DELETE',
-	     url: 'http://25.76.106.32:8080/gameStates/' + gameId
+	     url: 'http://localhost:8080/gameStates/' + gameId
 	 }).done(function (gameState) {
 	     console.log("Deleted GameState " + gameId)
 	 })
@@ -1382,7 +1382,7 @@ function checkSala() {
 }
 
 function connectToGrupos() {
-groupConnection = new WebSocket('ws://25.76.106.32:8080/salas');
+groupConnection = new WebSocket('ws://localhost:8080/salas');
 	
 	groupConnection.onopen = function() {
 		var msg = {
@@ -1496,7 +1496,7 @@ groupConnection = new WebSocket('ws://25.76.106.32:8080/salas');
 }
 
 function connectToUsers() {
-	usersConnection = new WebSocket('ws://25.76.106.32:8080/users');
+	usersConnection = new WebSocket('ws://localhost:8080/users');
 		
 	usersConnection.onopen = function() {
 			var msg = {
