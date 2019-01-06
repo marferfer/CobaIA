@@ -546,7 +546,7 @@ function update5() {
 
     //console.log(plataformasBasic.lista[1].pos);
 
-    nivel1.decorados[0].x -= 5; 
+    nivel1.decorados[0].x -= 5;
     if(nivel1.decorados[0].x < -14500){
     	nivel1.decorados[0].x = 500;
     }
