@@ -29,7 +29,7 @@ function loadSala(id, callback) {
 	$.ajax({
 		url : 'http://localhost:8080/grupos/' + id
 	}).done(function(grupo) {
-		// console.log('Versions loaded: ' + JSON.stringify(grupos));
+		console.log('Sala loaded: ' + JSON.stringify(grupo));
 		callback(grupo);
 	})
 }

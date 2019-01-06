@@ -30,8 +30,8 @@ public class SalasHandler extends TextWebSocketHandler {
 
 	private Map<String, WebSocketSession> sessions = new ConcurrentHashMap<>();
 	private ObjectMapper mapper = new ObjectMapper();
-	private Map<String, Integer> users = new HashMap<>();
-	private Map<Integer, Sala> salas = new HashMap<>();
+	private Map<String, String> users = new HashMap<>();
+	private Map<String, Sala> salas = new HashMap<>();
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -43,7 +43,13 @@ public class SalasHandler extends TextWebSocketHandler {
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		System.out.println("Session closed: " + session.getId());
 		sessions.remove(session.getId());
-		int groupId = users.get(session.getId());
+		String groupId;
+		if (users.containsKey(session.getId())) {
+			groupId = users.get(session.getId());
+		}
+		else {
+			groupId = users.get(session.getId());
+		}
 		Sala s = salas.get(groupId);
 		Collection<Grupo> gruposColl = GruposController.grupos();
 		ArrayList<Grupo> grupos;
@@ -53,7 +59,7 @@ public class SalasHandler extends TextWebSocketHandler {
 		  grupos = new ArrayList<Grupo>(gruposColl);
 		Grupo myGroup = new Grupo();
 		for (int i = 0; i < grupos.size(); i++) {
-			if (grupos.get(i).getId() == groupId) {
+			if (grupos.get(i).getNombre().equals(groupId)) {
 				myGroup = grupos.get(i);
 			}
 		}
@@ -70,7 +76,7 @@ public class SalasHandler extends TextWebSocketHandler {
 			s.user3Id = null;
 			myGroup.setUsuario1(s.user1);
 			myGroup.setUsuario2(s.user2);
-			myGroup.setUsuario3("");
+			myGroup.setUsuario3(null);
 		}
 		else if (session.getId().equals(s.user2Id)) {
 			userOut = s.user2;
@@ -79,20 +85,21 @@ public class SalasHandler extends TextWebSocketHandler {
 			s.user2Id = s.user3Id;
 			s.user3Id = null;
 			myGroup.setUsuario2(s.user2);
-			myGroup.setUsuario3("");
+			myGroup.setUsuario3(null);
 		}
 		else if (session.getId().equals(s.user3Id)) {
 			userOut = s.user3;
 			s.user3 = null;
 			s.user3Id = null;
-			myGroup.setUsuario3("");
+			myGroup.setUsuario3(null);
 		}
 		if (s.user1 == null && s.user2 == null && s.user3 == null) {
 			salas.remove(groupId);
-			GruposController.borraGrupo(groupId);
+			GruposController.borraGrupo(myGroup.getId());
 		}
 		else {
 			salas.put(groupId, s);
+			GruposController.actualizaGrupo(myGroup.getId(), myGroup);
 		}
 		ObjectNode newNode = mapper.createObjectNode();
 		newNode.put("name", userOut);
@@ -117,13 +124,13 @@ public class SalasHandler extends TextWebSocketHandler {
 		  grupos = new ArrayList<Grupo>(gruposColl);
 		Grupo myGroup = new Grupo();
 		for (int i = 0; i < grupos.size(); i++) {
-			if (grupos.get(i).getId() == node.get("groupId").asInt()) {
+			if (grupos.get(i).getNombre().equals(node.get("groupId").asText())) {
 				myGroup = grupos.get(i);
 			}
 		}
 		if (node.get("message").asText().equals("hi")) {
-			if (salas.containsKey(node.get("groupId").asInt())) {
-				s = salas.get(node.get("groupId").asInt());
+			if (salas.containsKey(node.get("groupId").asText())) {
+				s = salas.get(node.get("groupId").asText());
 				if (s.user2 == null) {
 					s.user2 = node.get("name").asText();
 					s.user2Id = session.getId();
@@ -134,15 +141,16 @@ public class SalasHandler extends TextWebSocketHandler {
 					s.user3Id = session.getId();
 					myGroup.setUsuario3(s.user3);
 				}
+				GruposController.actualizaGrupo(myGroup.getId(), myGroup);
 			}
 			else {
 				s.user1 = node.get("name").asText();
 				s.user1Id = session.getId();
 			}
-			users.put(session.getId(), node.get("groupId").asInt());
-			salas.put(node.get("groupId").asInt(), s);			
+			users.put(session.getId(), node.get("groupId").asText());
+			salas.put(node.get("groupId").asText(), s);			
 		}		
-		sendOtherParticipants(session, node);
+		sendAllParticipants(session, node);
 	}
 
 	private void sendOtherParticipants(WebSocketSession session, JsonNode node) throws IOException {
@@ -159,6 +167,21 @@ public class SalasHandler extends TextWebSocketHandler {
 			if(!participant.getId().equals(session.getId())) {
 				participant.sendMessage(new TextMessage(newNode.toString()));
 			}
+		}
+	}
+	
+	private void sendAllParticipants(WebSocketSession session, JsonNode node) throws IOException {
+
+		System.out.println("Message sent: " + node.toString());
+		
+		ObjectNode newNode = mapper.createObjectNode();
+		newNode.put("name", node.get("name").asText());
+		newNode.put("message", node.get("message").asText());
+		newNode.put("groupId", node.get("groupId").asText());
+		
+		
+		for(WebSocketSession participant : sessions.values()) {
+			participant.sendMessage(new TextMessage(newNode.toString()));
 		}
 	}
 

@@ -42,7 +42,7 @@ public class GruposController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Grupo> actualizaGrupo(@PathVariable long id, @RequestBody Grupo grupoActualizado) {
+	public static ResponseEntity<Grupo> actualizaGrupo(@PathVariable long id, @RequestBody Grupo grupoActualizado) {
 
 		Grupo savedGrupo = grupos.get(grupoActualizado.getId());
 
