@@ -1,6 +1,9 @@
 package es.urjc.code.juegosenred;
 
+import java.awt.List;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -41,6 +44,25 @@ public class PersonajeHandler extends TextWebSocketHandler {
 		
 		String n = node.get("name").asText();
 		
+		Collection<Grupo> gruposColl = GruposController.grupos();
+		ArrayList<Grupo> grupos;
+		if (gruposColl instanceof List)
+		  grupos = (ArrayList<Grupo>)gruposColl;
+		else
+		  grupos = new ArrayList<Grupo>(gruposColl);
+		Grupo myGroup = new Grupo();
+		for (int i = 0; i < grupos.size(); i++) {
+			if (grupos.get(i).getId() == node.get("groupId").asInt()) {
+				myGroup = grupos.get(i);
+			}
+		}
+		
+		boolean wereReady = false;
+		
+		if (myGroup.isTankaReady() && myGroup.isTaliReady() && myGroup.isAcroReady()) {
+			wereReady = true;
+		}
+		
 		if (n.equals("ready")) {
 			switch (node.get("message").asText()) {
 			case "tankabaIA":
@@ -50,6 +72,7 @@ public class PersonajeHandler extends TextWebSocketHandler {
 				else {
 					tankaReady = false;
 				}
+				myGroup.setTankaReady(tankaReady);
 				break;
 			case "acrobaIA":
 				if (!acroReady) {
@@ -58,6 +81,7 @@ public class PersonajeHandler extends TextWebSocketHandler {
 				else {
 					acroReady = false;
 				}
+				myGroup.setAcroReady(acroReady);
 				break;
 			case "talibaIA":
 				if (!taliReady) {
@@ -66,11 +90,15 @@ public class PersonajeHandler extends TextWebSocketHandler {
 				else {
 					taliReady = false;
 				}
+				myGroup.setTaliReady(taliReady);
 				break;
 			default:
 				break;
 			}
-			if (tankaReady && taliReady && acroReady) {
+			
+			GruposController.actualizaGrupo(myGroup.getId(), myGroup);
+			
+			if (myGroup.isTankaReady() && myGroup.isTaliReady() && myGroup.isAcroReady()) {
 				ObjectNode newNode = mapper.createObjectNode();
 				newNode.put("groupId", node.get("groupId").asText());
 				newNode.put("message", "start");
@@ -78,6 +106,24 @@ public class PersonajeHandler extends TextWebSocketHandler {
 					participant.sendMessage(new TextMessage(newNode.toString()));
 				}
 			}
+			
+			else if (wereReady) {
+				ObjectNode newNode = mapper.createObjectNode();
+				newNode.put("groupId", node.get("groupId").asText());
+				newNode.put("message", "cancel that");
+				for(WebSocketSession participant : sessions.values()) {
+					participant.sendMessage(new TextMessage(newNode.toString()));
+				}
+			}
+			
+			/*if (tankaReady && taliReady && acroReady) {
+				ObjectNode newNode = mapper.createObjectNode();
+				newNode.put("groupId", node.get("groupId").asText());
+				newNode.put("message", "start");
+				for(WebSocketSession participant : sessions.values()) {
+					participant.sendMessage(new TextMessage(newNode.toString()));
+				}
+			}*/
 		}
 		sendOtherParticipants(session, node);
 	}

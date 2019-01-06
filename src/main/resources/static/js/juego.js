@@ -1477,6 +1477,11 @@ groupConnection = new WebSocket('ws://25.76.106.32:8080/salas');
 				    	}
 				    });
 				}
+				else {
+					loadSala(myGroupId, function (grupo) {
+						showGrupo(grupo);
+					});
+				}
 			}
 			else {
 				loadSala(myGroupId, function (grupo) {

@@ -312,6 +312,12 @@ function actionOnClickTanka() {
 		button.alpha = 0.5;
 		if (tankaCheck.alpha === 1) {
 			tankaCheck.alpha = 0;
+			var msg = {
+				name : "ready",
+				message : "tankabaIA",
+				groupId : myGroupId
+			}
+			if (myGroupId != '') connection.send(JSON.stringify(msg));
 		}
 		button.setFrames(null, null, 0, null);
 		unlocked = true;
@@ -333,6 +339,12 @@ function actionOnClickTanka() {
 			}
 			if (taliCheck.alpha === 1) {
 				taliCheck.alpha = 0;
+				var msg = {
+					name : "ready",
+					message : "talibaIA",
+					groupId : myGroupId
+				}
+				if (myGroupId != '') connection.send(JSON.stringify(msg));
 			}
 			unlocked = true;
 		}
@@ -354,6 +366,12 @@ function actionOnClickTanka() {
 			}
 			if (acroCheck.alpha === 1) {
 				acroCheck.alpha = 0;
+				var msg = {
+					name : "ready",
+					message : "acrobaIA",
+					groupId : myGroupId
+				}
+				if (myGroupId != '') connection.send(JSON.stringify(msg));
 			}
 			unlocked = true;
 		}
@@ -404,6 +422,12 @@ function actionOnClickTali() {
 			}
 			if (tankaCheck.alpha === 1) {
 				tankaCheck.alpha = 0;
+				var msg = {
+					name : "ready",
+					message : "tankabaIA",
+					groupId : myGroupId
+				}
+				if (myGroupId != '') connection.send(JSON.stringify(msg));
 			}
 			unlocked = true;
 		}
@@ -421,6 +445,12 @@ function actionOnClickTali() {
 		}
 		if (taliCheck.alpha === 1) {
 			taliCheck.alpha = 0;
+			var msg = {
+				name : "ready",
+				message : "talibaIA",
+				groupId : myGroupId
+			}
+			if (myGroupId != '') connection.send(JSON.stringify(msg));
 		}
 		button.alpha = 0.5;
 		button.setFrames(null, null, 0, null);
@@ -443,6 +473,12 @@ function actionOnClickTali() {
 			}
 			if (acroCheck.alpha === 1) {
 				acroCheck.alpha = 0;
+				var msg = {
+					name : "ready",
+					message : "acrobaIA",
+					groupId : myGroupId
+				}
+				if (myGroupId != '') connection.send(JSON.stringify(msg));
 			}
 			unlocked = true;
 		}
@@ -493,6 +529,12 @@ function actionOnClickAcro() {
 			}
 			if (tankaCheck.alpha === 1) {
 				tankaCheck.alpha = 0;
+				var msg = {
+					name : "ready",
+					message : "tankabaIA",
+					groupId : myGroupId
+				}
+				if (myGroupId != '') connection.send(JSON.stringify(msg));
 			}
 			unlocked = true;
 		}
@@ -514,6 +556,12 @@ function actionOnClickAcro() {
 			}
 			if (taliCheck.alpha === 1) {
 				taliCheck.alpha = 0;
+				var msg = {
+					name : "ready",
+					message : "talibaIA",
+					groupId : myGroupId
+				}
+				if (myGroupId != '') connection.send(JSON.stringify(msg));
 			}
 			unlocked = true;
 		}
@@ -531,6 +579,12 @@ function actionOnClickAcro() {
 		}
 		if (acroCheck.alpha === 1) {
 			acroCheck.alpha = 0;
+			var msg = {
+				name : "ready",
+				message : "acrobaIA",
+				groupId : myGroupId
+			}
+			if (myGroupId != '') connection.send(JSON.stringify(msg));
 		}
 		button.alpha = 0.5;
 		button.setFrames(null, null, 0, null);
@@ -562,6 +616,8 @@ function actionOnClickAcro() {
 		if (myGroupId != '') connection.send(JSON.stringify(msg));
 	}
 }
+
+var allReady = false;
 
 $(document).ready(function() {
 
@@ -624,17 +680,31 @@ $(document).ready(function() {
 					}
 					break;
 				case 'start':
+					$('body').prepend('<div class="cd-number-wrapper">' +
+										  '<span class="cd-number-five">5</span>' +
+										  '<span class="cd-number-four">4</span>' +
+										  '<span class="cd-number-three">3</span>' +
+										  '<span class="cd-number-two">2</span>' +
+										  '<span class="cd-number-one">1</span>' +
+										'</div>');
+					allReady = true;
 					setTimeout(function() {
-						jugPersonajes.destroy();
-						inicio();
-						
-				    	document.getElementById("crearGrupo").innerHTML = 'Volver al Menú';
-				    	document.getElementById("crearGrupo").className = 'btn btn-danger';
-				    	document.getElementById("entrarGrupo").innerHTML = 'Controles';
-				    	
-					    
-					}, 5000);
+						if (allReady) {
+							jugPersonajes.destroy();
+							inicio();
+							
+					    	document.getElementById("crearGrupo").innerHTML = 'Volver al Menú';
+					    	document.getElementById("crearGrupo").className = 'btn btn-danger';
+					    	document.getElementById("entrarGrupo").innerHTML = 'Controles';
+					    	
+						    $('.cd-number-wrapper').remove();
+						}
+					}, 5500);
 					break;
+				case 'cancel that':
+					allReady = false;
+					$('.cd-number-wrapper').remove();
+					break;					
 				default:
 					switch (message.name) {
 					case tankaUser.text:
