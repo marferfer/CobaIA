@@ -901,7 +901,7 @@ function create5() {
     //tankabaIA.jugador = juego.add.sprite(11200, juego.world.height - 225, 'tankabaIAmovimiento');
 
     //Cambiar 340, juego.world.height - 225
-    tankabaIA.jugador = juego.add.sprite(7640, juego.world.height - 425, 'tankabaIAmovimiento');
+    tankabaIA.jugador = juego.add.sprite(340, juego.world.height - 425, 'tankabaIAmovimiento');
 
     tankabaIA.jugador.scale.setTo(1.3, 1.3);
     juego.physics.p2.enableBody(tankabaIA.jugador);
@@ -1447,7 +1447,9 @@ function updateMyGameState() {
 			'#caja2Rota:' + cajasCableado.lista[1].rota;
 			break;
 		case 'acrobaIA':
-			myKeyEvent = 'x:' + acrobaIA.jugador.body.x + '#y:' + acrobaIA.jugador.body.y;
+			myKeyEvent = 'x:' + acrobaIA.jugador.body.x + '#y:' + acrobaIA.jugador.body.y +
+			'#Ascensor1pos:' + plataformasBasic.lista[1].pos +
+			'#Ascensor2pos:' + plataformasBasic.lista[2].pos;
 			break;
 		default:
 			break;
@@ -1628,6 +1630,8 @@ function connect() {
 						var pos = str.split('#');
 						acrobaIA.jugador.body.x = pos[0].split(':')[1];
 						acrobaIA.jugador.body.y = pos[1].split(':')[1];
+						plataformasBasic.lista[1].pos = pos[2].split(':')[1];
+						plataformasBasic.lista[2].pos = pos[3].split(':')[1];
 					}
 					break;
 				}

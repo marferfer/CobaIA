@@ -343,6 +343,7 @@ svg rect{
 	font-size: 10em;
 	color: white;
 	font-family: 'arial'; /* Bowlby One SC */
+	pointer-events:none;
 }
 	
 .cd-number-five {
@@ -690,7 +691,7 @@ svg rect{
             
             <form method="post">
                <fieldset>
-                    <input type="text" placeholder="Escribe tu mensaje…" id="textoOwner" autofocus>
+                    <input type="text" placeholder="Escribe tu mensaje…" id="textoOwner" oninput="onInputChat()" onfocusout="onFocusOutChat()" autofocus>
                     
                 </fieldset>
                 <br/>
@@ -771,6 +772,13 @@ svg rect{
                 document.getElementById("formCreateGroup").style.visibility = "hidden";
                 //document.getElementById("crearGrupo").style.visibility = "visible";
             }
+	        
+	        function onInputChat() {
+	        	chatIsFocused = true;
+	        }
+	        function onFocusOutChat() {
+	        	chatIsFocused = false;
+	        }
 	    </script>
 
 

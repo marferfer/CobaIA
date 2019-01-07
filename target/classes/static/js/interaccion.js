@@ -27,80 +27,62 @@ function update5() {
         talibaIA.jugador.body.setZeroForce();
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////// CAMBIOS DE CAMARA  //////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     
-
-    if (nivel1.siguiendo == "tankabaIA") {
-        //console.log(tankabaIA.jugador.body.angle);
-        if (tankabaIA.actor == "chip") {
-            juego.camera.follow(chips.lista[2]);
-        }
-        else if (tankabaIA.actor == "tankabaIA") {
-            juego.camera.follow(tankabaIA.jugador);
-        }
-        else if (tankabaIA.actor == "talibaIA") {
-            juego.camera.follow(talibaIA.jugador);
-        }
-        else if (tankabaIA.actor == "acrobaIA") {
-            juego.camera.follow(acrobaIA.jugador);
-        }
-    }
-
-    if (nivel1.siguiendo == "acrobaIA") {
-        if (acrobaIA.actor == "chip") {
-            juego.camera.follow(chips.lista[0]);
-        }
-        else if (acrobaIA.actor == "tankabaIA") {
-            juego.camera.follow(tankabaIA.jugador);
-        }
-        else if (acrobaIA.actor == "talibaIA") {
-            juego.camera.follow(talibaIA.jugador);
-        }
-        else if (acrobaIA.actor == "acrobaIA") {
-            juego.camera.follow(acrobaIA.jugador);
-        }
-    }
-
-    if (nivel1.siguiendo == "talibaIA") {
-        //console.log(talibaIA.muerta);
-        if (talibaIA.actor == "chip"){
-            juego.camera.follow(chips.lista[1]);
-        }
-        else if (talibaIA.actor == "tankabaIA") {
-            juego.camera.follow(tankabaIA.jugador);
-        }
-        else if (talibaIA.actor == "talibaIA") {
-            juego.camera.follow(talibaIA.jugador);
-        }
-        else if (talibaIA.actor == "acrobaIA") {
-            juego.camera.follow(acrobaIA.jugador);
-        }
-        //juego.camera.follow(talibaIA.actor);
-    }    
-
-    if(ctrlT.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_Y)){
-        nivel1.siguiendo = "tankabaIA";
-    }
-
-    if(ctrlY.isDown || pad2.isDown(Phaser.Gamepad.XBOX360_Y)){
-        nivel1.siguiendo = "acrobaIA";
-    }
-
-    if(ctrlU.isDown || pad3.isDown(Phaser.Gamepad.XBOX360_Y)){
-        //console.log(talibaIA.muerta);
-        //console.log('hola');
-        nivel1.siguiendo = "talibaIA";
-        //juego.camera.follow(talibaIA.actor);
-    }
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CONTROLES ///////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    if (myGroupId != '') { //Online
+    if ($('#textoOwner').is(':focus')) {
+    	ctrlW = juego.input.keyboard.removeKey(Phaser.Keyboard.W);
+        ctrlA = juego.input.keyboard.removeKey(Phaser.Keyboard.A);
+        ctrlS = juego.input.keyboard.removeKey(Phaser.Keyboard.S);
+        ctrlD = juego.input.keyboard.removeKey(Phaser.Keyboard.D);
+        ctrlQ = juego.input.keyboard.removeKey(Phaser.Keyboard.Q);
+
+        //movimiento de la TalibaIA
+        ctrlH = juego.input.keyboard.removeKey(Phaser.Keyboard.H);
+        ctrlB = juego.input.keyboard.removeKey(Phaser.Keyboard.B);
+        ctrlN = juego.input.keyboard.removeKey(Phaser.Keyboard.N);
+        ctrlM = juego.input.keyboard.removeKey(Phaser.Keyboard.M);
+
+        //Reinicio
+        ctrlR = juego.input.keyboard.removeKey(Phaser.Keyboard.R);
+
+        //Cambio de camara
+        ctrlT = juego.input.keyboard.removeKey(Phaser.Keyboard.T);
+        ctrlY = juego.input.keyboard.removeKey(Phaser.Keyboard.Y);
+        ctrlU = juego.input.keyboard.removeKey(Phaser.Keyboard.U);
+        
+        ctrlShift = juego.input.keyboard.removeKey(Phaser.Keyboard.SHIFT);
+    }
+    else {
+    	
+    	ctrlW = juego.input.keyboard.addKey(Phaser.Keyboard.W);
+        ctrlA = juego.input.keyboard.addKey(Phaser.Keyboard.A);
+        ctrlS = juego.input.keyboard.addKey(Phaser.Keyboard.S);
+        ctrlD = juego.input.keyboard.addKey(Phaser.Keyboard.D);
+        ctrlQ = juego.input.keyboard.addKey(Phaser.Keyboard.Q);
+
+        //movimiento de la TalibaIA
+        ctrlH = juego.input.keyboard.addKey(Phaser.Keyboard.H);
+        ctrlB = juego.input.keyboard.addKey(Phaser.Keyboard.B);
+        ctrlN = juego.input.keyboard.addKey(Phaser.Keyboard.N);
+        ctrlM = juego.input.keyboard.addKey(Phaser.Keyboard.M);
+
+        //Reinicio
+        ctrlR = juego.input.keyboard.addKey(Phaser.Keyboard.R);
+
+        //Cambio de camara
+        ctrlT = juego.input.keyboard.addKey(Phaser.Keyboard.T);
+        ctrlY = juego.input.keyboard.addKey(Phaser.Keyboard.Y);
+        ctrlU = juego.input.keyboard.addKey(Phaser.Keyboard.U);
+        
+        ctrlShift = juego.input.keyboard.addKey(Phaser.Keyboard.SHIFT);
+        console.log(ctrlT);
+    }
+    
+    if (myGroupId != '' && !$('#textoOwner').is(':focus') && !chatIsFocused) { //Online
 	    var myKeyEvent = '';
 	    
 	    if (ctrlW.isDown) {
@@ -329,7 +311,7 @@ function update5() {
 	    }
 	    
     }
-    else { //Offline
+    else if (myGroupId == '') { //Offline
     	if ((pad1.justPressed(Phaser.Gamepad.XBOX360_A)) || cursores.up.isDown) {
     		wTankaDown = true;
     	}
@@ -396,6 +378,77 @@ function update5() {
     	else {
     		shiftTaliDown = false;
     	}
+    }
+    
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////// CAMBIOS DE CAMARA  //////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    
+
+    if (nivel1.siguiendo == "tankabaIA") {
+        //console.log(tankabaIA.jugador.body.angle);
+        if (tankabaIA.actor == "chip") {
+            juego.camera.follow(chips.lista[2]);
+        }
+        else if (tankabaIA.actor == "tankabaIA") {
+            juego.camera.follow(tankabaIA.jugador);
+        }
+        else if (tankabaIA.actor == "talibaIA") {
+            juego.camera.follow(talibaIA.jugador);
+        }
+        else if (tankabaIA.actor == "acrobaIA") {
+            juego.camera.follow(acrobaIA.jugador);
+        }
+    }
+
+    if (nivel1.siguiendo == "acrobaIA") {
+        if (acrobaIA.actor == "chip") {
+            juego.camera.follow(chips.lista[0]);
+        }
+        else if (acrobaIA.actor == "tankabaIA") {
+            juego.camera.follow(tankabaIA.jugador);
+        }
+        else if (acrobaIA.actor == "talibaIA") {
+            juego.camera.follow(talibaIA.jugador);
+        }
+        else if (acrobaIA.actor == "acrobaIA") {
+            juego.camera.follow(acrobaIA.jugador);
+        }
+    }
+
+    if (nivel1.siguiendo == "talibaIA") {
+        //console.log(talibaIA.muerta);
+        if (talibaIA.actor == "chip"){
+            juego.camera.follow(chips.lista[1]);
+        }
+        else if (talibaIA.actor == "tankabaIA") {
+            juego.camera.follow(tankabaIA.jugador);
+        }
+        else if (talibaIA.actor == "talibaIA") {
+            juego.camera.follow(talibaIA.jugador);
+        }
+        else if (talibaIA.actor == "acrobaIA") {
+            juego.camera.follow(acrobaIA.jugador);
+        }
+        //juego.camera.follow(talibaIA.actor);
+    }    
+
+    if (myGroupId != '' && !$('#textoOwner').is(':focus')) {
+	    if(ctrlT.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_Y)){
+	        nivel1.siguiendo = "tankabaIA";
+	    }
+	
+	    if(ctrlY.isDown || pad2.isDown(Phaser.Gamepad.XBOX360_Y)){
+	        nivel1.siguiendo = "acrobaIA";
+	    }
+	
+	    if(ctrlU.isDown || pad3.isDown(Phaser.Gamepad.XBOX360_Y)){
+	        //console.log(talibaIA.muerta);
+	        //console.log('hola');
+	        nivel1.siguiendo = "talibaIA";
+	        //juego.camera.follow(talibaIA.actor);
+	    }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -525,10 +578,12 @@ function update5() {
     if (tankabaIA.jugador.position.y > 1500) { // Muerte al caer
         reinicia();
     }
-
-    if (ctrlR.isDown) { // Pase de nivel
-        juego.destroy();
-        inicio();
+    
+    if (myGroupId != '' && !$('#textoOwner').is(':focus')) {
+	    if (ctrlR.isDown) { // Pase de nivel
+	        juego.destroy();
+	        inicio();
+	    }
     }
 
     if (plataformasBasic.lista[1].pos < 700 || plataformasBasic.lista[1].pos > 1310) {

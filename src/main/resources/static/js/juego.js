@@ -1585,6 +1585,7 @@ function connectToUsers() {
 
 var canConnect = false;
 var readyToUpdate = true;
+var chatIsFocused = false;
 
 var wTankaDown = false;
 var aTankaDown = false;
