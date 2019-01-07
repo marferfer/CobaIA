@@ -248,6 +248,7 @@ function create5() {
     cajaCableado.body.setRectangle(23, 69, 15);
     cajaCableado.body.x = 2770;
     cajaCableado.body.y = juego.world.height - 70;
+    cajaCableado.rota = false;
 
     cajasCableado.lista.push(cajaCableado);
 
@@ -262,6 +263,7 @@ function create5() {
     cajaCableado.animations.add('caja_rota', [1, 2, 3], 10, true);
     cajaCableado.body.static = true;
     cajaCableado.body.setRectangle(23, 69, 15);
+    cajaCableado.rota = false;
     cajasCableado.lista.push(cajaCableado);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
