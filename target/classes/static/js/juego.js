@@ -665,6 +665,7 @@ var groupConnection;
 var canDisconnect;
 var creator = false;
 var grupoNew;
+var entrandoEnSala = false;
 
 //Load grupos from server
 function loadGrupos(callback) {
@@ -894,13 +895,15 @@ $(document).ready(function () {
 
 			    //console.log(grupo);
 			    	
-			     $('#info').append(
+			    /* $('#info').append(
 			    		 '<li id="usuario1" class="nav-item"><span style="text-transform: capitalize">' + usuario + ' <i class="fas fa-star"></i></span></li>' +
 			    		 '<li id="usuario2" class="nav-item"><span style="text-transform: capitalize"></span></li>' +
-			    		 '<li id="usuario2" class="nav-item"><span style="text-transform: capitalize"></span></li>')
+			    		 '<li id="usuario2" class="nav-item"><span style="text-transform: capitalize"></span></li>')*/
 			    
 			    connectToGrupos();
 			    connectChat();
+			    document.getElementById("loaderSalas").style.visibility = "visible";
+			    document.getElementById("infoDeSalas").innerHTML = "Creando Sala";
 			    document.getElementById("pantallaInicio").style.visibility = "hidden";
 	            document.getElementById("formCreateGroup").style.visibility = "hidden";
 	            document.getElementById("entrarGrupo").style.visibility = "hidden";
@@ -910,6 +913,7 @@ $(document).ready(function () {
 	            btn.disabled = true;
 	            enSala = true;
 	            document.getElementById("abrir-chat").style.visibility = "visible";
+	            entrandoEnSala = true;
 			}	            
 		});
 		
@@ -959,7 +963,9 @@ $(document).ready(function () {
             				grupos[i].usuario3 = usuario;
             			}
             			//updateGrupo(grupos[i]);
-            			showGrupo(grupos[i]);
+            			//showGrupo(grupos[i]);
+            			entrandoEnSala = true;
+            			document.getElementById("loaderSalas").style.visibility = "visible";
                         var element6 = document.getElementById("pantallaInicio");
                         element6.style.visibility = "hidden";
                         var element5 = document.getElementById("salasDisp");
@@ -972,6 +978,12 @@ $(document).ready(function () {
                         enSala = true;
                         myGroupId = itemId;
                         myGroupName = grupos[i].nombre;
+                        if (myGroupName.length > 5) {
+                			document.getElementById("infoDeSalas").innerHTML = "Uniendote a<br>" + grupos[i].nombre;
+                        }
+                        else {
+                        	document.getElementById("infoDeSalas").innerHTML = "Uniendote a " + grupos[i].nombre;
+            			}
                         myGameId = grupos[i].gameId;
                         loadSala(myGroupId, function (grupo) {
                         	if (nivelJuego === 0.5) {
@@ -1012,7 +1024,9 @@ $(document).ready(function () {
 	                				miGrupo.usuario3 = usuario;
 	                			}
 	                			//updateGrupo(miGrupo);
-	                			showGrupo(miGrupo);
+	                			//showGrupo(miGrupo);
+	            				entrandoEnSala = true;
+	                			document.getElementById("loaderSalas").style.visibility = "visible";
 	                            var element6 = document.getElementById("pantallaInicio");
 	                            element6.style.zIndex = "2";
 	                            element6.style.visibility = "hidden";
@@ -1027,6 +1041,12 @@ $(document).ready(function () {
 	                            enSala = true;
 	                            myGroupId = itemId;
 	                            myGroupName = grupos[i].nombre;
+	                            if (myGroupName.length > 5) {
+		                			document.getElementById("infoDeSalas").innerHTML = "Uniendote a<br>" + grupos[i].nombre;
+	                            }
+	                            else {
+	                            	document.getElementById("infoDeSalas").innerHTML = "Uniendote a " + grupos[i].nombre;
+	                			}
 	                            myGameId = grupos[i].gameId;
 	                            if (nivelJuego === 0.5) {
 	                            	loadSala(myGroupId, function (grupo) {
@@ -1441,6 +1461,7 @@ groupConnection = new WebSocket('ws://localhost:8080/salas');
 				}, 2000);
 			}
 			else if (message.message == "hi" && message.name == usuario) {
+				
 				canDisconnect = true;
 				var btn = document.getElementById("crearGrupo");
 				btn.style.opacity = 1;
@@ -1475,16 +1496,23 @@ groupConnection = new WebSocket('ws://localhost:8080/salas');
 				    			break;
 				    		}
 				    	}
+				    	document.getElementById("loaderSalas").style.visibility = "hidden";
+						entrandoEnSala = false;
+						showGrupo(grupoWithId);
 				    });
 				}
 				else {
 					loadSala(myGroupId, function (grupo) {
+						document.getElementById("loaderSalas").style.visibility = "hidden";
+						entrandoEnSala = false;
 						showGrupo(grupo);
 					});
 				}
 			}
 			else {
 				loadSala(myGroupId, function (grupo) {
+					document.getElementById("loaderSalas").style.visibility = "hidden";
+					entrandoEnSala = false;
 					showGrupo(grupo);
 				});
 			}
