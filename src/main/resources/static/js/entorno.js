@@ -1289,12 +1289,14 @@ function create5() {
                 compuertas.lista[0].pivot.y = +250;
                 compuertas.lista[0].body.y += 250;
                 cajasCableado.lista[0].animations.play('caja_rota');
+                cajasCableado.lista[0].rota = true;
             
             }else if(body.id === 14){
 
                 let timer =  juego.time.events.add(1250, stopPlataforma, this, 1);
                 plataformasMoviles.lista[1].body.rotateRight(-25);
                 cajasCableado.lista[0].animations.play('caja_rota');
+                cajasCableado.lista[1].rota = true;
 
             }else{
                 ;
@@ -1440,7 +1442,9 @@ function updateMyGameState() {
 			'#xCaja3:' + cajas.lista[2].body.x + '#yCaja3:' + cajas.lista[2].body.y;
 			break;
 		case 'talibaIA':
-			myKeyEvent = 'x:' + talibaIA.jugador.body.x + '#y:' + talibaIA.jugador.body.y;
+			myKeyEvent = 'x:' + talibaIA.jugador.body.x + '#y:' + talibaIA.jugador.body.y +
+			'#caja1Rota:' + cajasCableado.lista[0].rota +
+			'#caja2Rota:' + cajasCableado.lista[1].rota;
 			break;
 		case 'acrobaIA':
 			myKeyEvent = 'x:' + acrobaIA.jugador.body.x + '#y:' + acrobaIA.jugador.body.y;
@@ -1463,7 +1467,7 @@ function updateMyGameState() {
 }
 
 function connect() {	
-	playerConnection = new WebSocket('ws://localhost:8080/players');
+	playerConnection = new WebSocket('ws://25.76.106.32:8080/players');
 	
 	playerConnection.onopen = function() {
 		canConnect = true;
@@ -1568,6 +1572,20 @@ function connect() {
 						var pos = str.split('#');
 						talibaIA.jugador.body.x = pos[0].split(':')[1];
 						talibaIA.jugador.body.y = pos[1].split(':')[1];
+						if (pos[2].split(':')[1] == 'true' && !cajasCableado.lista[0].rota) {
+							cajasCableado.lista[0].rota = true;
+							compuertas.lista[0].frame = 1;
+			                compuertas.lista[0].body.setRectangle(100, 25);
+			                compuertas.lista[0].pivot.y = +250;
+			                compuertas.lista[0].body.y += 250;
+			                cajasCableado.lista[0].animations.play('caja_rota');
+						}
+						if (pos[3].split(':')[1] == 'true' && !cajasCableado.lista[1].rota) {
+							cajasCableado.lista[1].rota = true;
+							let timer =  juego.time.events.add(1250, stopPlataforma, this, 1);
+			                plataformasMoviles.lista[1].body.rotateRight(-25);
+			                cajasCableado.lista[0].animations.play('caja_rota');
+						}
 					}
 					break;
 				}

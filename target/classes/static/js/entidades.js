@@ -94,6 +94,7 @@ class CajasCableado extends Objetos{
 
     constructor(){
         super();
+        var rota = false;
     }
 }
 
