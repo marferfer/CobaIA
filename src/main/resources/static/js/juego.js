@@ -411,15 +411,18 @@ function logInSignIn() {
     });
     
     $('#send-btn').click(function() {
+    	var d = new Date();
+		var hour = d.getHours();
+		var min  =  d.getMinutes();
+		var fecha = hour + ":" + min;
+    	
 		var msg = {
 			name : usuario,//$('#name').val(),
 			message : $('#textoOwner').val()
 		}
-		$('#mensajePersona').append(msg.name + ": " + msg.message + "<br>");
+		$('#mensajePersona').append("<b>"+ msg.name + "</b>: " + msg.message + "     <b>" + fecha +  "</b><br>");
 	    //$('#mensajePersona').val($('#mensajePersona').val() + "\n" + msg.name + ": " + msg.message);
 		chatConnection.send(JSON.stringify(msg));
-		
-		console.log($('#mensajePersona').val($('#mensajePersona').val() + "\n" + msg.name + ": " + msg.message));
 	});
 
     //Handle add button
@@ -902,6 +905,7 @@ $(document).ready(function () {
 			    
 			    connectToGrupos();
 			    connectChat();
+			    document.getElementById("nombreChat").innerHTML = "<h4>" + usuario +"</h4>";
 			    document.getElementById("loaderSalas").style.visibility = "visible";
 			    document.getElementById("infoDeSalas").innerHTML = "Creando Sala";
 			    document.getElementById("pantallaInicio").style.visibility = "hidden";
@@ -1008,6 +1012,7 @@ $(document).ready(function () {
                         miCobaIA = '';
                         connectToGrupos();
                         connectChat();
+                        document.getElementById("nombreChat").innerHTML = "<h4>" + usuario +"</h4>";
             		}
             		else if (grupos[i].id == itemId) {
             			document.getElementById("pantallaInicio").style.zIndex = "10";
@@ -1077,7 +1082,7 @@ $(document).ready(function () {
         }
     });
 	
-	$("#send-btn").click(function () {
+	/*$("#send-btn").click(function () {
 		
 		if(document.getElementById("textoOwner").value != ""){
 			
@@ -1109,11 +1114,11 @@ $(document).ready(function () {
 					            sala
 					        }
 					        
-							/*createChat(chat, function (chatWithId) {
-			                    //When item with id is returned from server
-			    				showChat(chatWithId);
-			    				console.log("todo correcto");
-			                });*/
+//							createChat(chat, function (chatWithId) {
+//			                    //When item with id is returned from server
+//			    				showChat(chatWithId);
+//			    				console.log("todo correcto");
+//			                });
 					        
 					        
 					        
@@ -1130,7 +1135,7 @@ $(document).ready(function () {
                 }
 			});
 		}
-	});
+	});*/
 })
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1403,6 +1408,8 @@ function checkSala() {
 
 function connectToGrupos() {
 groupConnection = new WebSocket('ws://25.76.106.32:8080/salas');
+
+
 	
 	groupConnection.onopen = function() {
 		var msg = {

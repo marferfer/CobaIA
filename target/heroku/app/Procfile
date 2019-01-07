@@ -1,0 +1,1 @@
+web: java -jar items-backend-and-frontend-0.0.1-SNAPSHOT.jar

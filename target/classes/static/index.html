@@ -572,34 +572,45 @@ svg rect{
 		<img src="assets/images/botonVolver.png" style="margin-top:100px;margin-left:300px;">
 	</div>
 	
-	<form id="formCreateGroup" class="formulario2" style="visibility: hidden; width: 600px">
-
-        <div class="form-group col-lg-12" >
-            <label for="nombreSala" id="title">Añada el nombre de la Sala.</label> <input type="text"
-                class="form-control " id="nombreSala"
-                aria-describedby="emailHelp" placeholder="Nombre de Sala">
-
-        </div>
-        <div class="form-group col-lg-12">
-          <div class="col-lg-10" style="margin-left: 200px">
-            <div class="btn-group" data-toggle="buttons">
-              <label class="btn btn-success" id="publica">
-                Pública
-              </label>
-              <label class="btn btn-success" id="privada">
-                Privada
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-group col-lg-12" id="password"></div>
-        <div class="form-group">
-	        <div class="botonCrearSala" style="margin-left:30px;">
-	            <button type="button" id="add-buttonCreateRoom" class="btn btn-success col-lg-4 offset-lg-1 col-md-12">Crear</button>
-	            <button onclick="volvermenuprincipal();" type="button" id="cancel" class="btn btn-danger col-lg-4 offset-lg-1 col-md-12">Cancelar</button>
+	<form id="formCreateGroup" class="formularioSalas" style="visibility: hidden;">
+		<div class="jumbotron" style="height: 700px">
+        <div class="col-lg-12">
+        <h2 style="text-align: center">- Crear Sala -</h2>
+	        <div class="form-group" >
+	            <label for="nombreSala" id="title" style="color:#000">Añada el nombre de la Sala.</label> <input type="text"
+	                class="form-control " id="nombreSala"
+	                aria-describedby="emailHelp" placeholder="Nombre de Sala">
+	
 	        </div>
-        </div>
+	        <div class="form-group">
+	          <div class="col-lg-12 offset-lg-5" >
+	            <div class="btn-group" data-toggle="buttons">
+	              <label class="btn btn-success btn-lg" id="publica">
+	                Pública
+	              </label>
+	              <label class="btn btn-success btn-lg" id="privada">
+	                Privada
+	              </label>
+	            </div>
+	          </div>
+	        </div>
+	
+	        <div class="form-group col-lg-12" id="password"></div>
+	        <br/>
+	        <br/>
+	        <br/>
+	        <br/>
+	        <br/>
+	        <br/>
+	        <br/>
+	        <div class="form-group">
+		        <div class="botonCrearSala" style="margin-left:30px; ">
+		            <button type="button" id="add-buttonCreateRoom" class="btn btn-success col-lg-4 offset-lg-1 col-md-12">Crear</button>
+		            <button onclick="volvermenuprincipal();" type="button" id="cancel" class="btn btn-danger col-lg-4 offset-lg-1 col-md-12">Cancelar</button>
+		        </div>
+	        </div>
+	     </div>
+	   </div>
 
     </form>
     
@@ -748,7 +759,7 @@ svg rect{
 	          
 	          $("#privada").on('click',function(e) {
                   e.preventDefault();
-                  document.getElementById("password").innerHTML = '<label for="passSala" id="title">Añada una contraseña para la Sala.</label> <input type="password" class="form-control " id="passSala" placeholder="Contraseña"> ';
+                  document.getElementById("password").innerHTML = '<label for="passSala" style="color:#000" id="title">Añada una contraseña para la Sala.</label> <input type="password" class="form-control " id="passSala" placeholder="Contraseña"> ';
 
               });
 	          
@@ -756,12 +767,21 @@ svg rect{
                   e.preventDefault();
                   document.getElementById("live-chat").style.visibility = "visible";
                   document.getElementById("abrir-chat").style.visibility = "hidden";
+                  document.getElementById('textoOwner').focus();
               });
 
               $("#publica").on('click',function(e) {
                   e.preventDefault();
                   document.getElementById("password").innerHTML = '';
               });
+              
+              $('#textoOwner').on('keydown', function (e) {
+            	    if (e.keyCode == 13) {
+            	        document.getElementById("send-btn").click();
+            	        document.getElementById('textoOwner').value = '';
+            	        return false;
+            	    }
+            	});
 	          
 	        })(jQuery); // End of use strict
 	        
