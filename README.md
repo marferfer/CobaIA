@@ -8,10 +8,10 @@ NOMBRE DEL JUEGO:
 
 <h2>DESCRIPCIÓN DEL JUEGO:</h2>
 <p>El juego se plantea como una aventura de puzzles y plataformas cooperativa. Los personajes principales son tres cobayas sometidas a un experimento en el que tres IA han tomado control de sus cerebros.
-Estas deben luchar por escapar del lugar donde son retenidas y para ello deberán unir fuerzas aprovechando las habilidades únicas que posee cada una.<br>Vídeo explicativo: https://youtu.be/KvUn1igZhm0</p>
+Estas deben luchar por escapar del lugar donde son retenidas y para ello deberán unir fuerzas aprovechando las habilidades únicas que posee cada una.</p>
   
 <p>Cada nivel se plantea como un puzzle en sí mismo y la única forma de seguir avanzando hacia la libertad es funcionar como un equipo.
-Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños fragmentos de quiénes son y dónde están realmente, lo que les hará dudar de hasta qué punto conocerse a sí mismo puede resultar peligroso.</p>
+Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños fragmentos de quiénes son y dónde están realmente, lo que les hará dudar de hasta qué punto conocerse a sí mismo puede resultar peligroso.<br>Vídeo explicativo: https://youtu.be/KvUn1igZhm0</p>
 
 <h2> INTERACCIÓN CON USUARIOS Y PERSPECTIVA: </h2>
 <p>Cada usuario controlará a una cobaya. Estará en cada nivel junto a sus compañeras para colaborar en el avance de los puzzles. La cámara se plantea con una vista de scroll-lateral que seguirá a un jugador a la ves y le permitirá observar su entorno en un pequeño radio. La cámara puede cambiar para enfocar a cualquiera de las otras dos CobaIAs en el momento que los jugadores lo deseen.</p>
