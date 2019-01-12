@@ -1475,7 +1475,7 @@ function updateMyGameState() {
 var updateGSInterval;
 
 function connect() {	
-	playerConnection = new WebSocket('wss://coba-ia.herokuapp.com/players');
+	playerConnection = new WebSocket('ws://localhost:8080/players');
 	
 	playerConnection.onopen = function() {
 		canConnect = true;

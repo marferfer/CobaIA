@@ -27,7 +27,7 @@ WebFontConfig = {
 // Load grupos from server
 function loadSala(id, callback) {
 	$.ajax({
-		url : 'https://coba-ia.herokuapp.com/grupos/' + id
+		url : 'http://localhost:8080/grupos/' + id
 	}).done(function(grupo) {
 		//console.log('Sala loaded: ' + JSON.stringify(grupo));
 		callback(grupo);
@@ -38,7 +38,7 @@ function loadSala(id, callback) {
 function updateSala(grupo) {
 	$.ajax({
 		method : 'PUT',
-		url : 'https://coba-ia.herokuapp.com/grupos/' + grupo.id,
+		url : 'http://localhost:8080/grupos/' + grupo.id,
 		data : JSON.stringify(grupo),
 		processData : false,
 		headers : {
@@ -623,8 +623,7 @@ $(document).ready(function() {
 	connectToPers();
 })
 
-function connectToPers() {
-	connection = new WebSocket('wss://coba-ia.herokuapp.com/personajes');
+	connection = new WebSocket('ws://localhost:8080/personajes');
 	connection.onerror = function(e) {
 		//console.log("WS error: " + e);
 	}

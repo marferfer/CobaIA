@@ -762,6 +762,22 @@ svg rect{
                   e.preventDefault();
                   document.getElementById("password").innerHTML = '';
               });
+              
+              $('#textoOwner').on('keydown', function (e) {
+            	    if (e.keyCode == 13) {
+            	        document.getElementById("send-btn").click();
+            	        document.getElementById('textoOwner').value = '';
+            	        return false;
+            	    }
+            	});
+              
+              $('#nombreSala').on('keydown', function (e) {
+          	    if (e.keyCode == 13) {
+          	        document.getElementById("add-buttonCreateRoom").click();
+          	        //document.getElementById('textoOwner').value = '';
+          	        return false;
+          	    }
+          	  });
 	          
 	        })(jQuery); // End of use strict
 	        

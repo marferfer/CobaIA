@@ -11,7 +11,7 @@ NOMBRE DEL JUEGO:
 Estas deben luchar por escapar del lugar donde son retenidas y para ello deberán unir fuerzas aprovechando las habilidades únicas que posee cada una.</p>
   
 <p>Cada nivel se plantea como un puzzle en sí mismo y la única forma de seguir avanzando hacia la libertad es funcionar como un equipo.
-Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños fragmentos de quiénes son y dónde están realmente, lo que les hará dudar de hasta qué punto conocerse a sí mismo puede resultar peligroso.</p>
+Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños fragmentos de quiénes son y dónde están realmente, lo que les hará dudar de hasta qué punto conocerse a sí mismo puede resultar peligroso.<br>Vídeo explicativo: https://youtu.be/KvUn1igZhm0</p>
 
 <h2> INTERACCIÓN CON USUARIOS Y PERSPECTIVA: </h2>
 <p>Cada usuario controlará a una cobaya. Estará en cada nivel junto a sus compañeras para colaborar en el avance de los puzzles. La cámara se plantea con una vista de scroll-lateral que seguirá a un jugador a la ves y le permitirá observar su entorno en un pequeño radio. La cámara puede cambiar para enfocar a cualquiera de las otras dos CobaIAs en el momento que los jugadores lo deseen.</p>
@@ -46,11 +46,9 @@ Sin embargo, conforme avance la aventura nuestras cobayas descubrirán pequeños
 <img src="src/main/resources/static/imgs/chip.jpg" align="center">
 
 <h2> DIAGRAMA DE CLASES: </h2>
-<p>Se puede destacar 2 Controladores que se encargan de manejar las dos clases que utilizaremos en un futuro, Version e Item.
-  También mostrar que <b> Versiones e Item heredan de los controladores</b>. No hemos utilizado templates ni tampoco 
-  repositorios, ya que utilizamos una <b>colección</b> para guardar permanentemente los datos en la ejecución. </p>
+<p>En esta entrega hemos realizado un diagrama de clases más exhaustivo que el anterior. Podemos ver a todos los handler con una dependencia directa de la aplicación. El siguiente escalón en la jerarquía son los controladores donde muchos tienen dependencias directas con los objetos. Por ejemplo el controlador de los grupos que depende directamente de los Handler de personajes y salas y asu vez los objetos grupo dependen de este controlador. Lo mismo ocurre con el objeto Item que depende del controlador de Items y este último del Handler de usuarios.</p>
 
-<img src="src/main/resources/static/imgs/readme/diagramaclases.jpeg" align="center">
+<img src="/DiagramaDeClases.png" align="center">
 
 <h2> SISTEMA DE NAVEGACIÓN: </h2>
 
