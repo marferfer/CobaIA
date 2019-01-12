@@ -5,13 +5,14 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.1.RELEASE</version>
+		<version>1.4.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>es.urjc.code.juegosenred</groupId>
-	<artifactId>cobaias</artifactId>
+	<artifactId>items-backend-and-frontend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
+	<packaging>jar</packaging>
+	<name>rest_ejer1_con_ui</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

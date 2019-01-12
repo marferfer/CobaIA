@@ -5,7 +5,7 @@ function update5() {
     // REINICIAR VARIABLES  ///////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //console.log(tankabaIA.jugador.body.x + " , "+tankabaIA.jugador.body.y);
+    ////console.log(tankabaIA.jugador.body.x + " , "+tankabaIA.jugador.body.y);
     tankabaIA.jugador.body.velocity.x = 0; //  Reseteamos la velocidad en x. Esto nos permitirá evitar que se acelere (suelo de hielo)
     if(!tankabaIA.canImove){
         tankabaIA.jugador.body.velocity.y = 0;
@@ -452,7 +452,7 @@ function update5() {
     
 
     if (nivel1.siguiendo == "tankabaIA") {
-        //console.log(tankabaIA.jugador.body.angle);
+        ////console.log(tankabaIA.jugador.body.angle);
         if (tankabaIA.actor == "chip") {
             juego.camera.follow(chips.lista[2]);
         }
@@ -483,7 +483,7 @@ function update5() {
     }
 
     if (nivel1.siguiendo == "talibaIA") {
-        //console.log(talibaIA.muerta);
+        ////console.log(talibaIA.muerta);
         if (talibaIA.actor == "chip"){
             juego.camera.follow(chips.lista[1]);
         }
@@ -509,8 +509,8 @@ function update5() {
 	    }
 	
 	    if(ctrlU.isDown || pad3.isDown(Phaser.Gamepad.XBOX360_Y)){
-	        //console.log(talibaIA.muerta);
-	        //console.log('hola');
+	        ////console.log(talibaIA.muerta);
+	        ////console.log('hola');
 	        nivel1.siguiendo = "talibaIA";
 	        //juego.camera.follow(talibaIA.actor);
 	    }
@@ -656,7 +656,7 @@ function update5() {
     }
     plataformasBasic.lista[1].pos -= plataformasBasic.lista[1].incremento;
     plataformasBasic.lista[1].body.y = plataformasBasic.lista[1].pos;
-    //console.log(plataformasBasic.lista[1].pos);
+    ////console.log(plataformasBasic.lista[1].pos);
 
     if (plataformasBasic.lista[2].pos < 700 || plataformasBasic.lista[2].pos > 1390) {
         plataformasBasic.lista[2].incremento *= -1;
@@ -664,7 +664,7 @@ function update5() {
     plataformasBasic.lista[2].pos -= plataformasBasic.lista[2].incremento;
     plataformasBasic.lista[2].body.y = plataformasBasic.lista[2].pos;
 
-    //console.log(plataformasBasic.lista[1].pos);
+    ////console.log(plataformasBasic.lista[1].pos);
 
     nivel1.decorados[0].x -= 5; 
     if(nivel1.decorados[0].x < -14500){
@@ -844,39 +844,39 @@ function update5() {
     }
 
     if (!checkIfCanJump(tankabaIA)) {
-        //console.log(tankabaIA.jugador.body.angle + ', ' + (tankabaIA.jugador.body.angle >= 0.0 && tankabaIA.jugador.body.angle <= 45.0));
+        ////console.log(tankabaIA.jugador.body.angle + ', ' + (tankabaIA.jugador.body.angle >= 0.0 && tankabaIA.jugador.body.angle <= 45.0));
         //let timer =  juego.time.events.add(1250, function(){tankabaIA.jugador.body.angle = 0;}, this, 0);
         //tankabaIA.jugador.body.angle = 0;
         tankabaIA.jugador.body.fixedRotation = true;
         if (!(tankabaIA.jugador.body.angle >= -45 && tankabaIA.jugador.body.angle <= 45)) {
             tankabaIA.jugador.body.angle = 0;
-            //console.log("hola");
+            ////console.log("hola");
         }
     }
     else {
         tankabaIA.jugador.body.fixedRotation = false;
     }
     if (!checkIfCanJump(acrobaIA)) {
-        //console.log(acrobaIA.jugador.body.angle + ', ' + (acrobaIA.jugador.body.angle >= 0.0 && acrobaIA.jugador.body.angle <= 45.0));
+        ////console.log(acrobaIA.jugador.body.angle + ', ' + (acrobaIA.jugador.body.angle >= 0.0 && acrobaIA.jugador.body.angle <= 45.0));
         //let timer =  juego.time.events.add(1250, function(){acrobaIA.jugador.body.angle = 0;}, this, 0);
         //acrobaIA.jugador.body.angle = 0;
         acrobaIA.jugador.body.fixedRotation = true;
         if (!(acrobaIA.jugador.body.angle >= -45 && acrobaIA.jugador.body.angle <= 45)) {
             acrobaIA.jugador.body.angle = 0;
-            //console.log("hola");
+            ////console.log("hola");
         }
     }
     else {
         acrobaIA.jugador.body.fixedRotation = false;
     }
     if (!checkIfCanJump(talibaIA)) {
-        //console.log(talibaIA.jugador.body.angle + ', ' + (talibaIA.jugador.body.angle >= 0.0 && talibaIA.jugador.body.angle <= 45.0));
+        ////console.log(talibaIA.jugador.body.angle + ', ' + (talibaIA.jugador.body.angle >= 0.0 && talibaIA.jugador.body.angle <= 45.0));
         //let timer =  juego.time.events.add(1250, function(){talibaIA.jugador.body.angle = 0;}, this, 0);
         //talibaIA.jugador.body.angle = 0;
         talibaIA.jugador.body.fixedRotation = true;
         if (!(talibaIA.jugador.body.angle >= -45 && talibaIA.jugador.body.angle <= 45)) {
             talibaIA.jugador.body.angle = 0;
-            //console.log("hola");
+            ////console.log("hola");
         }
     }
     else {

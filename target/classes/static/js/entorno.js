@@ -311,7 +311,7 @@ function create5() {
 
     boton.body.setRectangle(61, 15, 0, -5);
     //boton.body.debug = true;
-    //console.log(boton.body.id); //id: 14
+    ////console.log(boton.body.id); //id: 14
     boton.body.static = true;
     boton.body.angle = 90;
     boton.body.x = 2843;
@@ -325,7 +325,7 @@ function create5() {
 
     boton.body.setRectangle(61, 15, 0, -5);
     //boton.body.debug = true;
-    //console.log(boton.body.id); //id: 
+    ////console.log(boton.body.id); //id: 
     boton.body.static = true;
     boton.body.x = 6200;
     boton.body.y = 750;
@@ -338,7 +338,7 @@ function create5() {
 
     boton.body.setRectangle(61, 15, 0, -5);
     //boton.body.debug = true;
-    //console.log(boton.body.id); //id: 
+    ////console.log(boton.body.id); //id: 
     boton.body.static = true;
     boton.body.x = 5825;
     boton.body.y = 1371;
@@ -351,7 +351,7 @@ function create5() {
 
     boton.body.setRectangle(61, 15, 0, -5);
     //boton.body.debug = true;
-    //console.log(boton.body.id); //id: 
+    ////console.log(boton.body.id); //id: 
     boton.body.static = true;
     boton.body.x = 32960;
     boton.body.y = 1331;
@@ -364,7 +364,7 @@ function create5() {
 
     boton.body.setRectangle(61, 15, 0, -5);
     //boton.body.debug = true;
-    //console.log(boton.body.id); //id: 
+    ////console.log(boton.body.id); //id: 
     boton.body.static = true;
     boton.body.x = 42960;
     boton.body.y = 1331;
@@ -379,7 +379,7 @@ function create5() {
 
     boton.body.setRectangle(61, 15, 0, 6);
     //boton.body.debug = true;
-    //console.log(boton.body.id); //id: 
+    ////console.log(boton.body.id); //id: 
     boton.idNum = boton.body.id;
     boton.body.static = true;
     /*boton.body.x = 52960;
@@ -446,7 +446,7 @@ function create5() {
     plataformaBasic.body.setRectangle(26, 302);
     plataformaBasic.body.x = 4726;
     plataformaBasic.body.y = 1303;
-    //console.log(plataformaBasic.body.id);
+    ////console.log(plataformaBasic.body.id);
 
     plataformasBasic.lista.push(plataformaBasic);
 
@@ -469,7 +469,7 @@ function create5() {
     plataformaBasic.scale.setTo(1, 4);
     plataformaBasic.pos = 1300;
     plataformaBasic.incremento = 2;
-    //console.log(plataformaBasic.body.id); //id: 16
+    ////console.log(plataformaBasic.body.id); //id: 16
     plataformaBasic.body.collideWorldBounds = true;
 
     plataformasBasic.lista.push(plataformaBasic);
@@ -995,7 +995,7 @@ function create5() {
     plataformaBasic.scale.setTo(1, 3);
     plataformaBasic.pos = 1300;
     plataformaBasic.incremento = 2;
-    //console.log(plataformaBasic.body.id); //id: 16
+    ////console.log(plataformaBasic.body.id); //id: 16
     plataformaBasic.body.collideWorldBounds = true;
 
     plataformasBasic.lista.push(plataformaBasic);
@@ -1014,10 +1014,6 @@ function create5() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    function stopPlataforma(i){
-        plataformasMoviles.lista[i].body.rotateRight(0);
-    }
 
     function up() {
         //console.log('button up', arguments);
@@ -1041,14 +1037,14 @@ function create5() {
      function colisionInicialTankabaIA(body, bodyB, shapeA, shapeB, equation){
 
         if (body){
-            //console.log(body.sprite.key);
-            //console.log(body.id);
+            ////console.log(body.sprite.key);
+            ////console.log(body.id);
         }
 
 
         if(body.sprite.key === 'cajaCableado' && tecla_accion.isDown){  
 
-            //console.log(body.id);
+            ////console.log(body.id);
             cajasCableado.lista[0].animations.play('caja_rota');
             let timer =  juego.time.events.add(1250, stopPlataforma, this, 0);
             plataformasMoviles.lista[0].body.rotateRight(25);      
@@ -1433,6 +1429,10 @@ function create5() {
     juego.camera.follow(tankabaIA.jugador);
 }
 
+function stopPlataforma(i){
+    plataformasMoviles.lista[i].body.rotateRight(0);
+}
+
 function updateMyGameState() {
 	var myKeyEvent;
 	switch (miCobaIA) {
@@ -1479,7 +1479,7 @@ function connect() {
 	
 	playerConnection.onopen = function() {
 		canConnect = true;
-		updateGSInterval = setInterval(updateMyGameState, 50);
+		updateGSInterval = setInterval(updateMyGameState, 200);
 		//console.log('eeeeeeeeeo');
 		if (readyToUpdate) {
 			readyToUpdate = false;

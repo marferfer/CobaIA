@@ -623,6 +623,7 @@ $(document).ready(function() {
 	connectToPers();
 })
 
+function connectToPers() {
 	connection = new WebSocket('ws://localhost:8080/personajes');
 	connection.onerror = function(e) {
 		//console.log("WS error: " + e);

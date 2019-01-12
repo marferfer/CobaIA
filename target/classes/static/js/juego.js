@@ -52,7 +52,7 @@ function sound(src) {
 }
 
 function connectChat(){
-	//console.log('gola');
+	////console.log('gola');
 	chatConnection = new WebSocket('ws://localhost:8080/chat');
 	chatConnection.onerror = function(e) {
 		//console.log("WS error: " + e);
@@ -83,7 +83,7 @@ function loop() {
             //musica[1].play();
             nivel1off = false;
         }
-        //console.log(baseCharles.getVolume());
+        ////console.log(baseCharles.getVolume());
         loop();
     }, 2000);
 }
@@ -250,7 +250,7 @@ function loadItems(callback) {
     $.ajax({
         url: 'http://localhost:8080/items'
     }).done(function (items) {
-        //console.log('Items loaded: ' + JSON.stringify(items));
+        ////console.log('Items loaded: ' + JSON.stringify(items));
         callback(items);
     })
 }
@@ -282,7 +282,7 @@ function updateItem(item) {
             "Content-Type": "application/json"
         }
     }).done(function (item) {
-        //console.log("Updated item: " + JSON.stringify(item))
+        ////console.log("Updated item: " + JSON.stringify(item))
     })
 }
 
@@ -570,7 +570,7 @@ function loadVersions(callback) {
     $.ajax({
         url: 'http://localhost:8080/versions'
     }).done(function (versions) {
-        //console.log('Versions loaded: ' + JSON.stringify(versions));
+        ////console.log('Versions loaded: ' + JSON.stringify(versions));
         callback(versions);
     })
 }
@@ -665,7 +665,7 @@ function loadGrupos(callback) {
  $.ajax({
      url: 'http://localhost:8080/grupos'
  }).done(function (grupos) {
-     //console.log('Versions loaded: ' + JSON.stringify(grupos));
+     ////console.log('Versions loaded: ' + JSON.stringify(grupos));
      callback(grupos);
  })
 }
@@ -697,7 +697,7 @@ function updateGrupo(grupo) {
          "Content-Type": "application/json"
      }
  }).done(function (grupo) {
-     //console.log("Updated grupo: " + JSON.stringify(grupo))
+     ////console.log("Updated grupo: " + JSON.stringify(grupo))
  })
 }
 
@@ -718,7 +718,7 @@ function showGrupo(grupo) {
 	
 	document.getElementById("salas").innerHTML = grupo.nombre;
 	
-	//console.log(grupo);
+	////console.log(grupo);
 	var usuario1;
 	if (grupo.usuario1 == null) {
 		usuario1 = "";
@@ -886,7 +886,7 @@ $(document).ready(function () {
 
 			    document.getElementById("salas").innerHTML = inputName.val();
 
-			    //console.log(grupo);
+			    ////console.log(grupo);
 			    	
 			    /* $('#info').append(
 			    		 '<li id="usuario1" class="nav-item"><span style="text-transform: capitalize">' + usuario + ' <i class="fas fa-star"></i></span></li>' +
@@ -1114,8 +1114,8 @@ $(document).ready(function () {
 					        
 	                    	//var cant = grupos[i].mensajes.length;
 	                    	//grupos[i].mensajes[0]= document.getElementById("textoOwner").value;
-	                    	//console.log(grupos[i].mensajes[0]);
-	                    	//console.log(document.getElementById("textoOwner").value);
+	                    	////console.log(grupos[i].mensajes[0]);
+	                    	////console.log(document.getElementById("textoOwner").value);
 	                    	//cant++;
 	                    	i = grupos.length;
 						});
@@ -1135,7 +1135,7 @@ function loadChats(callback) {
     $.ajax({
         url: 'http://localhost:8080/chats'
     }).done(function (chats) {
-        //console.log('Chats loaded: ' + JSON.stringify(chats));
+        ////console.log('Chats loaded: ' + JSON.stringify(chats));
         callback(chats);
     })
 }
@@ -1183,7 +1183,7 @@ function deleteChat(chatId) {
 
 //Show chat in page
 function showChat(chats) {
-	 //console.log(chats);
+	 ////console.log(chats);
 	$('#mensajePersona').empty();
 	 var message = $('#mensajePersona');
    for(var i = 0; i < chats.length; i++){
@@ -1209,7 +1209,7 @@ function loadGameState(gameId, callback) {
 	 $.ajax({
 	     url: 'http://localhost:8080/gameStates' + gameId
 	 }).done(function (gameState) {
-	     //console.log('Chats loaded: ' + JSON.stringify(chats));
+	     ////console.log('Chats loaded: ' + JSON.stringify(chats));
 	     callback(gameState);
 	 })
 }
@@ -1301,7 +1301,7 @@ function hereIam() {
                         }
                     }*/
                 	showChat(chats);
-                    //console.log(misChats);
+                    ////console.log(misChats);
                 });
                
                 //showChat(misChats);
