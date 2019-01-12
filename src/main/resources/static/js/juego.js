@@ -53,17 +53,17 @@ function sound(src) {
 
 function connectChat(){
 	//console.log('gola');
-	chatConnection = new WebSocket('ws://25.76.106.32:8080/chat');
+	chatConnection = new WebSocket('wss://coba-ia.herokuapp.com/chat');
 	chatConnection.onerror = function(e) {
-		console.log("WS error: " + e);
+		//console.log("WS error: " + e);
 	}
 	chatConnection.onmessage = function(msg) {
-		console.log("WS message: " + msg.data);
+		//console.log("WS message: " + msg.data);
 		var message = JSON.parse(msg.data)
 		$('#mensajePersona').append( message.name + ": " + message.message + "<br>");
 	}
 	chatConnection.onclose = function() {
-		console.log("Closing socket");
+		console.log("Closing chat socket");
 	}
 }
 
@@ -205,7 +205,7 @@ var invitar = false;
 function addUserToFile(item){
 	$.ajax({
 		method: "POST",
-		url:'http://25.76.106.32:8080/ficheros',
+		url:'https://coba-ia.herokuapp.com/ficheros',
 		data: JSON.stringify(item),
 	    processData: false,
 	    headers: {
@@ -216,21 +216,14 @@ function addUserToFile(item){
 
 function getUsersAndPasswords(callback){
 	$.ajax({
-		url: 'http://25.76.106.32:8080/ficheros/{partes}'
+		url: 'https://coba-ia.herokuapp.com/ficheros/{partes}'
 	}).done(function(items){
 		callback(items);
 	})
 }
 
 
-var b = null;
-getUsersAndPasswords(function (a){
-	b = a[0];
-	console.log(a);
-});
 
-
-setTimeout(function(){console.log(b)}, 1000);
 
 
 
@@ -242,20 +235,20 @@ var usersConnection;
 //no borrar de momento, puede resultar util mas tarde
 /*function hola123(callback){
 	$.ajax({
-		url:'http://25.76.106.32:8080/items/{password}'
+		url:'https://coba-ia.herokuapp.com/items/{password}'
 	}).done(function(items){
 		callback(items);
 	})
 }
 
 hola123(function (pw) {
-    console.log(pw);
+    //console.log(pw);
 });*/
 
 //Load items from server
 function loadItems(callback) {
     $.ajax({
-        url: 'http://25.76.106.32:8080/items'
+        url: 'https://coba-ia.herokuapp.com/items'
     }).done(function (items) {
         //console.log('Items loaded: ' + JSON.stringify(items));
         callback(items);
@@ -266,14 +259,14 @@ function loadItems(callback) {
 function createItem(item, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://25.76.106.32:8080/items',
+        url: 'https://coba-ia.herokuapp.com/items',
         data: JSON.stringify(item),
         processData: false,
         headers: {
             "Content-Type": "application/json"
         }
     }).done(function (item) {
-        console.log("Item created: " + JSON.stringify(item));
+        //console.log("Item created: " + JSON.stringify(item));
         callback(item);
     })
 }
@@ -282,7 +275,7 @@ function createItem(item, callback) {
 function updateItem(item) {
     $.ajax({
         method: 'PUT',
-        url: 'http://25.76.106.32:8080/items/' + item.id,
+        url: 'https://coba-ia.herokuapp.com/items/' + item.id,
         data: JSON.stringify(item),
         processData: false,
         headers: {
@@ -297,9 +290,9 @@ function updateItem(item) {
 function deleteItem(itemId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://25.76.106.32:8080/items/' + itemId
+        url: 'https://coba-ia.herokuapp.com/items/' + itemId
     }).done(function (item) {
-        console.log("Deleted item " + itemId)
+        //console.log("Deleted item " + itemId)
     })
 }
 
@@ -333,7 +326,7 @@ function showUser(item) {
 }
 
 function llamarconsola(){
-	console.log('hola');
+	//console.log('hola');
 }
 
 function logInSignIn() {
@@ -363,7 +356,7 @@ function logInSignIn() {
 
     //Handle delete buttons
     $('li').click(function (event) {
-    	console.log('hola');
+    	//console.log('hola');
     	
     })
 
@@ -411,18 +404,15 @@ function logInSignIn() {
     });
     
     $('#send-btn').click(function() {
-    	var d = new Date();
-		var hour = d.getHours();
-		var min  =  d.getMinutes();
-		var fecha = hour + ":" + min;
-    	
 		var msg = {
 			name : usuario,//$('#name').val(),
 			message : $('#textoOwner').val()
 		}
-		$('#mensajePersona').append("<b>"+ msg.name + "</b>: " + msg.message + "     <b>" + fecha +  "</b><br>");
+		$('#mensajePersona').append(msg.name + ": " + msg.message + "<br>");
 	    //$('#mensajePersona').val($('#mensajePersona').val() + "\n" + msg.name + ": " + msg.message);
 		chatConnection.send(JSON.stringify(msg));
+		
+		//console.log($('#mensajePersona').val($('#mensajePersona').val() + "\n" + msg.name + ": " + msg.message));
 	});
 
     //Handle add button
@@ -451,7 +441,7 @@ function logInSignIn() {
     		var repeatedUser = false;
     		loadItems(function(items) {
 				for (var j = 0; j < items.length; j++) {
-					if (value == items[i]) {
+					if (value == items[j]) {
 						repeatedUser = true;
 					}
 				}
@@ -578,7 +568,7 @@ var cobaIAversion = "1.6";
 //Load VERSIONS from server
 function loadVersions(callback) {
     $.ajax({
-        url: 'http://25.76.106.32:8080/versions'
+        url: 'https://coba-ia.herokuapp.com/versions'
     }).done(function (versions) {
         //console.log('Versions loaded: ' + JSON.stringify(versions));
         callback(versions);
@@ -589,14 +579,14 @@ function loadVersions(callback) {
 function createVersion(version, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://25.76.106.32:8080/versions',
+        url: 'https://coba-ia.herokuapp.com/versions',
         data: JSON.stringify(version),
         processData: false,
         headers: {
             "Content-Type": "application/json"
         }
     }).done(function (version) {
-        console.log("Version created: " + JSON.stringify(version));
+        //console.log("Version created: " + JSON.stringify(version));
         callback(version);
     })
 }
@@ -605,14 +595,14 @@ function createVersion(version, callback) {
 function updateVersion(version) {
     $.ajax({
         method: 'PUT',
-        url: 'http://25.76.106.32:8080/versions/' + version.id,
+        url: 'https://coba-ia.herokuapp.com/versions/' + version.id,
         data: JSON.stringify(version),
         processData: false,
         headers: {
             "Content-Type": "application/json"
         }
     }).done(function (version) {
-        console.log("Updated version: " + JSON.stringify(version))
+        //console.log("Updated version: " + JSON.stringify(version))
     })
 }
 
@@ -620,9 +610,9 @@ function updateVersion(version) {
 function deleteVersion(versionId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://25.76.106.32:8080/versions/' + versionId
+        url: 'https://coba-ia.herokuapp.com/versions/' + versionId
     }).done(function (version) {
-        console.log("Deleted version " + versionId)
+        //console.log("Deleted version " + versionId)
     })
 }
 
@@ -673,7 +663,7 @@ var entrandoEnSala = false;
 //Load grupos from server
 function loadGrupos(callback) {
  $.ajax({
-     url: 'http://25.76.106.32:8080/grupos'
+     url: 'https://coba-ia.herokuapp.com/grupos'
  }).done(function (grupos) {
      //console.log('Versions loaded: ' + JSON.stringify(grupos));
      callback(grupos);
@@ -684,14 +674,14 @@ function loadGrupos(callback) {
 function createGrupo(grupo, callback) {
  $.ajax({
      method: "POST",
-     url: 'http://25.76.106.32:8080/grupos',
+     url: 'https://coba-ia.herokuapp.com/grupos',
      data: JSON.stringify(grupo),
      processData: false,
      headers: {
          "Content-Type": "application/json"
      }
  }).done(function (grupo) {
-     console.log("Grupo created: " + JSON.stringify(grupo));
+     //console.log("Grupo created: " + JSON.stringify(grupo));
      callback(grupo);
  })
 }
@@ -700,7 +690,7 @@ function createGrupo(grupo, callback) {
 function updateGrupo(grupo) {
  $.ajax({
      method: 'PUT',
-     url: 'http://25.76.106.32:8080/grupos/' + grupo.id,
+     url: 'https://coba-ia.herokuapp.com/grupos/' + grupo.id,
      data: JSON.stringify(grupo),
      processData: false,
      headers: {
@@ -715,9 +705,9 @@ function updateGrupo(grupo) {
 function deleteGrupo(grupoId) {
  $.ajax({
      method: 'DELETE',
-     url: 'http://25.76.106.32:8080/grupos/' + grupoId
+     url: 'https://coba-ia.herokuapp.com/grupos/' + grupoId
  }).done(function (grupo) {
-     console.log("Deleted grupo " + grupoId)
+     //console.log("Deleted grupo " + grupoId)
  })
 }
 
@@ -905,7 +895,6 @@ $(document).ready(function () {
 			    
 			    connectToGrupos();
 			    connectChat();
-			    document.getElementById("nombreChat").innerHTML = "<h4>" + usuario +"</h4>";
 			    document.getElementById("loaderSalas").style.visibility = "visible";
 			    document.getElementById("infoDeSalas").innerHTML = "Creando Sala";
 			    document.getElementById("pantallaInicio").style.visibility = "hidden";
@@ -955,7 +944,7 @@ $(document).ready(function () {
         if (elem.is('button')) {
             var itemDiv = elem.parent().parent().children();
             var itemId = itemDiv[0].id.split('-')[1];
-            console.log(itemId);
+            //console.log(itemId);
             document.getElementById("live-chat").style.visibility = "visible";
             loadGrupos(function (grupos) {
             	for (var i = 0; i < grupos.length; i++) {
@@ -1012,7 +1001,6 @@ $(document).ready(function () {
                         miCobaIA = '';
                         connectToGrupos();
                         connectChat();
-                        document.getElementById("nombreChat").innerHTML = "<h4>" + usuario +"</h4>";
             		}
             		else if (grupos[i].id == itemId) {
             			document.getElementById("pantallaInicio").style.zIndex = "10";
@@ -1082,7 +1070,7 @@ $(document).ready(function () {
         }
     });
 	
-	/*$("#send-btn").click(function () {
+	$("#send-btn").click(function () {
 		
 		if(document.getElementById("textoOwner").value != ""){
 			
@@ -1105,7 +1093,7 @@ $(document).ready(function () {
 					        var hora = fecha;
 					        var sala = habitacion;
 					        
-					        console.log(mensaje + "," + hora + "," + sala + ","  + usuario);
+					        //console.log(mensaje + "," + hora + "," + sala + ","  + usuario);
 
 					        var chat = {
 					        	mensaje,
@@ -1114,11 +1102,11 @@ $(document).ready(function () {
 					            sala
 					        }
 					        
-//							createChat(chat, function (chatWithId) {
-//			                    //When item with id is returned from server
-//			    				showChat(chatWithId);
-//			    				console.log("todo correcto");
-//			                });
+							/*createChat(chat, function (chatWithId) {
+			                    //When item with id is returned from server
+			    				showChat(chatWithId);
+			    				//console.log("todo correcto");
+			                });*/
 					        
 					        
 					        
@@ -1135,7 +1123,7 @@ $(document).ready(function () {
                 }
 			});
 		}
-	});*/
+	});
 })
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1145,7 +1133,7 @@ $(document).ready(function () {
 //Load Chats from server
 function loadChats(callback) {
     $.ajax({
-        url: 'http://25.76.106.32:8080/chats'
+        url: 'https://coba-ia.herokuapp.com/chats'
     }).done(function (chats) {
         //console.log('Chats loaded: ' + JSON.stringify(chats));
         callback(chats);
@@ -1156,14 +1144,14 @@ function loadChats(callback) {
 function createChat(chat, callback) {
     $.ajax({
         method: "POST",
-        url: 'http://25.76.106.32:8080/chats',
+        url: 'https://coba-ia.herokuapp.com/chats',
         data: JSON.stringify(chat),
         processData: false,
         headers: {
             "Content-Type": "application/json"
         }
     }).done(function (chat) {
-        console.log("Chat created: " + JSON.stringify(chat));
+        //console.log("Chat created: " + JSON.stringify(chat));
         callback(chat);
     })
 }
@@ -1172,14 +1160,14 @@ function createChat(chat, callback) {
 function updateChat(chat) {
     $.ajax({
         method: 'PUT',
-        url: 'http://25.76.106.32:8080/chats/' + chat.id,
+        url: 'https://coba-ia.herokuapp.com/chats/' + chat.id,
         data: JSON.stringify(chat),
         processData: false,
         headers: {
             "Content-Type": "application/json"
         }
     }).done(function (chat) {
-        console.log("Updated chat: " + JSON.stringify(chat))
+        //console.log("Updated chat: " + JSON.stringify(chat))
     })
 }
 
@@ -1187,9 +1175,9 @@ function updateChat(chat) {
 function deleteChat(chatId) {
     $.ajax({
         method: 'DELETE',
-        url: 'http://25.76.106.32:8080/chats/' + chatId
+        url: 'https://coba-ia.herokuapp.com/chats/' + chatId
     }).done(function (chat) {
-        console.log("Deleted chat " + chatId)
+        //console.log("Deleted chat " + chatId)
     })
 }
 
@@ -1219,7 +1207,7 @@ function showChat(chats) {
 //Load Chats from server
 function loadGameState(gameId, callback) {
 	 $.ajax({
-	     url: 'http://25.76.106.32:8080/gameStates' + gameId
+	     url: 'https://coba-ia.herokuapp.com/gameStates' + gameId
 	 }).done(function (gameState) {
 	     //console.log('Chats loaded: ' + JSON.stringify(chats));
 	     callback(gameState);
@@ -1230,14 +1218,14 @@ function loadGameState(gameId, callback) {
 function createGameState(gameState, callback) {
 	 $.ajax({
 	     method: "POST",
-	     url: 'http://25.76.106.32:8080/gameStates',
+	     url: 'https://coba-ia.herokuapp.com/gameStates',
 	     data: JSON.stringify(gameState),
 	     processData: false,
 	     headers: {
 	         "Content-Type": "application/json"
 	     }
 	 }).done(function (gameState) {
-	     console.log("GameState created: " + JSON.stringify(gameState));
+	     //console.log("GameState created: " + JSON.stringify(gameState));
 	     callback(gameState);
 	 })
 }
@@ -1246,14 +1234,14 @@ function createGameState(gameState, callback) {
 function updateGameState(gameState) {
 	 $.ajax({
 	     method: 'PUT',
-	     url: 'http://25.76.106.32:8080/gameStates/' + gameState.id,
+	     url: 'https://coba-ia.herokuapp.com/gameStates/' + gameState.id,
 	     data: JSON.stringify(gameState),
 	     processData: false,
 	     headers: {
 	         "Content-Type": "application/json"
 	     }
 	 }).done(function (gameState) {
-	     console.log("Updated GameState: " + JSON.stringify(gameState))
+	     //console.log("Updated GameState: " + JSON.stringify(gameState))
 	 })
 }
 
@@ -1261,9 +1249,9 @@ function updateGameState(gameState) {
 function deleteGameState(gameId) {
 	 $.ajax({
 	     method: 'DELETE',
-	     url: 'http://25.76.106.32:8080/gameStates/' + gameId
+	     url: 'https://coba-ia.herokuapp.com/gameStates/' + gameId
 	 }).done(function (gameState) {
-	     console.log("Deleted GameState " + gameId)
+	     //console.log("Deleted GameState " + gameId)
 	 })
 }
 
@@ -1285,7 +1273,7 @@ function checkUsers() {
             	}
             }
         });
-		console.log(usuario);
+		//console.log(usuario);
         checkUsers();
         loadGrupos(function (grupos) {
         	for (var i = 0; i < grupos.length; i++) {
@@ -1319,7 +1307,7 @@ function hereIam() {
                 //showChat(misChats);
             }
         }
-    	loadItems(function (items) {    		
+    	/*loadItems(function (items) {    		
     		for (var i = 0; i < items.length; i++) {
             	//if (invitar) showItem(items[i]);
                 if (items[i].description == usuario) {
@@ -1365,7 +1353,7 @@ function hereIam() {
     			location.reload();
     		}
     	});
-        hereIam();
+        hereIam();*/
     }, 750);
 }
 
@@ -1407,9 +1395,7 @@ function checkSala() {
 }
 
 function connectToGrupos() {
-groupConnection = new WebSocket('ws://25.76.106.32:8080/salas');
-
-
+groupConnection = new WebSocket('wss://coba-ia.herokuapp.com/salas');
 	
 	groupConnection.onopen = function() {
 		var msg = {
@@ -1421,10 +1407,10 @@ groupConnection = new WebSocket('ws://25.76.106.32:8080/salas');
 	}
 	
 	groupConnection.onerror = function(e) {
-		console.log("WS error: " + e);
+		//console.log("WS error: " + e);
 	}
 	groupConnection.onmessage = function(msg) {
-		console.log("WS message: " + msg.data + myGroupId);
+		//console.log("WS message: " + msg.data + myGroupId);
 		var message = JSON.parse(msg.data);
 		if (message.groupId == myGroupName) {
 			if (message.message == "bye") {
@@ -1526,65 +1512,122 @@ groupConnection = new WebSocket('ws://25.76.106.32:8080/salas');
 		}
 	}
 	groupConnection.onclose = function() {
-		console.log("Closing socket");
+		console.log("Closing group socket");
+		setTimeout(function() {
+			connectToGrupos();
+		}, 1000);
 	}
 }
 
 function connectToUsers() {
-	usersConnection = new WebSocket('ws://25.76.106.32:8080/users');
+	usersConnection = new WebSocket('wss://coba-ia.herokuapp.com/users');
 		
 	usersConnection.onopen = function() {
+		var msg = {
+			name : usuario,
+			message : 'hi'
+		}
+		usersConnection.send(JSON.stringify(msg));
+		stillAlive();
+	}
+	
+	usersConnection.onerror = function(e) {
+		//console.log("WS error: " + e);
+	}
+	usersConnection.onmessage = function(msg) {
+		//console.log("WS message: " + msg.data);
+		var message = JSON.parse(msg.data);
+		if (message.message == "User Repeated") {
+			document.getElementById("loader").style.visibility = "hidden";
+			$("body").prepend("<div>" +
+						        '<button type="button" id="btnRegistrarse" style="margin: 50px 1750px; position: absolute;	z-index: 30; width: 120px;"class="btn btn-success">Crear Cuenta</button>' +
+						    "</div>");
+			$("#formInicial").append('<label for="exampleInputEmail1" id="title">Antes de ' +
+									'continuar, añada su nombre de usuario.</label> <input type="email" ' +
+										'class="form-control " id="exampleInputEmail1" ' +
+										'aria-describedby="emailHelp" placeholder="Nombre de usuario" >' +
+									'<label for="passUser" id="contrasena">Añada una contraseña</label> <input type="password" ' +
+						                'class="form-control " id="passUser" ' +
+						                'placeholder="Contraseña">' +
+						            '<div id="confirmPass" style="visibility: hidden; display:none;">' +
+						            	'<label for="passUser" id="confirmContrasena">Por favor, repita la contraseña</label> <input type="password" ' +
+						                'class="form-control " id="passUser2" ' +
+						                'placeholder="Contraseña">' +
+						            '</div>');
+			$(".formulario").append('<div class="boton">' +
+										'<button type="button" id="add-button" class="btn btn-success">Aceptar</button>' +
+									'</div>');
+			document.getElementById("title").innerHTML = '<span style="color:red"> <b>Usuario ya conectado</b> </span>';
+			logInSignIn();
+		}
+		else {
+			var element3 = document.getElementById("pantallaInicio");
+            element3.style.visibility = "hidden";
+            element3.style.zIndex = "2";
+            document.getElementById("loader").style.visibility = "hidden";
+		}
+	}
+	usersConnection.onclose = function() {
+		console.log("Closing users socket");
+		setTimeout(function() {
+			connectToUsers();
+		}, 1000);
+	}
+	usersConnection.onerror = function(e) {
+		document.getElementById("pantallaInicio").style.visibility = "visible";
+		document.getElementById("pantallaInicio").style.zIndex = "50";
+		document.getElementById("error").innerHTML = "Parece que TalibaIA ha mordido algunos cables de más... <br>Error: " + e;
+		document.getElementById("imgTali").style.visibility = "visible";
+	}
+}
+
+function stillAlive() {
+	if (usersConnection != null) {
+		if (usersConnection.readyState === 1) {
 			var msg = {
 				name : usuario,
-				message : 'hi'
+				message : 'still alive'
 			}
 			usersConnection.send(JSON.stringify(msg));
 		}
-		
-		usersConnection.onerror = function(e) {
-			console.log("WS error: " + e);
-		}
-		usersConnection.onmessage = function(msg) {
-			console.log("WS message: " + msg.data);
-			var message = JSON.parse(msg.data);
-			if (message.message == "User Repeated") {
-				document.getElementById("loader").style.visibility = "hidden";
-				$("body").prepend("<div>" +
-							        '<button type="button" id="btnRegistrarse" style="margin: 50px 1750px; position: absolute;	z-index: 30; width: 120px;"class="btn btn-success">Crear Cuenta</button>' +
-							    "</div>");
-				$("#formInicial").append('<label for="exampleInputEmail1" id="title">Antes de ' +
-										'continuar, añada su nombre de usuario.</label> <input type="email" ' +
-											'class="form-control " id="exampleInputEmail1" ' +
-											'aria-describedby="emailHelp" placeholder="Nombre de usuario" >' +
-										'<label for="passUser" id="contrasena">Añada una contraseña</label> <input type="password" ' +
-							                'class="form-control " id="passUser" ' +
-							                'placeholder="Contraseña">' +
-							            '<div id="confirmPass" style="visibility: hidden; display:none;">' +
-							            	'<label for="passUser" id="confirmContrasena">Por favor, repita la contraseña</label> <input type="password" ' +
-							                'class="form-control " id="passUser2" ' +
-							                'placeholder="Contraseña">' +
-							            '</div>');
-				$(".formulario").append('<div class="boton">' +
-											'<button type="button" id="add-button" class="btn btn-success">Aceptar</button>' +
-										'</div>');
-				document.getElementById("title").innerHTML = '<span style="color:red"> <b>Usuario ya conectado</b> </span>';
-				logInSignIn();
-			}
-			else {
-				var element3 = document.getElementById("pantallaInicio");
-	            element3.style.visibility = "hidden";
-	            element3.style.zIndex = "2";
-	            document.getElementById("loader").style.visibility = "hidden";
-			}
-		}
-		usersConnection.onclose = function() {
-			console.log("Closing socket");
-			document.getElementById("pantallaInicio").style.visibility = "visible";
-			document.getElementById("pantallaInicio").style.zIndex = "50";
-			document.getElementById("error").innerHTML = "Parece que TalibaIA ha mordido algunos cables de más y nuestros servidores han caido.<br>Vuelve a intentarlo más tarde.";
-			document.getElementById("imgTali").style.visibility = "visible";
+	}
+	if (connection != null) {
+		if (connection.readyState === 1) {
+				var msg = {
+					name : usuario,
+					message : 'still alive'
+				}
+				connection.send(JSON.stringify(msg));
 		}
 	}
+	if (playerConnection != null) {
+		if (playerConnection.readyState === 1) {
+			var msg = {
+				name : usuario,
+				message : 'still alive'
+			}
+			playerConnection.send(JSON.stringify(msg));
+		}
+	}
+	if (groupConnection != null) {
+		if (groupConnection.readyState === 1) {
+			var msg = {
+				name : usuario,
+				message : 'still alive'
+			}
+			groupConnection.send(JSON.stringify(msg));
+		}
+	}
+	if (chatConnection != null) {
+		if (chatConnection.readyState === 1) {
+			var msg = {
+				name : usuario,
+				message : 'still alive'
+			}
+			chatConnection.send(JSON.stringify(msg));
+		}
+	}
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CONTROLES COBAIAS /////////////////////////////////////////////////////////////////////////////////////
@@ -1593,6 +1636,7 @@ function connectToUsers() {
 var canConnect = false;
 var readyToUpdate = true;
 var chatIsFocused = false;
+var stillAliveInterval = setInterval(stillAlive, 20000);
 
 var wTankaDown = false;
 var aTankaDown = false;

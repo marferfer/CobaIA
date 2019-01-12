@@ -84,7 +84,7 @@ function out() {
 function actionOnClickLocal () {
     game.destroy();
     inicio();
-    document.getElementById("crearGrupo").innerHTML = "Abandonar";
+    document.getElementById("crearGrupo").innerHTML = "Salir al Menú";
     document.getElementById("crearGrupo").className = "btn btn-danger";
     
     document.getElementById("entrarGrupo").innerHTML = "Controles";

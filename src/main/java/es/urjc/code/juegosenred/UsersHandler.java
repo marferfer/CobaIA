@@ -36,6 +36,7 @@ public class UsersHandler extends TextWebSocketHandler {
 		if (users.containsKey(session.getId())) {
 			Item myItem = users.get(session.getId());
 			ItemsController.borraItem(myItem.getId());
+			users.remove(session.getId());
 		}		
 	}
 	

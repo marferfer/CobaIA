@@ -10,3 +10,4 @@ User: MALLOLO Password: 1111
 User: Pepa1 Password: 1111
 User: probando Password: 11
 User: Luis97 Password: hola
+User: Mario Password: 1111

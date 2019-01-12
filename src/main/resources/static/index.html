@@ -27,7 +27,7 @@
 <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
 <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 
 
@@ -572,45 +572,34 @@ svg rect{
 		<img src="assets/images/botonVolver.png" style="margin-top:100px;margin-left:300px;">
 	</div>
 	
-	<form id="formCreateGroup" class="formularioSalas" style="visibility: hidden;">
-		<div class="jumbotron" style="height: 700px">
-        <div class="col-lg-12">
-        <h2 style="text-align: center">- Crear Sala -</h2>
-	        <div class="form-group" >
-	            <label for="nombreSala" id="title" style="color:#000">Añada el nombre de la Sala.</label> <input type="text"
-	                class="form-control " id="nombreSala"
-	                aria-describedby="emailHelp" placeholder="Nombre de Sala">
-	
+	<form id="formCreateGroup" class="formulario2" style="visibility: hidden; width: 600px">
+
+        <div class="form-group col-lg-12" >
+            <label for="nombreSala" id="title">Añada el nombre de la Sala.</label> <input type="text"
+                class="form-control " id="nombreSala"
+                aria-describedby="emailHelp" placeholder="Nombre de Sala">
+
+        </div>
+        <div class="form-group col-lg-12">
+          <div class="col-lg-10" style="margin-left: 200px">
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-success" id="publica">
+                Pública
+              </label>
+              <label class="btn btn-success" id="privada">
+                Privada
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-lg-12" id="password"></div>
+        <div class="form-group">
+	        <div class="botonCrearSala" style="margin-left:30px;">
+	            <button type="button" id="add-buttonCreateRoom" class="btn btn-success col-lg-4 offset-lg-1 col-md-12">Crear</button>
+	            <button onclick="volvermenuprincipal();" type="button" id="cancel" class="btn btn-danger col-lg-4 offset-lg-1 col-md-12">Cancelar</button>
 	        </div>
-	        <div class="form-group">
-	          <div class="col-lg-12 offset-lg-5" >
-	            <div class="btn-group" data-toggle="buttons">
-	              <label class="btn btn-success btn-lg" id="publica">
-	                Pública
-	              </label>
-	              <label class="btn btn-success btn-lg" id="privada">
-	                Privada
-	              </label>
-	            </div>
-	          </div>
-	        </div>
-	
-	        <div class="form-group col-lg-12" id="password"></div>
-	        <br/>
-	        <br/>
-	        <br/>
-	        <br/>
-	        <br/>
-	        <br/>
-	        <br/>
-	        <div class="form-group">
-		        <div class="botonCrearSala" style="margin-left:30px; ">
-		            <button type="button" id="add-buttonCreateRoom" class="btn btn-success col-lg-4 offset-lg-1 col-md-12">Crear</button>
-		            <button onclick="volvermenuprincipal();" type="button" id="cancel" class="btn btn-danger col-lg-4 offset-lg-1 col-md-12">Cancelar</button>
-		        </div>
-	        </div>
-	     </div>
-	   </div>
+        </div>
 
     </form>
     
@@ -642,7 +631,7 @@ svg rect{
     </div>
     
     <div class="loader loader--style1"  id="loader" title="0">
-	  <svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	  <svg version="1.1" id="loader-1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink" x="0px" y="0px"
 	   width="40px" height="40px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
 	  <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946
 	    s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634
@@ -662,7 +651,7 @@ svg rect{
 	</div>
 	
 	<div id="loaderSalas" class="loader loader--style8" title="7">
-  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+  <svg version="1.1" id="Layer_1" xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink" x="0px" y="0px"
      width="24px" height="30px" viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
     <rect x="0" y="10" width="4" height="10" fill="#333" opacity="0.2">
       <animate attributeName="opacity" attributeType="XML" values="0.2; 1; .2" begin="0s" dur="0.6s" repeatCount="indefinite" />
@@ -683,7 +672,7 @@ svg rect{
   <p id="infoDeSalas"></p>
 </div>
     
-    <img id="imgTali" src="assets/Images/TalibaIA.png" alt="TalibaIA attacks again">
+    <img id="imgTali" src="assets/images/TalibaIA.png" alt="TalibaIA attacks again">
     
     <div id="infoError">
     	<p id="error"></p>
@@ -759,7 +748,7 @@ svg rect{
 	          
 	          $("#privada").on('click',function(e) {
                   e.preventDefault();
-                  document.getElementById("password").innerHTML = '<label for="passSala" style="color:#000" id="title">Añada una contraseña para la Sala.</label> <input type="password" class="form-control " id="passSala" placeholder="Contraseña"> ';
+                  document.getElementById("password").innerHTML = '<label for="passSala" id="title">Añada una contraseña para la Sala.</label> <input type="password" class="form-control " id="passSala" placeholder="Contraseña"> ';
 
               });
 	          
@@ -767,21 +756,12 @@ svg rect{
                   e.preventDefault();
                   document.getElementById("live-chat").style.visibility = "visible";
                   document.getElementById("abrir-chat").style.visibility = "hidden";
-                  document.getElementById('textoOwner').focus();
               });
 
               $("#publica").on('click',function(e) {
                   e.preventDefault();
                   document.getElementById("password").innerHTML = '';
               });
-              
-              $('#textoOwner').on('keydown', function (e) {
-            	    if (e.keyCode == 13) {
-            	        document.getElementById("send-btn").click();
-            	        document.getElementById('textoOwner').value = '';
-            	        return false;
-            	    }
-            	});
 	          
 	        })(jQuery); // End of use strict
 	        

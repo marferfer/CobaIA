@@ -115,42 +115,45 @@ public class SalasHandler extends TextWebSocketHandler {
 		System.out.println("Message received: " + message.getPayload());
 		JsonNode node = mapper.readTree(message.getPayload());
 		
-		Sala s = new Sala();
-		Collection<Grupo> gruposColl = GruposController.grupos();
-		ArrayList<Grupo> grupos;
-		if (gruposColl instanceof List)
-		  grupos = (ArrayList<Grupo>)gruposColl;
-		else
-		  grupos = new ArrayList<Grupo>(gruposColl);
-		Grupo myGroup = new Grupo();
-		for (int i = 0; i < grupos.size(); i++) {
-			if (grupos.get(i).getNombre().equals(node.get("groupId").asText())) {
-				myGroup = grupos.get(i);
+		if (!node.get("message").asText().equals("still alive")) { 
+		
+			Sala s = new Sala();
+			Collection<Grupo> gruposColl = GruposController.grupos();
+			ArrayList<Grupo> grupos;
+			if (gruposColl instanceof List)
+			  grupos = (ArrayList<Grupo>)gruposColl;
+			else
+			  grupos = new ArrayList<Grupo>(gruposColl);
+			Grupo myGroup = new Grupo();
+			for (int i = 0; i < grupos.size(); i++) {
+				if (grupos.get(i).getNombre().equals(node.get("groupId").asText())) {
+					myGroup = grupos.get(i);
+				}
 			}
+			if (node.get("message").asText().equals("hi")) {
+				if (salas.containsKey(node.get("groupId").asText())) {
+					s = salas.get(node.get("groupId").asText());
+					if (s.user2 == null) {
+						s.user2 = node.get("name").asText();
+						s.user2Id = session.getId();
+						myGroup.setUsuario2(s.user2);
+					}
+					else if (s.user3 == null) {
+						s.user3 = node.get("name").asText();
+						s.user3Id = session.getId();
+						myGroup.setUsuario3(s.user3);
+					}
+					GruposController.actualizaGrupo(myGroup.getId(), myGroup);
+				}
+				else {
+					s.user1 = node.get("name").asText();
+					s.user1Id = session.getId();
+				}
+				users.put(session.getId(), node.get("groupId").asText());
+				salas.put(node.get("groupId").asText(), s);			
+			}		
+			sendAllParticipants(session, node);
 		}
-		if (node.get("message").asText().equals("hi")) {
-			if (salas.containsKey(node.get("groupId").asText())) {
-				s = salas.get(node.get("groupId").asText());
-				if (s.user2 == null) {
-					s.user2 = node.get("name").asText();
-					s.user2Id = session.getId();
-					myGroup.setUsuario2(s.user2);
-				}
-				else if (s.user3 == null) {
-					s.user3 = node.get("name").asText();
-					s.user3Id = session.getId();
-					myGroup.setUsuario3(s.user3);
-				}
-				GruposController.actualizaGrupo(myGroup.getId(), myGroup);
-			}
-			else {
-				s.user1 = node.get("name").asText();
-				s.user1Id = session.getId();
-			}
-			users.put(session.getId(), node.get("groupId").asText());
-			salas.put(node.get("groupId").asText(), s);			
-		}		
-		sendAllParticipants(session, node);
 	}
 
 	private void sendOtherParticipants(WebSocketSession session, JsonNode node) throws IOException {

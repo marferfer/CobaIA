@@ -36,7 +36,9 @@ public class ChatHandler extends TextWebSocketHandler {
 		System.out.println("Message received: " + message.getPayload());
 		JsonNode node = mapper.readTree(message.getPayload());
 		
-		sendOtherParticipants(session, node);
+		if (!node.get("message").asText().equals("still alive")) { 
+			sendOtherParticipants(session, node);
+		}
 	}
 
 	private void sendOtherParticipants(WebSocketSession session, JsonNode node) throws IOException {

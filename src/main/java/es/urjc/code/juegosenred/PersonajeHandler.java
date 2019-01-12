@@ -42,90 +42,94 @@ public class PersonajeHandler extends TextWebSocketHandler {
 		System.out.println("Message received: " + message.getPayload());
 		JsonNode node = mapper.readTree(message.getPayload());
 		
-		String n = node.get("name").asText();
+		if (!node.get("message").asText().equals("still alive")) { 
 		
-		Collection<Grupo> gruposColl = GruposController.grupos();
-		ArrayList<Grupo> grupos;
-		if (gruposColl instanceof List)
-		  grupos = (ArrayList<Grupo>)gruposColl;
-		else
-		  grupos = new ArrayList<Grupo>(gruposColl);
-		Grupo myGroup = new Grupo();
-		for (int i = 0; i < grupos.size(); i++) {
-			if (grupos.get(i).getId() == node.get("groupId").asInt()) {
-				myGroup = grupos.get(i);
-			}
-		}
-		
-		boolean wereReady = false;
-		
-		if (myGroup.isTankaReady() && myGroup.isTaliReady() && myGroup.isAcroReady()) {
-			wereReady = true;
-		}
-		
-		if (n.equals("ready")) {
-			switch (node.get("message").asText()) {
-			case "tankabaIA":
-				if (!tankaReady) {
-					tankaReady = true;
+			String n = node.get("name").asText();
+			
+			Collection<Grupo> gruposColl = GruposController.grupos();
+			ArrayList<Grupo> grupos;
+			if (gruposColl instanceof List)
+			  grupos = (ArrayList<Grupo>)gruposColl;
+			else
+			  grupos = new ArrayList<Grupo>(gruposColl);
+			Grupo myGroup = new Grupo();
+			for (int i = 0; i < grupos.size(); i++) {
+				if (grupos.get(i).getId() == node.get("groupId").asInt()) {
+					myGroup = grupos.get(i);
 				}
-				else {
-					tankaReady = false;
-				}
-				myGroup.setTankaReady(tankaReady);
-				break;
-			case "acrobaIA":
-				if (!acroReady) {
-					acroReady = true;
-				}
-				else {
-					acroReady = false;
-				}
-				myGroup.setAcroReady(acroReady);
-				break;
-			case "talibaIA":
-				if (!taliReady) {
-					taliReady = true;
-				}
-				else {
-					taliReady = false;
-				}
-				myGroup.setTaliReady(taliReady);
-				break;
-			default:
-				break;
 			}
 			
-			GruposController.actualizaGrupo(myGroup.getId(), myGroup);
+			boolean wereReady = false;
 			
 			if (myGroup.isTankaReady() && myGroup.isTaliReady() && myGroup.isAcroReady()) {
-				ObjectNode newNode = mapper.createObjectNode();
-				newNode.put("groupId", node.get("groupId").asText());
-				newNode.put("message", "start");
-				for(WebSocketSession participant : sessions.values()) {
-					participant.sendMessage(new TextMessage(newNode.toString()));
-				}
+				wereReady = true;
 			}
 			
-			else if (wereReady) {
-				ObjectNode newNode = mapper.createObjectNode();
-				newNode.put("groupId", node.get("groupId").asText());
-				newNode.put("message", "cancel that");
-				for(WebSocketSession participant : sessions.values()) {
-					participant.sendMessage(new TextMessage(newNode.toString()));
+			if (n.equals("ready")) {
+				switch (node.get("message").asText()) {
+				case "tankabaIA":
+					if (!tankaReady) {
+						tankaReady = true;
+					}
+					else {
+						tankaReady = false;
+					}
+					myGroup.setTankaReady(tankaReady);
+					break;
+				case "acrobaIA":
+					if (!acroReady) {
+						acroReady = true;
+					}
+					else {
+						acroReady = false;
+					}
+					myGroup.setAcroReady(acroReady);
+					break;
+				case "talibaIA":
+					if (!taliReady) {
+						taliReady = true;
+					}
+					else {
+						taliReady = false;
+					}
+					myGroup.setTaliReady(taliReady);
+					break;
+				default:
+					break;
 				}
+				
+				GruposController.actualizaGrupo(myGroup.getId(), myGroup);
+				
+				if (myGroup.isTankaReady() && myGroup.isTaliReady() && myGroup.isAcroReady()) {
+					ObjectNode newNode = mapper.createObjectNode();
+					newNode.put("groupId", node.get("groupId").asText());
+					newNode.put("message", "start");
+					for(WebSocketSession participant : sessions.values()) {
+						participant.sendMessage(new TextMessage(newNode.toString()));
+					}
+				}
+				
+				else if (wereReady) {
+					ObjectNode newNode = mapper.createObjectNode();
+					newNode.put("groupId", node.get("groupId").asText());
+					newNode.put("message", "cancel that");
+					for(WebSocketSession participant : sessions.values()) {
+						participant.sendMessage(new TextMessage(newNode.toString()));
+					}
+				}
+				
+				/*if (tankaReady && taliReady && acroReady) {
+					ObjectNode newNode = mapper.createObjectNode();
+					newNode.put("groupId", node.get("groupId").asText());
+					newNode.put("message", "start");
+					for(WebSocketSession participant : sessions.values()) {
+						participant.sendMessage(new TextMessage(newNode.toString()));
+					}
+				}*/
 			}
+			sendOtherParticipants(session, node);
 			
-			/*if (tankaReady && taliReady && acroReady) {
-				ObjectNode newNode = mapper.createObjectNode();
-				newNode.put("groupId", node.get("groupId").asText());
-				newNode.put("message", "start");
-				for(WebSocketSession participant : sessions.values()) {
-					participant.sendMessage(new TextMessage(newNode.toString()));
-				}
-			}*/
 		}
-		sendOtherParticipants(session, node);
 	}
 
 	private void sendOtherParticipants(WebSocketSession session, JsonNode node) throws IOException {

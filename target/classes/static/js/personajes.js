@@ -2,7 +2,7 @@ WebFontConfig = {
 
 	// 'active' means all requested fonts have finished loading
 	// We set a 1 second delay before calling 'createText'.
-	// For some reason if we don't the browser cannot render the text the first
+	// For some reason if we don't the browsser cannot render the text the first
 	// time it's created.
 	// active: function() { jugPersonajes.time.events.add(Phaser.Timer.SECOND,
 	// createText, this); },
@@ -27,9 +27,9 @@ WebFontConfig = {
 // Load grupos from server
 function loadSala(id, callback) {
 	$.ajax({
-		url : 'http://25.76.106.32:8080/grupos/' + id
+		url : 'https://coba-ia.herokuapp.com/grupos/' + id
 	}).done(function(grupo) {
-		console.log('Sala loaded: ' + JSON.stringify(grupo));
+		//console.log('Sala loaded: ' + JSON.stringify(grupo));
 		callback(grupo);
 	})
 }
@@ -38,14 +38,14 @@ function loadSala(id, callback) {
 function updateSala(grupo) {
 	$.ajax({
 		method : 'PUT',
-		url : 'http://25.76.106.32:8080/grupos/' + grupo.id,
+		url : 'https://coba-ia.herokuapp.com/grupos/' + grupo.id,
 		data : JSON.stringify(grupo),
 		processData : false,
 		headers : {
 			"Content-Type" : "application/json"
 		}
 	}).done(function(grupo) {
-		// console.log("Updated grupo: " + JSON.stringify(grupo))
+		// //console.log("Updated grupo: " + JSON.stringify(grupo))
 	})
 }
 
@@ -64,10 +64,10 @@ function preload6() {
 	jugPersonajes.load.spritesheet('buttonVolver',
 			'assets/Menu/button_sprite_sheet volver.png', 193, 71);
 	jugPersonajes.load.image('background', 'assets/Menu/Personajes.png');
-	jugPersonajes.load.image('tanka', 'assets/Images/TankabaIA.png');
-	jugPersonajes.load.image('tali', 'assets/Images/TalibaIA.png');
-	jugPersonajes.load.image('acro', 'assets/Images/AcrobaIA.png');
-	jugPersonajes.load.image('check', 'assets/Images/check.png');
+	jugPersonajes.load.image('tanka', 'assets/images/TankabaIA.png');
+	jugPersonajes.load.image('tali', 'assets/images/TalibaIA.png');
+	jugPersonajes.load.image('acro', 'assets/images/AcrobaIA.png');
+	jugPersonajes.load.image('check', 'assets/images/check.png');
 
 }
 
@@ -90,7 +90,7 @@ var acroCheck2;
 function create6() {
 
 	nivelJuego = 0.5;
-	// console.log(nivelJuego);
+	// //console.log(nivelJuego);
 
 	/*
 	 * var baseCharles = jugPersonajes.add.audio('baseCharles'); var metronomo =
@@ -217,15 +217,15 @@ function checkSala() {
  */
 
 function up() {
-	// console.log('button up', arguments);
+	// //console.log('button up', arguments);
 }
 
 function over() {
-	// console.log('button over');
+	// //console.log('button over');
 }
 
 function out() {
-	// console.log('button out');
+	// //console.log('button out');
 }
 
 function actionOnClickVolverMenu() {
@@ -620,13 +620,16 @@ function actionOnClickAcro() {
 var allReady = false;
 
 $(document).ready(function() {
+	connectToPers();
+})
 
-	connection = new WebSocket('ws://25.76.106.32:8080/personajes');
+function connectToPers() {
+	connection = new WebSocket('wss://coba-ia.herokuapp.com/personajes');
 	connection.onerror = function(e) {
-		console.log("WS error: " + e);
+		//console.log("WS error: " + e);
 	}
 	connection.onmessage = function(msg) {
-		console.log("WS message: " + msg.data);
+		//console.log("WS message: " + msg.data);
 		var message = JSON.parse(msg.data);
 		if (message.groupId == myGroupId) {
 			if (message.name != 'ready') {
@@ -757,6 +760,9 @@ $(document).ready(function() {
 		}
 	}
 	connection.onclose = function() {
-		console.log("Closing socket");
+		console.log("Closing personajes socket");
+		setTimeout(function() {
+			connectToPers();
+		}, 1000);
 	}
-})
+}

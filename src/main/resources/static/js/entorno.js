@@ -61,7 +61,7 @@ function preload5() {
     juego.load.image('compuertaParteSuperior', 'assets/images/compuertaParteSuperior.png');
     juego.load.image('ventilador', 'assets/images/ventilador.png');
     juego.load.image('bobina2', 'assets/images/bobina2.png');
-    juego.load.image('ascensor','assets/nivel1/ascensor.png');
+    juego.load.image('ascensor','assets/Nivel1/ascensor.png');
     juego.load.image('ventanas', 'assets/Nivel0/ventanas.png');
     juego.load.image('cientificos', 'assets/Nivel0/cientificos.png');
 
@@ -74,7 +74,7 @@ function preload5() {
     juego.load.spritesheet('acrobaIAmovimiento', 'assets/images/acrobaIAmovimiento.png', 95, 51, 59, 2, 3);
     juego.load.spritesheet('bobina', 'assets/images/bobina.png', 287, 49, 6, 0, 0);
     juego.load.spritesheet('aire', 'assets/images/aire.png', 175, 295, 5, 0, 0);
-    juego.load.spritesheet('boton', 'assets/images/button.png', 99, 28, 10, 0, 0);
+    juego.load.spritesheet('boton', 'assets/images/Button.png', 99, 28, 10, 0, 0);
 
     juego.load.physics('sueloN1Parte1Collisions', 'assets/data/sueloN1Parte1.json');
     //juego.load.physics('sueloN1Parte2Collisions', 'assets/data/sueloN1Parte2.json');
@@ -1020,15 +1020,15 @@ function create5() {
     }
 
     function up() {
-        console.log('button up', arguments);
+        //console.log('button up', arguments);
     }
 
     function over() {
-        console.log('button over');
+        //console.log('button over');
     }
 
     function out() {
-        console.log('button out');
+        //console.log('button out');
     }
 
     function actionOnClick () {
@@ -1297,7 +1297,7 @@ function create5() {
 
                 let timer =  juego.time.events.add(1250, stopPlataforma, this, 1);
                 plataformasMoviles.lista[1].body.rotateRight(-25);
-                cajasCableado.lista[0].animations.play('caja_rota');
+                cajasCableado.lista[1].animations.play('caja_rota');
                 cajasCableado.lista[1].rota = true;
 
             }else{
@@ -1434,59 +1434,63 @@ function create5() {
 }
 
 function updateMyGameState() {
-	setTimeout(function() {
-		var myKeyEvent;
-		switch (miCobaIA) {
-		case 'tankabaIA':
-			myKeyEvent = 'x:' + tankabaIA.jugador.body.x + '#y:' + tankabaIA.jugador.body.y + 
-			'#xCaja1:' + cajas.lista[0].body.x + '#yCaja1:' + cajas.lista[0].body.y + 
-			'#xCaja2:' + cajas.lista[1].body.x + '#yCaja2:' + cajas.lista[1].body.y + 
-			'#xCaja3:' + cajas.lista[2].body.x + '#yCaja3:' + cajas.lista[2].body.y;
-			break;
-		case 'talibaIA':
-			myKeyEvent = 'x:' + talibaIA.jugador.body.x + '#y:' + talibaIA.jugador.body.y +
-			'#caja1Rota:' + cajasCableado.lista[0].rota +
-			'#caja2Rota:' + cajasCableado.lista[1].rota;
-			break;
-		case 'acrobaIA':
-			myKeyEvent = 'x:' + acrobaIA.jugador.body.x + '#y:' + acrobaIA.jugador.body.y +
-			'#Ascensor1pos:' + plataformasBasic.lista[1].pos +
-			'#Ascensor2pos:' + plataformasBasic.lista[2].pos;
-			break;
-		default:
-			break;
-		}
-		 var msg = {
-			cobaIA : miCobaIA,
-			keyEvent : myKeyEvent,
-			groupId : myGroupId
-		}
-	    playerConnection.send(JSON.stringify(msg));
+	var myKeyEvent;
+	switch (miCobaIA) {
+	case 'tankabaIA':
+		myKeyEvent = 'x:' + Math.trunc(tankabaIA.jugador.body.x * 100)/100 + '#y:' + Math.trunc(tankabaIA.jugador.body.y * 100)/100 + 
+		'#xCaja1:' + Math.trunc(cajas.lista[0].body.x * 100)/100 + '#yCaja1:' + Math.trunc(cajas.lista[0].body.y * 100)/100 + 
+		'#xCaja2:' + Math.trunc(cajas.lista[1].body.x * 100)/100 + '#yCaja2:' + Math.trunc(cajas.lista[1].body.y * 100)/100 + 
+		'#xCaja3:' + Math.trunc(cajas.lista[2].body.x * 100)/100 + '#yCaja3:' + Math.trunc(cajas.lista[2].body.y * 100)/100 +
+		'#W:' + wTankaDown + '#A:' + aTankaDown + '#D:' + dTankaDown + '#Shift:' + shiftTankaDown;
+		break;
+	case 'talibaIA':
+		myKeyEvent = 'x:' + Math.trunc(talibaIA.jugador.body.x * 100)/100 + '#y:' + Math.trunc(talibaIA.jugador.body.y * 100)/100 +
+		'#caja1Rota:' + cajasCableado.lista[0].rota +
+		'#caja2Rota:' + cajasCableado.lista[1].rota +
+		'#W:' + wTaliDown + '#A:' + aTaliDown + '#D:' + dTaliDown + '#Shift:' + shiftTaliDown;
+		break;
+	case 'acrobaIA':
+		myKeyEvent = 'x:' + Math.trunc(acrobaIA.jugador.body.x * 100)/100 + '#y:' + Math.trunc(acrobaIA.jugador.body.y * 100)/100 +
+		'#Ascensor1pos:' + Math.trunc(plataformasBasic.lista[1].pos * 100)/100 +
+		'#Ascensor2pos:' + Math.trunc(plataformasBasic.lista[2].pos * 100)/100 +
+		'#W:' + wAcroDown + '#A:' + aAcroDown + '#D:' + dAcroDown + '#Shift:' + shiftAcroDown;
+		break;
+	default:
+		break;
+	}
+	 var msg = {
+		cobaIA : miCobaIA,
+		keyEvent : myKeyEvent,
+		groupId : myGroupId
+	}
+	 if (playerConnection.readyState === 1) { 
+		 playerConnection.send(JSON.stringify(msg)); 
+	 }
 //		var myGameState;
 //		loadGameState(myGameId, function(gameState) {
 //			myGameState = gameState;			
 //		});
-		updateMyGameState();
-	}, 4000);
 }
 
+var updateGSInterval;
+
 function connect() {	
-	playerConnection = new WebSocket('ws://25.76.106.32:8080/players');
+	playerConnection = new WebSocket('wss://coba-ia.herokuapp.com/players');
 	
 	playerConnection.onopen = function() {
 		canConnect = true;
-		console.log('eeeeeeeeeo');
+		updateGSInterval = setInterval(updateMyGameState, 50);
+		//console.log('eeeeeeeeeo');
 		if (readyToUpdate) {
 			readyToUpdate = false;
-			updateMyGameState();
 		}
 	}
 	
 	playerConnection.onerror = function(e) {
-		console.log("WS error: " + e);
+		//console.log("WS error: " + e);
 	}
 	playerConnection.onmessage = function(msg) {
-		console.log("WS message: " + msg.data + myGroupId);
+		//console.log("WS message: " + msg.data + myGroupId);
 		var message = JSON.parse(msg.data)
 		if (message.groupId == myGroupId) {
 			switch (message.cobaIA) {
@@ -1534,6 +1538,10 @@ function connect() {
 						cajas.lista[1].body.y = pos[5].split(':')[1];
 						cajas.lista[2].body.x = pos[6].split(':')[1];
 						cajas.lista[2].body.y = pos[7].split(':')[1];
+						wTankaDown = (pos[8].split(':')[1] == 'true');
+						aTankaDown = (pos[9].split(':')[1] == 'true');
+						dTankaDown = (pos[10].split(':')[1] == 'true');
+						shiftTankaDown = (pos[11].split(':')[1] == 'true');
 					}
 					break;
 				}
@@ -1586,10 +1594,14 @@ function connect() {
 						}
 						if (pos[3].split(':')[1] == 'true' && !cajasCableado.lista[1].rota) {
 							cajasCableado.lista[1].rota = true;
+			                cajasCableado.lista[1].animations.play('caja_rota');
 							let timer =  juego.time.events.add(1250, stopPlataforma, this, 1);
 			                plataformasMoviles.lista[1].body.rotateRight(-25);
-			                cajasCableado.lista[0].animations.play('caja_rota');
 						}
+						wTaliDown = (pos[4].split(':')[1] == 'true');
+						aTaliDown = (pos[5].split(':')[1] == 'true');
+						dTaliDown = (pos[6].split(':')[1] == 'true');
+						shiftTaliDown = (pos[7].split(':')[1] == 'true');
 					}
 					break;
 				}
@@ -1634,6 +1646,10 @@ function connect() {
 						acrobaIA.jugador.body.y = pos[1].split(':')[1];
 						plataformasBasic.lista[1].pos = pos[2].split(':')[1];
 						plataformasBasic.lista[2].pos = pos[3].split(':')[1];
+						wAcroDown = (pos[4].split(':')[1] == 'true');
+						aAcroDown = (pos[5].split(':')[1] == 'true');
+						dAcroDown = (pos[6].split(':')[1] == 'true');
+						shiftAcroDown = (pos[7].split(':')[1] == 'true');
 					}
 					break;
 				}
@@ -1644,9 +1660,13 @@ function connect() {
 		}
 	}
 	playerConnection.onclose = function() {
-		console.log("Closing socket");
+		console.log("Closing player socket");
+		playerConnection = null;
 		setTimeout(function() {
 			connect();
 		}, 1000);
+		clearInterval(updateGSInterval);
+		updateGSInterval = null;
+		//connect();
 	}
 }

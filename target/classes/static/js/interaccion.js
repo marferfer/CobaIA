@@ -79,234 +79,299 @@ function update5() {
         ctrlU = juego.input.keyboard.addKey(Phaser.Keyboard.U);
         
         ctrlShift = juego.input.keyboard.addKey(Phaser.Keyboard.SHIFT);
-        console.log(ctrlT);
     }
     
     if (myGroupId != '' && !$('#textoOwner').is(':focus') && !chatIsFocused) { //Online
 	    var myKeyEvent = '';
-	    
+	    var msg;
 	    if (ctrlW.isDown) {
-//	    	switch (miCobaIA) {
-//	    	case 'tankabaIA':
-//	    		wTankaDown = true;
-//	    		break;
-//	    	case 'talibaIA':
-//	    		wTaliDown = true;
-//	    		break;
-//	    	case 'acrobaIA':
-//	    		wAcroDown = true;
-//	    		break;
-//	    	default:
-//	    		break;
-//	    	}
-	    	if(!currentWDown && canConnect){
+	    	switch (miCobaIA) {
+	    	case 'tankabaIA':
+	    		wTankaDown = true;
+	    		break;
+	    	case 'talibaIA':
+	    		wTaliDown = true;
+	    		break;
+	    	case 'acrobaIA':
+	    		wAcroDown = true;
+	    		break;
+	    	default:
+	    		break;
+	    	}
+	    	if(!currentWDown && canConnect){	    		
 	    		myKeyEvent = 'wDown';
 	    		currentWDown = true;
-	    		 var msg = {
+	    		 msg = {
 					cobaIA : miCobaIA,
 					keyEvent : myKeyEvent,
 					groupId : myGroupId
 				}
-			    playerConnection.send(JSON.stringify(msg));
+	    		 if (playerConnection != null) {
+		    		 if (playerConnection.readyState === 1) { 
+		    			 playerConnection.send(JSON.stringify(msg));
+		    		 }
+	    		 }
 	    	}
 	    } 
 	    else {
-//	    	switch (miCobaIA) {
-//	    	case 'tankabaIA':
-//	    		wTankaDown = false;
-//	    		break;
-//	    	case 'talibaIA':
-//	    		wTaliDown = false;
-//	    		break;
-//	    	case 'acrobaIA':
-//	    		wAcroDown = false;
-//	    		break;
-//	    	default:
-//	    		break;
-//	    	}
+	    	switch (miCobaIA) {
+	    	case 'tankabaIA':
+	    		wTankaDown = false;
+	    		break;
+	    	case 'talibaIA':
+	    		wTaliDown = false;
+	    		break;
+	    	case 'acrobaIA':
+	    		wAcroDown = false;
+	    		break;
+	    	default:
+	    		break;
+	    	}
 	    	if(currentWDown && canConnect){
 		    	myKeyEvent = 'wUp';
 	    		currentWDown = false;
-	    		 var msg = {
+	    		 msg = {
  					cobaIA : miCobaIA,
  					keyEvent : myKeyEvent,
  					groupId : myGroupId
  				}
- 			    playerConnection.send(JSON.stringify(msg));
+	    		 if (playerConnection != null) {
+		    		 if (playerConnection.readyState === 1) { 
+		    			 playerConnection.send(JSON.stringify(msg));
+		    		 }
+	    		 }
 	    	}
 	    }
 	    if (ctrlA.isDown) {
-//	    	switch (miCobaIA) {
-//	    	case 'tankabaIA':
-//	    		aTankaDown = true;
-//	    		break;
-//	    	case 'talibaIA':
-//	    		aTaliDown = true;
-//	    		break;
-//	    	case 'acrobaIA':
-//	    		aAcroDown = true;
-//	    		break;
-//	    	default:
-//	    		break;
-//	    	}
+	    	switch (miCobaIA) {
+	    	case 'tankabaIA':
+	    		aTankaDown = true;
+	    		break;
+	    	case 'talibaIA':
+	    		aTaliDown = true;
+	    		break;
+	    	case 'acrobaIA':
+	    		aAcroDown = true;
+	    		break;
+	    	default:
+	    		break;
+	    	}
 	    	if(!currentADown && canConnect){
 		    	myKeyEvent = 'aDown';
 	    		currentADown = true;
-	    		 var msg = {
+	    		 msg = {
   					cobaIA : miCobaIA,
   					keyEvent : myKeyEvent,
   					groupId : myGroupId
   				}
-  			    playerConnection.send(JSON.stringify(msg));
+	    		 if (playerConnection != null) {
+		    		 if (playerConnection.readyState === 1) { 
+		    			 playerConnection.send(JSON.stringify(msg));
+		    		 }
+	    		 }
 	    	}
 	    } 
 	    else {
-//	    	switch (miCobaIA) {
-//	    	case 'tankabaIA':
-//	    		aTankaDown = false;
-//	    		break;
-//	    	case 'talibaIA':
-//	    		aTaliDown = false;
-//	    		break;
-//	    	case 'acrobaIA':
-//	    		aAcroDown = false;
-//	    		break;
-//	    	default:
-//	    		break;
-//	    	}
+	    	switch (miCobaIA) {
+	    	case 'tankabaIA':
+	    		aTankaDown = false;
+	    		break;
+	    	case 'talibaIA':
+	    		aTaliDown = false;
+	    		break;
+	    	case 'acrobaIA':
+	    		aAcroDown = false;
+	    		break;
+	    	default:
+	    		break;
+	    	}
 	    	if(currentADown && canConnect){
 		    	myKeyEvent = 'aUp';
 	    		currentADown = false;
-	    		 var msg = {
+	    		 msg = {
   					cobaIA : miCobaIA,
   					keyEvent : myKeyEvent,
   					groupId : myGroupId
   				}
-  			    playerConnection.send(JSON.stringify(msg));
+	    		 if (playerConnection != null) {
+		    		 if (playerConnection.readyState === 1) { 
+		    			 playerConnection.send(JSON.stringify(msg));
+		    		 }
+	    		 }
 	    	}
 	    }
 	    if (ctrlS.isDown) {
-//	    	switch (miCobaIA) {
-//	    	case 'tankabaIA':
-//	    		sTankaDown = true;
-//	    		break;
-//	    	case 'talibaIA':
-//	    		sTaliDown = true;
-//	    		break;
-//	    	case 'acrobaIA':
-//	    		sAcroDown = true;
-//	    		break;
-//	    	default:
-//	    		break;
-//	    	}
+	    	switch (miCobaIA) {
+	    	case 'tankabaIA':
+	    		sTankaDown = true;
+	    		break;
+	    	case 'talibaIA':
+	    		sTaliDown = true;
+	    		break;
+	    	case 'acrobaIA':
+	    		sAcroDown = true;
+	    		break;
+	    	default:
+	    		break;
+	    	}
 	    	if(!currentSDown && canConnect){
 		    	myKeyEvent = 'sDown';
 	    		currentSDown = true;
-	    		 var msg = {
+	    		 msg = {
   					cobaIA : miCobaIA,
   					keyEvent : myKeyEvent,
   					groupId : myGroupId
   				}
-  			    playerConnection.send(JSON.stringify(msg));
+	    		 if (playerConnection != null) {
+		    		 if (playerConnection.readyState === 1) { 
+		    			 playerConnection.send(JSON.stringify(msg));
+		    		 }
+	    		 }
 	    	}
 	    } 
 	    else {
-//	    	switch (miCobaIA) {
-//	    	case 'tankabaIA':
-//	    		sTankaDown = false;
-//	    		break;
-//	    	case 'talibaIA':
-//	    		sTaliDown = false;
-//	    		break;
-//	    	case 'acrobaIA':
-//	    		sAcroDown = false;
-//	    		break;
-//	    	default:
-//	    		break;
-//	    	}
+	    	switch (miCobaIA) {
+	    	case 'tankabaIA':
+	    		sTankaDown = false;
+	    		break;
+	    	case 'talibaIA':
+	    		sTaliDown = false;
+	    		break;
+	    	case 'acrobaIA':
+	    		sAcroDown = false;
+	    		break;
+	    	default:
+	    		break;
+	    	}
 	    	if(currentSDown && canConnect){
 		    	myKeyEvent = 'sUp';
 	    		currentSDown = false;
-	    		 var msg = {
+	    		 msg = {
   					cobaIA : miCobaIA,
   					keyEvent : myKeyEvent,
   					groupId : myGroupId
   				}
-  			    playerConnection.send(JSON.stringify(msg));
+	    		 if (playerConnection != null) {
+		    		 if (playerConnection.readyState === 1) { 
+		    			 playerConnection.send(JSON.stringify(msg));
+		    		 }
+	    		 }
 	    	}
 	    }
 	    if (ctrlD.isDown) {
-//	    	switch (miCobaIA) {
-//	    	case 'tankabaIA':
-//	    		dTankaDown = true;
-//	    		break;
-//	    	case 'talibaIA':
-//	    		dTaliDown = true;
-//	    		break;
-//	    	case 'acrobaIA':
-//	    		dAcroDown = true;
-//	    		break;
-//	    	default:
-//	    		break;
-//	    	}
+	    	switch (miCobaIA) {
+	    	case 'tankabaIA':
+	    		dTankaDown = true;
+	    		break;
+	    	case 'talibaIA':
+	    		dTaliDown = true;
+	    		break;
+	    	case 'acrobaIA':
+	    		dAcroDown = true;
+	    		break;
+	    	default:
+	    		break;
+	    	}
 	    	if(!currentDDown && canConnect){
 		    	myKeyEvent = 'dDown';
 	    		currentDDown = true;
-	    		 var msg = {
+	    		 msg = {
   					cobaIA : miCobaIA,
   					keyEvent : myKeyEvent,
   					groupId : myGroupId
   				}
-  			    playerConnection.send(JSON.stringify(msg));
+	    		 if (playerConnection != null) {
+		    		 if (playerConnection.readyState === 1) { 
+		    			 playerConnection.send(JSON.stringify(msg));
+		    		 }
+	    		 }
 	    	}
 	    } 
 	    else {
-//	    	switch (miCobaIA) {
-//	    	case 'tankabaIA':
-//	    		dTankaDown = false;
-//	    		break;
-//	    	case 'talibaIA':
-//	    		dTaliDown = false;
-//	    		break;
-//	    	case 'acrobaIA':
-//	    		dAcroDown = false;
-//	    		break;
-//	    	default:
-//	    		break;
-//	    	}
+	    	switch (miCobaIA) {
+	    	case 'tankabaIA':
+	    		dTankaDown = false;
+	    		break;
+	    	case 'talibaIA':
+	    		dTaliDown = false;
+	    		break;
+	    	case 'acrobaIA':
+	    		dAcroDown = false;
+	    		break;
+	    	default:
+	    		break;
+	    	}
 	    	if(currentDDown && canConnect){
 		    	myKeyEvent = 'dUp';
 	    		currentDDown = false;
-	    		 var msg = {
+	    		 msg = {
   					cobaIA : miCobaIA,
   					keyEvent : myKeyEvent,
   					groupId : myGroupId
   				}
-  			    playerConnection.send(JSON.stringify(msg));
+	    		 if (playerConnection != null) {
+		    		 if (playerConnection.readyState === 1) { 
+		    			 playerConnection.send(JSON.stringify(msg));
+		    		 }
+	    		 }
 	    	}
 	    }
 	    if (ctrlShift.isDown) {
+	    	switch (miCobaIA) {
+	    	case 'tankabaIA':
+	    		shiftTankaDown = true;
+	    		break;
+	    	case 'talibaIA':
+	    		shiftTaliDown = true;
+	    		break;
+	    	case 'acrobaIA':
+	    		shiftAcroDown = true;
+	    		break;
+	    	default:
+	    		break;
+	    	}
 	    	if(!currentShiftDown && canConnect){
 		    	myKeyEvent = 'shiftDown';
 	    		currentShiftDown = true;
-	    		 var msg = {
+	    		 msg = {
   					cobaIA : miCobaIA,
   					keyEvent : myKeyEvent,
   					groupId : myGroupId
   				}
-  			    playerConnection.send(JSON.stringify(msg));
+	    		 if (playerConnection != null) {
+		    		 if (playerConnection.readyState === 1) { 
+		    			 playerConnection.send(JSON.stringify(msg));
+		    		 }
+	    		 }
 	    	}
 	    } 
 	    else {
+	    	switch (miCobaIA) {
+	    	case 'tankabaIA':
+	    		shiftTankaDown = false;
+	    		break;
+	    	case 'talibaIA':
+	    		shiftTaliDown = false;
+	    		break;
+	    	case 'acrobaIA':
+	    		shiftAcroDown = false;
+	    		break;
+	    	default:
+	    		break;
+	    	}
 	    	if(currentShiftDown && canConnect){
 		    	myKeyEvent = 'shiftUp';
 	    		currentShiftDown = false;
-	    		 var msg = {
+	    		 msg = {
   					cobaIA : miCobaIA,
   					keyEvent : myKeyEvent,
   					groupId : myGroupId
   				}
-  			    playerConnection.send(JSON.stringify(msg));
+	    		if (playerConnection != null) {
+		    		 if (playerConnection.readyState === 1) { 
+		    			 playerConnection.send(JSON.stringify(msg));
+		    		 }
+  				}
 	    	}
 	    }
 	    
@@ -880,7 +945,7 @@ function update5() {
             acrobaIA.trepando = true
             let timer =  juego.time.events.add(250, function(){acrobaIA.trepando = false;}, this, 0);
         }
-        console.log(tankabaIA.jugador.body.x + ', ' + tankabaIA.jugador.body.y);
+        //console.log(tankabaIA.jugador.body.x + ', ' + tankabaIA.jugador.body.y);
     }    
     else {
         //acrobaIA.jugador.body.angle = 0;
