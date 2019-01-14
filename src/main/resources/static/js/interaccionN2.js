@@ -175,6 +175,20 @@ function update2() {
         
     }
 
+    
+    $("#crearGrupo").click(function () {  
+    	//if(nivelCreadoPrev == 0)
+    	juego2.destroy();
+    	menu();
+    	document.getElementById("crearGrupo").innerHTML = 'Crear Sala';
+    	document.getElementById("crearGrupo").className = 'btn btn-success';
+    	document.getElementById("entrarGrupo").innerHTML = 'Buscar Salas';
+    	if(document.getElementById("live-chat").style.visibility == 'hidden'){
+    		document.getElementById("abrir-chat").style.visibility = 'visible';
+    	}
+    	
+    });
+    
     //Indicador
 
     // Pad "connected or not" indicator
@@ -204,6 +218,7 @@ function update2() {
     if (tankabaIA.jugador.position.y > 1500) { // Muerte al caer
         reinicia();
     }
+    
 
     if (ctrlR.isDown) { // Pase de nivel
         juego2.destroy();
@@ -211,7 +226,7 @@ function update2() {
     }
 
 
-    if(tankabaIA.jugador.body.x>3450){
+    if(tankabaIA.jugador.body.x>3450 || acrobaIA.jugador.position.x>3450 || talibaIA.jugador.position.x>3450){
         juego2.destroy();
         nivel3();
     }

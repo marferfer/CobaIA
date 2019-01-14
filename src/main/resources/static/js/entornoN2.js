@@ -447,7 +447,7 @@ function create2() {
 /////////////// ACROBAIA   ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    acrobaIA.jugador = juego2.add.sprite(700, juego2.world.height - 300, 'acrobaIAmovimiento');
+    acrobaIA.jugador = juego2.add.sprite(230, juego2.world.height - 925, 'acrobaIAmovimiento');
     juego2.physics.p2.enableBody(acrobaIA.jugador);
     acrobaIA.jugador.body.setRectangle(80, 33);
     
@@ -455,7 +455,7 @@ function create2() {
     acrobaIA.jugador.body.mass = 1;
 
     acrobaIA.jugador.dynamic = true;
-    acrobaIA.jugador.body.debug = true;
+    //acrobaIA.jugador.body.debug = true;
 
     acrobaIA.jugador.animations.add('movimientoDerecha', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
                                                             20, 21, 22, 23, 24, 25, 26, 27, 28], 60, true);
@@ -469,7 +469,7 @@ function create2() {
 /////////////// TALIBAIA   ////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    talibaIA.jugador = juego2.add.sprite(700, juego2.world.height - 300, 'talibaIAmovimiento');
+    talibaIA.jugador = juego2.add.sprite(180, juego2.world.height - 725, 'talibaIAmovimiento');
     juego2.physics.p2.enableBody(talibaIA.jugador);
     talibaIA.jugador.body.setRectangle(80, 40);
     
