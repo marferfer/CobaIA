@@ -193,7 +193,8 @@ function create5() {
     compuerta.body.static = true;
     
     compuerta.body.setRectangle(50, 500);
-    compuerta.animations.frame = 1;
+    compuerta.animations.frame = 0;
+    compuerta.abierta = false;
     compuerta.body.x = 2820;
     compuerta.body.y = 700;
     compuertas.lista.push(compuerta);
@@ -206,6 +207,7 @@ function create5() {
     compuerta.body.static = true;
     compuerta.body.setRectangle(50, 500);
     compuerta.animations.frame = 0;
+    compuerta.abierta = false;
     compuertas.lista.push(compuerta);
 
     //COMPUERTA 3
@@ -216,6 +218,7 @@ function create5() {
     compuerta.body.static = true;
     compuerta.body.setRectangle(50, 500);
     compuerta.animations.frame = 1;
+    compuerta.abierta = true;
     compuertas.lista.push(compuerta);
 
     compuertas.lista[2].frame = 1;
@@ -283,6 +286,7 @@ function create5() {
     /////////////// BOTONES   /////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    // BOTON 0 //solo accesible a la acrobaIA
     botones.grupo = juego.add.group();
     botones.grupo.enableBody = true;
     botones.grupo.physicsBodyType = Phaser.Physics.P2JS;
@@ -290,11 +294,25 @@ function create5() {
     let boton = botones.grupo.create(0, 0, 'boton');
 
     boton.body.setRectangle(61, 15, 0, -5);
-    //boton.body.debug = true;
     boton.body.static = true;
     boton.body.x = 2447;
     boton.body.y = 480;
+    boton.idNum = boton.body.id;
+    
+    botones.lista.push(boton);
+    
+    
+    // BOTON 1 //solo para la caja
 
+    boton = botones.grupo.create(0, 0, 'boton');
+
+    boton.body.setRectangle(61, 15, 0, -5);
+    boton.body.static = true;
+    boton.body.angle = 90;
+    boton.body.x = 2843;
+    boton.body.y = 1311;
+    boton.idNum = boton.body.id;
+    
     botones.lista.push(boton);
 
     // BOTON 2
@@ -302,13 +320,11 @@ function create5() {
     boton = botones.grupo.create(0, 0, 'boton');
 
     boton.body.setRectangle(61, 15, 0, -5);
-    //boton.body.debug = true;
-    ////console.log(boton.body.id); //id: 14
     boton.body.static = true;
-    boton.body.angle = 90;
-    boton.body.x = 2843;
-    boton.body.y = 1311;
-
+    boton.body.x = 6200;
+    boton.body.y = 750;
+    boton.idNum = boton.body.id;
+    
     botones.lista.push(boton);
 
     // BOTON 3
@@ -316,66 +332,45 @@ function create5() {
     boton = botones.grupo.create(0, 0, 'boton');
 
     boton.body.setRectangle(61, 15, 0, -5);
-    //boton.body.debug = true;
-    ////console.log(boton.body.id); //id: 
     boton.body.static = true;
-    boton.body.x = 6200;
-    boton.body.y = 750;
-
+    boton.body.x = 5825;
+    boton.body.y = 1371;
+    boton.idNum = boton.body.id;
+    
     botones.lista.push(boton);
 
     // BOTON 4
 
     boton = botones.grupo.create(0, 0, 'boton');
 
-    boton.body.setRectangle(61, 15, 0, -5);
-    //boton.body.debug = true;
-    ////console.log(boton.body.id); //id: 
+    boton.body.setRectangle(61, 15, 0, -5); 
     boton.body.static = true;
-    boton.body.x = 5825;
-    boton.body.y = 1371;
-
+    boton.body.x = 32960;
+    boton.body.y = 1331;
+    boton.idNum = boton.body.id;
+    
     botones.lista.push(boton);
 
     // BOTON 5
 
     boton = botones.grupo.create(0, 0, 'boton');
 
-    boton.body.setRectangle(61, 15, 0, -5);
-    //boton.body.debug = true;
-    ////console.log(boton.body.id); //id: 
+    boton.body.setRectangle(61, 15, 0, 6);
     boton.body.static = true;
-    boton.body.x = 32960;
+    boton.body.x = 42960;
     boton.body.y = 1331;
+    boton.idNum = boton.body.id;
 
     botones.lista.push(boton);
 
     // BOTON 6
 
-    boton = botones.grupo.create(0, 0, 'boton');
-
-    boton.body.setRectangle(61, 15, 0, -5);
-    //boton.body.debug = true;
-    ////console.log(boton.body.id); //id: 
-    boton.body.static = true;
-    boton.body.x = 42960;
-    boton.body.y = 1331;
-
-    botones.lista.push(boton);
-
-    // BOTON 7 zona 3
-
     boton = botones.grupo.create(7805, 1346, 'boton');
 
-    boton.animations.frame = 6;
-
-    boton.body.setRectangle(61, 15, 0, 6);
-    //boton.body.debug = true;
-    ////console.log(boton.body.id); //id: 
+    boton.animations.frame = 1;
+    boton.body.setRectangle(61, 15, 0, 6); 
     boton.idNum = boton.body.id;
     boton.body.static = true;
-    /*boton.body.x = 52960;
-    boton.body.y = 1331;*/
 
     botones.lista.push(boton);
 
@@ -1049,14 +1044,14 @@ function create5() {
         }
 
 
-        if(body.sprite.key === 'cajaCableado' && tecla_accion.isDown){  
+        /*if(body.sprite.key === 'cajaCableado' && tecla_accion.isDown){  
 
             ////console.log(body.id);
             cajasCableado.lista[0].animations.play('caja_rota');
             let timer =  juego.time.events.add(1250, stopPlataforma, this, 0);
             plataformasMoviles.lista[0].body.rotateRight(25);      
 
-        }
+        }*/
 
         if(body.sprite.key === 'boton'){
             if(body.id == 14) {
@@ -1069,6 +1064,45 @@ function create5() {
             if(body.id === 18){
                 let timer =  juego.time.events.add(1250, stopPlataforma, this, 2);
                 plataformasMoviles.lista[2].body.rotateRight(-25);
+            }
+            
+            if(body.sprite.key === 'boton'){
+
+                if(body.id === 18){
+                    let timer =  juego.time.events.add(1250, stopPlataforma, this, 2);
+                    plataformasMoviles.lista[2].body.rotateRight(-25);
+                }
+
+                if(body.id === botones.lista[0].idNum){
+                	botones.lista[0].animations.frame = 8;
+    			}
+    			            
+    			if(body.id === botones.lista[1].idNum){
+    				botones.lista[1].animations.frame = 8;
+    			}
+    			
+    			if(body.id === botones.lista[2].idNum){
+    				botones.lista[2].animations.frame = 8;
+    			}
+    			
+    			/*if(body.id === botones.lista[3].idNum){
+    				botones.lista[3].animations.frame = 8;
+    			}*/
+    			
+    			/*if(body.id === botones.lista[4].idNum){
+    				botones.lista[4].animations.frame = 8;
+    			}*/
+    			
+    			/*if(body.id === botones.lista[5].idNum){
+    				botones.lista[5].animations.frame = 8;
+    			}*/
+                
+                if(body.id === botones.lista[6].idNum){
+                    rayos.lista[3].body.clearShapes();
+                    rayos.lista[3].animations.stop();
+                    rayos.lista[3].animations.frame = 0;
+                    botones.lista[6].animations.frame = 8;
+                }
             }
         }
 
@@ -1164,6 +1198,39 @@ function create5() {
                 plataformasMoviles.lista[2].body.rotateRight(0);
                 //stopPlataforma(0);
             }
+            
+            if(body.sprite.key === 'boton'){
+                plataformasMoviles.lista[2].body.rotateRight(0);
+                
+                if(body.id === botones.lista[0].idNum) {
+                    botones.lista[0].animations.frame = 0;
+                }
+                
+                if(body.id === botones.lista[1].idNum) {
+                    botones.lista[1].animations.frame = 0;
+                }
+                
+                if(body.id === botones.lista[2].idNum) {
+                    botones.lista[2].animations.frame = 0;
+                }
+                
+                /*if(body.id === botones.lista[3].idNum) {
+                    botones.lista[3].animations.frame = 0;
+                }*/
+                
+                /*if(body.id === botones.lista[4].idNum) {
+                    botones.lista[4].animations.frame = 0;
+                }*/
+                
+                /*if(body.id === botones.lista[5].idNum) {
+                    botones.lista[5].animations.frame = 0;
+                }*/
+                
+                if(body.id === botones.lista[6].idNum) {
+                    botones.lista[6].animations.frame = 0;
+                }
+                //stopPlataforma(0);
+            }
         }
     }
 
@@ -1190,6 +1257,45 @@ function create5() {
             if(body.id === 18){
                 let timer =  juego.time.events.add(1250, stopPlataforma, this, 2);
                 plataformasMoviles.lista[2].body.rotateRight(-25);
+            }
+            
+            if(body.sprite.key === 'boton'){
+
+                if(body.id === 18){
+                    let timer =  juego.time.events.add(1250, stopPlataforma, this, 2);
+                    plataformasMoviles.lista[2].body.rotateRight(-25);
+                }
+
+                if(body.id === botones.lista[0].idNum){
+                	botones.lista[0].animations.frame = 8;
+    			}
+    			            
+    			if(body.id === botones.lista[1].idNum){
+    				botones.lista[1].animations.frame = 8;
+    			}
+    			
+    			if(body.id === botones.lista[2].idNum){
+    				botones.lista[2].animations.frame = 8;
+    			}
+    			
+    			/*if(body.id === botones.lista[3].idNum){
+    				botones.lista[3].animations.frame = 8;
+    			}*/
+    			
+    			/*if(body.id === botones.lista[4].idNum){
+    				botones.lista[4].animations.frame = 8;
+    			}*/
+    			
+    			/*if(body.id === botones.lista[5].idNum){
+    				botones.lista[5].animations.frame = 8;
+    			}*/
+                
+                if(body.id === botones.lista[6].idNum){
+                    rayos.lista[3].body.clearShapes();
+                    rayos.lista[3].animations.stop();
+                    rayos.lista[3].animations.frame = 0;
+                    botones.lista[6].animations.frame = 8;
+                }
             }
         }
 
@@ -1280,6 +1386,39 @@ function create5() {
                 //stopPlataforma(0);
                 plataformasMoviles.lista[2].body.rotateRight(0);
             }
+            
+            if(body.sprite.key === 'boton'){
+                plataformasMoviles.lista[2].body.rotateRight(0);
+                
+                if(body.id === botones.lista[0].idNum) {
+                    botones.lista[0].animations.frame = 0;
+                }
+                
+                if(body.id === botones.lista[1].idNum) {
+                    botones.lista[1].animations.frame = 0;
+                }
+                
+                if(body.id === botones.lista[2].idNum) {
+                    botones.lista[2].animations.frame = 0;
+                }
+                
+                /*if(body.id === botones.lista[3].idNum) {
+                    botones.lista[3].animations.frame = 0;
+                }*/
+                
+                /*if(body.id === botones.lista[4].idNum) {
+                    botones.lista[4].animations.frame = 0;
+                }*/
+                
+                /*if(body.id === botones.lista[5].idNum) {
+                    botones.lista[5].animations.frame = 0;
+                }*/
+                
+                if(body.id === botones.lista[6].idNum) {
+                    botones.lista[6].animations.frame = 0;
+                }
+                //stopPlataforma(0);
+            }
         }
     }
 
@@ -1289,12 +1428,16 @@ function create5() {
         if(body.sprite.key === 'cajaCableado' && shiftTaliDown) {  
 
             if(body.id === 13){
-                compuertas.lista[0].frame = 1;
-                compuertas.lista[0].body.setRectangle(100, 25);
-                compuertas.lista[0].pivot.y = +250;
-                compuertas.lista[0].body.y += 250;
-                cajasCableado.lista[0].animations.play('caja_rota');
-                cajasCableado.lista[0].rota = true;
+            	if(!compuertas.lista[0].abierta){
+	                compuertas.lista[0].frame = 1;
+	                compuertas.lista[0].body.setRectangle(100, 25);
+	                compuertas.lista[0].pivot.y = +250;
+	                compuertas.lista[0].body.y += 250;
+	                compuertas.lista[0].abierta = true;
+	                cajasCableado.lista[0].animations.play('caja_rota');
+	                cajasCableado.lista[0].rota = true;
+            	}
+	                
             
             }else if(body.id === 14){
 
@@ -1316,6 +1459,30 @@ function create5() {
                 plataformasMoviles.lista[2].body.rotateRight(-25);
             }
 
+            if(body.id === botones.lista[0].idNum){
+            	botones.lista[0].animations.frame = 8;
+			}
+			            
+			if(body.id === botones.lista[1].idNum){
+				botones.lista[1].animations.frame = 8;
+			}
+			
+			if(body.id === botones.lista[2].idNum){
+				botones.lista[2].animations.frame = 8;
+			}
+			
+			/*if(body.id === botones.lista[3].idNum){
+				botones.lista[3].animations.frame = 8;
+			}*/
+			
+			/*if(body.id === botones.lista[4].idNum){
+				botones.lista[4].animations.frame = 8;
+			}*/
+			
+			/*if(body.id === botones.lista[5].idNum){
+				botones.lista[5].animations.frame = 8;
+			}*/
+            
             if(body.id === botones.lista[6].idNum){
                 //rayos.lista[3].body.y = 0;
                 rayos.lista[3].body.clearShapes();
@@ -1410,10 +1577,33 @@ function create5() {
 
             if(body.sprite.key === 'boton'){
                 plataformasMoviles.lista[2].body.rotateRight(0);
+                
+                if(body.id === botones.lista[0].idNum) {
+                    botones.lista[0].animations.frame = 0;
+                }
+                
+                if(body.id === botones.lista[1].idNum) {
+                    botones.lista[1].animations.frame = 0;
+                }
+                
+                if(body.id === botones.lista[2].idNum) {
+                    botones.lista[2].animations.frame = 0;
+                }
+                
+                /*if(body.id === botones.lista[3].idNum) {
+                    botones.lista[3].animations.frame = 0;
+                }*/
+                
+                /*if(body.id === botones.lista[4].idNum) {
+                    botones.lista[4].animations.frame = 0;
+                }*/
+                
+                /*if(body.id === botones.lista[5].idNum) {
+                    botones.lista[5].animations.frame = 0;
+                }*/
+                
                 if(body.id === botones.lista[6].idNum) {
-                    botones.lista[6].animations.frame = 6;
-                    //botones.lista[6].body.clearShapes();
-                    //botones.lista[6].body.setRectangle(61, 15, 0, 2);
+                    botones.lista[6].animations.frame = 0;
                 }
                 //stopPlataforma(0);
             }
