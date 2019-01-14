@@ -1,7 +1,5 @@
 function inicio() {
      juego = new Phaser.Game(1920, 800, Phaser.AUTO, '', {preload: preload5, create: create5, update: update5, render: render5});                
-    
-    
 
     function render5() { // Render
         //juego.debug.cameraInfo(juego.camera, 32, 32);

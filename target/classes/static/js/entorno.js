@@ -64,6 +64,21 @@ function preload5() {
     juego.load.image('ascensor','assets/Nivel1/ascensor.png');
     juego.load.image('ventanas', 'assets/Nivel0/ventanas.png');
     juego.load.image('cientificos', 'assets/Nivel0/cientificos.png');
+    
+    juego.load.image('cartel_tanka_derecha', 'assets/images/cartel_tanka_derecha.jpg');
+    juego.load.image('cartel_tanka_izquierda', 'assets/images/cartel_tanka_izquierda.jpg');
+    juego.load.image('cartel_tanka_arriba', 'assets/images/cartel_tanka_arriba.jpg');
+    juego.load.image('cartel_tanka_abajo', 'assets/images/cartel_tanka_abajo.jpg');
+    
+    juego.load.image('cartel_acro_derecha', 'assets/images/cartel_acro_derecha.jpg');
+    juego.load.image('cartel_acro_izquierda', 'assets/images/cartel_acro_izquierda.jpg');
+    juego.load.image('cartel_acro_arriba', 'assets/images/cartel_acro_arriba.jpg');
+    juego.load.image('cartel_acro_abajo', 'assets/images/cartel_acro_abajo.jpg');
+    
+    juego.load.image('cartel_tali_derecha', 'assets/images/cartel_tali_derecha.jpg');
+    juego.load.image('cartel_tali_izquierda', 'assets/images/cartel_tali_izquierda.jpg');
+    juego.load.image('cartel_tali_arriba', 'assets/images/cartel_tali_arriba.jpg');
+    juego.load.image('cartel_tali_abajo', 'assets/images/cartel_tali_abajo.jpg');
 
     juego.load.spritesheet('compuerta', 'assets/images/compuerta.png', 125, 547);
     //juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
@@ -140,6 +155,13 @@ function create5() {
     sueloN1.body.x = 5900;
     sueloN1.body.y = juego.world.height - 655;    
 
+    //decorados por delante del suelo
+    nivel1.decorados[5] = juego.add.image(480, 975, 'cartel_acro_derecha');
+    nivel1.decorados[6] = juego.add.image(2650, 1150, 'cartel_tali_abajo');
+    nivel1.decorados[7] = juego.add.image(3930, 1200, 'cartel_tali_arriba');
+    nivel1.decorados[8] = juego.add.image(6000, 900, 'cartel_tanka_derecha');
+    nivel1.decorados[9] = juego.add.image(7700, 900, 'cartel_tali_abajo');
+    
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// TECLAS   //////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -293,7 +315,7 @@ function create5() {
 
     let boton = botones.grupo.create(0, 0, 'boton');
 
-    boton.body.setRectangle(61, 15, 0, -5);
+    boton.body.setRectangle(61, 15, 0, 6);
     boton.body.static = true;
     boton.body.x = 2447;
     boton.body.y = 480;
@@ -306,7 +328,7 @@ function create5() {
 
     boton = botones.grupo.create(0, 0, 'boton');
 
-    boton.body.setRectangle(61, 15, 0, -5);
+    boton.body.setRectangle(61, 15, 0, 6);
     boton.body.static = true;
     boton.body.angle = 90;
     boton.body.x = 2843;
@@ -319,7 +341,7 @@ function create5() {
 
     boton = botones.grupo.create(0, 0, 'boton');
 
-    boton.body.setRectangle(61, 15, 0, -5);
+    boton.body.setRectangle(61, 15, 0, 6);
     boton.body.static = true;
     boton.body.x = 6200;
     boton.body.y = 750;
@@ -331,7 +353,7 @@ function create5() {
 
     boton = botones.grupo.create(0, 0, 'boton');
 
-    boton.body.setRectangle(61, 15, 0, -5);
+    boton.body.setRectangle(61, 15, 0, 6);
     boton.body.static = true;
     boton.body.x = 5825;
     boton.body.y = 1371;
@@ -343,7 +365,7 @@ function create5() {
 
     boton = botones.grupo.create(0, 0, 'boton');
 
-    boton.body.setRectangle(61, 15, 0, -5); 
+    boton.body.setRectangle(61, 15, 0, 6); 
     boton.body.static = true;
     boton.body.x = 32960;
     boton.body.y = 1331;
@@ -453,7 +475,7 @@ function create5() {
     plataformaBasic.body.angle = 90;
     plataformaBasic.body.x = 5472;
     plataformaBasic.body.y = 1300;
-    plataformaBasic.scale.setTo(1, 4);
+    plataformaBasic.scale.setTo(1, 2);
     plataformaBasic.pos = 1300;
     plataformaBasic.incremento = 2;
     ////console.log(plataformaBasic.body.id); //id: 16
@@ -977,12 +999,12 @@ function create5() {
 /////////DECORADOS POR DELANTE DEL JUGADOR  ///////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    nivel1.decorados[5] = juego.add.image(1000, juego.world.height - 490, 'conexionTuboArriba');
-    nivel1.decorados[6] = juego.add.image(1035, juego.world.height - 1043, 'conexionTuboDerecha');
+    nivel1.decorados[10] = juego.add.image(1000, juego.world.height - 490, 'conexionTuboArriba');
+    nivel1.decorados[11] = juego.add.image(1035, juego.world.height - 1043, 'conexionTuboDerecha');
 
-    nivel1.decorados[7] = juego.add.image(2800, 420, 'compuertaParteSuperior');
-    nivel1.decorados[8] = juego.add.image(6750, 800, 'compuertaParteSuperior');
-    nivel1.decorados[9] = juego.add.image(10430, 475, 'compuertaParteSuperior');
+    nivel1.decorados[12] = juego.add.image(2800, 420, 'compuertaParteSuperior');
+    nivel1.decorados[13] = juego.add.image(6750, 800, 'compuertaParteSuperior');
+    nivel1.decorados[14] = juego.add.image(10430, 475, 'compuertaParteSuperior');
     
     
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

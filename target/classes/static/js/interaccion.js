@@ -647,6 +647,12 @@ function update5() {
 	        inicio();
 	    }
     }
+    
+    
+    if(ctrlR.isDown){
+    	
+    	;
+    }
 
     if (plataformasBasic.lista[1].pos < 700 || plataformasBasic.lista[1].pos > 1310) {
         plataformasBasic.lista[1].incremento *= -1;
