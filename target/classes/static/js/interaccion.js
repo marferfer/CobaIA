@@ -1026,6 +1026,7 @@ function update5() {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     $("#crearGrupo").click(function () {  
+    	//if(nivelCreadoPrev == 0)
     	juego.destroy();
     	menu();
     	document.getElementById("crearGrupo").innerHTML = 'Crear Sala';

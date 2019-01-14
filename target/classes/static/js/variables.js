@@ -3,6 +3,8 @@ var jugPersonajes;
 
 var juegoPruebas;
 
+var nivelCreadoPrev;
+
 var pad1;
 var pad2;
 var pad3;
