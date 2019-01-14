@@ -499,7 +499,7 @@ function update5() {
         //juego.camera.follow(talibaIA.actor);
     }    
 
-    if (myGroupId != '' && !$('#textoOwner').is(':focus')) {
+    if (!$('#textoOwner').is(':focus')) {
 	    if(ctrlT.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_Y)){
 	        nivel1.siguiendo = "tankabaIA";
 	    }
@@ -508,11 +508,8 @@ function update5() {
 	        nivel1.siguiendo = "acrobaIA";
 	    }
 	
-	    if(ctrlU.isDown || pad3.isDown(Phaser.Gamepad.XBOX360_Y)){
-	        ////console.log(talibaIA.muerta);
-	        ////console.log('hola');
+	    if(ctrlU.isDown || pad3.isDown(Phaser.Gamepad.XBOX360_Y)){       
 	        nivel1.siguiendo = "talibaIA";
-	        //juego.camera.follow(talibaIA.actor);
 	    }
     }
 
@@ -666,6 +663,7 @@ function update5() {
 
     ////console.log(plataformasBasic.lista[1].pos);
 
+    //cientificos moviles
     nivel1.decorados[0].x -= 5; 
     if(nivel1.decorados[0].x < -14500){
     	nivel1.decorados[0].x = 500;
@@ -675,15 +673,22 @@ function update5() {
     let posInicial = plataformasBasic.lista[0].body.y;
     if(cajas.lista[1].body.x <= 2935){
         plataformasBasic.lista[0].body.y = 2000;
+		botones.lista[1].animations.frame = 8;
+
     }else{
         plataformasBasic.lista[0].body.y = posInicial;
+        botones.lista[1].animations.frame = 0;
     }
 
     if(cajas.lista[2].body.x < 5849){
+    	
+    	botones.lista[3].animations.frame = 8;
+    	
         compuertas.lista[1].frame = 1;
         compuertas.lista[1].body.setRectangle(100, 25);
         compuertas.lista[1].pivot.y = +250;
         compuertas.lista[1].body.y += 250;
+        compuertas.lista[1].abierta = true;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
