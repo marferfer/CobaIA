@@ -105,6 +105,12 @@ perifericos que se pueden utilizar. Si se pincha en volver, retrocederemos al me
 <p>Para acceder a la aplicación basta con introducir en el navegador la url "localhost:8080" y ya podremos empezar a jugar.</p>
 <p><b> Esta por defecto la IP 10.6.33.11:8080, cámbiala por tu IP </b></p>
 
+<h2>PORTALES DONDE ENCONTRAR EL JUEGO:</h2>
+<p>En las últimas fases de la práctica hemos pasado por diversas dificultades a nivel técnico y a nivel de jugabilidad, así que realizamos un cambio en nuestra estrategia de desarrollo.</p>
+<p>Para empezar, los problemas para el desarrollo del juego online fue demasiado problemático, teníamos un retraso en la visualización de los demás jugadores que no pudimos salvar. Aún así una versión cercana a nuestro objetivo inicial puede verse en https://coba-ia.herokuapp.com/.</p>
+<p>Debido a esto decidimos centrarnos en el desarrollo del videojuego en local. Nos centramos en perfeccionar lo mayor posible los elementos que más flojeaban o que no estaban totalmente pulicdos como eran los botones y la sensación que generaban en el jugador al pulsarlos, la inclusión del agua como un elemento más de los puzles, añadir pistas y señales a los jugadores a modo de tutorial/explicación de cómo avanzar y la inclusión de un segundo nivel jugable.</p>
+<p>Esta versión local puede probarse en las plataformas de NewGrounds(https://www.newgrounds.com/portal/view/724207?updated=1547521862), Kongregate(https://www.kongregate.com/games/JBarbas/cobaia_preview), Gamejolt(https://gamejolt.com/games/coba-ia/390537) y Itch.io(https://marferfer.itch.io/cobaia)</p>
+
 <h2>REFERENCIAS:</h2>
 <p>Hollow Knight, Inside, Ori Blind Forest.</p>
 
