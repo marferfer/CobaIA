@@ -286,7 +286,7 @@ function update2() {
         }
     }*/
     
-    function checkIfCanJump(cobaIA) {
+    function checkIfCanJump2(cobaIA) {
 
         var yAxis = p2.vec2.fromValues(0, 1);
         var result = false;
@@ -305,7 +305,7 @@ function update2() {
         return result;
     }
 
-    if (!checkIfCanJump(tankabaIA)) {
+    if (!checkIfCanJump2(tankabaIA)) {
         //console.log(tankabaIA.jugador.body.angle + ', ' + (tankabaIA.jugador.body.angle >= 0.0 && tankabaIA.jugador.body.angle <= 45.0));
         //let timer =  juego2.time.events.add(1250, function(){tankabaIA.jugador.body.angle = 0;}, this, 0);
         //tankabaIA.jugador.body.angle = 0;
@@ -354,10 +354,9 @@ function update2() {
             tankabaIA.jugador.frame = 0;
         }
     }   
+       
 
-    
-
-    if (cursores.up.isDown && checkIfCanJump(tankabaIA) && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
+    if (cursores.up.isDown && checkIfCanJump2(tankabaIA) && tankabaIA.canImove) { // Si estamos presionando el botón UP y estamos colisionando con alguna plataforma o tal vez el contador de saltos es igual a 1 y además no hay colisión con las escaleras 
         
 
         tankabaIA.jugador.body.moveUp(300);
@@ -376,14 +375,14 @@ function update2() {
 
     ///////////////////////////////////////////////////////controles AcrobaIA
 
-    if(ctrlW.isDown && checkIfCanJump(acrobaIA) && acrobaIA.canImove){
+    if(ctrlW.isDown && checkIfCanJump2(acrobaIA) && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveUp(300);
 
     }else if(ctrlA.isDown && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveLeft(300);
-        if(checkIfCanJump(acrobaIA)){
+        if(checkIfCanJump2(acrobaIA)){
             acrobaIA.jugador.animations.play('movimientoIzquierda');
             acrobaIA.ultimo_sentido = "izquierda";
         }
@@ -391,7 +390,7 @@ function update2() {
     }else if(ctrlD.isDown && acrobaIA.canImove){
 
         acrobaIA.jugador.body.moveRight(300);
-        if(checkIfCanJump(acrobaIA)){
+        if(checkIfCanJump2(acrobaIA)){
             acrobaIA.jugador.animations.play('movimientoDerecha');
             acrobaIA.ultimo_sentido = "derecha";
         }
@@ -414,14 +413,14 @@ function update2() {
 
     ///////////////////////////////////////////////////////controles talibaIA
 
-    if(ctrlH.isDown && checkIfCanJump(talibaIA) && talibaIA.canImove){
+    if(ctrlH.isDown && checkIfCanJump2(talibaIA) && talibaIA.canImove){
 
         talibaIA.jugador.body.moveUp(300);
 
     }else if(ctrlB.isDown && talibaIA.canImove){
 
         talibaIA.jugador.body.moveLeft(300);
-        if(checkIfCanJump(talibaIA)){
+        if(checkIfCanJump2(talibaIA)){
             talibaIA.jugador.animations.play('movimientoIzquierda');
             talibaIA.ultimo_sentido = "izquierda";
         }
@@ -429,7 +428,7 @@ function update2() {
     }else if(ctrlM.isDown && talibaIA.canImove){
 
         talibaIA.jugador.body.moveRight(300);
-        if(checkIfCanJump(talibaIA)){
+        if(checkIfCanJump2(talibaIA)){
             talibaIA.jugador.animations.play('movimientoDerecha');
             talibaIA.ultimo_sentido = "derecha";
         }
@@ -446,6 +445,27 @@ function update2() {
         }
         
     }
+    
+    
+    
+    if(cajas.lista[3].body.x <= 3200 && cajas.lista[3].body.x >= 2820 && cajas.lista[3].body.y <= 1300 && cajas.lista[3].body.y >= 1000){
+        //plataformasBasic.lista[0].body.y = 2000;
+    	botones.lista[indexBotonC].animations.frame = 8;
+    	
+    	if(!compuertas.lista[3].abierta){
+            compuertas.lista[3].frame = 1;
+            
+            compuertas.lista[3].body.setRectangle(100, 25);
+            compuertas.lista[3].pivot.y = +250;
+            //compuertas.lista[3].body.y += 250;
+            compuertas.lista[3].abierta = true;
+    	}
+
+    }else{
+        //plataformasBasic.lista[0].body.y = posInicial;
+        botones.lista[7].animations.frame = 0;
+    }
+    
 }
 
 function reinicia() {

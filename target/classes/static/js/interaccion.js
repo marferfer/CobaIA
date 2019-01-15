@@ -929,7 +929,37 @@ function update5() {
     }   
 
     if(tankabaIA.jugador.body.x > 11000){
-        juego.destroy();
+    	
+
+            //this.raf.stop();
+
+    		juego.state.destroy();
+    		juego.sound.destroy();
+
+            juego.scale.destroy();
+            juego.stage.destroy();
+            juego.input.destroy();
+            //juego.physics.destroy();
+
+            /*this.state = null;
+            this.cache = null;
+            this.input = null;
+            this.load = null;
+            this.sound = null;
+            this.stage = null;
+            this.time = null;
+            this.world = null;
+            this.isBooted = false;
+
+            this.renderer.destroy(false);*/
+    	
+            Phaser.Canvas.removeFromDOM(juego.canvas);
+
+            //Phaser.GAMES[this.id] = null;
+
+       
+
+        
         nivel2();
     }
 
@@ -958,9 +988,10 @@ function update5() {
         }
         //console.log(tankabaIA.jugador.body.x + ', ' + tankabaIA.jugador.body.y);
     }    
-    else {
+    else if(nivelJuego == 1) {
         //acrobaIA.jugador.body.angle = 0;
-        baseTrepar.body.x = 0;
+        
+    	baseTrepar.body.x = 0;
         baseTrepar.body.y = 0;
     }
     if(wAcroDown && checkIfCanJump(acrobaIA) && acrobaIA.canImove){

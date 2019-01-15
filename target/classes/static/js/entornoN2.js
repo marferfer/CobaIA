@@ -1,4 +1,6 @@
-
+var indexBoton;
+var indexBotonB;
+var indexBotonC;
 
 
 function preload2() {
@@ -23,13 +25,14 @@ function preload2() {
     juego2.load.image('cable', 'assets/images/cable.png');
     juego2.load.image('frasco', 'assets/images/frasco.png');
     juego2.load.image('plataformaMovil', 'assets/images/plataformaMovil.png');
-    juego2.load.image('boton', 'assets/images/boton.png');
+    
     juego2.load.image('conexionTuboArriba', 'assets/images/conexionTuboArriba.png');
     juego2.load.image('conexionTuboDerecha', 'assets/images/conexionTuboDerecha.png');
     juego2.load.image('indicadorJ1', 'assets/images/J1 azul.png');
     juego2.load.image('indicadorJ2', 'assets/images/J2 rojo.png');
     juego2.load.image('indicadorJ3', 'assets/images/J3 rosa.png');
     juego2.load.image('pilaCadaveres', 'assets/images/pilaCadaveres.png');
+    juego2.load.image('compuertaParteSuperior', 'assets/images/compuertaParteSuperior.png');
 
     //juego.load.image('ventilador', 'assets/images/ventilador.png');
 
@@ -42,6 +45,7 @@ function preload2() {
     juego2.load.spritesheet('tankabaIAmovimiento', 'assets/images/tankabaIAmovimiento.png', 93, 59, 59, 6, 7);
     juego2.load.spritesheet('acrobaIAmovimiento', 'assets/images/acrobaIAmovimiento.png', 95, 51, 59, 2, 3);
     juego2.load.spritesheet('bobina', 'assets/images/bobina.png', 287, 49, 6, 0, 0);
+    juego2.load.spritesheet('boton', 'assets/images/Button.png', 99, 28, 10, 0, 0);
     //juego.load.spritesheet('aire', 'assets/images/aire.png', 175, 295, 5, 0, 0);
 
     juego2.load.physics('sueloN1Parte1Collisions', 'assets/data/sueloN2Parte1.json');
@@ -67,7 +71,7 @@ function create2() {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// NIVEL 1   /////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    niveljuego2 = 1;
+    niveljuego = 2;
     nivel1.fondo = juego2.add.sprite(0, -500, 'fondoN1');
 
     //Decorados que se ven detras del jugador
@@ -146,7 +150,8 @@ function create2() {
     //compuerta.body.debug = true;
     compuerta.body.static = true;
     compuerta.pivot.y = 250;
-    compuerta.body.setRectangle(75, 25);
+    compuerta.body.setRectangle(50, 500);
+    compuerta.abierta = false;
     compuerta.animations.frame = 0;
     //compuerta.body.x = 4475;
     //compuerta.body.y = juego2.world.height - 500;
@@ -167,7 +172,7 @@ function create2() {
     cajaCableado.body.angle = 180;
 
     cajaCableado.body.debug = false;
-    cajaCableado.animations.frame = 0;
+    cajaCableado. = 0;
     cajaCableado.animations.add('caja_rota', [1, 2, 3], 10, true);
     cajaCableado.body.static = true;
     cajaCableado.body.setRectangle(23, 69, 15);
@@ -185,33 +190,48 @@ function create2() {
 
     let boton = botones.grupo.create(3048, 1185, 'boton');
 
-    boton.body.setRectangle(61, 15, 0, -5);
+    boton.body.setRectangle(61, 15, 0, 6);
     //boton.body.debug = true;
     boton.body.static = true;
     //boton.body.x = 2600;
     //boton.body.y = juego2.world.height - 275;
-
+    boton.idNum = boton.body.id;
+    
     botones.lista.push(boton);
+    indexBotonC = botones.lista.indexOf(boton);
+    //console.log(botones.lista.indexOf(boton));
+    
+    
 
     let botonSubir = botones.grupo.create(1282, juego2.world.height - 205, 'boton');
 
-    botonSubir.body.setRectangle(61, 15, 0, -5);
+    botonSubir.body.setRectangle(61, 15, 0, 6);
     //boton.body.debug = true;
     botonSubir.body.static = true;
     //boton.body.x = 2600;
     //boton.body.y = juego2.world.height - 275;
+    
+    botonSubir.idNum = botonSubir.body.id;
+
 
     botones.lista.push(botonSubir);
+    //console.log(botones.lista.indexOf(botonSubir));
+    indexBoton = botones.lista.indexOf(botonSubir);
+    //botones.lista[indexBoton].animations.frame = 8;
+    
 
     let botonBajar = botones.grupo.create(1182, juego2.world.height - 205, 'boton');
 
-    botonBajar.body.setRectangle(61, 15, 0, -5);
+    botonBajar.body.setRectangle(61, 15, 0, 6);
     //boton.body.debug = true;
     botonBajar.body.static = true;
     //boton.body.x = 2600;
     //boton.body.y = juego2.world.height - 275;
+    botonBajar.idNum = botonBajar.body.id;
 
     botones.lista.push(botonBajar);
+    console.log(botones.lista.indexOf(botonBajar));
+    indexBotonB = botones.lista.indexOf(botonBajar);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// PLATAFORMAS MOVILES   /////////////////////////////////////////////////////////////////////////////////
@@ -439,8 +459,8 @@ function create2() {
     tankabaIA.jugador.animations.add('movimientoIzquierda', [30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46,
                                                              47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58], 60, true);
 
-    tankabaIA.jugador.body.onBeginContact.add(colisionInicialTankabaIA, this);
-    tankabaIA.jugador.body.onEndContact.add(colisionFinalTankabaIA, this);
+    tankabaIA.jugador.body.onBeginContact.add(colisionInicialTankabaIA2, this);
+    tankabaIA.jugador.body.onEndContact.add(colisionFinalTankabaIA2, this);
 
     //indicadorJ1 = juego2.add.sprite(2100, juego2.world.height - 225, 'indicadorJ1');
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -494,6 +514,7 @@ function create2() {
 
     //nivel1.decorados[2] = juego2.add.image(1610, juego2.world.height - 490, 'conexionTuboArriba');
     //nivel1.decorados[3] = juego2.add.image(1634, juego2.world.height - 1043, 'conexionTuboDerecha');
+    nivel1.decorados[15] = juego2.add.image(3428, 645, 'compuertaParteSuperior');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -537,9 +558,8 @@ function create2() {
 
     }
 
-     function colisionInicialTankabaIA(body, bodyB, shapeA, shapeB, equation){
-
-
+     function colisionInicialTankabaIA2(body, bodyB, shapeA, shapeB, equation){
+    	 
         if(body.sprite.key === 'cajaCableado' && tecla_accion.isDown){  
 
             //console.log(body.id);
@@ -549,16 +569,20 @@ function create2() {
 
         }
 
-        if(body.id === 13){
+        if(body.id === botones.lista[indexBotonB].idNum){
             //console.log(body.id);
             //animacion de boton presionado
+        	//console.log("HOLA bajar");
+        	botones.lista[indexBotonB].animations.frame = 8;
             let timer =  juego2.time.events.add(6900, stopPlataforma, this, ascensores.lista[0].direccion);
             ascensores.lista[0].body.moveDown(125);
         }
 
-        if(body.id === 12){
+        if(body.id === botones.lista[indexBoton].idNum){
+        	
             //console.log(body.id);
             //animacion de boton presionado
+        	botones.lista[indexBoton].animations.frame = 8;
             let timer =  juego2.time.events.add(6900, stopPlataforma, this, ascensores.lista[0].direccion);
             ascensores.lista[0].body.moveUp(125);
         }
@@ -637,13 +661,17 @@ function create2() {
         }
     }
 
-    function colisionFinalTankabaIA(body, bodyB, shapeA, shapeB, equation){
+    function colisionFinalTankabaIA2(body, bodyB, shapeA, shapeB, equation){
 
         if(body.sprite !== null){
 
             if(body.sprite.key === 'boton'){
-                //plataformasMoviles.lista[0].body.rotateRight(0);
-                //stopPlataforma(0);
+            	if(body.id === botones.lista[indexBotonB].idNum){
+            		botones.lista[indexBotonB].animations.frame = 0;
+            	}
+            	if(body.id === botones.lista[indexBoton].idNum){
+            		botones.lista[indexBoton].animations.frame = 0;
+            	}
             }
         }
     }
@@ -659,16 +687,18 @@ function create2() {
 
         }
 
-        if(body.id === 13){
+        if(body.id === botones.lista[indexBotonB].idNum){
             //console.log(body.id);
             //animacion de boton presionado
+        	botones.lista[indexBotonB].animations.frame = 8;
             let timer =  juego2.time.events.add(6900, stopPlataforma, this, ascensores.lista[0].direccion);
             ascensores.lista[0].body.moveDown(125);
         }
 
-        if(body.id === 12){
+        if(body.id === botones.lista[indexBoton].idNum){
             //console.log(body.id);
             //animacion de boton presionado
+        	botones.lista[indexBoton].animations.frame = 8;
             let timer =  juego2.time.events.add(6900, stopPlataforma, this, ascensores.lista[0].direccion);
             ascensores.lista[0].body.moveUp(125);
         }
@@ -748,12 +778,16 @@ function create2() {
     }
 
     function colisionFinalAcrobaIA(body, bodyB, shapeA, shapeB, equation){
-
+    	botones.lista[indexBotonB].animations.frame = 0;
         if(body.sprite !== null){
 
             if(body.sprite.key === 'boton'){
-                //plataformasMoviles.lista[0].body.rotateRight(0);
-                //stopPlataforma(0);
+            	if(body.id === botones.lista[indexBotonB].idNum){
+            		botones.lista[indexBotonB].animations.frame = 0;
+            	}
+            	if(body.id === botones.lista[indexBoton].idNum){
+            		botones.lista[indexBoton].animations.frame = 0;
+            	}
             }
         }
     }
@@ -779,16 +813,18 @@ function create2() {
             }
         }
 
-        if(body.id === 13){
+        if(body.id === botones.lista[indexBotonB].idNum){
             //console.log(body.id);
             //animacion de boton presionado
+        	botones.lista[indexBotonB].animations.frame = 8;
             let timer =  juego2.time.events.add(6900, stopPlataforma, this, ascensores.lista[0].direccion);
             ascensores.lista[0].body.moveDown(125);
         }
 
-        if(body.id === 12){
+        if(body.id === botones.lista[indexBoton].idNum){
             //console.log(body.id);
             //animacion de boton presionado
+        	botones.lista[indexBoton].animations.frame = 8;
             let timer =  juego2.time.events.add(6900, stopPlataforma, this, ascensores.lista[0].direccion);
             ascensores.lista[0].body.moveUp(125);
         }
@@ -867,11 +903,17 @@ function create2() {
     }
 
     function colisionFinalTalibaIA(body, bodyB, shapeA, shapeB, equation){
-
+       
        if(body.sprite !== null){
 
             if(body.sprite.key === 'boton'){
-                //plataformasMoviles.lista[0].body.rotateRight(0);
+            	if(body.id === botones.lista[indexBotonB].idNum){
+            		botones.lista[indexBotonB].animations.frame = 0;
+            	}
+            	if(body.id === botones.lista[indexBoton].idNum){
+            		botones.lista[indexBoton].animations.frame = 0;
+            	}
+            	//plataformasMoviles.lista[0].body.rotateRight(0);
                 //stopPlataforma(0);
             }
         }
@@ -879,13 +921,15 @@ function create2() {
 
     function colisionInicialCaja(body, bodyB, shapeA, shapeB, equation){
 
-       //if(body.sprite !== null){
+       /*if(body.sprite !== null){
 
-            //if(body.sprite.key === 'boton'){
-                compuertas.lista[0].animations.frame = 1;
+            if(body.sprite.key === 'caja'){
+                
+            	
+            	//compuertas.lista[0].animations.frame = 1;
                 //stopPlataforma(0);
-            //}
-        //}
+            }
+        //}*/
     }
 
     function colisionFinalCaja(body, bodyB, shapeA, shapeB, equation){
