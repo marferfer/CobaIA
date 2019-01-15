@@ -79,6 +79,8 @@ function preload5() {
     juego.load.image('cartel_tali_izquierda', 'assets/images/cartel_tali_izquierda.jpg');
     juego.load.image('cartel_tali_arriba', 'assets/images/cartel_tali_arriba.jpg');
     juego.load.image('cartel_tali_abajo', 'assets/images/cartel_tali_abajo.jpg');
+    juego.load.image('agua', 'assets/images/AGUA.png');
+    juego.load.image('sueloU', 'assets/images/sueloN1Parte3-U.png');
 
     juego.load.spritesheet('compuerta', 'assets/images/compuerta.png', 125, 547);
     //juego.load.spritesheet('personaje', 'assets/images/personaje.png', 47, 73);
@@ -90,6 +92,7 @@ function preload5() {
     juego.load.spritesheet('bobina', 'assets/images/bobina.png', 287, 49, 6, 0, 0);
     juego.load.spritesheet('aire', 'assets/images/aire.png', 175, 295, 5, 0, 0);
     juego.load.spritesheet('boton', 'assets/images/Button.png', 99, 28, 10, 0, 0);
+    juego.load.spritesheet('burbujas', 'assets/images/Burbujas.png', 540, 452, 28, 0, 0);
 
     juego.load.physics('sueloN1Parte1Collisions', 'assets/data/sueloN1Parte1.json');
     //juego.load.physics('sueloN1Parte2Collisions', 'assets/data/sueloN1Parte2.json');
@@ -108,7 +111,7 @@ function create5() {
     /////////////// WEBSOCKETS   //////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	connect(); 
+	//connect(); 
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////// FISICAS DEL MUNDO   ///////////////////////////////////////////////////////////////////////////////////
@@ -143,6 +146,8 @@ function create5() {
     nivel1.grupo.physicsBodyType = Phaser.Physics.P2JS;
     
     nivel1.siguiendo = miCobaIA;
+    
+    
 
     let sueloN1 = nivel1.grupo.create(0, juego.world.height -300, 'sueloN1Parte1');
     juego.physics.p2.enableBody(sueloN1);
@@ -619,7 +624,7 @@ function create5() {
     bobinas.grupo.enableBody = true;
     bobinas.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
-    let bobina = bobinas.grupo.create(8900, 940, 'bobina2');
+    let bobina = bobinas.grupo.create(7474, 1250, 'bobina2');
     bobina.body.angle = 90;
 
     bobina.body.clearShapes();
@@ -633,96 +638,12 @@ function create5() {
     //bobina.body.y = juego.world.height - 260;
 
     bobinas.lista.push(bobina);
-
+    
     rayos.grupo = juego.add.group();
     rayos.grupo.enableBody = true;
     rayos.grupo.physicsBodyType = Phaser.Physics.P2JS;
 
     let rayo = rayos.grupo.create(bobina.body.x, bobina.body.y, 'bobina');
-
-    rayo.body.setRectangle(220, 10);
-
-    //bobina.body.debug = true;
-    rayo.body.static = true;
-    rayo.body.angle = 90;
-    //pilaCadaveres.pivot.x = 150;
-    //pilaCadaveres.body.setRectangle(300, 25, -150);
-
-    //rayo.body.x = 12000;
-    //rayo.body.y = juego.world.height - 1260;
-
-
-    rayo.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
-    rayo.animations.play('bobina_encendida');
-
-    rayos.lista.push(rayo);
-
-
-
-    //BOBINA 2
-
-    rayo = rayos.grupo.create(9404, 830, 'bobina');
-    //bobina.body.angle = 90;
-
-    rayo.body.setRectangle(220, 10);
-
-    //bobina.body.debug = true;
-    rayo.body.static = true;
-    //pilaCadaveres.pivot.x = 150;
-    //pilaCadaveres.body.setRectangle(300, 25, -150);
-
-    //bobina.body.x = 12000;
-    //bobina.body.y = juego.world.height - 260;
-
-    //bobina.body.x = 1200;
-    //bobina.body.y = juego.world.height - 260;
-
-
-    rayo.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
-    rayo.animations.play('bobina_encendida');
-
-    rayos.lista.push(rayo);  
-
-    //BOBINA 3
-
-    rayo = rayos.grupo.create(9684, 830, 'bobina');
-    //rayo.body.angle = 90;
-
-    rayo.body.setRectangle(220, 10);
-
-    //rayo.body.debug = true;
-    rayo.body.static = true;
-    //pilaCadaveres.pivot.x = 150;
-    //pilaCadaveres.body.setRectangle(300, 25, -150);
-
-    //rayo.body.x = 12000;
-    //rayo.body.y = juego.world.height - 260;
-    //bobina.body.x = 1200;
-    //bobina.body.y = juego.world.height - 260;
-
-    rayo.animations.add('bobina_encendida', [1, 2, 3, 4, 5], 30, true);
-    rayo.animations.play('bobina_encendida');
-
-    rayos.lista.push(rayo);  
-
-    //BOBINA 4
-
-    bobina = bobinas.grupo.create(7474, 1250, 'bobina2');
-    bobina.body.angle = 90;
-
-    bobina.body.clearShapes();
-    bobina.body.loadPolygon('bobina2Collisions', 'bobina2');
-
-    //bobina.body.debug = true;
-    bobina.body.static = true;
-    //pilaCadaveres.pivot.x = 150;
-    //pilaCadaveres.body.setRectangle(300, 25, -150);
-    //bobina.body.x = 1200;
-    //bobina.body.y = juego.world.height - 260;
-
-    bobinas.lista.push(bobina);
-
-    rayo = rayos.grupo.create(bobina.body.x, bobina.body.y, 'bobina');
     rayo.body.angle = 90;
 
     rayo.body.setRectangle(220, 10);
@@ -898,7 +819,7 @@ function create5() {
     //tankabaIA.jugador = juego.add.sprite(11200, juego.world.height - 225, 'tankabaIAmovimiento');
 
     //Cambiar 340, juego.world.height - 225
-    tankabaIA.jugador = juego.add.sprite(10000, juego.world.height - 405, 'tankabaIAmovimiento');
+    tankabaIA.jugador = juego.add.sprite(340, juego.world.height - 425, 'tankabaIAmovimiento');
 
     tankabaIA.jugador.scale.setTo(1.3, 1.3);
     juego.physics.p2.enableBody(tankabaIA.jugador);
@@ -994,6 +915,33 @@ function create5() {
     plataformaBasic.body.collideWorldBounds = true;
 
     plataformasBasic.lista.push(plataformaBasic);
+    
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////// AGUA   ////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    aguaL.grupo = juego.add.group();
+    aguaL.grupo.enableBody = true;
+    aguaL.grupo.physicsBodyType = Phaser.Physics.P2JS;
+
+    let agua = aguaL.grupo.create(9400, 1085, 'agua');
+
+    agua.body.setRectangle(900, 10);
+    
+    agua.pivot.y = -70;
+
+    //agua.body.debug = true;
+    agua.body.static = true;
+
+
+    let burbujas = juego.add.sprite(9150, 1055, 'burbujas');
+
+    //agua.body.debug = true;
+    burbujas.animations.add('burbujasMove', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+    										 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], 4, true);
+    burbujas.animations.play('burbujasMove');
+
+    aguaL.lista.push(agua);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////DECORADOS POR DELANTE DEL JUGADOR  ///////////////////////////////////////////////////////////////////////////
@@ -1005,6 +953,9 @@ function create5() {
     nivel1.decorados[12] = juego.add.image(2800, 420, 'compuertaParteSuperior');
     nivel1.decorados[13] = juego.add.image(6750, 800, 'compuertaParteSuperior');
     nivel1.decorados[14] = juego.add.image(10430, 475, 'compuertaParteSuperior');
+    nivel1.decorados[15] = juego.add.image(8955, 1023, 'sueloU');
+    nivel1.decorados[15] = juego.add.image(8955, 1123, 'sueloU');
+    nivel1.decorados[15] = juego.add.image(8955, 1223, 'sueloU');
     
     
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1120,15 +1071,21 @@ function create5() {
     			}*/
                 
                 if(body.id === botones.lista[6].idNum){
-                    rayos.lista[3].body.clearShapes();
-                    rayos.lista[3].animations.stop();
-                    rayos.lista[3].animations.frame = 0;
+                    rayos.lista[0].body.clearShapes();
+                    rayos.lista[0].animations.stop();
+                    rayos.lista[0].animations.frame = 0;
                     botones.lista[6].animations.frame = 8;
                 }
             }
         }
 
         if(body.sprite.key === 'bobina'){
+
+            tankabaIA.muerta = true;
+
+        }
+        
+        if(body.sprite.key === 'agua'){
 
             tankabaIA.muerta = true;
 
@@ -1313,9 +1270,9 @@ function create5() {
     			}*/
                 
                 if(body.id === botones.lista[6].idNum){
-                    rayos.lista[3].body.clearShapes();
-                    rayos.lista[3].animations.stop();
-                    rayos.lista[3].animations.frame = 0;
+                    rayos.lista[0].body.clearShapes();
+                    rayos.lista[0].animations.stop();
+                    rayos.lista[0].animations.frame = 0;
                     botones.lista[6].animations.frame = 8;
                 }
             }
@@ -1473,6 +1430,12 @@ function create5() {
             }    
 
         }
+        
+        if(body.sprite.key === 'agua'){
+
+            tankabaIA.muerta = true;
+
+        }
 
         if(body.sprite.key === 'boton'){
 
@@ -1507,9 +1470,9 @@ function create5() {
             
             if(body.id === botones.lista[6].idNum){
                 //rayos.lista[3].body.y = 0;
-                rayos.lista[3].body.clearShapes();
-                rayos.lista[3].animations.stop();
-                rayos.lista[3].animations.frame = 0;
+                rayos.lista[0].body.clearShapes();
+                rayos.lista[0].animations.stop();
+                rayos.lista[0].animations.frame = 0;
                 botones.lista[6].animations.frame = 8;
                 //botones.lista[6].body.clearShapes();
                 //botones.lista[6].body.setRectangle(61, 15, 0, 4);
@@ -1652,7 +1615,7 @@ function stopPlataforma(i){
     plataformasMoviles.lista[i].body.rotateRight(0);
 }
 
-function updateMyGameState() {
+/*function updateMyGameState() {
 	var myKeyEvent;
 	switch (miCobaIA) {
 	case 'tankabaIA':
@@ -1888,4 +1851,4 @@ function connect() {
 		updateGSInterval = null;
 		//connect();
 	}
-}
+}*/

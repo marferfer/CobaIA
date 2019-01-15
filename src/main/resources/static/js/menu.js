@@ -1,7 +1,7 @@
-var game = new Phaser.Game(1920, 800, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
 
 function menu(){
-    game = new Phaser.Game(1920, 800, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
+    game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
 }
 function preload() {
 
@@ -39,12 +39,15 @@ function create() {
     game.stage.backgroundColor = '#182d3b';
 
     background = game.add.tileSprite(0, 0, 1920, 800, 'background');
+    background.scale.setTo(0.8, 0.8);
 
-    title = game.add.sprite(game.world.centerX - 769, 50, 'title');
+    title = game.add.sprite(game.world.centerX - 350, 50, 'title');
+    title.scale.setTo(0.5, 0.5);
 
-    buttonOnline = game.add.button(game.world.centerX - 840, 550, 'buttonOnline', actionOnClickCharacter, this, 2, 1, 0);
-    buttonLocal = game.add.button(game.world.centerX - 580, 550, 'buttonLocal', actionOnClickLocal, this, 2, 1, 0);
-    buttonControles = game.add.button(game.world.centerX - 320, 550, 'buttonControles', actionOnClickControl, this, 2, 1, 0);
+    buttonOnline = game.add.button(game.world.centerX - 400, 450, 'buttonOnline', actionOnClickCharacter, this, null, null, 0);
+    buttonOnline.alpha = 0.5;
+    buttonLocal = game.add.button(game.world.centerX - 200, 450, 'buttonLocal', actionOnClickLocal, this, 2, 1, 0);
+    buttonControles = game.add.button(game.world.centerX, 450, 'buttonControles', actionOnClickControl, this, 2, 1, 0);
     //buttonExit = game.add.button(game.world.centerX - 360, 550, 'buttonSalir', actionOnClickExit, this, 2, 1, 0); //game.world.centerX - 320, 550
 
     //buttonPruebas = game.add.button(game.world.centerX - 220, 550, 'buttonSalir', actionOnClickPruebas, this, 2, 1, 0); //game.world.centerX - 320, 550
@@ -84,17 +87,16 @@ function out() {
 function actionOnClickLocal () {
     game.destroy();
     inicio();
-    //nivel2();
-    document.getElementById("crearGrupo").innerHTML = "Salir al Menú";
-    document.getElementById("crearGrupo").className = "btn btn-danger";
+    //document.getElementById("crearGrupo").innerHTML = "Salir al Menú";
+    //document.getElementById("crearGrupo").className = "btn btn-danger";
     
-    document.getElementById("entrarGrupo").innerHTML = "Controles";
+    //document.getElementById("entrarGrupo").innerHTML = "Controles";
 
 }
 
 function actionOnClickCharacter () {
-    game.destroy();
-    personajes();
+    /*game.destroy();
+    personajes();*/
     //pers = true;
 
 }

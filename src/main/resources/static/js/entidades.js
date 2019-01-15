@@ -148,6 +148,13 @@ class Bobinas extends Objetos{
     }
 }
 
+class AguaL extends Objetos{
+
+    constructor(){
+        super();
+    }
+}
+
 class Ventiladores extends Objetos{
 
     constructor(){
@@ -200,5 +207,6 @@ lasers = null;
  let pilasCadaveres = new PilaCadaveres();
  let rayos = new Rayos();
  let bobinas = new Bobinas();
+ let aguaL = new AguaL();
  let ventiladores = new Ventiladores();
  let ascensores = new Ascensor();

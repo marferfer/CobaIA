@@ -1,5 +1,7 @@
 function inicio() {
-     juego = new Phaser.Game(1920, 800, Phaser.AUTO, '', {preload: preload5, create: create5, update: update5, render: render5});                
+     juego = new Phaser.Game(800, 600, Phaser.AUTO, '', {preload: preload5, create: create5, update: update5, render: render5});                
+    
+    
 
     function render5() { // Render
         //juego.debug.cameraInfo(juego.camera, 32, 32);
@@ -8,9 +10,7 @@ function inicio() {
 
     function reinicia_inmediato() {
         location.reload();
-    } 
-
-    
+    }     
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -93,7 +93,7 @@ function loop() {
 var miCobaIA = '';
 
 function personajes() {
-     jugPersonajes = new Phaser.Game(1920, 800, Phaser.AUTO, '', {preload: preload6, create: create6});  
+     jugPersonajes = new Phaser.Game(800, 600, Phaser.AUTO, '', {preload: preload6, create: create6});  
 
      function render6() { // Render
         //juego.debug.cameraInfo(juego.camera, 32, 32);
@@ -106,7 +106,7 @@ function personajes() {
 }
 
 function pruebas() {
-     juegoPruebas = new Phaser.Game(1920, 800, Phaser.AUTO, '', {preload: preloadP, create: createP, update: updateP, render: renderP});                
+     juegoPruebas = new Phaser.Game(800, 600, Phaser.AUTO, '', {preload: preloadP, create: createP, update: updateP, render: renderP});                
     
     
 
@@ -123,7 +123,7 @@ function pruebas() {
 }
 
 function nivel2() {
-     juego2 = new Phaser.Game(1920, 800, Phaser.AUTO, '', {preload: preload2, create: create2, update: update2, render: render2});                
+     juego2 = new Phaser.Game(800, 600, Phaser.AUTO, '', {preload: preload2, create: create2, update: update2, render: render2});                
     
     
 
@@ -140,7 +140,7 @@ function nivel2() {
 }
 
 function nivel3() {
-     game = new Phaser.Game(1920, 800, Phaser.AUTO, '', {preload: preload3, create: create3});                
+     game = new Phaser.Game(800, 600, Phaser.AUTO, '', {preload: preload3, create: create3});                
 
     function render3() { // Render
         //juego.debug.cameraInfo(juego.camera, 32, 32);
@@ -155,7 +155,7 @@ function nivel3() {
 }
 
 function controles() {
-     game = new Phaser.Game(1920, 800, Phaser.AUTO, '', {preload: preload4, create: create4});                
+     game = new Phaser.Game(800, 600, Phaser.AUTO, '', {preload: preload4, create: create4});                
 
     function render4() { // Render
         //juego.debug.cameraInfo(juego.camera, 32, 32);
@@ -176,7 +176,7 @@ function controles() {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-hereIam();
+//hereIam();
 //checkUsers();
 
 
@@ -200,7 +200,7 @@ var invitar = false;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //agregamos un nuevo usuario y password a los ficheros 
-function addUserToFile(item){
+/*function addUserToFile(item){
 	$.ajax({
 		method: "POST",
 		url:'http://localhost:8080/ficheros',
@@ -231,17 +231,7 @@ function getUsersAndPasswords(callback){
 var usersConnection;
 
 //no borrar de momento, puede resultar util mas tarde
-/*function hola123(callback){
-	$.ajax({
-		url:'http://localhost:8080/items/{password}'
-	}).done(function(items){
-		callback(items);
-	})
-}
 
-hola123(function (pw) {
-    //console.log(pw);
-});*/
 
 //Load items from server
 function loadItems(callback) {
@@ -449,11 +439,7 @@ function logInSignIn() {
 	    			for (var i = 0; i < items.length; i += 2) {
 	    				if (value == items[i] && value2 == items[i+1]) {
 	    					userMatches = true;
-	    					i = items.length;    					
-	    					/*createItem(item, function (itemWithId) {
-	    	                    //When item with id is returned from server
-	    	    				showUser(itemWithId);
-	    	                });*/    					
+	    					i = items.length; 					
 	    					showUser(item);
 	    					connectToUsers();
 	    	                var element = document.getElementById("exampleInputEmail1");
@@ -463,9 +449,6 @@ function logInSignIn() {
 	    	                var element2 = document.getElementById("title");
 	    	                element2.parentNode.removeChild(element2);
 	    	                document.getElementById("loader").style.visibility = "visible";
-	    	                /*var element3 = document.getElementById("pantallaInicio");
-	    	                element3.style.visibility = "hidden";
-	    	                element3.style.zIndex = "2";*/
 	    	                var element4 = document.getElementById("contrasena");
 	    	                element4.parentNode.removeChild(element4);
 	    	                var element5 = document.getElementById("passUser");
@@ -477,9 +460,6 @@ function logInSignIn() {
 	    	                
 	    	   
 	    	                usuario = value;
-	    	                /*if (usuario == "admin") {
-	    	        			checkUsers();
-	    	        		}*/
 	    				}
 	    			}
 	    		});
@@ -512,11 +492,6 @@ function logInSignIn() {
 					document.getElementById("confirmContrasena").innerHTML = '<span style="color:red"> <b>Las contraseñas no concuerdan</b> </span>';
 				}
 				else if (!repeatedUser){
-					/*createItem(item, function (itemWithId) {
-	                    //When item with id is returned from server
-	    				showUser(itemWithId);
-	    				addUserToFile(itemWithId);
-	                });*/
 					
 					showUser(item);
 					addUserToFile(item);
@@ -528,9 +503,6 @@ function logInSignIn() {
 	                element1.parentNode.removeChild(element1);
 	                var element2 = document.getElementById("title");
 	                element2.parentNode.removeChild(element2);
-	                /*var element3 = document.getElementById("pantallaInicio");
-	                element3.style.visibility = "hidden";
-	                element3.style.zIndex = "2";*/
 	                document.getElementById("loader").style.visibility = "visible";
 	                var element4 = document.getElementById("contrasena");
 	                element4.parentNode.removeChild(element4);
@@ -787,22 +759,6 @@ $(document).ready(function () {
         	enSala = false;
         	miSala = null;
         	miSala2 = null;
-        	/*loadGrupos(function (grupos) {
-        		for (var i = 0; i < grupos.length; i++) {
-        			if (grupos[i].usuario1 == usuario) {
-        				grupos[i].usuario1 = '';
-        				updateGrupo(grupos[i]);
-        			}
-        			else if (grupos[i].usuario2 == usuario) {
-        				grupos[i].usuario2 = '';
-        				updateGrupo(grupos[i]);
-        			}
-        			else if (grupos[i].usuario3 == usuario) {
-        				grupos[i].usuario3 = '';
-        				updateGrupo(grupos[i]);
-        			}
-        		}
-        	});*/
         	document.getElementById("info").innerHTML = '';
 			document.getElementById("salas").innerHTML = '';
 			btn.className = "btn btn-success";
@@ -885,11 +841,6 @@ $(document).ready(function () {
 			    document.getElementById("salas").innerHTML = inputName.val();
 
 			    ////console.log(grupo);
-			    	
-			    /* $('#info').append(
-			    		 '<li id="usuario1" class="nav-item"><span style="text-transform: capitalize">' + usuario + ' <i class="fas fa-star"></i></span></li>' +
-			    		 '<li id="usuario2" class="nav-item"><span style="text-transform: capitalize"></span></li>' +
-			    		 '<li id="usuario2" class="nav-item"><span style="text-transform: capitalize"></span></li>')*/
 			    
 			    connectToGrupos();
 			    connectChat();
@@ -1100,11 +1051,6 @@ $(document).ready(function () {
 					            sala
 					        }
 					        
-							/*createChat(chat, function (chatWithId) {
-			                    //When item with id is returned from server
-			    				showChat(chatWithId);
-			    				//console.log("todo correcto");
-			                });*/
 					        
 					        
 					        
@@ -1289,15 +1235,7 @@ function hereIam() {
 	setTimeout(function(){
 		if (enSala) {
             if (miGrupo != '') {
-            	/*var misChats = {};
-            	var chatSize = 0;;*/
                 loadChats(function (chats) {
-                    /*for (var i = 0; i < chats.length; i++) {
-                        if (chats[i].sala == miGrupo) {
-                        	misChats[chatSize] = chats[i];
-                        	chatSize++;
-                        }
-                    }*/
                 	showChat(chats);
                     ////console.log(misChats);
                 });
@@ -1305,53 +1243,6 @@ function hereIam() {
                 //showChat(misChats);
             }
         }
-    	/*loadItems(function (items) {    		
-    		for (var i = 0; i < items.length; i++) {
-            	//if (invitar) showItem(items[i]);
-                if (items[i].description == usuario) {
-                	items[i].checked = true;
-                    updateItem(items[i]);
-                }
-            }
-    		if (miSala != null && enSala) {
-    			var user2 = false;
-    			var user3 = false;
-                for (var j = 0; j < items.length; j++) {
-                	if (items[j].description == miSala.usuario2 && !user2) {    			            		
-                		user2 = true;
-                	}
-                	if (items[j].description == miSala.usuario3 && !user3){    			            		
-                		user3 = true;
-                	}
-                }
-                if (!user2) {
-                	miSala.usuario2 = '';
-            		updateGrupo(miSala);
-                }
-                if (!user3) {
-                	miSala.usuario3 = '';
-            		updateGrupo(miSala);
-                }
-    		}
-    		if (miSala2 != null && enSala) {
-    			var user1 = false;
-                for (var j = 0; j < items.length; j++) {
-                	if (items[j].description == miSala2.usuario1 && !user1) {    			            		
-                		user1 = true;
-                	}
-                }
-                if (!user1) {
-                	miSala2.usuario1 = '';
-            		updateGrupo(miSala2);
-                }
-    		}
-        });
-    	loadVersions(function (versions) {
-    		if (cobaIAversion != versions[0].description) {
-    			location.reload();
-    		}
-    	});
-        hereIam();*/
     }, 750);
 }
 
@@ -1627,7 +1518,7 @@ function stillAlive() {
 			chatConnection.send(JSON.stringify(msg));
 		}
 	}
-}
+}*/
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CONTROLES COBAIAS /////////////////////////////////////////////////////////////////////////////////////
@@ -1636,7 +1527,7 @@ function stillAlive() {
 var canConnect = false;
 var readyToUpdate = true;
 var chatIsFocused = false;
-var stillAliveInterval = setInterval(stillAlive, 20000);
+//var stillAliveInterval = setInterval(stillAlive, 20000);
 
 var wTankaDown = false;
 var aTankaDown = false;

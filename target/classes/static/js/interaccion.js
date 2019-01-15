@@ -32,418 +32,75 @@ function update5() {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CONTROLES ///////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    if ($('#textoOwner').is(':focus')) {
-    	ctrlW = juego.input.keyboard.removeKey(Phaser.Keyboard.W);
-        ctrlA = juego.input.keyboard.removeKey(Phaser.Keyboard.A);
-        ctrlS = juego.input.keyboard.removeKey(Phaser.Keyboard.S);
-        ctrlD = juego.input.keyboard.removeKey(Phaser.Keyboard.D);
-        ctrlQ = juego.input.keyboard.removeKey(Phaser.Keyboard.Q);
-
-        //movimiento de la TalibaIA
-        ctrlH = juego.input.keyboard.removeKey(Phaser.Keyboard.H);
-        ctrlB = juego.input.keyboard.removeKey(Phaser.Keyboard.B);
-        ctrlN = juego.input.keyboard.removeKey(Phaser.Keyboard.N);
-        ctrlM = juego.input.keyboard.removeKey(Phaser.Keyboard.M);
-
-        //Reinicio
-        ctrlR = juego.input.keyboard.removeKey(Phaser.Keyboard.R);
-
-        //Cambio de camara
-        ctrlT = juego.input.keyboard.removeKey(Phaser.Keyboard.T);
-        ctrlY = juego.input.keyboard.removeKey(Phaser.Keyboard.Y);
-        ctrlU = juego.input.keyboard.removeKey(Phaser.Keyboard.U);
-        
-        ctrlShift = juego.input.keyboard.removeKey(Phaser.Keyboard.SHIFT);
-    }
-    else {
-    	
-    	ctrlW = juego.input.keyboard.addKey(Phaser.Keyboard.W);
-        ctrlA = juego.input.keyboard.addKey(Phaser.Keyboard.A);
-        ctrlS = juego.input.keyboard.addKey(Phaser.Keyboard.S);
-        ctrlD = juego.input.keyboard.addKey(Phaser.Keyboard.D);
-        ctrlQ = juego.input.keyboard.addKey(Phaser.Keyboard.Q);
-
-        //movimiento de la TalibaIA
-        ctrlH = juego.input.keyboard.addKey(Phaser.Keyboard.H);
-        ctrlB = juego.input.keyboard.addKey(Phaser.Keyboard.B);
-        ctrlN = juego.input.keyboard.addKey(Phaser.Keyboard.N);
-        ctrlM = juego.input.keyboard.addKey(Phaser.Keyboard.M);
-
-        //Reinicio
-        ctrlR = juego.input.keyboard.addKey(Phaser.Keyboard.R);
-
-        //Cambio de camara
-        ctrlT = juego.input.keyboard.addKey(Phaser.Keyboard.T);
-        ctrlY = juego.input.keyboard.addKey(Phaser.Keyboard.Y);
-        ctrlU = juego.input.keyboard.addKey(Phaser.Keyboard.U);
-        
-        ctrlShift = juego.input.keyboard.addKey(Phaser.Keyboard.SHIFT);
-    }
-    
-    if (myGroupId != '' && !$('#textoOwner').is(':focus') && !chatIsFocused) { //Online
-	    var myKeyEvent = '';
-	    var msg;
-	    if (ctrlW.isDown) {
-	    	switch (miCobaIA) {
-	    	case 'tankabaIA':
-	    		wTankaDown = true;
-	    		break;
-	    	case 'talibaIA':
-	    		wTaliDown = true;
-	    		break;
-	    	case 'acrobaIA':
-	    		wAcroDown = true;
-	    		break;
-	    	default:
-	    		break;
-	    	}
-	    	if(!currentWDown && canConnect){	    		
-	    		myKeyEvent = 'wDown';
-	    		currentWDown = true;
-	    		 msg = {
-					cobaIA : miCobaIA,
-					keyEvent : myKeyEvent,
-					groupId : myGroupId
-				}
-	    		 if (playerConnection != null) {
-		    		 if (playerConnection.readyState === 1) { 
-		    			 playerConnection.send(JSON.stringify(msg));
-		    		 }
-	    		 }
-	    	}
-	    } 
-	    else {
-	    	switch (miCobaIA) {
-	    	case 'tankabaIA':
-	    		wTankaDown = false;
-	    		break;
-	    	case 'talibaIA':
-	    		wTaliDown = false;
-	    		break;
-	    	case 'acrobaIA':
-	    		wAcroDown = false;
-	    		break;
-	    	default:
-	    		break;
-	    	}
-	    	if(currentWDown && canConnect){
-		    	myKeyEvent = 'wUp';
-	    		currentWDown = false;
-	    		 msg = {
- 					cobaIA : miCobaIA,
- 					keyEvent : myKeyEvent,
- 					groupId : myGroupId
- 				}
-	    		 if (playerConnection != null) {
-		    		 if (playerConnection.readyState === 1) { 
-		    			 playerConnection.send(JSON.stringify(msg));
-		    		 }
-	    		 }
-	    	}
-	    }
-	    if (ctrlA.isDown) {
-	    	switch (miCobaIA) {
-	    	case 'tankabaIA':
-	    		aTankaDown = true;
-	    		break;
-	    	case 'talibaIA':
-	    		aTaliDown = true;
-	    		break;
-	    	case 'acrobaIA':
-	    		aAcroDown = true;
-	    		break;
-	    	default:
-	    		break;
-	    	}
-	    	if(!currentADown && canConnect){
-		    	myKeyEvent = 'aDown';
-	    		currentADown = true;
-	    		 msg = {
-  					cobaIA : miCobaIA,
-  					keyEvent : myKeyEvent,
-  					groupId : myGroupId
-  				}
-	    		 if (playerConnection != null) {
-		    		 if (playerConnection.readyState === 1) { 
-		    			 playerConnection.send(JSON.stringify(msg));
-		    		 }
-	    		 }
-	    	}
-	    } 
-	    else {
-	    	switch (miCobaIA) {
-	    	case 'tankabaIA':
-	    		aTankaDown = false;
-	    		break;
-	    	case 'talibaIA':
-	    		aTaliDown = false;
-	    		break;
-	    	case 'acrobaIA':
-	    		aAcroDown = false;
-	    		break;
-	    	default:
-	    		break;
-	    	}
-	    	if(currentADown && canConnect){
-		    	myKeyEvent = 'aUp';
-	    		currentADown = false;
-	    		 msg = {
-  					cobaIA : miCobaIA,
-  					keyEvent : myKeyEvent,
-  					groupId : myGroupId
-  				}
-	    		 if (playerConnection != null) {
-		    		 if (playerConnection.readyState === 1) { 
-		    			 playerConnection.send(JSON.stringify(msg));
-		    		 }
-	    		 }
-	    	}
-	    }
-	    if (ctrlS.isDown) {
-	    	switch (miCobaIA) {
-	    	case 'tankabaIA':
-	    		sTankaDown = true;
-	    		break;
-	    	case 'talibaIA':
-	    		sTaliDown = true;
-	    		break;
-	    	case 'acrobaIA':
-	    		sAcroDown = true;
-	    		break;
-	    	default:
-	    		break;
-	    	}
-	    	if(!currentSDown && canConnect){
-		    	myKeyEvent = 'sDown';
-	    		currentSDown = true;
-	    		 msg = {
-  					cobaIA : miCobaIA,
-  					keyEvent : myKeyEvent,
-  					groupId : myGroupId
-  				}
-	    		 if (playerConnection != null) {
-		    		 if (playerConnection.readyState === 1) { 
-		    			 playerConnection.send(JSON.stringify(msg));
-		    		 }
-	    		 }
-	    	}
-	    } 
-	    else {
-	    	switch (miCobaIA) {
-	    	case 'tankabaIA':
-	    		sTankaDown = false;
-	    		break;
-	    	case 'talibaIA':
-	    		sTaliDown = false;
-	    		break;
-	    	case 'acrobaIA':
-	    		sAcroDown = false;
-	    		break;
-	    	default:
-	    		break;
-	    	}
-	    	if(currentSDown && canConnect){
-		    	myKeyEvent = 'sUp';
-	    		currentSDown = false;
-	    		 msg = {
-  					cobaIA : miCobaIA,
-  					keyEvent : myKeyEvent,
-  					groupId : myGroupId
-  				}
-	    		 if (playerConnection != null) {
-		    		 if (playerConnection.readyState === 1) { 
-		    			 playerConnection.send(JSON.stringify(msg));
-		    		 }
-	    		 }
-	    	}
-	    }
-	    if (ctrlD.isDown) {
-	    	switch (miCobaIA) {
-	    	case 'tankabaIA':
-	    		dTankaDown = true;
-	    		break;
-	    	case 'talibaIA':
-	    		dTaliDown = true;
-	    		break;
-	    	case 'acrobaIA':
-	    		dAcroDown = true;
-	    		break;
-	    	default:
-	    		break;
-	    	}
-	    	if(!currentDDown && canConnect){
-		    	myKeyEvent = 'dDown';
-	    		currentDDown = true;
-	    		 msg = {
-  					cobaIA : miCobaIA,
-  					keyEvent : myKeyEvent,
-  					groupId : myGroupId
-  				}
-	    		 if (playerConnection != null) {
-		    		 if (playerConnection.readyState === 1) { 
-		    			 playerConnection.send(JSON.stringify(msg));
-		    		 }
-	    		 }
-	    	}
-	    } 
-	    else {
-	    	switch (miCobaIA) {
-	    	case 'tankabaIA':
-	    		dTankaDown = false;
-	    		break;
-	    	case 'talibaIA':
-	    		dTaliDown = false;
-	    		break;
-	    	case 'acrobaIA':
-	    		dAcroDown = false;
-	    		break;
-	    	default:
-	    		break;
-	    	}
-	    	if(currentDDown && canConnect){
-		    	myKeyEvent = 'dUp';
-	    		currentDDown = false;
-	    		 msg = {
-  					cobaIA : miCobaIA,
-  					keyEvent : myKeyEvent,
-  					groupId : myGroupId
-  				}
-	    		 if (playerConnection != null) {
-		    		 if (playerConnection.readyState === 1) { 
-		    			 playerConnection.send(JSON.stringify(msg));
-		    		 }
-	    		 }
-	    	}
-	    }
-	    if (ctrlShift.isDown) {
-	    	switch (miCobaIA) {
-	    	case 'tankabaIA':
-	    		shiftTankaDown = true;
-	    		break;
-	    	case 'talibaIA':
-	    		shiftTaliDown = true;
-	    		break;
-	    	case 'acrobaIA':
-	    		shiftAcroDown = true;
-	    		break;
-	    	default:
-	    		break;
-	    	}
-	    	if(!currentShiftDown && canConnect){
-		    	myKeyEvent = 'shiftDown';
-	    		currentShiftDown = true;
-	    		 msg = {
-  					cobaIA : miCobaIA,
-  					keyEvent : myKeyEvent,
-  					groupId : myGroupId
-  				}
-	    		 if (playerConnection != null) {
-		    		 if (playerConnection.readyState === 1) { 
-		    			 playerConnection.send(JSON.stringify(msg));
-		    		 }
-	    		 }
-	    	}
-	    } 
-	    else {
-	    	switch (miCobaIA) {
-	    	case 'tankabaIA':
-	    		shiftTankaDown = false;
-	    		break;
-	    	case 'talibaIA':
-	    		shiftTaliDown = false;
-	    		break;
-	    	case 'acrobaIA':
-	    		shiftAcroDown = false;
-	    		break;
-	    	default:
-	    		break;
-	    	}
-	    	if(currentShiftDown && canConnect){
-		    	myKeyEvent = 'shiftUp';
-	    		currentShiftDown = false;
-	    		 msg = {
-  					cobaIA : miCobaIA,
-  					keyEvent : myKeyEvent,
-  					groupId : myGroupId
-  				}
-	    		if (playerConnection != null) {
-		    		 if (playerConnection.readyState === 1) { 
-		    			 playerConnection.send(JSON.stringify(msg));
-		    		 }
-  				}
-	    	}
-	    }
-	    
-    }
-    else if (myGroupId == '') { //Offline
-    	if ((pad1.justPressed(Phaser.Gamepad.XBOX360_A)) || cursores.up.isDown) {
-    		wTankaDown = true;
-    	}
-    	else {
-    		wTankaDown = false;
-    	}
-    	if ((pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || cursores.left.isDown) {
-    		aTankaDown = true;
-    	}
-    	else {
-    		aTankaDown = false;
-    	}
-    	if ((pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || cursores.right.isDown) {
-    		dTankaDown = true;
-    	}
-    	else {
-    		dTankaDown = false;
-    	}
-    	if((pad2.justPressed(Phaser.Gamepad.XBOX360_A)) || ctrlW.isDown) {
-    		wAcroDown = true;
-    	}
-    	else {
-    		wAcroDown = false;
-    	}
-    	if((pad2.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad2.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || ctrlA.isDown) {
-    		aAcroDown = true;
-    	}
-    	else {
-    		aAcroDown = false;
-    	}
-    	if((pad2.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad2.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || ctrlD.isDown) {
-    		dAcroDown = true;
-    	}
-    	else {
-    		dAcroDown = false;
-    	}
-    	if ((pad2.isDown(Phaser.Gamepad.XBOX360_X)) || ctrlShift.isDown) {
-    		shiftAcroDown = true;
-    	}
-    	else {
-    		shiftAcroDown = false;
-    	}
-    	if((pad3.justPressed(Phaser.Gamepad.XBOX360_A)) || ctrlH.isDown) {
-    		wTaliDown = true;
-    	}
-    	else {
-    		wTaliDown = false;
-    	}
-    	if((pad3.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad3.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || ctrlB.isDown) {
-    		aTaliDown = true;
-    	}
-    	else {
-    		aTaliDown = false;
-    	}
-    	if((pad3.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad3.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || ctrlM.isDown) {
-    		dTaliDown = true;
-    	}
-    	else {
-    		dTaliDown = false;
-    	}
-    	if (tecla_accion.isDown || juego.input.gamepad.pad3.isDown(Phaser.Gamepad.XBOX360_X)) {
-    		shiftTaliDown = true;
-    	}
-    	else {
-    		shiftTaliDown = false;
-    	}
-    }
+	if ((pad1.justPressed(Phaser.Gamepad.XBOX360_A)) || cursores.up.isDown) {
+		wTankaDown = true;
+	}
+	else {
+		wTankaDown = false;
+	}
+	if ((pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || cursores.left.isDown) {
+		aTankaDown = true;
+	}
+	else {
+		aTankaDown = false;
+	}
+	if ((pad1.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad1.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || cursores.right.isDown) {
+		dTankaDown = true;
+	}
+	else {
+		dTankaDown = false;
+	}
+	if((pad2.justPressed(Phaser.Gamepad.XBOX360_A)) || ctrlW.isDown) {
+		wAcroDown = true;
+	}
+	else {
+		wAcroDown = false;
+	}
+	if((pad2.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad2.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || ctrlA.isDown) {
+		aAcroDown = true;
+	}
+	else {
+		aAcroDown = false;
+	}
+	if((pad2.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad2.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || ctrlD.isDown) {
+		dAcroDown = true;
+	}
+	else {
+		dAcroDown = false;
+	}
+	if ((pad2.isDown(Phaser.Gamepad.XBOX360_X)) || ctrlShift.isDown) {
+		shiftAcroDown = true;
+	}
+	else {
+		shiftAcroDown = false;
+	}
+	if((pad3.justPressed(Phaser.Gamepad.XBOX360_A)) || ctrlH.isDown) {
+		wTaliDown = true;
+	}
+	else {
+		wTaliDown = false;
+	}
+	if((pad3.isDown(Phaser.Gamepad.XBOX360_DPAD_LEFT) || pad3.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) < -0.1) || ctrlB.isDown) {
+		aTaliDown = true;
+	}
+	else {
+		aTaliDown = false;
+	}
+	if((pad3.isDown(Phaser.Gamepad.XBOX360_DPAD_RIGHT) || pad3.axis(Phaser.Gamepad.XBOX360_STICK_LEFT_X) > 0.1) || ctrlM.isDown) {
+		dTaliDown = true;
+	}
+	else {
+		dTaliDown = false;
+	}
+	if (tecla_accion.isDown || juego.input.gamepad.pad3.isDown(Phaser.Gamepad.XBOX360_X)) {
+		shiftTaliDown = true;
+	}
+	else {
+		shiftTaliDown = false;
+	}
+	if (ctrlQ.isDown) {
+		console.log(tankabaIA.jugador.body.x + ", " + tankabaIA.jugador.body.y);
+	}
     
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////// CAMBIOS DE CAMARA  //////////////////////////////////////////////////////////////////////////////////
@@ -500,15 +157,15 @@ function update5() {
     }    
 
     if (!$('#textoOwner').is(':focus')) {
-	    if(ctrlT.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_Y)){
+	    if(cursores.down.isDown || pad1.isDown(Phaser.Gamepad.XBOX360_Y)){
 	        nivel1.siguiendo = "tankabaIA";
 	    }
 	
-	    if(ctrlY.isDown || pad2.isDown(Phaser.Gamepad.XBOX360_Y)){
+	    if(ctrlS.isDown || pad2.isDown(Phaser.Gamepad.XBOX360_Y)){
 	        nivel1.siguiendo = "acrobaIA";
 	    }
 	
-	    if(ctrlU.isDown || pad3.isDown(Phaser.Gamepad.XBOX360_Y)){       
+	    if(ctrlN.isDown || pad3.isDown(Phaser.Gamepad.XBOX360_Y)){       
 	        nivel1.siguiendo = "talibaIA";
 	    }
     }
@@ -641,11 +298,10 @@ function update5() {
         reinicia();
     }
     
-    if (myGroupId != '' && !$('#textoOwner').is(':focus')) {
-	    if (ctrlR.isDown) { // Pase de nivel
-	        juego.destroy();
-	        inicio();
-	    }
+
+    if (ctrlR.isDown) { // Pase de nivel
+        juego.destroy();
+        inicio();
     }
     
     
@@ -928,7 +584,7 @@ function update5() {
         }
     }   
 
-    if(tankabaIA.jugador.body.x > 11000){
+    if(tankabaIA.jugador.body.x > 11000 || acrobaIA.jugador.body.x > 11000 || talibaIA.jugador.body.x > 11000){
     	
 
             //this.raf.stop();
